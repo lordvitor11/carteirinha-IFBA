@@ -16,4 +16,4 @@ jobs:
               host: ${{ secrets.HOST }} 
               user: ${{ secrets.USER }}
               password: ${{ secrets.PASS }}
-              localDir: "lordvitor11/carteirinha-IFBA"
+              localDir: ""
