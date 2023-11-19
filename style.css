@@ -1,0 +1,39 @@
+:root {
+    --light-green: #388E3C;
+    --dark-green: #274E13;
+    --medium-green: #337A30;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-green);
+    color: white;
+}
+
+.custom-radio {
+    display: inline-block;
+    margin-right: 10px; 
+    margin-bottom: 5px;
+}
+
+.custom-radio input[type="radio"] {
+    display: none; 
+}
+
+.custom-radio label {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid var(--medium-green);
+    transition: all 0.3s ease;
+}
+
