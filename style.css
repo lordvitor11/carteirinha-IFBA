@@ -226,7 +226,7 @@ nav a:hover {
     background-color: var(--light-green);
     color: #fff;
     padding: 20px;
-    height: 200px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -241,4 +241,3 @@ nav a:hover {
   .copyright {
     text-align: center;
   }
-
