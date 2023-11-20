@@ -1,33 +1,33 @@
 :root {
-    --light-green: #388E3C;
-    --dark-green: #274E13;
-    --medium-green: #337A30;
+  --light-green: #388E3C;
+  --dark-green: #274E13;
+  --medium-green: #337A30;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--light-green);
-    color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-green);
+  color: white;
 }
 
 nav {
-    background-color: #388E3C;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color: #388E3C;
+  color: #fff;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav a {
