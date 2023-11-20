@@ -114,7 +114,11 @@ nav a:hover {
   }
 
   .image {
+<<<<<<< HEAD
     width: 440px; /* Ajuste o tamanho conforme necessário */
+=======
+    width: 300px; /* Ajuste o tamanho conforme necessário */
+>>>>>>> 0d5da1b (login)
     height: auto;
     margin-top: 20px;
     margin-right: 250px;
@@ -141,9 +145,17 @@ nav a:hover {
     width: 400px; /* Ajuste o tamanho conforme necessário */
     height: auto;
     margin-bottom: 20px; /* Adiciona espaço abaixo da imagem */
+<<<<<<< HEAD
   }
 
   .announcements-title {
+=======
+    margin-left: 150px;
+  }
+
+  .announcements-title {
+    margin-right: 300px;
+>>>>>>> 0d5da1b (login)
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -151,10 +163,18 @@ nav a:hover {
   }
 
   .separator{
+<<<<<<< HEAD
+=======
+    margin-right: 300px;
+>>>>>>> 0d5da1b (login)
     margin-bottom: 10px;
   }
 
   .announcements-subtitle {
+<<<<<<< HEAD
+=======
+    margin-right: 300px;
+>>>>>>> 0d5da1b (login)
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -162,6 +182,10 @@ nav a:hover {
   }
 
   .announcements-text {
+<<<<<<< HEAD
+=======
+    margin-right: 300px;
+>>>>>>> 0d5da1b (login)
     font-size: 16px;
     color: white;
   }
