@@ -1,19 +1,11 @@
-function changeRadio(label) {
-    let home = document.querySelector("#home-label");
-    let menu = document.querySelector("#menu-label");
-    
-    if (label.id == "menu-label") {
-        menu.style.borderBottom = "2px solid #274E13";
-        home.style.borderBottom = "2px solid #337A30";
+function check() {
+    let submit = document.querySelector("#submit");
+    let user = document.querySelector("#username");
+    let password = document.querySelector("#password");
 
-        menu.style.color = "#274E13";
-        home.style.color = "white";
+    if (user.value.length > 0 && password.value.length > 0) {
+        submit.disabled = false;
     } else {
-        home.style.borderBottom = "2px solid #274E13";
-        menu.style.borderBottom = "2px solid #337A30";
-
-        home.style.color = "#274E13";
-        menu.style.color = "white";
-        //
-    };
+        submit.disabled = true;
+    }
 }
