@@ -114,7 +114,7 @@ nav a:hover {
   }
 
   .image {
-    width: 300px; /* Ajuste o tamanho conforme necessário */
+    width: 440px; /* Ajuste o tamanho conforme necessário */
     height: auto;
     margin-top: 20px;
     margin-right: 250px;
@@ -141,11 +141,9 @@ nav a:hover {
     width: 400px; /* Ajuste o tamanho conforme necessário */
     height: auto;
     margin-bottom: 20px; /* Adiciona espaço abaixo da imagem */
-    margin-left: 150px;
   }
 
   .announcements-title {
-    margin-right: 300px;
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -153,12 +151,10 @@ nav a:hover {
   }
 
   .separator{
-    margin-right: 300px;
     margin-bottom: 10px;
   }
 
   .announcements-subtitle {
-    margin-right: 300px;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -166,7 +162,6 @@ nav a:hover {
   }
 
   .announcements-text {
-    margin-right: 300px;
     font-size: 16px;
     color: white;
   }
