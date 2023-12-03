@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/View/cardapio.css">
+    <link rel="stylesheet" href="cardapio.css">
+    <title>Cardápio Semanal</title>
 </head>
 <body>
     <header>
-        <img src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
+        <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
     </header>
 
     <nav>
@@ -17,23 +17,44 @@
             <a href="cardapio.html">Cardápio</a>
         </div>
         <div class="right">
-            <a href="#">LOGIN</a>
+            <a href="../Controller/login.php">LOGIN</a>
         </div>
     </nav>
 
-    <main class="session-cardapio">
-
+    <main>
+        <div class="overlay">
+            <h2>CARDÁPIO SEMANAL</h2>
+        </div>
+        <div class="transparent-box">
+            <div class="menu">
+                <div class="days">
+                    <div class="day">Segunda</div>
+                    <div class="day">Terça</div>
+                    <div class="day">Quarta</div>
+                    <div class="day">Quinta</div>
+                    <div class="day">Sexta</div>
+                </div>
+                <div class="separator"></div>
+                <div class="meals">
+                    <div class="meal">Frango Grelhado com Molho de Limão</div>
+                    <div class="meal">Spaghetti à Bolonhesa com Tomate Fresco</div>
+                    <div class="meal">Salada Caesar com Croutons Crocantes</div>
+                    <div class="meal">Sopa de Legumes com Ervas Aromáticas</div>
+                    <div class="meal">Peixe Assado com Vegetais Assados</div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>
         <div>
-          <img src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo"> <!-- Substitua 'logo.png' pelo caminho ou URL da sua logo -->
+            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo">
         </div>
         <div class="copyright">
           <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
             Campus Seabra</p>
         </div>
       </footer>
-    <script src="script.js"></script>
+    <script src="View/script.js"></script>
 </body>
 </html>

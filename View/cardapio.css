@@ -1,9 +1,70 @@
 @import url(style.css);
-  
-.right {
-      margin-left: auto;
+
+header {
+    background-color: #388E3C;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
 }
 
-footer {
-    position: fixed;
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.menu {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #28a745;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transparent-box{
+    box-shadow: 7px 7px 5px #388e3c73;
+    border-radius: 10px;
+    padding: 30px;
+    background-color: #e7e7e770;
+}
+
+.overlay {
+    position: absolute;
+    top: 28%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+.overlay h2 {
+    margin: 0;
+    font-size: 2em;
+    color: #28a745;
+}
+
+.days, .meals {
+    flex: 1;
+    padding: 20px;
+}
+
+.day, .meal {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #28a745;
+}
+
+.day:last-child, .meal:last-child {
+    border-bottom: none;
+}
+
+.separator {
+    width: 2px;
+    height: 100%;
+    background-color: #28a745;
+    margin: 0 5px; /* Adicionando margem para separar os dias da semana e os pratos. */
 }
