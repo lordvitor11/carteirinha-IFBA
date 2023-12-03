@@ -1,4 +1,4 @@
-<?php session_start(); include_once 'connect.php' 
+<?php //session_start(); include_once 'connect.php' 
     $username = $_POST['username'];
     $password = $_POST['password'];
 
