@@ -114,7 +114,7 @@ nav a:hover {
 }
 
 .image {
-  width: 440px; 
+  width: 380px; 
   height: auto;
   margin-top: 20px;
   margin-right: 250px;
@@ -178,6 +178,7 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-bottom: 100px;
 }
 
 .menu-title {
@@ -227,21 +228,27 @@ nav a:hover {
 }
 
 footer {
-  background-color: var(--light-green);
-  color: #fff;
-  padding: 20px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  text-align: center;
+  padding: 20px; /* Ajuste o padding conforme necessário */
+  background-color: #388E3C;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-.logo {
-  width: 400px; 
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 200px; /* Ajuste conforme necessário */
   height: auto;
+  margin-right: 10px; /* Espaçamento entre a imagem e o texto de copyright */
 }
 
 .copyright {
-  text-align: center;
+  text-align: left; /* Alinhe o texto à esquerda */
 }

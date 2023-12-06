@@ -1,0 +1,47 @@
+@import url(style.css);
+
+.container-sphere {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 150px;
+    margin-bottom: 200px;
+}
+
+.person {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.semi-sphere {
+    width: 350px;
+    height: 420px; /* Ajuste a altura conforme necessário */
+    background-color: transparent;
+    border-radius: 10%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Alteração para empilhar os elementos verticalmente */
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    border: 2px #388E3C solid;
+    box-shadow: 10px 10px 5px lightblue;
+}
+
+.img-sobre {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    height: 150px; /* Ajuste o tamanho conforme necessário */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px; /* Espaçamento entre a imagem e o texto */
+}
+
+/* Adicionando um estilo para centralizar os elementos internos */
+.person h2,
+.person p {
+    margin: 5px 0;
+}
+
+.person h2{
+    color: #388E3C;
+}
