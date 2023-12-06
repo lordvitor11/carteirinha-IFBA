@@ -24,8 +24,6 @@
                 echo $result;
             }
         ?>
-    </form>
-
-    
+    </form>  
 </body>
 </html>
