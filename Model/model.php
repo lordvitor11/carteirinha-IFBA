@@ -10,19 +10,32 @@
 
             $result = $this->conn->query($sql);
 
-            return $result->num_rows > 0 ? true : false;
+            if ($result->num_rows > 0) {
+                return true;
+            } else {
+                $sql = "SELECT nome, senha FROM usuario WHERE email = '$usuario'";
+
+                $result = $this->conn->query($sql);
+
+                return $result->num_rows > 0 ? true : false;
+            }
         }
 
         public function login($usuario, $senha): string {
-            $sql = "SELECT nome, senha FROM usuario WHERE nome = '$usuario'";
-
+            $sql = "SELECT nome, senha, email FROM usuario WHERE nome = '$usuario'";
             $result = $this->conn->query($sql);
-            $tempUser = ""; $tempPass = "";
+
+            if ($result->num_rows <= 0) {
+                $sql = "SELECT nome, senha, email FROM usuario WHERE email = '$usuario'";
+                $result = $this->conn->query($sql);
+            }
+            
+            $tempUser = ""; $tempPass = ""; $tempEmail = "";
             while ($row = $result->fetch_assoc()) {
-                $tempUser = $row['nome']; $tempPass = $row['senha'];
+                $tempUser = $row['nome']; $tempPass = $row['senha']; $tempEmail = $row['email'];
             }
 
-            if ($usuario === $tempUser && MD5($senha) === $tempPass) {
+            if ($usuario === $tempUser || $usuario === $tempEmail && MD5($senha) === $tempPass) {
                 return true;
             } else {
                 return false;
