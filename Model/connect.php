@@ -1,7 +1,7 @@
 <?php 
   //$servername = "carteirinha23.mysql.dbaas.com.br";
   //$username = "carteirinha23";
-  //$password = "LEDS@ifseabra0";
+  //$password = "";
   //$dbname = "carteirinha23";
 
   $servername = "localhost";

@@ -16,9 +16,5 @@
                 return false;
             }
         }
-
-        public function teste($usuario, $senha):string {
-            return $this->model->login($usuario, $senha);
-        }
     }
 ?>
