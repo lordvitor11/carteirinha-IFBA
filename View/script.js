@@ -3,13 +3,8 @@ function check() {
     let user = document.querySelector("#username");
     let password = document.querySelector("#password");
 
-    if (user.value.length > 0 && password.value.length > 0) {
-        submit.disabled = false;
-        submit.classList.add("enabled");
-    } else {
-        submit.disabled = true;
-        submit.classList.remove("enabled");
-    }
+    submit.disabled = !(user.value.length > 0 && password.value.length > 0);
+    submit.classList.toggle("enabled", !submit.disabled);
 }
 
 function enviarFormulario() {
@@ -20,20 +15,22 @@ function enviarFormulario() {
     xhr.open("POST", "processLogin.php", true);
   
     xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        if (xhr.responseText == "logged") {
-            let resultDiv = document.querySelector(".result");
-
-            resultDiv.style.display = "flex";
-            resultDiv.style.opacity = "1";
-
-            setTimeout(() => {
-                window.location.href = "../index.php";
-            }, 2000);
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                if (xhr.responseText === "logged") {
+                    let resultDiv = document.querySelector(".result");
+    
+                    resultDiv.style.display = "flex";
+                    resultDiv.style.opacity = "1";
+    
+                    setTimeout(() => {
+                        window.location.href = "../index.php";
+                    }, 2000);
+                }
+            } else {
+                console.error("Erro na requisição: " + xhr.status);
+            }
         }
-
-        settim
-      }
     };
   
     xhr.send(formData);

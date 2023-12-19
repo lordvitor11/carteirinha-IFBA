@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require("../Controller/controller.php");
 
@@ -7,8 +7,13 @@
         $usuario = $_POST['username'];
         $senha = $_POST['password'];
 
-        if ($controller->processarLogin($usuario, $senha)) {
-            // echo "<h1>Logado como $usuario</h1>";
+        $resultadoLogin = $controller->processarLogin($usuario, $senha);
+
+        if ($resultadoLogin['situacao'] == "aprovado") {
+            $nome = $controller->getUserData($resultadoLogin['id']);
+            $_SESSION['id'] = $resultadoLogin['id'];
+            $_SESSION['user'] = $nome;
+            $_SESSION['logged_in'] = true;
             echo "logged";
         } else {
             echo "<h1>Usuário inexistente ou credenciais inválidas!</h1>";

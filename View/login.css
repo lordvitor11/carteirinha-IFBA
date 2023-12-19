@@ -80,9 +80,7 @@ h2 {
 .result {
     width: fit-content;
     height: fit-content;
-    /* border: 1px solid #ccc; */
     overflow: hidden;
-    /* display: flex; */
     align-items: center;
     justify-content: center;
     margin-bottom: 15px;
@@ -104,15 +102,15 @@ h2 {
     border-top: 3px solid transparent;
     animation: spin 1s cubic-bezier(0.22, 0.61, 0.36, 1) infinite, pulse 1s ease-in-out infinite;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-  }
+}
   
-  @keyframes spin {
+@keyframes spin {
     0% { transform: rotate(0deg) scale(0.75); }
     50% { transform: rotate(180deg) scale(0.6); }
     100% { transform: rotate(360deg) scale(0.75); }
-  }
+}
   
-  @keyframes pulse {
+@keyframes pulse {
     0%, 100% { border-color: var(--dark-green); }
     50% { border-color: var(--light-green); }
-  }
+}

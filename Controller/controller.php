@@ -5,16 +5,21 @@
             $this->model = new LoginModel();
         }
 
-        public function processarLogin($usuario, $senha): bool {
+        public function processarLogin($usuario, $senha) {
             if ($this->model->hasRegistry($usuario, $senha)) {
-                if ($this->model->login($usuario, $senha)) {
-                    return true;
+                $response = $this->model->login($usuario, $senha);
+                if ($response['situacao'] == "aprovado") {
+                    return array("situacao" => "aprovado", "id" => $response['id']);
                 } else {
-                    return false;
+                    return array("situacao" => "desaprovado", "id" => null);
                 }
             } else {
-                return false;
+                return array("situacao" => "desaprovado", "id" => null);
             }
+        }
+
+        public function getUserData($id): string {
+            return $this->model->getUserData($id);
         }
     }
 ?>

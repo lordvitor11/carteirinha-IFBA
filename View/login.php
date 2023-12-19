@@ -27,28 +27,9 @@
                 <div class="content">Logado</div>
             </div>
 
-            <input type="submit" value="ENTRAR" name="submit" id="submit" onclick="enviarFormulario()" disabled>
+            <input type="submit" value="ENTRAR" name="submit" id="submit" disabled>
         </form>
     </main>
-
-    <?php 
-        // require("../Controller/controller.php");
-
-        // if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
-
-        //     $controller = new LoginController();
-
-        //     $usuario = $_POST['username'];
-        //     $senha = $_POST['password'];
-
-        //     if ($controller->processarLogin($usuario, $senha)) {
-        //         // echo "<h1>Logado como $usuario</h1>";
-        //         echo "<script>login();</script>";
-        //     } else {
-        //         echo "<h1>Usuário inexistente ou credenciais inválidas!</h1>";
-        //     }
-        // }
-    ?>
 
     <footer>
         <div class="footer-content">

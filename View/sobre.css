@@ -15,12 +15,12 @@
 
 .semi-sphere {
     width: 350px;
-    height: 420px; /* Ajuste a altura conforme necessário */
+    height: 420px;
     background-color: transparent;
     border-radius: 10%;
     overflow: hidden;
     display: flex;
-    flex-direction: column; /* Alteração para empilhar os elementos verticalmente */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px;
@@ -29,14 +29,13 @@
 }
 
 .img-sobre {
-    width: 150px; /* Ajuste o tamanho conforme necessário */
-    height: 150px; /* Ajuste o tamanho conforme necessário */
+    width: 150px; 
+    height: 150px; 
     border-radius: 50%;
     object-fit: cover;
-    margin-top: 10px; /* Espaçamento entre a imagem e o texto */
+    margin-top: 10px;
 }
 
-/* Adicionando um estilo para centralizar os elementos internos */
 .person h2,
 .person p {
     margin: 5px 0;

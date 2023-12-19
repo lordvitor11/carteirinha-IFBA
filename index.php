@@ -1,3 +1,11 @@
+<?php session_start();
+  if (!isset($_SESSION['logged_in'])) {
+    $_SESSION['user'] = "";
+    $_SESSION['id_user'] = "";
+    $_SESSION['logged_in'] = false;
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

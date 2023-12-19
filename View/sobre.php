@@ -16,33 +16,24 @@
     <div class="container-sphere">
         <div class="person">
             <div class="semi-sphere">
-                <!-- Nome da Pessoa -->
                 <h2>Victor Hugo de Souza Santiago</h2><br>
-                <!-- Informações sobre a Pessoa -->
                 <p>Discente do IFBA Campus Seabra ingressado no ano de 2020.</p><br>
-                <!-- Foto da Pessoa -->
                 <img src="../assets/victor.jpg" alt="Foto da Pessoa 1" class="img-sobre" onerror="this.src='../assets/person.png'">
             </div>
         </div>
 
         <div class="person">
             <div class="semi-sphere">
-                <!-- Nome da Pessoa -->
                 <h2>Rui Santos Carigé Júnior</h2><br>
-                <!-- Informações sobre a Pessoa -->
                 <p>Vigente Docente do Curso de Informática no IFBA - Campus Seabra e Orientador deste projeto.</p><br>
-                <!-- Foto da Pessoa -->
                 <img src="../assets/rui.jpg" alt="Foto da Pessoa 2" class="img-sobre" onerror="this.src='../assets/person.png'">
             </div>
         </div>
 
         <div class="person">
             <div class="semi-sphere">
-                <!-- Nome da Pessoa -->
                 <h2>Vitor César Batista de Souza</h2><br>
-                <!-- Informações sobre a Pessoa -->
                 <p>Discente do IFBA Campus Seabra ingressado no ano de 2020.</p><br>
-                <!-- Foto da Pessoa -->
                 <img src="../assets/vitor.jpg" alt="Foto da Pessoa 3" class="img-sobre" onerror="this.src='../assets/person.png'">
             </div>
         </div>

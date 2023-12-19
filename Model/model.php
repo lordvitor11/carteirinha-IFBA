@@ -21,25 +21,38 @@
             }
         }
 
-        public function login($usuario, $senha): string {
-            $sql = "SELECT nome, senha, email FROM usuario WHERE nome = '$usuario'";
+        public function login($usuario, $senha) {
+            $sql = "SELECT id, nome, senha, email FROM usuario WHERE nome = '$usuario'";
             $result = $this->conn->query($sql);
 
             if ($result->num_rows <= 0) {
-                $sql = "SELECT nome, senha, email FROM usuario WHERE email = '$usuario'";
+                $sql = "SELECT id, nome, senha, email FROM usuario WHERE email = '$usuario'";
                 $result = $this->conn->query($sql);
             }
             
-            $tempUser = ""; $tempPass = ""; $tempEmail = "";
+            $tempUser = ""; $tempPass = ""; $tempEmail = ""; $tempId = "";
             while ($row = $result->fetch_assoc()) {
-                $tempUser = $row['nome']; $tempPass = $row['senha']; $tempEmail = $row['email'];
+                $tempUser = $row['nome']; $tempPass = $row['senha']; $tempEmail = $row['email']; $tempId = $row['id'];
             }
 
-            if ($usuario === $tempUser || $usuario === $tempEmail && MD5($senha) === $tempPass) {
-                return true;
+            if (($usuario === $tempUser || $usuario === $tempEmail) && MD5($senha) === $tempPass) {
+                return array('situacao' => 'aprovado', 'id' => $tempId);
             } else {
-                return false;
+                return array('situacao' => 'desaprovado', 'id' => null);
             }
+        }
+
+        public function getUserData($id) : string {
+            $sql = "SELECT nome FROM usuario WHERE id = '$id'";
+            $result = $this->conn->query($sql);
+
+            $nome = "";
+
+            while ($row = $result->fetch_assoc()) {
+                $nome = $row['nome'];
+            }
+
+            return $nome;
         }
     }
 ?>
