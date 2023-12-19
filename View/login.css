@@ -33,6 +33,10 @@ input[type="password"] {
     font-size: 16px;
 }
 
+input[type="password"] {
+    margin-bottom: 5px;
+}
+
 input[type="submit"] {
     width: 100%; /* Largura total do botão de envio */
     color: #fff;
@@ -70,3 +74,45 @@ h2 {
 .enabled {
     background-color: var(--dark-green);   
 }
+
+/* LOADING BAR LOGIN */
+
+.result {
+    width: fit-content;
+    height: fit-content;
+    /* border: 1px solid #ccc; */
+    overflow: hidden;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    opacity: 0;
+    display: none;
+    transition: all 0.4s ease;
+
+}
+
+.result .content {
+    color: var(--medium-green);
+}
+
+.loading-spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #3498db;
+    border-radius: 50%;
+    border-top: 3px solid transparent;
+    animation: spin 1s cubic-bezier(0.22, 0.61, 0.36, 1) infinite, pulse 1s ease-in-out infinite;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg) scale(0.75); }
+    50% { transform: rotate(180deg) scale(0.6); }
+    100% { transform: rotate(360deg) scale(0.75); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { border-color: var(--dark-green); }
+    50% { border-color: var(--light-green); }
+  }

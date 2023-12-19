@@ -15,33 +15,39 @@
 
     <main class="main-login">
         <h2>FAÇA LOGIN</h2><br>
-        <form action="" method="post">
+        <form id="form">
             <label for="usuario">Nome de Usuário:</label>
-            <input type="text" oninput="check();" name="username" id="username" placeholder="Usuário" required><br><br>
+            <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required><br><br>
 
             <label for="senha">Senha:</label>
-            <input type="password" oninput="check();" name="password" id="password" placeholder="Senha" required><br><br>
+            <input type="password" oninput="check()" name="password" id="password" placeholder="Senha" required><br><br>
 
-            <input type="submit" value="ENTRAR" name="submit" id="submit" disabled>
+            <div class="result">
+                <div class="loading-spinner"></div>
+                <div class="content">Logado</div>
+            </div>
+
+            <input type="submit" value="ENTRAR" name="submit" id="submit" onclick="enviarFormulario()" disabled>
         </form>
     </main>
 
     <?php 
-        require("../Controller/controller.php");
+        // require("../Controller/controller.php");
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+        // if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
-            $controller = new LoginController();
+        //     $controller = new LoginController();
 
-            $usuario = $_POST['username'];
-            $senha = $_POST['password'];
+        //     $usuario = $_POST['username'];
+        //     $senha = $_POST['password'];
 
-            if ($controller->processarLogin($usuario, $senha)) {
-                echo "<h1>Logado como $usuario</h1>";
-            } else {
-                echo "<h1>Usuário inexistente ou credenciais inválidas!</h1>";
-            }
-        }
+        //     if ($controller->processarLogin($usuario, $senha)) {
+        //         // echo "<h1>Logado como $usuario</h1>";
+        //         echo "<script>login();</script>";
+        //     } else {
+        //         echo "<h1>Usuário inexistente ou credenciais inválidas!</h1>";
+        //     }
+        // }
     ?>
 
     <footer>
