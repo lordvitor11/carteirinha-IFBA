@@ -16,7 +16,7 @@
             $_SESSION['logged_in'] = true;
             echo "logged";
         } else {
-            echo "<h1>Usuário inexistente ou credenciais inválidas!</h1>";
+            echo "error";
         }
     }
 ?>

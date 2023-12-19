@@ -1,19 +1,22 @@
 @import url(style.css);
 
+body {
+    background-color: #f4f4f4;  
+}
+
 main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 400px); /* Ajuste conforme necessário para acomodar o rodapé */
-    background-color: white;
+    min-height: calc(100vh - 400px);
     padding: 15px;
     border-radius: 10px;
     box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.3);
     flex: 1;
-    max-width: 400px; /* Largura máxima do main */
-    width: 100%; /* Ajuste para garantir a largura máxima */
-    margin: auto; /* Centraliza na tela */
+    max-width: 400px;
+    width: 100%;
+    margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -25,7 +28,7 @@ form {
 
 input[type="text"],
 input[type="password"] {
-    width: 100%; /* Largura total dos textboxes */
+    width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -38,7 +41,7 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-    width: 100%; /* Largura total do botão de envio */
+    width: 100%;
     color: #fff;
     padding: 10px;
     border: none;
@@ -74,6 +77,7 @@ h2 {
 .enabled {
     background-color: var(--dark-green);   
 }
+
 
 /* LOADING BAR LOGIN */
 
@@ -113,4 +117,42 @@ h2 {
 @keyframes pulse {
     0%, 100% { border-color: var(--dark-green); }
     50% { border-color: var(--light-green); }
+}
+
+
+/* FORM SETUP  */
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd; 
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+.notification {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.error {
+    background-color: #f75252; 
+    color: white;
 }

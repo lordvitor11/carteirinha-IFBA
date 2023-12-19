@@ -41,14 +41,14 @@
                     mais conveniente e agradável.</p>
               </div>
             </div>
-            <img src="assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image"> <!-- Substitua 'boneco.png' pelo caminho ou URL da sua imagem -->
+            <img src="assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image">
           </div>
     </main>
 
     <main class="session-3">
         <div class="announcements-section">
             <div class="announcements-image">
-              <img src="assets/202fb5c3fc9a4a73b3049e546ceb0fc4.png" alt="Imagem de Comunicados" class="announcements-image"> <!-- Substitua 'sua-imagem.jpg' pelo caminho ou URL da sua imagem -->
+              <img src="assets/202fb5c3fc9a4a73b3049e546ceb0fc4.png" alt="Imagem de Comunicados" class="announcements-image">
             </div>
             <div class="announcements-content">
               <div class="announcements-title">COMUNICADOS</div>
@@ -69,7 +69,7 @@
         
             <div class="menu-items">
               <div class="menu-item">
-                <img src="assets/6da0cc15731a428a9e2cf1767f46190f.png" alt="Imagem do Almoço" class="menu-image"> <!-- Substitua 'prato1.jpg' pelo caminho ou URL da sua imagem -->
+                <img src="assets/6da0cc15731a428a9e2cf1767f46190f.png" alt="Imagem do Almoço" class="menu-image">
                 <div>
                   <div class="menu-name">Almoço</div>
                   <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png"> </div><br>
@@ -80,7 +80,7 @@
               </div>
         
               <div class="menu-item">
-                <img src="assets/7732604ec55c471e850c0151ec6b1697.png" alt="Imagem do Complemento" class="menu-image"> <!-- Substitua 'prato2.jpg' pelo caminho ou URL da sua imagem -->
+                <img src="assets/7732604ec55c471e850c0151ec6b1697.png" alt="Imagem do Complemento" class="menu-image">
                 <div>
                   <div class="menu-name">Complemento</div>
                   <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png"> </div><br>
@@ -90,9 +90,8 @@
                 </div>
               </div>
         
-              <!-- Adicione mais itens conforme necessário -->
               <div class="menu-item">
-                <img src="assets/d362a44164f44a24bbb327a5d7208dd6.png" alt="Imagem da Sobremesa" class="menu-image"> <!-- Substitua 'prato2.jpg' pelo caminho ou URL da sua imagem -->
+                <img src="assets/d362a44164f44a24bbb327a5d7208dd6.png" alt="Imagem da Sobremesa" class="menu-image">
                 <div>
                   <div class="menu-name">Sobremesa</div>
                   <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png"> </div><br>
@@ -105,7 +104,7 @@
 
     <footer>
         <div>
-          <img src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo"> <!-- Substitua 'logo.png' pelo caminho ou URL da sua logo -->
+          <img src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo">
         </div>
         <div class="copyright">
           <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia

@@ -7,6 +7,30 @@ function check() {
     submit.classList.toggle("enabled", !submit.disabled);
 }
 
+function showNotification(message, type) {
+    let notification = document.querySelector("#notification");
+    let inputUser = document.querySelector("#username");
+    let inputPass = document.querySelector("#password");
+
+    notification.innerHTML = message;
+    notification.className = "notification " + type;
+    notification.style.opacity = 1;
+
+    inputUser.value = "";
+    inputPass.value = "";
+    check();
+
+    setTimeout(() => {
+        notification.style.opacity = 0;
+    }, 2500);
+
+    setTimeout(() => {
+        notification.classList.remove(type);
+        notification.innerHTML = "";
+
+    }, 3000);
+}
+
 function enviarFormulario() {
     let formElement = document.querySelector("#form");
     let formData = new FormData(formElement);
@@ -26,6 +50,8 @@ function enviarFormulario() {
                     setTimeout(() => {
                         window.location.href = "../index.php";
                     }, 2000);
+                } else {
+                    showNotification("Usuário inexistente ou credenciais inválidas!", "error");
                 }
             } else {
                 console.error("Erro na requisição: " + xhr.status);
@@ -37,6 +63,6 @@ function enviarFormulario() {
 }
 
 document.querySelector("#form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevenir o envio padrão do formulário
+    event.preventDefault();
     enviarFormulario();
 });

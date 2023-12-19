@@ -14,6 +14,7 @@
     <?php include_once("navbar.php"); showNav("login"); ?>
 
     <main class="main-login">
+      <div id="notification" class="notification"></div>
         <h2>FAÇA LOGIN</h2><br>
         <form id="form">
             <label for="usuario">Nome de Usuário:</label>
