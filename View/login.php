@@ -11,14 +11,9 @@
         <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
     </header>
 
-    <nav>
-        <div>
-            <a href="../index.html">Início</a>
-            <a href="cardapio.html">Cardápio</a>
-        </div>
-    </nav>
+    <?php include_once("navbar.php"); showNav("login"); ?>
 
-    <main>
+    <main class="main-login">
         <h2>FAÇA LOGIN</h2><br>
         <form action="" method="post">
             <label for="usuario">Nome de Usuário:</label>
@@ -27,7 +22,7 @@
             <label for="senha">Senha:</label>
             <input type="password" oninput="check();" name="password" id="password" placeholder="Senha" required><br><br>
 
-            <input type="submit" value="ENTRAR" name="submit" id="submit">
+            <input type="submit" value="ENTRAR" name="submit" id="submit" disabled>
         </form>
     </main>
 
@@ -41,12 +36,6 @@
             $usuario = $_POST['username'];
             $senha = $_POST['password'];
 
-            /*if ($controller->teste($usuario, $senha)) {
-                echo "<h1>Usuário encontrado!</h1>";
-            } else {
-                echo "<h1>Usuário não econtrado!</h1>";
-            }*/
-
             if ($controller->processarLogin($usuario, $senha)) {
                 echo "<h1>Logado como $usuario</h1>";
             } else {
@@ -56,14 +45,16 @@
     ?>
 
     <footer>
-        <div>
-            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo">
-        </div>
-        <div class="copyright">
-          <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
-            Campus Seabra</p>
+        <div class="footer-content">
+          <div class="logo">
+            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
+          </div>
+          <div class="copyright">
+            <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
+              Campus Seabra</p>
+          </div>
         </div>
       </footer>
-    <script src="View/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -11,15 +11,7 @@
         <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
     </header>
 
-    <nav>
-        <div>
-            <a href="../index.html">Início</a>
-            <a href="cardapio.html">Cardápio</a>
-        </div>
-        <div class="right">
-            <a href="login.html">LOGIN</a>
-        </div>
-    </nav>
+    <?php include_once("navbar.php"); showNav("default"); ?>
 
     <div class="container">
         <h1>CARDÁPIO SEMANAL</h1>
@@ -77,6 +69,6 @@
             Campus Seabra</p>
         </div>
       </footer>
-    <script src="View/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

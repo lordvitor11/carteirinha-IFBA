@@ -35,17 +35,23 @@ input[type="password"] {
 
 input[type="submit"] {
     width: 100%; /* Largura total do botão de envio */
-    background-color: #388E3C;
     color: #fff;
     padding: 10px;
     border: none;
     border-radius: 5px;
     font-size: 18px;
+    background-color: var(--gray);
+    transition: all 0.4s ease;
+}
+
+input[type="submit"].enabled {
+    background-color: var(--medium-green);
     cursor: pointer;
 }
 
-input[type="submit"]:hover {
-    background-color: #274E13;
+input[type="submit"].enabled:hover {
+    background-color: var(--dark-green);
+
 }
 
 .label {
@@ -59,4 +65,8 @@ input[type="submit"]:hover {
 h2 {
     margin-top: 0;
     color: #388E3C;
+}
+
+.enabled {
+    background-color: var(--dark-green);   
 }

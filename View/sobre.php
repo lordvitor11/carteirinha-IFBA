@@ -11,16 +11,7 @@
         <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
     </header>
 
-    <nav>
-        <div>
-            <a href="../index.html">Início</a>
-            <a href="cardapio.html">Cardápio</a>
-            <a href="sobre.html">Sobre</a>
-        </div>
-        <div class="right">
-            <a href="login.html">LOGIN</a>
-        </div>
-    </nav>
+    <?php include_once("navbar.php"); showNav("default"); ?>
 
     <div class="container-sphere">
         <div class="person">
@@ -30,7 +21,7 @@
                 <!-- Informações sobre a Pessoa -->
                 <p>Discente do IFBA Campus Seabra ingressado no ano de 2020.</p><br>
                 <!-- Foto da Pessoa -->
-                <img src="../assets/victor.jpg" alt="Foto da Pessoa 1" class="img-sobre">
+                <img src="../assets/victor.jpg" alt="Foto da Pessoa 1" class="img-sobre" onerror="this.src='../assets/person.png'">
             </div>
         </div>
 
@@ -41,7 +32,7 @@
                 <!-- Informações sobre a Pessoa -->
                 <p>Vigente Docente do Curso de Informática no IFBA - Campus Seabra e Orientador deste projeto.</p><br>
                 <!-- Foto da Pessoa -->
-                <img src="../assets/person.png" alt="Foto da Pessoa 1" class="img-sobre">
+                <img src="../assets/rui.jpg" alt="Foto da Pessoa 2" class="img-sobre" onerror="this.src='../assets/person.png'">
             </div>
         </div>
 
@@ -50,9 +41,9 @@
                 <!-- Nome da Pessoa -->
                 <h2>Vitor César Batista de Souza</h2><br>
                 <!-- Informações sobre a Pessoa -->
-                <p>Discente do IFBA Campus Seabra ingressado no ano de 2020..</p><br>
+                <p>Discente do IFBA Campus Seabra ingressado no ano de 2020.</p><br>
                 <!-- Foto da Pessoa -->
-                <img src="../assets/person.png" alt="Foto da Pessoa 1" class="img-sobre">
+                <img src="../assets/vitor.jpg" alt="Foto da Pessoa 3" class="img-sobre" onerror="this.src='../assets/person.png'">
             </div>
         </div>
     </div>
@@ -68,6 +59,6 @@
           </div>
         </div>
     </footer>
-    <script src="View/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

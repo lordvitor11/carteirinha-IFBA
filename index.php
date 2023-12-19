@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/View/style.css">
+    <title>Bem-vindo(a)</title>
+    <link rel="stylesheet" href="View/style.css">
 </head>
 <body>
     <header>
         <img src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
     </header>
 
-    <nav>
-        <div>
-            <a href="../index.html">Início</a>
-            <a href="View/cardapio.html">Cardápio</a>
-        </div>
-        <div class="right">
-            <a href="View/login.php">LOGIN</a>
-        </div>
-    </nav>
+    <?php include_once("View/navbar.php"); showNav("landpage"); ?>
 
     <main class="session-2">
         <img class="texto" src="assets/9e42d98494cc4cb687bf1f0012b58c06.png" alt="BEM-VINDO! EXPLORE E APROVEITE TODOS OS RECURSOS.">
-        <a href="/View/cardapio.html">
+        <a href="View/cardapio.php">
             <button class="custom-button">CARDÁPIO</button>
         </a>
     </main>
