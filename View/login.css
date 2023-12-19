@@ -26,8 +26,7 @@ form {
     text-align: center;
 }
 
-input[type="text"],
-input[type="password"] {
+input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -84,8 +83,6 @@ h2 {
 .result {
     width: fit-content;
     height: fit-content;
-    overflow: hidden;
-    align-items: center;
     justify-content: center;
     margin-bottom: 15px;
     opacity: 0;

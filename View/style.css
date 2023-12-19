@@ -33,7 +33,7 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: #ffffff;
+  color: #fff;
   font-size: 16px;
   font-weight: bold;
   margin: 0 15px;
@@ -42,17 +42,11 @@ nav a {
   cursor: pointer;
   border-bottom: 3px solid var(--medium-green);
   transition: all 0.3s ease;
-  text-decoration: none;
 }
 
-nav a:hover {
-  text-decoration: none;
-  color: var(--medium-green);
-}
+nav a:hover { color: var(--medium-green); }
 
-.right {
-  margin-left: auto;
-}
+.right { margin-left: auto; }
 
 .session-2{
   height: 500px;
