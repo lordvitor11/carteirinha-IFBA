@@ -42,17 +42,18 @@
             }
         }
 
-        public function getUserData($id) : string {
-            $sql = "SELECT nome FROM usuario WHERE id = '$id'";
+        public function getUserData($id) : array {
+            $sql = "SELECT nome, categoria FROM usuario WHERE id = '$id'";
             $result = $this->conn->query($sql);
 
-            $nome = "";
+            $nome = ""; $categoria = "";
 
             while ($row = $result->fetch_assoc()) {
                 $nome = $row['nome'];
+                $categoria = $row['categoria'];
             }
 
-            return $nome;
+            return array("nome" => $nome, "categoria" => $categoria);
         }
     }
 ?>

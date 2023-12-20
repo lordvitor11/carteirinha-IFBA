@@ -4,9 +4,13 @@
             $path = $call == "landpage" ? "View/logout.php" : "logout.php";
             $pathLogin = $call == "landpage" ? "View/login.php" : "login.php";
             
-            if ($_SESSION['logged_in']) {
+            if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
                 $nome = $_SESSION['user'];
-                $text = "<div class='right' title='Clique para sair'><a href='{$path}'>Logado como <strong>{$nome}!</strong></a></div>";
+                $text = "<div class='right'><span class='adm'>Administrador</span><a title='Clique para sair' href='{$path}'>Logado como <strong>{$nome}!</strong></a></div>";
+
+            } else if ($_SESSION['logged_in']) {
+                $nome = $_SESSION['user'];
+                $text = "<div class='right'><a title='Clique para sair' href='{$path}'>Logado como <strong>{$nome}!</strong></a></div>";
             } else {
                 $text = "<div class='right'><a href='{$pathLogin}'>LOGIN</a></div>";
             }

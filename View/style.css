@@ -3,6 +3,7 @@
   --dark-green: #274E13;
   --medium-green: #337A30;
   --gray: #706f6f;
+  --salmon: #f75252;
 }
 
 * {
@@ -239,4 +240,11 @@ footer {
 
 .copyright {
   text-align: center;
+}
+
+span.adm {
+  padding: 10px;
+  color: white;
+  background-color: var(--salmon);
+  border-radius: 5px;
 }

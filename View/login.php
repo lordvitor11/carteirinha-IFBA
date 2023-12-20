@@ -18,10 +18,10 @@
         <h2>FAÇA LOGIN</h2><br>
         <form id="form">
             <label for="usuario">Nome de Usuário:</label>
-            <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required><br><br>
+            <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required autocomplete="off"><br><br>
 
             <label for="senha">Senha:</label>
-            <input type="password" oninput="check()" name="password" id="password" placeholder="Senha" required><br><br>
+            <input type="password" oninput="check()" name="password" id="password" placeholder="Senha" required autocomplete="off"><br><br>
 
             <div class="result">
                 <div class="loading-spinner"></div>

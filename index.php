@@ -3,6 +3,7 @@
     $_SESSION['user'] = "";
     $_SESSION['id_user'] = "";
     $_SESSION['logged_in'] = false;
+    $_SESSION['category'] = "";
   }
 ?>
 

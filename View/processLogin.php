@@ -10,10 +10,11 @@
         $resultadoLogin = $controller->processarLogin($usuario, $senha);
 
         if ($resultadoLogin['situacao'] == "aprovado") {
-            $nome = $controller->getUserData($resultadoLogin['id']);
+            $data = $controller->getUserData($resultadoLogin['id']);
             $_SESSION['id'] = $resultadoLogin['id'];
-            $_SESSION['user'] = $nome;
+            $_SESSION['user'] = $data['nome'];
             $_SESSION['logged_in'] = true;
+            $_SESSION['category'] = $data['categoria'];
             echo "logged";
         } else {
             echo "error";

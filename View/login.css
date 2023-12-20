@@ -150,6 +150,6 @@ button {
 }
 
 .error {
-    background-color: #f75252; 
+    background-color: var(--salmon); 
     color: white;
 }

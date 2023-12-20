@@ -18,7 +18,7 @@
             }
         }
 
-        public function getUserData($id): string {
+        public function getUserData($id): array {
             return $this->model->getUserData($id);
         }
     }
