@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -58,6 +60,8 @@
                 </tr>
             </tbody>
         </table>
+
+        <?php if ($_SESSION['category'] == "adm") { echo "<a href='cardapio-admin.php'><button class='editar'>Editar cardápio</button></a>"; } ?>
     </div>
 
     <footer>
