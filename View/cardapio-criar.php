@@ -7,10 +7,6 @@
     <title>Cardápio ADMIN</title>
 </head>
 <body>
-    <header>
-        <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
-    </header>
-
     <?php include_once("navbar.php"); showNav("default"); ?>
 
     <div class="container">
@@ -98,8 +94,8 @@
             </div>
 
             <div class="botao-container">
+                <button class="cancelar" type="button" onclick="cancelarCardapio()">Cancelar Cardápio</button>
                 <button type="button" onclick="validarCardapio()">Validar Cardápio</button>
-                <button type="button" onclick="cancelarCardapio()">Cancelar Cardápio</button>
             </div>
         </form>
     </div>

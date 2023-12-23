@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <header>
-        <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
-    </header>
-
     <?php include_once("navbar.php"); showNav("login"); ?>
 
     <main class="main-login">

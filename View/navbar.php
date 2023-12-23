@@ -16,6 +16,8 @@
             }
         }
 
+        $img = $call == "landpage" ? "assets/1b1210fdf4454600bea220983da0cc63.png" : "../assets/1b1210fdf4454600bea220983da0cc63.png";
+        echo "<header><a href='https://portal.ifba.edu.br/seabra' target='_blank'><img src='{$img}' alt='logo-ifba-seabra'></a></header>";
         if ($call == "login") {
             echo "<nav><div><a href='../index.php'>Início</a><a href='cardapio.php'>Cardápio</a><a href='sobre.php'>Sobre</a></div></nav>";
         } else if ($call == "landpage") {

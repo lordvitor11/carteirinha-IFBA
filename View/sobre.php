@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="sobre.css">
 </head>
 <body>
-    <header>
-        <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
-    </header>
-
     <?php include_once("navbar.php"); showNav("default"); ?>
 
     <div class="container-sphere">
@@ -18,7 +14,7 @@
             <div class="semi-sphere">
                 <h2>Victor Hugo de Souza Santiago</h2><br>
                 <p>Discente do IFBA Campus Seabra ingressado no ano de 2020.</p><br>
-                <img src="../assets/victor.jpg" alt="Foto da Pessoa 1" class="img-sobre" onerror="this.src='../assets/person.png'">
+                <a href="https://www.github.com/nxrding-dev" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/victor.jpg" alt="Foto da Pessoa 1" class="img-sobre" onerror="this.src='../assets/person.png'"></a>
             </div>
         </div>
 
@@ -26,7 +22,7 @@
             <div class="semi-sphere">
                 <h2>Rui Santos Carigé Júnior</h2><br>
                 <p>Vigente Docente do Curso de Informática no IFBA - Campus Seabra e Orientador deste projeto.</p><br>
-                <img src="../assets/rui.jpg" alt="Foto da Pessoa 2" class="img-sobre" onerror="this.src='../assets/person.png'">
+                <a href="#" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/rui.jpg" alt="Foto da Pessoa 2" class="img-sobre" onerror="this.src='../assets/person.png'"></a>
             </div>
         </div>
 
@@ -34,7 +30,7 @@
             <div class="semi-sphere">
                 <h2>Vitor César Batista de Souza</h2><br>
                 <p>Discente do IFBA Campus Seabra ingressado no ano de 2020.</p><br>
-                <img src="../assets/vitor.jpg" alt="Foto da Pessoa 3" class="img-sobre" onerror="this.src='../assets/person.png'">
+                <a href="https://www.github.com/lordvitor11" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/vitor.jpg" alt="Foto da Pessoa 3" class="img-sobre" onerror="this.src='../assets/person.png'"></a>
             </div>
         </div>
     </div>
