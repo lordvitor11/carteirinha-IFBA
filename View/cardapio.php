@@ -24,37 +24,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Segunda</td>
-                    <td>Frango Grelhado</td>
-                    <td>Arroz Integral</td>
-                    <td>Frutas</td>
-                </tr>
-                <tr>
-                    <td>Terça</td>
-                    <td>Peixe Assado</td>
-                    <td>Quinoa</td>
-                    <td>Iogurte com Mel</td>
-                </tr>
-                <tr>
-                    <td>Quarta</td>
-                    <td>Vegetariano</td>
-                    <td>Salada de Grão-de-Bico</td>
-                    <td>Gelatina</td>
-                </tr>
-                <tr>
-                    <td>Quinta</td>
-                    <td>Carne de Porco ao Molho</td>
-                    <td>Purê de Batata</td>
-                    <td>Pudim</td>
-                </tr>
-                <tr>
-                    <td>Sexta</td>
-                    <td>Macarrão com Almôndegas</td>
-                    <td>Legumes Cozidos</td>
-                    <td>Sorvete</td>
-                </tr>
-            </tbody>
+                <?php 
+                    require("../Controller/controller.php");
+
+                    $controller = new LoginController();
+
+                    $cardapio = $controller->getCardapio();
+
+                    foreach ($cardapio as $dia) {
+                        $newDia = ucfirst($dia['dia']) . "-feira";
+                        echo "<tr>";
+                        echo "<td>{$newDia}</td>";
+                        echo "<td>{$dia['principal']}</td>";
+                        echo "<td>{$dia['acompanhamento']}</td>";
+                        echo "<td>{$dia['sobremesa']}</td>";
+                        echo "</tr>";
+                    }
+                ?>
+            </tbody> 
+
+           
         </table>
 
         <?php if ($_SESSION['category'] == "adm") { echo "<a href='cardapio-admin.php'><button class='editar'>Editar cardápio</button></a>"; } ?>

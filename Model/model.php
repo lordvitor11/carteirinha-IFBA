@@ -21,7 +21,7 @@
             }
         }
 
-        public function login($usuario, $senha) {
+        public function login($usuario, $senha) : array {
             $sql = "SELECT id, nome, senha, email FROM usuario WHERE nome = '$usuario'";
             $result = $this->conn->query($sql);
 
@@ -54,6 +54,42 @@
             }
 
             return array("nome" => $nome, "categoria" => $categoria);
+        }
+
+        public function getCardapio() : array {
+            $sql = "SELECT *
+            FROM cardapio
+            WHERE data_refeicao >= (
+                SELECT MAX(data_refeicao)
+                FROM cardapio
+                WHERE dia = 'segunda'
+            ) AND data_refeicao <= DATE_ADD((
+                SELECT MAX(data_refeicao)
+                FROM cardapio
+                WHERE dia = 'segunda'
+            ), INTERVAL 4 DAY)
+            ORDER BY data_refeicao;
+            ";
+
+            $result = $this->conn->query($sql);
+
+            $index = 0;
+
+            if ($result->num_rows > 0) {
+                $cardapio = array();
+                while ($row = $result->fetch_assoc()) {
+                    $cardapio[$index] = array(
+                        "dia" => $row['dia'],
+                        "principal" => $row['principal'], 
+                        "acompanhamento" => $row['acompanhamento'], 
+                        "sobremesa" => $row['sobremesa']
+                    );
+
+                    $index++;
+                }
+
+                return $cardapio;
+            }
         }
     }
 ?>

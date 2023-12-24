@@ -21,5 +21,9 @@
         public function getUserData($id): array {
             return $this->model->getUserData($id);
         }
+
+        public function getCardapio() : array {
+            return $this->model->getCardapio();
+        }
     }
 ?>
