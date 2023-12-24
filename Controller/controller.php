@@ -27,8 +27,12 @@
             return $this->model->getCardapio();
         }
 
-        public function deleteCardapio() {
-            $this->model->deleteCardapio();
+        public function deleteCardapio() : string {
+            return $this->model->deleteCardapio();
+        }
+
+        public function setCardapio($array) : string {
+            return $this->model->setCardapio($array);
         }
     }
 ?>

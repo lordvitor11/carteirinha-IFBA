@@ -95,10 +95,32 @@
             }
         }
 
-        public function deleteCardapio() {
+        public function deleteCardapio() : string {
             $sql = "DELETE FROM cardapio";
 
-            $this->conn->$query($sql);
+            if ($this->conn->query($sql) === TRUE) {
+                return "Sem erros";
+            } else {
+                return "Erro ao excluir dados do cardápio: " . $this->conn->error;
+            }
+        }
+
+        public function setCardapio($array) : string {
+            $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
+
+            if (!$stmt) {
+                return "Erro na preparação da consulta: " . $this->conn->error;
+            }
+
+            $stmt->bind_param("sssss", $array['data'], $array['dia'], $array['principal'], $array['acompanhamento'], $array['sobremesa']);
+
+            if (!$stmt->execute()) {
+                return "Erro na execução da consulta: " . $stmt->error;
+            }
+
+            $stmt->close();
+
+            return "Sem erros";
         }
     }
 ?>

@@ -25,11 +25,11 @@
                 </div>
                 <div>
                     <label for="acompanhamento-segunda">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-segunda" name="acompanhamento-segunda" required>
+                    <input type="text" id="acompanhamento-segunda" name="acompanhamento-segunda">
                 </div>
                 <div>
                     <label for="sobremesa-segunda">Sobremesa:</label>
-                    <input type="text" id="sobremesa-segunda" name="sobremesa-segunda" required>
+                    <input type="text" id="sobremesa-segunda" name="sobremesa-segunda">
                 </div>
             </div>
 
@@ -40,11 +40,11 @@
                 </div>
                 <div>
                     <label for="acompanhamento-terca">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-terca" name="acompanhamento-terca" required>
+                    <input type="text" id="acompanhamento-terca" name="acompanhamento-terca">
                 </div>
                 <div>
                     <label for="sobremesa-terca">Sobremesa:</label>
-                    <input type="text" id="sobremesa-terca" name="sobremesa-terca" required>
+                    <input type="text" id="sobremesa-terca" name="sobremesa-terca">
                 </div>
             </div>
 
@@ -55,11 +55,11 @@
                 </div>
                 <div>
                     <label for="acompanhamento-quarta">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-quarta" name="acompanhamento-quarta" required>
+                    <input type="text" id="acompanhamento-quarta" name="acompanhamento-quarta">
                 </div>
                 <div>
                     <label for="sobremesa-quarta">Sobremesa:</label>
-                    <input type="text" id="sobremesa-quarta" name="sobremesa-quarta" required>
+                    <input type="text" id="sobremesa-quarta" name="sobremesa-quarta">
                 </div>
             </div>
 
@@ -70,11 +70,11 @@
                 </div>
                 <div>
                     <label for="acompanhamento-quinta">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-quinta" name="acompanhamento-quinta" required>
+                    <input type="text" id="acompanhamento-quinta" name="acompanhamento-quinta">
                 </div>
                 <div>
                     <label for="sobremesa-quinta">Sobremesa:</label>
-                    <input type="text" id="sobremesa-quinta" name="sobremesa-quinta" required>
+                    <input type="text" id="sobremesa-quinta" name="sobremesa-quinta">
                 </div>
             </div>
 
@@ -85,11 +85,11 @@
                 </div>
                 <div>
                     <label for="acompanhamento-sexta">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-sexta" name="acompanhamento-sexta" required>
+                    <input type="text" id="acompanhamento-sexta" name="acompanhamento-sexta">
                 </div>
                 <div>
                     <label for="sobremesa-sexta">Sobremesa:</label>
-                    <input type="text" id="sobremesa-sexta" name="sobremesa-sexta" required>
+                    <input type="text" id="sobremesa-sexta" name="sobremesa-sexta">
                 </div>
             </div>
 
