@@ -36,7 +36,7 @@ function enviarFormulario() {
     let formData = new FormData(formElement);
   
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "processLogin.php", true);
+    xhr.open("POST", "process/processLogin.php", true);
   
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -51,6 +51,7 @@ function enviarFormulario() {
                         window.location.href = "../index.php";
                     }, 2000);
                 } else {
+                    console.log(xhr.responseText);
                     showNotification("Usuário inexistente ou credenciais inválidas!", "error");
                 }
             } else {
@@ -66,3 +67,27 @@ document.querySelector("#form").addEventListener("submit", function(event) {
     event.preventDefault();
     enviarFormulario();
 });
+
+function excluirCardapio() {
+    let xhr = new XMLHttpRequest();
+
+    xhr.open("POST", "process/delete-cardapio.php", true);
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            document.getElementById("resultado").innerHTML = xhr.responseText;
+        } else {
+            console.error("Erro na requisição AJAX:", xhr.statusText);
+        }
+    };
+
+    xhr.send();
+}
+
+function adicionarCardapio() {
+    window.location.href = "cardapio-criar.php";
+}
+
+function cancelarCardapio() {
+    window.location.href = "cardapio-admin.php";
+}

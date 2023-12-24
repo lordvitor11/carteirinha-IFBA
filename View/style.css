@@ -248,3 +248,7 @@ span.adm {
   background-color: var(--salmon);
   border-radius: 5px;
 }
+
+img {
+  user-select: none;
+}

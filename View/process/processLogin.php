@@ -1,6 +1,7 @@
 <?php session_start();
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        require("../Controller/controller.php");
+        $path = realpath(__DIR__ . "/.." . "/..");
+        require($path . "/Controller/controller.php");
 
         $controller = new LoginController();
 

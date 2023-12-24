@@ -7,11 +7,11 @@
     <title>Cardápio ADMIN</title>
 </head>
 <body>
-    <?php include_once("navbar.php"); showNav("default"); ?>
+    <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
         <h1>CRIAR CARDÁPIO</h1>
-        <form id="cardapioForm">
+        <form action="process/process-cardapio.php" method="POST" id="cardapioForm">
             <label for="data-inicio">Data inicío:</label>
             <input type="date" id="data-inicio" name="data-inicio" required>
 
@@ -95,14 +95,14 @@
 
             <div class="botao-container">
                 <button class="cancelar" type="button" onclick="cancelarCardapio()">Cancelar Cardápio</button>
-                <button type="button" onclick="validarCardapio()">Validar Cardápio</button>
+                <input type="submit" value="Validar Cardápio">
             </div>
         </form>
     </div>
 
     <footer>
         <div>
-            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo">
+            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo" draggable="false">
         </div>
         <div class="copyright">
           <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia Campus Seabra</p>

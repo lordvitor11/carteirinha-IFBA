@@ -7,7 +7,7 @@
     <title>Administração de Cardápios</title>
 </head>
 <body>
-    <?php include_once("navbar.php"); showNav("default"); ?>
+    <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
         <h1>Administração de Cardápios</h1><br>
@@ -24,7 +24,6 @@
         </div>
 
         <div class="cardapios">
-            <!-- Tabela de Cardápios -->
             <table>
                 <thead>
                     <tr>
@@ -35,21 +34,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Exemplo de linha na tabela, substitua com dados reais do banco de dados -->
-                    <tr>
-                        <td>01/01/2023</td>
-                        <td>05/01/2023</td>
-                        <td>
-                            <button onclick="editarCardapio(1)">Editar</button>
-                            <button onclick="excluirCardapio(1)">Excluir</button>
-                        </td>
-                        <td><input type="checkbox" name="selecao" value="1"></td>
-                    </tr>
-                    <!-- Adicione mais linhas conforme necessário -->
+                    <?php 
+                        require("../Controller/controller.php");
+
+                        $controller = new LoginController();
+
+                        $cardapio = $controller->getCardapio();
+
+                        if (sizeof($cardapio) > 0 && $cardapio[0] != null) {
+                            $inicio_vig = date("d/m/Y", strtotime($cardapio[0]['data'])); 
+                            $fim_vig = date("d/m/Y", strtotime($cardapio[sizeof($cardapio) - 1]['data']));
+
+                            echo "
+                            <tr>
+                                <td>$inicio_vig</td>
+                                <td>$fim_vig</td>
+                                <td>
+                                    <button onclick='editarCardapio()'>Editar</button>
+                                    <button onclick='excluirCardapio()'>Excluir</button>
+                                </td>
+                                <td><input type='checkbox' name='selecao' value='1'></td>
+                            </tr>";
+                        }
+                    ?>
                 </tbody>
             </table>
 
-            <!-- Botões para Adicionar e Limpar Seleção -->
             <div class="botoes-admin">
                 <a href="cardapio-criar.php" class="botao-adicionar">Adicionar Cardápio</a>
                 <button onclick="limparSelecao()">Limpar Seleção</button>
@@ -59,7 +69,7 @@
 
     <footer>
         <div>
-            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo">
+            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo" draggable="false">
         </div>
         <div class="copyright">
           <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia

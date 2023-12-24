@@ -63,3 +63,8 @@ button.editar {
 button.editar:hover {
     background-color: var(--medium-green);
 }
+
+h3.null {
+    margin-top: 50px;
+    margin-bottom: 10px;
+}

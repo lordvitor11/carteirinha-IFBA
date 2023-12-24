@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <?php include_once("navbar.php"); showNav("login"); ?>
+    <?php include_once("process/navbar.php"); showNav("login"); ?>
 
     <main class="main-login">
       <div id="notification" class="notification"></div>
@@ -31,7 +31,7 @@
     <footer>
         <div class="footer-content">
           <div class="logo">
-            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra">
+            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" draggable="false">
           </div>
           <div class="copyright">
             <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia

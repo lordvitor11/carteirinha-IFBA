@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 24/12/2023 às 02:16
+-- Tempo de geração: 24/12/2023 às 07:06
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -37,15 +37,31 @@ CREATE TABLE `cardapio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Despejando dados para a tabela `cardapio`
+-- Acionadores `cardapio`
+--
+DELIMITER $$
+CREATE TRIGGER `copiar_historico_cardapio` BEFORE DELETE ON `cardapio` FOR EACH ROW BEGIN
+    -- Copia os dados específicos da linha excluída para a tabela de histórico
+    INSERT INTO historico_cardapio (id, data_refeicao, dia, principal, acompanhamento, sobremesa)
+    VALUES (OLD.id, OLD.data_refeicao, OLD.dia, OLD.principal, OLD.acompanhamento, OLD.sobremesa);
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `historico_cardapio`
 --
 
-INSERT INTO `cardapio` (`id`, `data_refeicao`, `dia`, `principal`, `acompanhamento`, `sobremesa`) VALUES
-(1, '2023-12-25', 'segunda', 'Arroz, feijão e Frango cozido', 'Salada', 'Banana'),
-(2, '2023-12-26', 'terça', 'Strogonoff de frango', 'Batata palha', 'Melancia'),
-(3, '2023-12-27', 'quarta', 'Arroz, feijão e costela assada', 'Salada', 'Sem acompanhamento'),
-(4, '2023-12-28', 'quinta', 'Macarrão com sardinha', 'Salada', 'Laranja'),
-(5, '2023-12-29', 'sexta', 'Arroz, feijão e vaca atolada', 'Sem acompanhamento', 'Banana');
+CREATE TABLE `historico_cardapio` (
+  `id` int(11) NOT NULL,
+  `data_refeicao` varchar(255) NOT NULL,
+  `dia` varchar(255) NOT NULL,
+  `principal` varchar(255) NOT NULL,
+  `acompanhamento` varchar(255) NOT NULL,
+  `sobremesa` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -238,8 +254,7 @@ INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `categoria`, `telefone`) 
 -- Índices de tabela `cardapio`
 --
 ALTER TABLE `cardapio`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `data_refeicao` (`data_refeicao`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices de tabela `horario_padrão`

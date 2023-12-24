@@ -80,6 +80,7 @@
                 while ($row = $result->fetch_assoc()) {
                     $cardapio[$index] = array(
                         "dia" => $row['dia'],
+                        "data" => $row['data_refeicao'],
                         "principal" => $row['principal'], 
                         "acompanhamento" => $row['acompanhamento'], 
                         "sobremesa" => $row['sobremesa']
@@ -89,7 +90,15 @@
                 }
 
                 return $cardapio;
+            } else {
+                return array(null);
             }
+        }
+
+        public function deleteCardapio() {
+            $sql = "DELETE FROM cardapio";
+
+            $this->conn->$query($sql);
         }
     }
 ?>

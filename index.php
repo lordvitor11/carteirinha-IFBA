@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="View/style.css">
 </head>
 <body>
-    <?php include_once("View/navbar.php"); showNav("landpage"); ?>
+    <?php include_once("View/process/navbar.php"); showNav("landpage"); ?>
 
     <main class="session-2">
-        <img class="texto" src="assets/9e42d98494cc4cb687bf1f0012b58c06.png" alt="BEM-VINDO! EXPLORE E APROVEITE TODOS OS RECURSOS.">
+        <img class="texto" src="assets/9e42d98494cc4cb687bf1f0012b58c06.png" alt="BEM-VINDO! EXPLORE E APROVEITE TODOS OS RECURSOS." draggable="false">
         <a href="View/cardapio.php">
             <button class="custom-button">CARDÁPIO</button>
         </a>
@@ -38,18 +38,18 @@
                     mais conveniente e agradável.</p>
               </div>
             </div>
-            <img src="assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image">
+            <img src="assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image" draggable="false">
           </div>
     </main>
 
     <main class="session-3">
         <div class="announcements-section">
             <div class="announcements-image">
-              <img src="assets/202fb5c3fc9a4a73b3049e546ceb0fc4.png" alt="Imagem de Comunicados" class="announcements-image">
+              <img src="assets/202fb5c3fc9a4a73b3049e546ceb0fc4.png" alt="Imagem de Comunicados" class="announcements-image" draggable="false">
             </div>
             <div class="announcements-content">
               <div class="announcements-title">COMUNICADOS</div>
-              <div class="separator"> <img src="assets/e9b3f7bfb99641acba8a73b3b29a33bc.png"> </div><br>
+              <div class="separator"> <img src="assets/e9b3f7bfb99641acba8a73b3b29a33bc.png" draggable="false"> </div><br>
               <div class="announcements-subtitle">TÍTULO</div><br>
               <div class="announcements-text">
                 <p>Informações sobre os comunicados vão aqui.</p>
@@ -62,14 +62,14 @@
         <div class="menu-section">
             <div class="menu-title">CARDÁPIO?</div>
 
-            <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png"> </div>
+            <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div>
         
             <div class="menu-items">
               <div class="menu-item">
-                <img src="assets/6da0cc15731a428a9e2cf1767f46190f.png" alt="Imagem do Almoço" class="menu-image">
+                <img src="assets/6da0cc15731a428a9e2cf1767f46190f.png" alt="Imagem do Almoço" class="menu-image" draggable="false">
                 <div>
                   <div class="menu-name">Almoço</div>
-                  <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png"> </div><br>
+                  <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div><br>
                   <div class="menu-info">
                     <p>Todo dia diversas opções diferente.</p>
                   </div>
@@ -77,10 +77,10 @@
               </div>
         
               <div class="menu-item">
-                <img src="assets/7732604ec55c471e850c0151ec6b1697.png" alt="Imagem do Complemento" class="menu-image">
+                <img src="assets/7732604ec55c471e850c0151ec6b1697.png" alt="Imagem do Complemento" class="menu-image" draggable="false">
                 <div>
                   <div class="menu-name">Complemento</div>
-                  <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png"> </div><br>
+                  <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div><br>
                   <div class="menu-info">
                     <p>Diversas opções, como saladas e entre outros.</p>
                   </div>
@@ -88,10 +88,10 @@
               </div>
         
               <div class="menu-item">
-                <img src="assets/d362a44164f44a24bbb327a5d7208dd6.png" alt="Imagem da Sobremesa" class="menu-image">
+                <img src="assets/d362a44164f44a24bbb327a5d7208dd6.png" alt="Imagem da Sobremesa" class="menu-image" draggable="false">
                 <div>
                   <div class="menu-name">Sobremesa</div>
-                  <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png"> </div><br>
+                  <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div><br>
                   <div class="menu-info">
                     <p>Ótimos acompanhamentos para a sua refeição.</p>
                   </div>
@@ -101,7 +101,7 @@
 
     <footer>
         <div>
-          <img src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo">
+          <img src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo" draggable="false">
         </div>
         <div class="copyright">
           <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia

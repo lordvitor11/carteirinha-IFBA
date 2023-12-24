@@ -1,7 +1,8 @@
 <?php
     class LoginController {
         public function __construct() {
-            require("../Model/model.php");
+            $path = realpath(__DIR__ . "/..");
+            require($path . "/Model/model.php");
             $this->model = new LoginModel();
         }
 
@@ -24,6 +25,10 @@
 
         public function getCardapio() : array {
             return $this->model->getCardapio();
+        }
+
+        public function deleteCardapio() {
+            $this->model->deleteCardapio();
         }
     }
 ?>

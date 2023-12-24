@@ -84,6 +84,7 @@ h2 {
     width: fit-content;
     height: fit-content;
     justify-content: center;
+    align-items: center;
     margin-bottom: 15px;
     opacity: 0;
     display: none;
