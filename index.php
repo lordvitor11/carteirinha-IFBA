@@ -1,12 +1,3 @@
-<?php session_start();
-  if (!isset($_SESSION['logged_in'])) {
-    $_SESSION['user'] = "";
-    $_SESSION['id_user'] = "";
-    $_SESSION['logged_in'] = false;
-    $_SESSION['category'] = "";
-  }
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -26,20 +17,20 @@
     </main>
 
     <main class="session-3">
-        <div class="box1">
-            <div class="box2">
-              <div class="title">COMO SURGIU?</div>
+      <div class="box1">
+          <div class="box2">
+            <div class="title">COMO SURGIU?</div>
 
-              <div class="text">
-                <p>O projeto da carteirinha digital, se iniciou em 2023, com o intuito de<br>
-                    simplificar o processo de do almoço na escola, proporcionando praticidade e<br>
-                    controle aos alunos. Além disso, ele oferece segurança e eficiência para a<br>
-                    instituição de ensino, tornando a experiência de refeições na escola muito<br>
-                    mais conveniente e agradável.</p>
-              </div>
+            <div class="text">
+              <p>O projeto da carteirinha digital, se iniciou em 2023, com o intuito de<br>
+                  simplificar o processo de do almoço na escola, proporcionando praticidade e<br>
+                  controle aos alunos. Além disso, ele oferece segurança e eficiência para a<br>
+                  instituição de ensino, tornando a experiência de refeições na escola muito<br>
+                  mais conveniente e agradável.</p>
             </div>
-            <img src="assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image" draggable="false">
           </div>
+          <img src="assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image" draggable="false">
+        </div>
     </main>
 
     <main class="session-3">

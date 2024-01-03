@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -68,6 +66,10 @@
             } else if ($_SESSION['category'] == "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
                 echo "<a href='cardapio-admin.php'><button class='editar'>Adicionar cardápio</button></a>"; 
+            } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null) {
+                echo "<a href=''><button class='editar'>Quero almoçar!</button></a>";
+            } else if ($_SESSION['category'] != "adm" && $cardapio[0] == null) {
+                echo "<h3 class='null'>O cardápio ainda está vazio.</h3>";
             }
         ?>
     </div>

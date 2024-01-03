@@ -1,4 +1,13 @@
 <?php session_start();
+    if (!isset($_SESSION['logged_in'])) {
+        $_SESSION['user'] = "";
+        $_SESSION['id_user'] = "";
+        $_SESSION['logged_in'] = false;
+        $_SESSION['category'] = "";
+    }
+?>
+
+<?php
     function showNav($call) {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
         $host = $_SERVER['HTTP_HOST'];
