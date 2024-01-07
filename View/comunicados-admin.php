@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cardapio-admin.css">
-    <title>Administração de Cardápios</title>
+    <link rel="stylesheet" href="comunicados-admin.css">
+    <title>Gerenciamento de Comunicados</title>
 </head>
 <body>
 <header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img src='../assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
@@ -12,25 +12,14 @@
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
-        <h1>Administração de Cardápios</h1><br>
+        <h1>Gerenciamento de Comunicados</h1><br>
 
-        <div class="filtro-container">
-            <h2>Filtrar</h2>
-            <div class="filtro-campos">
-                <label class="label-data" for="filtro-data-inicio">Data início:</label>
-                <input type="date" id="filtro-data-inicio" placeholder="Filtrar por Data Início">
-
-                <label class="label-data" for="filtro-data-fim">Data fim:</label>
-                <input type="date" id="filtro-data-fim" placeholder="Filtrar por Data Fim">
-            </div>
-        </div>
-
-        <div class="cardapios">
+        <div class="comunicados">
             <table>
                 <thead>
                     <tr>
-                        <th>Data Início</th>
-                        <th>Data Fim</th>
+                        <th>Data Publicação</th>
+                        <th>Título</th>
                         <th>Ações</th>
                         <th></th>
                     </tr>
@@ -63,7 +52,7 @@
             </table>
 
             <div class="botoes-admin">
-                <a href="cardapio-criar.php" class="botao-adicionar">Adicionar Cardápio</a>
+                <a href="comunicado-criar.php" class="botao-adicionar">Adicionar Comunicados</a>
                 <button onclick="limparSelecao()">Limpar Seleção</button>
             </div>
         </div>
