@@ -32,8 +32,8 @@
             }
         }
 
-        $img = $call == "landpage" ? "assets/1b1210fdf4454600bea220983da0cc63.png" : "../assets/1b1210fdf4454600bea220983da0cc63.png";
-        echo "<header><a href='https://portal.ifba.edu.br/seabra' target='_blank'><img src='{$img}' alt='logo-ifba-seabra' draggable='false'></a></header>";
+        /*$img = $call == "landpage" ? "assets/1b1210fdf4454600bea220983da0cc63.png" : "../assets/1b1210fdf4454600bea220983da0cc63.png";
+        echo "<header> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img src='{$img}' alt='logo-ifba-seabra' draggable='false'>  </a> </header>";*/
         if ($call == "login") {
             echo "<nav><div><a href='{$index}'>Início</a><a href='{$cardapio}'>Cardápio</a><a href='{$sobre}'>Sobre</a></div></nav>";
         } else {
