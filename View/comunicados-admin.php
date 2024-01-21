@@ -20,6 +20,7 @@
                     <tr>
                         <th>Data Publicação</th>
                         <th>Título</th>
+                        <th>Link</th>
                         <th>Ações</th>
                         <th></th>
                     </tr>

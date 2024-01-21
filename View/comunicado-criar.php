@@ -20,6 +20,9 @@
             <label for="titulo">Título:</label>
             <input type="text" id="titulo" name="titulo" required>
 
+            <label for="link">Link:</label>
+            <input type="text" id="link" name="link" required>
+
             <label for="imagem" class="label-file-upload">Escolher imagem</label>
             <input type="file" id="imagem" name="imagem" accept="image/*" required>
 
