@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="View/style.css">
+    <link rel="stylesheet" href="View/css/style.css">
     <title>Início</title>
 </head>
 <body>
@@ -34,12 +34,14 @@
         <h4 class="comunicados">COMUNICADOS</h4>
         <div class="card">
             <div class="top">
-                <div class="userDetails">
-                    <div class="profile_img">
-                        <img src="assets/profile_instagram.png" class="cover">
+                <a href="https://www.instagram.com/ifba____seabra_____/" target="_blank">
+                    <div class="userDetails">
+                        <div class="profile_img">
+                            <img src="assets/profile_instagram.png" class="cover">
+                        </div>
+                        <h3>IFBA Seabra<br><span>Seabra, Bahia</span></h3>
                     </div>
-                    <h3>IFBA Seabra<br><span>Seabra, Bahia</span></h3>
-                </div>
+                </a>
                 <div>
                     <img src="assets/dot.png" class="dot">
                 </div>
@@ -61,24 +63,33 @@
                     </div>
                 </div>
             </div>
+            
             <div class="actionBtns">
-                <div class="left">
-                    <img src="assets/heart.png" class="heart">
-                    <img src="assets/comment.png">
-                    <img src="assets/share.png">
-                </div>
-                <div class="right">
-                    <img src="assets/bookmark.png">
-                </div>
+                <a href="https://www.instagram.com/ifba____seabra_____/" target="_blank">
+                    <div class="left">
+                        <img src="assets/heart.png" class="heart">
+                        <img src="assets/comment.png">
+                        <img src="assets/share.png">
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/ifba____seabra_____/" target="_blank">
+                    <div class="right">
+                        <img src="assets/bookmark.png">
+                    </div>
+                </a>
             </div>
         </div>
     </div>
 
     <div class="session-4-1">
-        <a href="View/comunicados-admin.php">
-            <button class="custom-button-2">GERENCIAR</button>
-        </a>
-    </div>
+        <?php
+            if (isset($_SESSION['category']) && $_SESSION['category'] == "adm") {
+                echo "
+                <a href='View/comunicados-admin.php'>
+                <button class='custom-button-2'>GERENCIAR</button>
+                </a>";
+            }
+        ?>
     </div>
 
     <main class="session-5">
@@ -119,7 +130,8 @@
                     <p>Ótimos acompanhamentos para a sua refeição.</p>
                   </div>
                 </div>
-              </div>
+            </div>
+        </div>
     </main>
 
     <footer class="rodape">

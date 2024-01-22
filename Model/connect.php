@@ -1,13 +1,13 @@
 <?php 
-  //$servername = "carteirinha23.mysql.dbaas.com.br";
-  //$username = "carteirinha23";
-  //$password = "";
-  //$dbname = "carteirinha23";
-
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
+  $servername = "carteirinha23.mysql.dbaas.com.br";
+  $username = "carteirinha23";
+  $password = "LEDS@ifseabra0";
   $dbname = "carteirinha23";
+
+  // $servername = "localhost";
+  // $username = "root";
+  // $password = "";
+  // $dbname = "carteirinha23";
 
   $conn = new mysqli($servername, $username, $password, $dbname);
 

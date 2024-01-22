@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cardapio.css">
+    <link rel="stylesheet" href="css/cardapio.css">
     <title>Cardápio Semanal</title>
 </head>
 <body>
@@ -71,7 +71,7 @@
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null) {
                 echo "<a href=''><button class='editar'>Quero almoçar!</button></a>";
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] == null) {
-                echo "<h3 class='null'>O cardápio ainda está vazio.</h3>";
+                echo "<h3 class='null'>O cardápio ainda está vazio. Aguarde por atualizações.</h3>";
             }
         ?>
     </div>
