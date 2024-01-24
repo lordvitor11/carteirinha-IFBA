@@ -13,7 +13,7 @@
 
     <div class="container">
         <h1>CRIAR COMUNICADOS</h1>
-        <form>
+        <form action="process/process-comunicados.php" method="post" enctype="multipart/form-data">
             <label for="data-publicacao">Data publicação:</label>
             <input type="date" id="data-publicacao" name="data-publicacao" required>
 

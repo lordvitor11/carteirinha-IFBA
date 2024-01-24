@@ -26,26 +26,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                        require("../Controller/controller.php");
+                    <?php
+                        $jsonStringOrigem = file_get_contents('process/dados.json');
+                        $arrayDados = json_decode($jsonStringOrigem, true);
 
-                        $controller = new LoginController();
-
-                        $cardapio = $controller->getCardapio();
-
-                        if (sizeof($cardapio) > 0 && $cardapio[0] != null) {
-                            $inicio_vig = date("d/m/Y", strtotime($cardapio[0]['data'])); 
-                            $fim_vig = date("d/m/Y", strtotime($cardapio[sizeof($cardapio) - 1]['data']));
-
-                            echo "
-                            <tr>
-                                <td>$inicio_vig</td>
-                                <td>$fim_vig</td>
-                                <td>
-                                    <button onclick='editarCardapio()'>Editar</button>
-                                    <button onclick='excluirCardapio()'>Excluir</button>
-                                </td>
-                                <td><input type='checkbox' name='selecao' value='1'></td>
+                        foreach ($arrayDados as $item) {
+                            echo "<tr>
+                            <td>{$item['data_publicacao']}</td>
+                            <td>{$item['titulo']}</td>
+                            <td>{$item['link']}</td>
+                            <td>
+                                <button onclick='editarCardapio()'>Editar</button>
+                                <button onclick='excluirCardapio()'>Excluir</button>
+                            </td>
+                            <td><input type='checkbox' name='selecao' value='1'></td>
                             </tr>";
                         }
                     ?>
