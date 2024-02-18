@@ -1,4 +1,5 @@
 @import url(style.css);
+@import url(mq/sobre.mq.css);
 
 .container-sphere {
     display: flex;
@@ -43,24 +44,4 @@
 
 .person h2{
     color: #388E3C;
-}
-
-.rodape {
-    background-color: #388E3C;
-    color: #fff;
-    padding: 20px;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .logo {
-    width: 400px; 
-    height: auto;
-  }
-  
-.copyright {
-    text-align: center;
 }

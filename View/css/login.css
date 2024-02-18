@@ -1,4 +1,5 @@
 @import url(style.css);
+@import url(mq/login.mq.css);
 
 body {
     background-color: #f4f4f4;  
@@ -19,6 +20,10 @@ main {
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+.main-login {
+    width: 85%;
 }
 
 form {
