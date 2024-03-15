@@ -12,26 +12,15 @@
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
-        <h1>Administração de Cardápios</h1><br>
-
-        <div class="filtro-container">
-            <h2>Filtrar</h2>
-            <div class="filtro-campos">
-                <label class="label-data" for="filtro-data-inicio">Data início:</label>
-                <input type="date" id="filtro-data-inicio" placeholder="Filtrar por Data Início">
-
-                <label class="label-data" for="filtro-data-fim">Data fim:</label>
-                <input type="date" id="filtro-data-fim" placeholder="Filtrar por Data Fim">
-            </div>
-        </div>
+        <h1>Cardápio Atual</h1><br>
 
         <div class="cardapios">
             <table>
                 <thead>
                     <tr>
-                        <th>Data Início</th>
-                        <th>Data Fim</th>
-                        <th>Ações</th>
+                        <th>Inicio</th>
+                        <th>Fim</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -55,7 +44,13 @@
                                     <button onclick='editarCardapio()'>Editar</button>
                                     <button onclick='excluirCardapio()'>Excluir</button>
                                 </td>
-                                <td><input type='checkbox' name='selecao' value='1'></td>
+                            </tr>";
+                        } else {
+                            echo "
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>Cardápio não existente no momento!</td>
                             </tr>";
                         }
                     ?>
@@ -64,7 +59,6 @@
 
             <div class="botoes-admin">
                 <a href="cardapio-criar.php" class="botao-adicionar">Adicionar Cardápio</a>
-                <button onclick="limparSelecao()">Limpar Seleção</button>
             </div>
         </div>
     </div>
@@ -74,7 +68,7 @@
             <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo" draggable="false">
         </div>
         <div class="copyright">
-          <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
+          <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
             Campus Seabra</p>
         </div>
     </footer>

@@ -106,13 +106,13 @@
         }
 
         public function setCardapio($array) : string {
-            $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa, id_excluido) VALUES (?, ?, ?, ?, ?, ?)");
 
             if (!$stmt) {
                 return "Erro na preparação da consulta: " . $this->conn->error;
             }
 
-            $stmt->bind_param("sssss", $array['data'], $array['dia'], $array['principal'], $array['acompanhamento'], $array['sobremesa']);
+            $stmt->bind_param("sssssi", $array['data'], $array['dia'], $array['principal'], $array['acompanhamento'], $array['sobremesa'], $array['id_excluido']);
 
             if (!$stmt->execute()) {
                 return "Erro na execução da consulta: " . $stmt->error;

@@ -88,7 +88,7 @@ document.querySelector("#form").addEventListener("submit", function(event) {
 function excluirCardapio() {
     let xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "process/delete-cardapio.php", true);
+    // xhr.open("POST", "process/delete-cardapio.php", true);
 
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {

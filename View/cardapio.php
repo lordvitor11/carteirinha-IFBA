@@ -69,7 +69,14 @@
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
                 echo "<a href='cardapio-admin.php'><button class='editar'>Adicionar cardápio</button></a>"; 
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null) {
-                echo "<a href=''><button class='editar'>Quero almoçar!</button></a>";
+                date_default_timezone_set('America/Sao_Paulo');
+                $current_time = date("H");
+
+                if (intval($current_time) >= 9) {
+                    echo "<span class='horario-limite'>Horário limite atingido!</span>";
+                } else {
+                    echo "<a href=''><button class='editar'>Quero almoçar!</button></a>";
+                }
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Aguarde por atualizações.</h3>";
             }

@@ -69,3 +69,12 @@ h3.null {
     margin-top: 50px;
     margin-bottom: 10px;
 }
+
+.horario-limite {
+    text-align: center;
+    font-weight: 600;
+    background-color: rgb(202, 132, 124);
+    width: 80%;
+    padding: 10px;
+    color: white;
+}
