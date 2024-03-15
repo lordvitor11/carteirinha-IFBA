@@ -23,8 +23,8 @@
         <div class="person">
             <div class="semi-sphere">
                 <h2>Rui Santos Carigé Júnior</h2><br>
-                <p>Vigente Docente do Curso de Informática no IFBA - Campus Seabra e Orientador deste projeto.</p><br>
-                <a href="#" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/rui.jpg" alt="Foto da Pessoa 2" class="img-sobre" onerror="this.src='../assets/person.png'" draggable="false"></a>
+                <p>Docente do Curso de Informática no IFBA - Campus Seabra e Orientador deste projeto.</p><br>
+                <a href="http://lattes.cnpq.br/9841225286230930" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/rui.png" alt="Foto da Pessoa 2" class="img-sobre" onerror="this.src='../assets/person.png'" draggable="false"></a>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
             <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
         </div>
         <div class="copyright">
-          <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
+          <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
             Campus Seabra</p>
         </div>
     </footer>
