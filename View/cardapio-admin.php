@@ -41,7 +41,7 @@
                                 <td>$inicio_vig</td>
                                 <td>$fim_vig</td>
                                 <td>
-                                    <button onclick='editarCardapio()'>Editar</button>
+                                    <a href='cardapio-alterar.php'><button onclick='editarCardapio()'>Editar</button>
                                     <button onclick='excluirCardapio()'>Excluir</button>
                                 </td>
                             </tr>";

@@ -35,7 +35,7 @@
         <h4 class="comunicados">COMUNICADOS</h4>
         <div class="card">
             <div class="top">
-                <a href="https://www.instagram.com/ifba____seabra_____/" target="_blank">
+                <a href="https://www.instagram.com/ifba_seabra" target="_blank">
                     <div class="userDetails">
                         <div class="profile_img">
                             <img src="assets/profile_instagram.png" class="cover">
@@ -83,14 +83,14 @@
             </div>
             
             <div class="actionBtns">
-                <a href="https://www.instagram.com/ifba____seabra_____/" target="_blank">
+                <a href="https://www.instagram.com/ifba_seabra" target="_blank">
                     <div class="left">
                         <img src="assets/heart.png" class="heart">
                         <img src="assets/comment.png">
                         <img src="assets/share.png">
                     </div>
                 </a>
-                <a href="https://www.instagram.com/ifba____seabra_____/" target="_blank">
+                <a href="https://www.instagram.com/ifba_seabra" target="_blank">
                     <div class="right">
                         <img src="assets/bookmark.png">
                     </div>
