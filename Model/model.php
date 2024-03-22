@@ -66,7 +66,7 @@
             ) AND data_refeicao <= DATE_ADD((
                 SELECT MAX(data_refeicao)
                 FROM cardapio
-                WHERE dia = 'segunda' AND ind_excluido = 0
+                WHERE dia = 'segunda'
             ), INTERVAL 4 DAY)
             ORDER BY data_refeicao;
             ";
@@ -83,8 +83,7 @@
                         "data" => $row['data_refeicao'],
                         "principal" => $row['principal'], 
                         "acompanhamento" => $row['acompanhamento'], 
-                        "sobremesa" => $row['sobremesa'],
-                        "ind_excluido" => $row['ind_excluido']
+                        "sobremesa" => $row['sobremesa']
                     );
 
                     $index++;
@@ -97,7 +96,6 @@
         }
 
         public function deleteCardapio() : string {
-            // Mudar ind_excluido para 1
             $sql = "DELETE FROM cardapio";
 
             if ($this->conn->query($sql) === TRUE) {
