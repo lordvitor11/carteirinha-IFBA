@@ -13,7 +13,7 @@
 
     <div class="container">
         <h1>CARDÁPIO SEMANAL</h1>
-        <img src="../assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
+        <img src="../assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
         <table>
             
             <?php 

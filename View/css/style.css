@@ -129,6 +129,7 @@ nav a:hover { color: var(--medium-green); }
 .image {
   width: 100%; 
   margin-top: 10px;
+  margin-bottom: -2px;
 }
 
 .menu-section {
@@ -240,7 +241,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-inline: var(--container-padding-horizontal);
   display: grid;
   place-items: center;
-  height: 605px;
+  height: 600px;
 }
 
 .session-4-1{

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cardapio-alterar2.css">
+    <link rel="stylesheet" href="css/cardapio-alterar.css">
     <title>ALTERAR CARDÁPIO</title>
 </head>
 <body>
@@ -33,23 +33,28 @@
             echo "<div class='dia-semana'>";
             echo "<div>";
             echo "<label for='" . strtolower($dia) . "'>$dia:</label>";
-            echo "<input type='text' id='" . strtolower($dia) . "' name='" . strtolower($dia) . "' required>";
+            echo "<input type='text' id='" . strtolower($dia) . "' name='" . strtolower($dia) . "' placeholder='Proteína' required>";
             echo "</div>";
             echo "<div>";
-            echo "<label for='acompanhamento-" . strtolower($dia) . "'>Acompanhamento:</label>";
-            echo "<input type='text' id='acompanhamento-" . strtolower($dia) . "' name='acompanhamento-" . strtolower($dia) . "'>";
+            echo "<label for='acompanhamento-" . strtolower($dia) . "'>‎ </label>";
+            echo "<input type='text' id='acompanhamento-" . strtolower($dia) . "' name='acompanhamento-" . strtolower($dia) . "' placeholder='Acompanhamento'>";
             echo "</div>";
             echo "<div>";
-            echo "<label for='sobremesa-" . strtolower($dia) . "'>Sobremesa:</label>";
-            echo "<input type='text' id='sobremesa-" . strtolower($dia) . "' name='sobremesa-" . strtolower($dia) . "'>";
+            echo "<label for='sobremesa-" . strtolower($dia) . "'>‎ </label>";
+            echo "<input type='text' id='sobremesa-" . strtolower($dia) . "' name='sobremesa-" . strtolower($dia) . "' placeholder='Sobremesa'>";
             echo "</div>";
             echo "</div>";
         }
         ?>
 
         <div class="botao-container">
-            <button class="cancelar" type="button" onclick="cancelarCardapio()">Cancelar Alteração</button>
-            <input type="submit" value="Alterar Cardápio" class="alterar">
+            <button class="cancelar" type="button" onclick="cancelarCardapio()">
+                <img src="../assets/cancelar-100px.png" alt="Cancelar">
+            </button>
+
+            <button class="alterar" type="button" onclick="alterarCardapio()">
+                <img src="../assets/validar-100px.png" alt="Alterar">
+            </button>
         </div>
     </form>
 </div>

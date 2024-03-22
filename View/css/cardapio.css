@@ -47,14 +47,14 @@ h1 {
 }
 
 .image2 {
-    margin-bottom: -46px;
+    margin-bottom: -20px;
     max-width: 100%;
     max-height: 250px;
 }
 
 button.editar {
     padding: 10px 20px;
-    background-color: var(--light-green);
+    background-color: var(--salmon);
     color: white;
     border: none;
     cursor: pointer;
@@ -62,7 +62,7 @@ button.editar {
 }
 
 button.editar:hover {
-    background-color: var(--medium-green);
+    background-color: var(--medium-salmon);
 }
 
 h3.null {
