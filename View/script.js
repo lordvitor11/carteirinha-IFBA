@@ -108,3 +108,98 @@ function adicionarCardapio() {
 function cancelarCardapio() {
     window.location.href = "cardapio-admin.php";
 }
+
+function addFields() {
+    const data_inicio = document.querySelector('#data-inicio').value; // Data de início
+    const data_fim = document.querySelector('#data-fim').value; // Data de término
+
+    if (data_inicio != "" || data_fim != "") {
+        const inicio = new Date(data_inicio);
+        const fim = new Date(data_fim);
+        const component = document.querySelector('.content');
+        component.innerHTML = "";
+        fim.setDate(fim.getDate() + 1); // Adiciona 1 dia ao fim
+
+        // Objeto para mapear o número do dia da semana para o nome correspondente
+        const diaSemanaNomes = ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
+
+        // Objeto para armazenar os dias da semana entre as datas
+        const dias_da_semana_entre_datas = {};
+
+        // Loop através de cada dia entre a data de início e a data de término
+        for (let data = inicio; data < fim; data.setDate(data.getDate() + 1)) {
+            // Obtém o dia da semana para a data atual
+            const dia_da_semana_numero = data.getDay();
+
+            // Armazena o dia da semana e a data correspondente no objeto
+            dias_da_semana_entre_datas[data.toISOString().slice(0, 10)] = diaSemanaNomes[dia_da_semana_numero];
+        }
+
+        for (const [data, dia_da_semana] of Object.entries(dias_da_semana_entre_datas)) {
+            // Divs
+            let divItem = document.createElement('div');
+            let divPrincipal = document.createElement('div');
+            let divAcompanhamento = document.createElement('div');
+            let divSobremesa = document.createElement('div');
+
+            // Content
+            let labelPrincipal = document.createElement('label');
+            let inputPrincipal = document.createElement('input');
+
+            let labelAcompanhamento = document.createElement('label');
+            let inputAcompanhamento = document.createElement('input');
+
+            let labelSobremesa = document.createElement('label');
+            let inputSobremesa = document.createElement('input');
+
+            // Configuração dos componentes
+            divItem.classList.add('dia-semana');
+
+            // Proteína
+            labelPrincipal.setAttribute('id', dia_da_semana);
+            labelPrincipal.setAttribute('name', dia_da_semana);
+            labelPrincipal.textContent = dia_da_semana.charAt(0).toUpperCase() + dia_da_semana.slice(1).toLowerCase() + '-feira';
+
+            inputPrincipal.setAttribute('id', dia_da_semana);
+            inputPrincipal.setAttribute('name', dia_da_semana);
+            inputPrincipal.setAttribute('placeholder', 'Proteína');
+
+            // Acompanhamento
+            labelAcompanhamento.setAttribute('id', 'acompanhamento-' + dia_da_semana);
+            labelAcompanhamento.setAttribute('name', 'acompanhamento-' + dia_da_semana);
+            labelAcompanhamento.textContent = "‎ ";
+
+            inputAcompanhamento.setAttribute('id', 'acompanhamento-' + dia_da_semana);
+            inputAcompanhamento.setAttribute('name', 'acompanhamento-' + dia_da_semana);
+            inputAcompanhamento.setAttribute('placeholder', 'Acompanhamento');
+
+            // Sobremesa
+            labelSobremesa.setAttribute('id', 'sobremesa-' + dia_da_semana);
+            labelSobremesa.setAttribute('name', 'sobremesa-' + dia_da_semana);
+            labelSobremesa.textContent = "‎ ";
+
+            inputSobremesa.setAttribute('id', 'sobremesa-' + dia_da_semana);
+            inputSobremesa.setAttribute('name', 'sobremesa-' + dia_da_semana);
+            inputSobremesa.setAttribute('placeholder', 'Sobremesa');
+
+            // Adição dos componentes aos componetes pais
+            divPrincipal.appendChild(labelPrincipal);
+            divPrincipal.appendChild(inputPrincipal);
+
+            divAcompanhamento.appendChild(labelAcompanhamento);
+            divAcompanhamento.appendChild(inputAcompanhamento);
+
+            divSobremesa.appendChild(labelSobremesa);
+            divSobremesa.appendChild(inputSobremesa);
+
+            divItem.appendChild(divPrincipal);
+            divItem.appendChild(divAcompanhamento);
+            divItem.appendChild(divSobremesa);
+
+            component.appendChild(divItem);
+        }
+
+        const buttonContainer = document.querySelector('.botao-container');
+        buttonContainer.style.display = "flex";
+    }
+}
