@@ -24,8 +24,13 @@
             </div>
             <div class="content"></div>
             <div class="botao-container">
-                <input type="button" value="Cancelar Cardápio">
-                <input type="submit" value="Validar Cardápio">
+                <button class="cancelar" type="button" onclick="cancelarCardapio()">
+                    <img src="../assets/cancelar-100px.png" alt="Cancelar">
+                </button>
+
+                <button class="validar" type="submit">
+                    <img src="../assets/validar-100px.png" alt="Alterar">
+                </button>
             </div>
         </form>
     </div>
