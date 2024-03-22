@@ -66,7 +66,7 @@
             ) AND data_refeicao <= DATE_ADD((
                 SELECT MAX(data_refeicao)
                 FROM cardapio
-                WHERE dia = 'segunda'
+                WHERE dia = 'segunda' AND ind_excluido = 0
             ), INTERVAL 4 DAY)
             ORDER BY data_refeicao;
             ";
@@ -83,7 +83,8 @@
                         "data" => $row['data_refeicao'],
                         "principal" => $row['principal'], 
                         "acompanhamento" => $row['acompanhamento'], 
-                        "sobremesa" => $row['sobremesa']
+                        "sobremesa" => $row['sobremesa'],
+                        "ind_excluido" => $row['ind_excluido']
                     );
 
                     $index++;
@@ -96,6 +97,7 @@
         }
 
         public function deleteCardapio() : string {
+            // Mudar ind_excluido para 1
             $sql = "DELETE FROM cardapio";
 
             if ($this->conn->query($sql) === TRUE) {
@@ -106,13 +108,13 @@
         }
 
         public function setCardapio($array) : string {
-            $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa, id_excluido) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
 
             if (!$stmt) {
                 return "Erro na preparação da consulta: " . $this->conn->error;
             }
 
-            $stmt->bind_param("sssssi", $array['data'], $array['dia'], $array['principal'], $array['acompanhamento'], $array['sobremesa'], $array['id_excluido']);
+            $stmt->bind_param("sssss", $array['data'], $array['dia'], $array['principal'], $array['acompanhamento'], $array['sobremesa']);
 
             if (!$stmt->execute()) {
                 return "Erro na execução da consulta: " . $stmt->error;

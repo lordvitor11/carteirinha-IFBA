@@ -27,7 +27,7 @@
             <p class="text">O projeto da carteirinha digital iniciou-se em 2023 com o intuito de simplificar o processo de almoço na escola, proporcionando praticidade e controle aos alunos. Além disso, oferece segurança e eficiência para a instituição de ensino, tornando a experiência das refeições na escola muito mais conveniente e agradável.</p>
         </div>
         <div class="image">
-            <img src="assets/_0454db25-be52-4019-98c8-a6837e90ff09-removebg-preview.png" alt="Imagem do Boneco" class="image" draggable="false">
+            <img src="assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image" draggable="false">
         </div>
     </main>
 

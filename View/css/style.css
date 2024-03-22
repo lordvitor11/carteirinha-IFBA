@@ -240,7 +240,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-inline: var(--container-padding-horizontal);
   display: grid;
   place-items: center;
-  height: 600px;
+  height: 605px;
 }
 
 .session-4-1{
