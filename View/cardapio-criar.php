@@ -23,7 +23,7 @@
             <div class="dia-semana">
                 <div>
                     <label for="segunda">Segunda-feira:</label>
-                    <input type="text" id="segunda" name="segunda" required>
+                    <input type="text" id="segunda" name="segunda" required placeholder="Proteína">
                 </div>
                 <div>
                     <label for="acompanhamento-segunda">‎ </label>
@@ -38,7 +38,7 @@
             <div class="dia-semana">
                 <div>
                     <label for="terca">Terça-feira:</label>
-                    <input type="text" id="terca" name="terca" required>
+                    <input type="text" id="terca" name="terca" required required placeholder="Proteína">
                 </div>
                 <div>
                     <label for="acompanhamento-terca">‎ </label>
@@ -53,7 +53,7 @@
             <div class="dia-semana">
                 <div>
                     <label for="quarta">Quarta-feira:</label>
-                    <input type="text" id="quarta" name="quarta" required>
+                    <input type="text" id="quarta" name="quarta" required required placeholder="Proteína">
                 </div>
                 <div>
                     <label for="acompanhamento-quarta">‎ </label>
@@ -68,7 +68,7 @@
             <div class="dia-semana">
                 <div>
                     <label for="quinta">Quinta-feira:</label>
-                    <input type="text" id="quinta" name="quinta" required>
+                    <input type="text" id="quinta" name="quinta" required required placeholder="Proteína">
                 </div>
                 <div>
                     <label for="acompanhamento-quinta">‎ </label>
@@ -83,7 +83,7 @@
             <div class="dia-semana">
                 <div>
                     <label for="sexta">Sexta-feira:</label>
-                    <input type="text" id="sexta" name="sexta" required>
+                    <input type="text" id="sexta" name="sexta" required required placeholder="Proteína">
                 </div>
                 <div>
                     <label for="acompanhamento-sexta">‎ </label>

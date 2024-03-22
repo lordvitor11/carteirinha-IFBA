@@ -33,7 +33,7 @@
             echo "<div class='dia-semana'>";
             echo "<div>";
             echo "<label for='" . strtolower($dia) . "'>$dia:</label>";
-            echo "<input type='text' id='" . strtolower($dia) . "' name='" . strtolower($dia) . "' required>";
+            echo "<input type='text' id='" . strtolower($dia) . "' name='" . strtolower($dia) . "' placeholder='Proteína' required>";
             echo "</div>";
             echo "<div>";
             echo "<label for='acompanhamento-" . strtolower($dia) . "'>‎ </label>";
