@@ -26,12 +26,12 @@
                     <input type="text" id="segunda" name="segunda" required>
                 </div>
                 <div>
-                    <label for="acompanhamento-segunda">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-segunda" name="acompanhamento-segunda">
+                    <label for="acompanhamento-segunda">‎ </label>
+                    <input type="text" id="acompanhamento-segunda" name="acompanhamento-segunda" placeholder="Acompanhamento">
                 </div>
                 <div>
-                    <label for="sobremesa-segunda">Sobremesa:</label>
-                    <input type="text" id="sobremesa-segunda" name="sobremesa-segunda">
+                    <label for="sobremesa-segunda">‎ </label>
+                    <input type="text" id="sobremesa-segunda" name="sobremesa-segunda" placeholder="Sobremesa">
                 </div>
             </div>
 
@@ -41,12 +41,12 @@
                     <input type="text" id="terca" name="terca" required>
                 </div>
                 <div>
-                    <label for="acompanhamento-terca">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-terca" name="acompanhamento-terca">
+                    <label for="acompanhamento-terca">‎ </label>
+                    <input type="text" id="acompanhamento-terca" name="acompanhamento-terca" placeholder="Acompanhamento">
                 </div>
                 <div>
-                    <label for="sobremesa-terca">Sobremesa:</label>
-                    <input type="text" id="sobremesa-terca" name="sobremesa-terca">
+                    <label for="sobremesa-terca">‎ </label>
+                    <input type="text" id="sobremesa-terca" name="sobremesa-terca" placeholder="Sobremesa">
                 </div>
             </div>
 
@@ -56,12 +56,12 @@
                     <input type="text" id="quarta" name="quarta" required>
                 </div>
                 <div>
-                    <label for="acompanhamento-quarta">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-quarta" name="acompanhamento-quarta">
+                    <label for="acompanhamento-quarta">‎ </label>
+                    <input type="text" id="acompanhamento-quarta" name="acompanhamento-quarta" placeholder="Acompanhamento">
                 </div>
                 <div>
-                    <label for="sobremesa-quarta">Sobremesa:</label>
-                    <input type="text" id="sobremesa-quarta" name="sobremesa-quarta">
+                    <label for="sobremesa-quarta">‎ </label>
+                    <input type="text" id="sobremesa-quarta" name="sobremesa-quarta" placeholder="Sobremesa">
                 </div>
             </div>
 
@@ -71,12 +71,12 @@
                     <input type="text" id="quinta" name="quinta" required>
                 </div>
                 <div>
-                    <label for="acompanhamento-quinta">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-quinta" name="acompanhamento-quinta">
+                    <label for="acompanhamento-quinta">‎ </label>
+                    <input type="text" id="acompanhamento-quinta" name="acompanhamento-quinta" placeholder="Acompanhamento">
                 </div>
                 <div>
-                    <label for="sobremesa-quinta">Sobremesa:</label>
-                    <input type="text" id="sobremesa-quinta" name="sobremesa-quinta">
+                    <label for="sobremesa-quinta">‎ </label>
+                    <input type="text" id="sobremesa-quinta" name="sobremesa-quinta" placeholder="Sobremesa">
                 </div>
             </div>
 
@@ -86,18 +86,23 @@
                     <input type="text" id="sexta" name="sexta" required>
                 </div>
                 <div>
-                    <label for="acompanhamento-sexta">Acompanhamento:</label>
-                    <input type="text" id="acompanhamento-sexta" name="acompanhamento-sexta">
+                    <label for="acompanhamento-sexta">‎ </label>
+                    <input type="text" id="acompanhamento-sexta" name="acompanhamento-sexta" placeholder="Acompanhamento">
                 </div>
                 <div>
-                    <label for="sobremesa-sexta">Sobremesa:</label>
-                    <input type="text" id="sobremesa-sexta" name="sobremesa-sexta">
+                    <label for="sobremesa-sexta">‎ </label>
+                    <input type="text" id="sobremesa-sexta" name="sobremesa-sexta" placeholder="Sobremesa">
                 </div>
             </div>
 
             <div class="botao-container">
-                <button class="cancelar" type="button" onclick="cancelarCardapio()">Cancelar Cardápio</button>
-                <input type="submit" value="Validar Cardápio">
+                <button class="cancelar" type="button" onclick="cancelarCardapio()">
+                    <img src="../assets/cancelar-100px.png" alt="Cancelar">
+                </button>
+
+                <button class="validar" type="submit">
+                    <img src="../assets/validar-100px.png" alt="Alterar">
+                </button>
             </div>
         </form>
     </div>
