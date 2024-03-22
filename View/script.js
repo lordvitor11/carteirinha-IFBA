@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         carousel.style.transform = "translateX(" + translateValue + ")";
     }
 
-    setInterval(nextSlide, 3000); // Troca de slide a cada 3 segundos
+    setInterval(nextSlide, 3000);
 });
 
 function check() {
@@ -88,8 +88,6 @@ document.querySelector("#form").addEventListener("submit", function(event) {
 function excluirCardapio() {
     let xhr = new XMLHttpRequest();
 
-    // xhr.open("POST", "process/delete-cardapio.php", true);
-
     xhr.onload = function () {
         if (xhr.status >= 200 && xhr.status < 300) {
             document.getElementById("resultado").innerHTML = xhr.responseText;
@@ -110,15 +108,15 @@ function cancelarCardapio() {
 }
 
 function addFields() {
-    const data_inicio = document.querySelector('#data-inicio').value; // Data de início
-    const data_fim = document.querySelector('#data-fim').value; // Data de término
+    const data_inicio = document.querySelector('#data-inicio').value;
+    const data_fim = document.querySelector('#data-fim').value;
 
     if (data_inicio != "" || data_fim != "") {
         const inicio = new Date(data_inicio);
         const fim = new Date(data_fim);
         const component = document.querySelector('.content');
         component.innerHTML = "";
-        fim.setDate(fim.getDate() + 1); // Adiciona 1 dia ao fim
+        fim.setDate(fim.getDate() + 1);
 
         // Objeto para mapear o número do dia da semana para o nome correspondente
         const diaSemanaNomes = ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
@@ -128,7 +126,6 @@ function addFields() {
 
         // Loop através de cada dia entre a data de início e a data de término
         for (let data = inicio; data < fim; data.setDate(data.getDate() + 1)) {
-            // Obtém o dia da semana para a data atual
             const dia_da_semana_numero = data.getDay();
 
             // Armazena o dia da semana e a data correspondente no objeto
