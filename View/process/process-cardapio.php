@@ -8,51 +8,65 @@
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
 
-    $semana = array(
-        "segunda" => array(
-            "dia" => "segunda",
-            "data" => $inicio->format('Y-m-d'),
-            "principal" => $_POST['segunda'],
-            "acompanhamento" => $_POST['acompanhamento-segunda'] != "" ? $_POST['acompanhamento-segunda'] : "Sem acompanhamento",
-            "sobremesa" => $_POST['sobremesa-segunda'] != "" ? $_POST['sobremesa-segunda'] : "Sem sobremesa",
-            "id_excluido" => 0
-        ),
-        "terca" => array(
-            "dia" => "terca",
-            "data" => $inicio->modify("+1 days")->format('Y-m-d'),
-            "principal" => $_POST['terca'],
-            "acompanhamento" => $_POST['acompanhamento-terca'] != "" ? $_POST['acompanhamento-terca'] : "Sem acompanhamento",
-            "sobremesa" => $_POST['sobremesa-terca'] != "" ? $_POST['sobremesa-terca'] : "Sem sobremesa",
-            "id_excluido" => 0
-        ),
-        "quarta" => array(
-            "dia" => "quarta",
-            "data" => $inicio->modify("+1 days")->format('Y-m-d'),
-            "principal" => $_POST['quarta'],
-            "acompanhamento" => $_POST['acompanhamento-quarta'] != "" ? $_POST['acompanhamento-quarta'] : "Sem acompanhamento",
-            "sobremesa" => $_POST['sobremesa-quarta'] != "" ? $_POST['sobremesa-quarta'] : "Sem sobremesa",
-            "id_excluido" => 0
-        ),
-        "quinta" => array(
-            "dia" => "quinta",
-            "data" => $inicio->modify("+1 days")->format('Y-m-d'),
-            "principal" => $_POST['quinta'],
-            "acompanhamento" => $_POST['acompanhamento-quinta'] != "" ? $_POST['acompanhamento-quinta'] : "Sem acompanhamento",
-            "sobremesa" => $_POST['sobremesa-quinta'] != "" ? $_POST['sobremesa-quinta'] : "Sem sobremesa",
-            "id_excluido" => 0
-        ),
-        "sexta" => array(
-            "dia" => "sexta",
-            "data" => $fim->format('Y-m-d'),
-            "principal" => $_POST['sexta'],
-            "acompanhamento" => $_POST['acompanhamento-sexta'] != "" ? $_POST['acompanhamento-sexta'] : "Sem acompanhamento",
-            "sobremesa" => $_POST['sobremesa-sexta'] != "" ? $_POST['sobremesa-sexta'] : "Sem sobremesa",
-            "id_excluido" => 0
-        )
-    );
+    $dias = ['segunda', 'terca', 'quarta', 'quinta', 'sexta'];
+    $diasDaSemana = array();
+    $semana = array();
 
-    foreach ($semana as $dia) {
-        $error = $controller->setCardapio($dia); 
+    // Itere por cada dia dentro do intervalo
+    while ($inicio <= $fim) {
+        $diaDaSemana = $inicio->format('N');
+    
+        switch ($diaDaSemana) {
+            case 1:
+                $diasDaSemana[0][] = $dias[0]; break;
+            case 2: 
+                $diasDaSemana[0][] = $dias[1]; break;
+            case 3:
+                $diasDaSemana[0][] = $dias[2]; break;
+            case 4:
+                $diasDaSemana[0][] = $dias[3]; break;
+            case 5: 
+                $diasDaSemana[0][] = $dias[4]; break;
+        }
+
+        if ($diaDaSemana >= 1 && $diaDaSemana <= 5) {
+            $diasDaSemana[1][] = $inicio->format('Y-m-d');
+        }
+    
+        // Avance para o próximo dia
+        $inicio->modify('+1 day');
+    }
+
+    for ($c = 0; $c < count($dias); $c++) {
+        if (in_array($dias[$c], $diasDaSemana[0])) {
+            $semana[] = array(
+                $dias[$c] => array(
+                    'dia' => $dias[$c],
+                    'data' => $diasDaSemana[1][array_search($dias[$c], $diasDaSemana[0])],
+                    'principal' => $_POST[$dias[$c]],
+                    'acompanhamento' => $_POST["acompanhamento-{$dias[$c]}"] != "" ? $_POST["acompanhamento-{$dias[$c]}"] : 'Sem acompanhamento',
+                    'sobremesa' => $_POST["sobremesa-{$dias[$c]}"] != "" ? $_POST["sobremesa-{$dias[$c]}"] : 'Sem sobremesa'
+                )
+            );
+        } else {
+            $semana[] = array(
+                $dias[$c] => array(
+                    'dia' => $dias[$c],
+                    'data' => 'S/A',
+                    'principal' => 'S/A',
+                    'acompanhamento' => 'S/A',
+                    'sobremesa' => 'S/A'
+                )
+            );
+        }
+    }
+
+    for ($c = 0; $c < count($semana); $c++) {
+        if ($semana[$c][$dias[$c]]['data'] == 'S/A') {
+            continue;
+        } else {
+            $error = $controller->setCardapio($semana[$c][$dias[$c]]);
+        }
     }
 
     if ($error == "Sem erros") {

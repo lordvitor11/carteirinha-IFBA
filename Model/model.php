@@ -1,5 +1,6 @@
 <?php
     class LoginModel {
+        public $conn;
         public function __construct() {
             require("connect.php");
             $this->conn = $conn;
@@ -57,36 +58,61 @@
         }
 
         public function getCardapio() : array {
-            $sql = "SELECT *
-            FROM cardapio
-            WHERE data_refeicao >= (
-                SELECT MAX(data_refeicao)
-                FROM cardapio
-                WHERE dia = 'segunda'
-            ) AND data_refeicao <= DATE_ADD((
-                SELECT MAX(data_refeicao)
-                FROM cardapio
-                WHERE dia = 'segunda'
-            ), INTERVAL 4 DAY)
-            ORDER BY data_refeicao;
-            ";
+            $sql = "SELECT * FROM cardapio WHERE ind_excluido = 0 ORDER BY data_refeicao";
 
             $result = $this->conn->query($sql);
 
-            $index = 0;
-
             if ($result->num_rows > 0) {
-                $cardapio = array();
+                $cardapio = array_fill(0, 5, null);
                 while ($row = $result->fetch_assoc()) {
-                    $cardapio[$index] = array(
+                    $dia;
+
+                    switch ($row['dia']) {
+                        case "segunda":
+                            $dia = 0; break;
+                        case "terca":
+                            $dia = 1; break;
+                        case "quarta": 
+                            $dia = 2; break;
+                        case "quinta":
+                            $dia = 3; break;
+                        case "sexta":
+                            $dia = 4; break;
+                    }
+
+                    $cardapio[$dia] = array(
                         "dia" => $row['dia'],
                         "data" => $row['data_refeicao'],
                         "principal" => $row['principal'], 
                         "acompanhamento" => $row['acompanhamento'], 
                         "sobremesa" => $row['sobremesa']
                     );
+                }
 
-                    $index++;
+                for ($c = 0; $c < count($cardapio); $c++) {
+                    if ($cardapio[$c] == null) {
+                        $diaTemp;
+                        switch (array_search($cardapio[$c], $cardapio)) {
+                            case 0: 
+                                $diaTemp = 'Segunda-feira'; break;
+                            case 1:
+                                $diaTemp = 'Terça-feira'; break;
+                            case 2: 
+                                $diaTemp = 'Quarta-feira'; break;
+                            case 3:
+                                $diaTemp = 'Quinta-feira'; break;
+                            case 4:
+                                $diaTemp = 'Sexta-feira'; break;
+                        }
+
+                        $cardapio[$c] = array(
+                            "dia" => $diaTemp,
+                            "data" => '',
+                            "principal" => 'Sem refeição', 
+                            "acompanhamento" => 'Sem refeição', 
+                            "sobremesa" => 'Sem refeição'
+                        );
+                    }
                 }
 
                 return $cardapio;
@@ -106,6 +132,11 @@
         }
 
         public function setCardapio($array) : string {
+            foreach ($array as $dia) {
+                print_r($dia);
+                echo "<br>";
+            }
+            print_r($array);
             $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
 
             if (!$stmt) {

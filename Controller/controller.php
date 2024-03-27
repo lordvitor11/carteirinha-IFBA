@@ -1,5 +1,6 @@
 <?php
     class LoginController {
+        public $model;
         public function __construct() {
             $path = realpath(__DIR__ . "/..");
             require($path . "/Model/model.php");
