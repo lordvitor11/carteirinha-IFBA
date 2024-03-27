@@ -11,9 +11,11 @@
 
     <?php include_once("process/navbar.php"); showNav("login"); ?>
 
+    <h1 class="title-login">FAÇA LOGIN</h1><br>
+
     <main class="main-login">
+    <img class="img-login" src="../assets/if.png" alt="Logo IFBA">
       <div id="notification" class="notification"></div>
-        <h2>FAÇA LOGIN</h2><br>
         <form id="form">
             <label for="usuario">Nome de Usuário:</label>
             <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required autocomplete="off"><br><br>
