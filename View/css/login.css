@@ -65,7 +65,7 @@ input[type="submit"].enabled:hover {
 
 }
 
-.label {
+label {
     display: block;
     text-align: left;
     margin-bottom: 5px;
@@ -73,9 +73,17 @@ input[type="submit"].enabled:hover {
     color: #555;
 }
 
-h2 {
+.title-login {
     margin-top: 0;
-    color: #388E3C;
+    color: #5ab15e;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: -30px;
+}
+
+.img-login{
+    width: 50px; /* Largura desejada */
+    height: 65px; /* Altura desejada */
 }
 
 .enabled {
@@ -128,7 +136,7 @@ h2 {
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
 }
 
 input {
