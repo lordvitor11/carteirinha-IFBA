@@ -42,15 +42,23 @@
                         <tbody>";
 
                     foreach ($cardapio as $dia) {
-                        $data = date("d/m", strtotime($dia['data'])); 
-                        $newDia = ucfirst($dia['dia']) . "-feira";
-                        echo "<tr>";
-                        echo "<td>{$newDia} ({$data})</td>";
-                        echo "<td>{$dia['principal']}</td>";
-                        echo "<td>{$dia['acompanhamento']}</td>";
-                        echo "<td>{$dia['sobremesa']}</td>";
-                        echo "</tr>";
-                        
+                        if ($dia['principal'] != 'Sem refeição') {
+                            $data = date("d/m", strtotime($dia['data'])); 
+                            $newDia = ucfirst($dia['dia']) . "-feira";
+                            echo "<tr>";
+                            echo "<td>{$newDia} ({$data})</td>";
+                            echo "<td>{$dia['principal']}</td>";
+                            echo "<td>{$dia['acompanhamento']}</td>";
+                            echo "<td>{$dia['sobremesa']}</td>";
+                            echo "</tr>";
+                        } else {
+                            echo "<tr>";
+                            echo "<td>{$dia['dia']}</td>";
+                            echo "<td>{$dia['principal']}</td>";
+                            echo "<td>{$dia['acompanhamento']}</td>";
+                            echo "<td>{$dia['sobremesa']}</td>";
+                            echo "</tr>";
+                        }
                     }
 
                     echo "</tbody>";
