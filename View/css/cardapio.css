@@ -52,18 +52,21 @@ h1 {
     max-height: 250px;
 }
 
-button.editar {
+button.editar, button.excluir {
     padding: 10px 20px;
-    background-color: var(--salmon);
+    background-color: var(--light-green);
     color: white;
     border: none;
     cursor: pointer;
     transition: all 0.4s ease;
 }
 
-button.editar:hover {
-    background-color: var(--medium-salmon);
-}
+button.excluir { background-color: var(--salmon); }
+
+button.editar:hover { background-color: var(--dark-green); }
+
+button.excluir:hover { background-color: var(--medium-salmon); }
+
 
 h3.null {
     margin-top: 50px;
@@ -77,4 +80,45 @@ h3.null {
     width: 80%;
     padding: 10px;
     color: white;
+}
+
+.separador {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+}
+
+.popup {
+    width: 300px;
+    height: fit-content;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup button {
+    border: none;
+    width: 60px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.popup img {
+    width: 60px;
+}
+
+.popup-open {
+    overflow: hidden;
+}
+
+.div-btns {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
 }

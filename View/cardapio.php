@@ -1,3 +1,13 @@
+<?php
+    require("../Controller/controller.php");
+    $controller = new LoginController();
+
+    if (isset($_POST['sinal'])) {
+        $sinal = $_POST['sinal'];
+        $cardapio = $controller->deleteCardapio();             
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -17,17 +27,12 @@
         <table>
             
             <?php 
-                require("../Controller/controller.php");
 
                 error_reporting(E_ALL);
 
                 ini_set('display_errors', 1);
 
-                $controller = new LoginController();
-
-                $cardapio = $controller->getCardapio();
-
-                
+                $cardapio = $controller->getCardapio();             
 
                 if ($cardapio[0] != null) {
                     echo "
@@ -64,18 +69,19 @@
                     echo "</tbody>";
                     echo "</table>";
                 }
-
-                
             ?>
             </tbody> 
         </table>
 
         <?php 
             if ($_SESSION['category'] == "adm" && $cardapio[0] != null) {
-                echo "<a href='cardapio-admin.php'><button class='editar'>Editar cardápio</button></a>"; 
+                echo "<div class='separador'>";
+                echo "<button class='excluir' onclick='cardapio_popup()'>Excluir cardápio</button>";
+                echo "<a href='cardapio-alterar.php'><button class='editar'>Editar cardápio</button></a>";
+                echo "</div>";
             } else if ($_SESSION['category'] == "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
-                echo "<a href='cardapio-admin.php'><button class='editar'>Adicionar cardápio</button></a>"; 
+                echo "<a href='cardapio-criar.php'><button class='editar'>Adicionar cardápio</button></a>"; 
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null) {
                 date_default_timezone_set('America/Sao_Paulo');
                 $current_time = date("H");
@@ -101,5 +107,6 @@
         </div>
     </footer>
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>

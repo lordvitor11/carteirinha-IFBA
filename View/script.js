@@ -104,7 +104,7 @@ function adicionarCardapio() {
 }
 
 function cancelarCardapio() {
-    window.location.href = "cardapio-admin.php";
+    window.location.href = "cardapio.php";
 }
 
 function addFields() {
@@ -118,13 +118,8 @@ function addFields() {
         component.innerHTML = "";
         fim.setDate(fim.getDate() + 1);
 
-        // Objeto para mapear o número do dia da semana para o nome correspondente
         const diaSemanaNomes = ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
-
-        // Objeto para armazenar os dias da semana entre as datas
         const dias_da_semana_entre_datas = {};
-
-        // Loop através de cada dia entre a data de início e a data de término
         for (let data = inicio; data < fim; data.setDate(data.getDate() + 1)) {
             const dia_da_semana_numero = data.getDay();
 
@@ -160,6 +155,7 @@ function addFields() {
             inputPrincipal.setAttribute('id', dia_da_semana);
             inputPrincipal.setAttribute('name', dia_da_semana);
             inputPrincipal.setAttribute('placeholder', 'Proteína');
+            inputPrincipal.required = true;
 
             // Acompanhamento
             labelAcompanhamento.setAttribute('id', 'acompanhamento-' + dia_da_semana);
@@ -199,4 +195,59 @@ function addFields() {
         const buttonContainer = document.querySelector('.botao-container');
         buttonContainer.style.display = "flex";
     }
+}
+
+function excluirCardapio_() {
+    alert('ok');
+}
+
+function cardapio_popup() {
+    let container = document.querySelector('.container');
+    let div = document.createElement('div');
+    let label = document.createElement('span');
+    let confirmBtn = document.createElement('button');
+    let cancelBtn = document.createElement('button');
+    let divBtns = document.createElement('div');
+    let imgValidar = document.createElement('img');
+    let imgCancelar = document.createElement('img');
+
+    imgValidar.setAttribute('src', '../assets/validar-100px.png');
+    imgCancelar.setAttribute('src', '../assets/cancelar-100px.png');
+
+    label.textContent = 'Excluir Cardápio?';
+
+    confirmBtn.addEventListener('click', () => {
+        $.ajax({
+            url: "cardapio.php",
+            type: "POST",
+            data: { sinal: "Sinal enviado!" },
+            success: function(response) {
+                document.body.classList.remove('popup-open');
+                container.removeChild(div);
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error("Erro ao enviar sinal: " + error);
+            }
+        });
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        document.body.classList.remove('popup-open');
+        container.removeChild(div);
+    });
+
+    div.classList.add('popup');
+    divBtns.classList.add('div-btns');
+
+    div.appendChild(label);
+    confirmBtn.appendChild(imgValidar);
+    cancelBtn.appendChild(imgCancelar);
+    divBtns.appendChild(cancelBtn);
+    divBtns.appendChild(confirmBtn);
+    div.appendChild(divBtns);
+
+    container.appendChild(div);
+
+    document.body.classList.add('popup-open');
 }

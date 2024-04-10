@@ -122,7 +122,7 @@
         }
 
         public function deleteCardapio() : string {
-            $sql = "DELETE FROM cardapio";
+            $sql = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";
 
             if ($this->conn->query($sql) === TRUE) {
                 return "Sem erros";
