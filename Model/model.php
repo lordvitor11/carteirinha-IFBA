@@ -94,23 +94,23 @@
                         $diaTemp;
                         switch (array_search($cardapio[$c], $cardapio)) {
                             case 0: 
-                                $diaTemp = 'Segunda-feira'; break;
+                                $diaTemp = 'Segunda'; break;
                             case 1:
-                                $diaTemp = 'Terça-feira'; break;
+                                $diaTemp = 'Terça'; break;
                             case 2: 
-                                $diaTemp = 'Quarta-feira'; break;
+                                $diaTemp = 'Quarta'; break;
                             case 3:
-                                $diaTemp = 'Quinta-feira'; break;
+                                $diaTemp = 'Quinta'; break;
                             case 4:
-                                $diaTemp = 'Sexta-feira'; break;
+                                $diaTemp = 'Sexta'; break;
                         }
 
                         $cardapio[$c] = array(
                             "dia" => $diaTemp,
                             "data" => '',
-                            "principal" => 'Sem refeição', 
-                            "acompanhamento" => 'Sem refeição', 
-                            "sobremesa" => 'Sem refeição'
+                            "principal" => '-', 
+                            "acompanhamento" => '-', 
+                            "sobremesa" => '-'
                         );
                     }
                 }
@@ -152,6 +152,15 @@
             $stmt->close();
 
             return "Sem erros";
+        }
+
+        public function getTime() : string {
+            $sql = "SELECT * FROM horario_padrao WHERE fim_vig IS NULL";
+            $result = $this->conn->query($sql);
+            $response = ""; 
+
+            while ($row = $result->fetch_assoc()) { $response = $row['horario']; }
+            return $response;
         }
     }
 ?>

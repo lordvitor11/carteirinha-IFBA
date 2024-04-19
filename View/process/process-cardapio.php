@@ -1,75 +1,125 @@
 <?php
-    require("../../Controller/controller.php");
+  function substituirValores($array1, $array2) {
+    foreach ($array1 as $data => $valores1) {
+      if (isset($array2[$data])) {
+        // Se a data estiver presente em ambas as arrays, substituir os valores
+        $keys1 = array_keys($valores1);
+        $keys2 = array_keys($array2[$data]);
 
-    $controller = new LoginController();
-    $inicio = new DateTime($_POST['data-inicio']);
-    $fim = new DateTime($_POST['data-fim']);
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+        for ($i = 0; $i < min(3, count($keys1), count($keys2)); $i++) {
+          $chave1 = $keys1[$i];
+          $chave2 = $keys2[$i];
+          $array2[$data][$chave2] = $valores1[$chave1];
+        }
+      }
+    }
+    return $array2;
+  }
 
-    $dias = ['segunda', 'terca', 'quarta', 'quinta', 'sexta'];
-    $diasDaSemana = array();
-    $semana = array();
+  function trocarIndice($array, $antigoIndice, $novoIndice) {
+    if (array_key_exists($antigoIndice, $array)) {
+      $keys = array_keys($array);
+      $values = array_values($array);
+        
+      $indice = array_search($antigoIndice, $keys);
+      if ($indice !== false) {
+        $keys[$indice] = $novoIndice;
+        $array = array_combine($keys, $values[$indice]);
+      }
+    }
+    return $array;
+  }
 
-    // Itere por cada dia dentro do intervalo
-    while ($inicio <= $fim) {
-        $diaDaSemana = $inicio->format('N');
+  require("../../Controller/controller.php");
+
+  $controller = new LoginController();
+  $teste = array();
+  $count = 0;
+
+  foreach ($_POST as $chave => $valor) {
+    $dateTime = DateTime::createFromFormat('Y-m-d', $_POST[$chave]);
+
+    if (!$dateTime instanceof DateTime) {
+      $teste[$count][$chave] = $valor !== "" ? $valor : "-";
+
+      if (count($teste[$count]) % 3 === 0) {
+        $count++;
+      }
+    }
+  }
+
+  $inicio = new DateTime($_POST['data-inicio']);
+  $numeroSemana = $inicio->format("W");
+  $ano = $inicio->format("Y");
+
+  $segundaRaw = new DateTime();
+  $segundaRaw->setISODate($ano, $numeroSemana, 1);
+
+  $sextaRaw = new DateTime();
+  $sextaRaw->setISODate($ano, $numeroSemana, 5);
+
+  $segunda = $segundaRaw->format("Y-m-d");
+  $sexta = $sextaRaw->format("Y-m-d");
+
+  $semana['Monday'] = $segunda;
+
+  $segundaObj = new DateTime($segunda);
+  $sextaObj = new DateTime($sexta);
     
-        switch ($diaDaSemana) {
-            case 1:
-                $diasDaSemana[0][] = $dias[0]; break;
-            case 2: 
-                $diasDaSemana[0][] = $dias[1]; break;
-            case 3:
-                $diasDaSemana[0][] = $dias[2]; break;
-            case 4:
-                $diasDaSemana[0][] = $dias[3]; break;
-            case 5: 
-                $diasDaSemana[0][] = $dias[4]; break;
-        }
+  $data = clone $segundaObj;
+  $data->modify("+1 day");
+  while ($data < $sextaObj) {
+    $semana[$data->format('l')] = $data->format("Y-m-d");
+    $data->modify("+1 day");
+  }
 
-        if ($diaDaSemana >= 1 && $diaDaSemana <= 5) {
-            $diasDaSemana[1][] = $inicio->format('Y-m-d');
-        }
-    
-        // Avance para o próximo dia
-        $inicio->modify('+1 day');
-    }
+  $semana['Friday'] = $sexta;
 
-    for ($c = 0; $c < count($dias); $c++) {
-        if (in_array($dias[$c], $diasDaSemana[0])) {
-            $semana[] = array(
-                $dias[$c] => array(
-                    'dia' => $dias[$c],
-                    'data' => $diasDaSemana[1][array_search($dias[$c], $diasDaSemana[0])],
-                    'principal' => $_POST[$dias[$c]],
-                    'acompanhamento' => $_POST["acompanhamento-{$dias[$c]}"] != "" ? $_POST["acompanhamento-{$dias[$c]}"] : 'Sem acompanhamento',
-                    'sobremesa' => $_POST["sobremesa-{$dias[$c]}"] != "" ? $_POST["sobremesa-{$dias[$c]}"] : 'Sem sobremesa'
-                )
-            );
-        } else {
-            $semana[] = array(
-                $dias[$c] => array(
-                    'dia' => $dias[$c],
-                    'data' => 'S/A',
-                    'principal' => 'S/A',
-                    'acompanhamento' => 'S/A',
-                    'sobremesa' => 'S/A'
-                )
-            );
-        }
-    }
+  $inicioD = new DateTime($_POST['data-inicio']);
+  $fimD = new DateTime($_POST['data-fim']);
+  $diasPreenchidos = array();
 
-    for ($c = 0; $c < count($semana); $c++) {
-        if ($semana[$c][$dias[$c]]['data'] == 'S/A') {
-            continue;
-        } else {
-            $error = $controller->setCardapio($semana[$c][$dias[$c]]);
-        }
-    }
+  $newData = clone $inicioD;
+  while ($newData <= $fimD) {
+    $diasPreenchidos[$newData->format("Y-m-d")] = array();
+    $newData->modify("+1 day");
+  }
 
-    if ($error == "Sem erros") {
-        header("Location: ../cardapio.php");
-    }
+  $novoArray = array();
+  for ($c = 0; $c < count($teste); $c++) {
+    $novoArray[array_keys($diasPreenchidos)[$c]] = $teste[$c];
+  }
+
+  $finalList = array();
+  $diasSemana = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+  for ($c = 0; $c < count($semana); $c++) {
+    $finalList[$semana[$diasSemana[$c]]] = array('principal' => '-', 'acompanhamento' => '-', 'sobremesa' => '-');
+  }
+
+  $finalList = substituirValores($novoArray, $finalList);
+  $json = array();
+  $dias = ['segunda', 'terca', 'quarta', 'quinta', 'sexta'];
+  $count = 0;
+
+  foreach ($finalList as $key => $valores) {
+    $json[] = array(
+      $dias[$count] => array(
+        'dia' => $dias[$count],
+        'data' => $key,
+        'principal' => $valores['principal'],
+        'acompanhamento' => $valores['acompanhamento'],
+        'sobremesa' => $valores['sobremesa']
+      )
+    );
+    $count++;
+  }
+
+  for ($c = 0; $c < count($json); $c++) {
+    $error = $controller->setCardapio($json[$c][$dias[$c]]);
+  }
+
+  if ($error == "Sem erros") {
+    header("Location: ../cardapio.php");
+  }
 ?>

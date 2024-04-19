@@ -27,7 +27,7 @@ label {
     color: #388E3C;
 }
 input[type="date"],
-input[type="text"] {
+input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -72,3 +72,4 @@ input[type="text"] {
     width: 100%; /* Ajusta a largura da imagem para preencher o botão */
     height: auto; /* Mantém a proporção da imagem */
 }
+

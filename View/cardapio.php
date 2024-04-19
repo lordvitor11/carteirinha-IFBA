@@ -39,7 +39,7 @@
                         <thead>
                             <tr>
                                 <th>Dia</th>
-                                <th>Prato Principal</th>
+                                <th>Proteína</th>
                                 <th>Acompanhamento</th>
                                 <th>Sobremesa</th>
                             </tr>
@@ -76,17 +76,19 @@
         <?php 
             if ($_SESSION['category'] == "adm" && $cardapio[0] != null) {
                 echo "<div class='separador'>";
-                echo "<button class='excluir' onclick='cardapio_popup()'>Excluir cardápio</button>";
-                echo "<a href='cardapio-alterar.php'><button class='editar'>Editar cardápio</button></a>";
+                echo "<button class='excluir' onclick='cardapio_popup()'>Excluir</button>";
+                echo "<a href='cardapio-alterar.php'><button class='editar'>Editar</button></a>";
                 echo "</div>";
             } else if ($_SESSION['category'] == "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
                 echo "<a href='cardapio-criar.php'><button class='editar'>Adicionar cardápio</button></a>"; 
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null) {
                 date_default_timezone_set('America/Sao_Paulo');
-                $current_time = date("H");
+                $current_time = date("H:m:s");
 
-                if (intval($current_time) >= 9) {
+                $horario_padrao = $controller->getTime();
+
+                if (intval($current_time) > $horario_padrao) {
                     echo "<span class='horario-limite'>Horário limite atingido!</span>";
                 } else {
                     echo "<a href=''><button class='editar'>Quero almoçar!</button></a>";

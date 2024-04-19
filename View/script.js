@@ -118,7 +118,7 @@ function addFields() {
         component.innerHTML = "";
         fim.setDate(fim.getDate() + 1);
 
-        const diaSemanaNomes = ['segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
+        const diaSemanaNomes = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sábado', 'domingo'];
         const dias_da_semana_entre_datas = {};
         for (let data = inicio; data < fim; data.setDate(data.getDate() + 1)) {
             const dia_da_semana_numero = data.getDay();

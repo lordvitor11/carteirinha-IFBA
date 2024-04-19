@@ -35,5 +35,9 @@
         public function setCardapio($array) : string {
             return $this->model->setCardapio($array);
         }
+
+        public function getTime() : string {
+            return $this->model->getTime();
+        }
     }
 ?>
