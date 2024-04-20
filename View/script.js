@@ -197,10 +197,6 @@ function addFields() {
     }
 }
 
-function excluirCardapio_() {
-    alert('ok');
-}
-
 function cardapio_popup() {
     let container = document.querySelector('.container');
     let div = document.createElement('div');

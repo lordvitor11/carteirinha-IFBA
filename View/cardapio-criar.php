@@ -1,3 +1,26 @@
+<?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        $data_usuario = $_POST['dataSelecionada'];
+        $data = new DateTime($data_usuario);
+        $primeiro_dia_semana = 0;
+        $ultimo_dia_semana = 6;
+        $dia_semana = $data->format("w");
+        $primeiro_dia_timestamp = strtotime("-" . ($dia_semana - $primeiro_dia_semana) . " days", $data->getTimestamp());
+        $ultimo_dia_timestamp = strtotime("+" . ($ultimo_dia_semana - $dia_semana) . " days", $data->getTimestamp());
+        $dias_semana = array();
+        
+        for ($i = $primeiro_dia_timestamp; $i <= $ultimo_dia_timestamp; $i = strtotime('+1 day', $i)) {
+            $dias_semana[] = date("Y-m-d", $i);
+        }
+
+        array_shift($dias_semana);
+        array_pop($dias_semana);
+
+        echo json_encode($dias_semana);
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -20,7 +43,7 @@
             </div>
             <div>
                 <label for="data-fim">Data fim:</label>
-                <input type="date" id="data-fim" name="data-fim" oninput="addFields()" required>
+                <input type="date" id="data-fim" name="data-fim" required>
             </div>
             <div class="content"></div>
             <div class="botao-container">
@@ -44,5 +67,36 @@
         </div>
     </footer>
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let inputDate = document.getElementById('data-inicio');
+            inputDate.addEventListener('input', function() {
+                $.ajax({
+                    url: "cardapio-criar.php",
+                    type: "POST", 
+                    dataType: "json", 
+                    data: { dataSelecionada: inputDate.value},
+                    success: function(response) {
+                        let inputDateF = document.getElementById('data-fim');
+                        inputDateF.addEventListener('input', function() { 
+                            let dataSelecionada = new Date(inputDateF.value);
+                            let dataISO = dataSelecionada.toISOString().split('T')[0];
+                            
+                            if (response.includes(dataISO)) { addFields(); }
+                            else {
+                                inputDateF.value = '';
+                                alert('Data inválida. Por favor, selecione outra data.');
+                                document.querySelector('.content').innerHTML = "";
+                            }
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erro na requisição: " + error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
