@@ -50,7 +50,9 @@ nav a {
   transition: all 0.3s ease;
 }
 
-nav a:hover { color: var(--medium-green); }
+nav a:hover { color: rgb(192, 192, 192); }
+
+.button-admin  a:hover { background-color: var(--medium-salmon);}
 
 .right { margin-left: auto; }
 
@@ -199,7 +201,7 @@ nav a:hover { color: var(--medium-green); }
   text-align: center;
 }
 
-span.adm {
+.button-admin{
   padding: 10px;
   color: white;
   background-color: var(--salmon);

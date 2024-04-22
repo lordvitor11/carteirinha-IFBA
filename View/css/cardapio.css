@@ -52,40 +52,56 @@ h1 {
     max-height: 250px;
 }
 
-button.editar, button.excluir {
+.button {
     padding: 10px 20px;
     background-color: var(--light-green);
     color: white;
     border: none;
     cursor: pointer;
     transition: all 0.4s ease;
+    margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
 }
 
-button.excluir { background-color: var(--salmon); }
+.button.excluir {
+    background-color: var(--salmon);
+    color: white;
+}
 
-button.editar:hover { background-color: var(--dark-green); }
+.button.excluir:hover {
+    background-color: var(--medium-salmon);
+}
 
-button.excluir:hover { background-color: var(--medium-salmon); }
+.button.cardapio-historico {
+    background-color: rgb(44, 83, 255);
+    color: white;
+}
 
+.button.cardapio-historico:hover {
+    background-color: rgb(0, 47, 255);
+}
 
-h3.null {
-    margin-top: 50px;
-    margin-bottom: 10px;
+.button.editar, .button.horario-admin {
+    background-color: var(--light-green);
+    color: white;
+}
+
+.button.editar:hover, .button.horario-admin:hover {
+    background-color: var(--dark-green);
+}
+
+.separador {
+    display: flex;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    width: 100%; /* Definindo largura total */
 }
 
 .horario-limite {
     text-align: center;
     font-weight: 600;
     background-color: rgb(202, 132, 124);
-    width: 80%;
+    width: 50%;
     padding: 10px;
     color: white;
-}
-
-.separador {
-    display: flex;
-    justify-content: space-between;
-    width: 300px;
 }
 
 .popup {
@@ -114,11 +130,4 @@ h3.null {
 
 .popup-open {
     overflow: hidden;
-}
-
-.div-btns {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
 }

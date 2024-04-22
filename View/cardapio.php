@@ -76,8 +76,10 @@
         <?php 
             if ($_SESSION['category'] == "adm" && $cardapio[0] != null) {
                 echo "<div class='separador'>";
-                echo "<button class='excluir' onclick='cardapio_popup()'>Excluir</button>";
-                echo "<a href='cardapio-alterar.php'><button class='editar'>Editar</button></a>";
+                echo "<div class='button-group'>";
+                echo "<button class='button excluir' onclick='cardapio_popup()'>Excluir</button>";
+                echo "<a href='cardapio-alterar.php'><button class='button editar'>Editar</button></a>";
+                echo "</div>";
                 echo "</div>";
             } else if ($_SESSION['category'] == "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
@@ -91,7 +93,7 @@
                 if (intval($current_time) > $horario_padrao) {
                     echo "<span class='horario-limite'>Horário limite atingido!</span>";
                 } else {
-                    echo "<a href=''><button class='editar'>Quero almoçar!</button></a>";
+                    echo "<a href='cardapio-reserva.php'><button class='editar'>Quero almoçar!</button></a>";
                 }
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Aguarde por atualizações.</h3>";

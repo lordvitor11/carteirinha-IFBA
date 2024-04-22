@@ -1,0 +1,121 @@
+@import url(style.css);
+@import url(mq/cardapio.mq.css);
+  
+.right {
+    margin-left: auto;
+}
+
+.titulo{
+    font-weight: bolder;
+    margin-bottom: 10px;
+    color: var(--light-green);
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%; /* Defina a largura do container de input */
+    margin-bottom: 15px; /* Adicione margem inferior para separação */
+}
+
+.input-container label {
+    font-size: 18px;
+    color: #388E3C; /* Cor verde */
+    margin-right: 10px; /* Adicione uma margem à direita para separar a label do input */
+}
+
+input[type="date"] {
+    width: 40%; /* Defina a largura dos inputs de data */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 5%; /* Adicione uma margem entre os inputs */
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px;
+    box-shadow: 5px 5px 10px lightblue;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #388E3C;
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 20px 0;
+    color: #388E3C;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: var(--light-green);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
+}
+
+.button {
+    background-color: var(--light-green);
+    color: white;
+}
+
+.button:hover {
+    background-color: var(--dark-green);
+}
+
+.button-voltar {
+    padding: 10px 20px;
+    background-color: var(--salmon);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
+}
+
+.button-voltar:hover {
+    background-color: var(--salmon);
+    color: white;
+}
+
+.button-voltar:hover {
+    background-color: var(--medium-salmon);
+}
+
+.separador {
+    display: flex;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    width: 100%; /* Definindo largura total */
+}
