@@ -1,6 +1,6 @@
 <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-        $data_usuario = $_POST['dataSelecionada'];
+    if (isset($_GET['data'])) {
+        $data_usuario = $_GET['data'];
         $data = new DateTime($data_usuario);
         $primeiro_dia_semana = 0;
         $ultimo_dia_semana = 6;
@@ -39,7 +39,7 @@
         <form action="process/process-cardapio.php" method="POST" id="cardapioForm">
             <div>
                 <label for="data-inicio">Data inicío:</label>
-                <input type="date" id="data-inicio" name="data-inicio" oninput="addFields()" required>
+                <input type="date" id="data-inicio" name="data-inicio" required>
             </div>
             <div>
                 <label for="data-fim">Data fim:</label>
@@ -65,33 +65,50 @@
     <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let inputDate = document.getElementById('data-inicio');
-            inputDate.addEventListener('input', function() {
-                $.ajax({
-                    url: "cardapio-criar.php",
-                    type: "POST", 
-                    dataType: "json", 
-                    data: { dataSelecionada: inputDate.value},
-                    success: function(response) {
-                        let inputDateF = document.getElementById('data-fim');
-                        inputDateF.addEventListener('input', function() { 
-                            let dataSelecionada = new Date(inputDateF.value);
-                            let dataISO = dataSelecionada.toISOString().split('T')[0];
-                            
-                            if (response.includes(dataISO)) { addFields(); }
-                            else {
-                                inputDateF.value = '';
-                                alert('Data inválida. Por favor, selecione outra data.');
-                                document.querySelector('.content').innerHTML = "";
-                            }
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error("Erro na requisição: " + error);
-                    }
-                });
-            });
+        function obterDiasSemana(data_usuario) {
+            let data = new Date(data_usuario);
+            let primeiro_dia_semana = 0; // Domingo
+            let ultimo_dia_semana = 6; // Sábado
+            let dia_semana = data.getDay();
+            let primeiro_dia_timestamp;
+            let ultimo_dia_timestamp;
+            let inputDate = document.querySelector('#data-fim');
+
+            if (dia_semana == 6) {
+                dia_semana = 0;
+                primeiro_dia_timestamp = new Date(data.getTime() - (dia_semana - primeiro_dia_semana) * 24 * 60 * 60 * 1000);
+                ultimo_dia_timestamp = new Date(data.getTime() + (ultimo_dia_semana - dia_semana) * 24 * 60 * 60 * 1000);
+            } else {
+                primeiro_dia_timestamp = new Date(data.getTime() - (dia_semana - primeiro_dia_semana) * 24 * 60 * 60 * 1000 - 1);
+                ultimo_dia_timestamp = new Date(data.getTime() + (ultimo_dia_semana - dia_semana) * 24 * 60 * 60 * 1000);
+            }
+
+            let dias_semana = [];
+
+            for (let i = primeiro_dia_timestamp; i <= ultimo_dia_timestamp; i.setDate(i.getDate() + 1)) {
+                dias_semana.push(i.toISOString().slice(0, 10));
+            }
+
+            dias_semana.shift();
+            dias_semana.pop();
+
+            let min = dias_semana[0];
+            let max = dias_semana[dias_semana.length - 1];
+
+            inputDate.setAttribute("min", min);
+            inputDate.setAttribute("max", max);
+        }
+
+        let input = document.querySelector('#data-inicio');
+        let inputF = document.querySelector('#data-fim');
+        input.addEventListener('input', function() {
+            document.querySelector('.content').innerHTML = "";
+            inputF.value = "";
+            obterDiasSemana(input.value);
+        });
+
+        inputF.addEventListener('input', function() {
+            addFields();
         });
     </script>
 </body>
