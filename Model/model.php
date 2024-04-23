@@ -162,5 +162,23 @@
             while ($row = $result->fetch_assoc()) { $response = $row['horario']; }
             return $response;
         }
+
+        public function setDefaultTime($data, $horario) : string {
+            $stmt = $this->conn->prepare("INSERT INTO tabela_temporaria (inicio_vig, horario) VALUES (?, ?)");
+
+            if (!$stmt) {
+                return "Erro na preparação da consulta: " . $this->conn->error;
+            }
+
+            $stmt->bind_param("ss", $data, $horario);
+
+            if (!$stmt->execute()) {
+                return "Erro na execução da consulta: " . $stmt->error;
+            }
+
+            $stmt->close();
+
+            return "Sem erros";
+        }
     }
 ?>

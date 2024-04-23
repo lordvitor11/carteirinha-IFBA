@@ -17,7 +17,8 @@ h1 {
 }
 
 form {
-    max-width: 400px;
+    max-width: 350;
+    width: 350px;
     margin: 40px auto;
     padding: 50px;
     border: 1px solid #b4b4b4;
@@ -45,40 +46,12 @@ input[type="date"], input[type="time"] {
 }
 
 .botao-container {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
-
-.cancelar,
-.validar {
-    padding: 5px 5px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-
-.cancelar {
-    background-color: #f75252;
-    color: #fff;
-}
-
-.validar {
-    background-color: #388E3C;
-    color: #fff;
-}
-
-.cancelar:hover,
-.validar:hover {
-    filter: brightness(0.9);
-}
-
+    
 #outro:disabled {
     cursor: not-allowed;
 }

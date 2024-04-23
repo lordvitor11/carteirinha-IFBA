@@ -83,17 +83,17 @@
                 echo "</div>";
             } else if ($_SESSION['category'] == "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
-                echo "<a href='cardapio-criar.php'><button class='editar'>Adicionar cardápio</button></a>"; 
+                echo "<a href='cardapio-criar.php'><button class='button'>Adicionar cardápio</button></a>"; 
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null) {
                 date_default_timezone_set('America/Sao_Paulo');
                 $current_time = date("H:m:s");
 
                 $horario_padrao = $controller->getTime();
 
-                if (intval($current_time) > $horario_padrao) {
+                if ($current_time > $horario_padrao) {
                     echo "<span class='horario-limite'>Horário limite atingido!</span>";
                 } else {
-                    echo "<a href='cardapio-reserva.php'><button class='editar'>Quero almoçar!</button></a>";
+                    echo "<a href='cardapio-reserva.php'><button class='button'>Quero almoçar!</button></a>";
                 }
             } else if ($_SESSION['category'] != "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Aguarde por atualizações.</h3>";

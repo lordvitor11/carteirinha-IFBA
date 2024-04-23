@@ -404,3 +404,104 @@ h1, h2, h3, h4, h5, h6 {
 a {
   text-decoration: none;
 }
+
+.popup-index {
+  position: fixed;
+  top: 0;
+  left: 17.2%;
+  width: 65%;
+  height: 80px;
+  /* background-color: rgba(25, 44, 27, 0.7); */
+  background-color: #CCCCCC;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  animation: showPopup 0.7s backwards;
+}
+
+.hide-popup-index {
+  animation: hidePopup 0.7s backwards;
+}
+
+.popup-index-title {
+  font-size: 1.5vw;
+  margin-top: 0;
+  color: #666666;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: var(--light-green);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
+}
+
+.botao-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancelar,
+.validar {
+  padding: 5px 5px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  width: 40px;
+  height: 40px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.cancelar {
+  background-color: #f75252;
+  color: #fff;
+  background-image: url('../../assets/cancelar-100px.png');
+}
+
+.validar {
+  background-color: #388E3C;
+  color: #fff;
+  background-image: url('../../assets/validar-100px.png');
+}
+
+.cancelar:hover,
+.validar:hover {
+  filter: brightness(0.9);
+}
+
+
+@keyframes showPopup {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  } 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hidePopup {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  } 100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}

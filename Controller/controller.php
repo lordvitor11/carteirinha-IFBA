@@ -39,5 +39,9 @@
         public function getTime() : string {
             return $this->model->getTime();
         }
+
+        public function setDefaultTime($data, $horario) : string {
+            return $this->model->setDefaultTime($data, $horario);
+        }
     }
 ?>

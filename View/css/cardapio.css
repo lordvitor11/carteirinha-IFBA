@@ -52,19 +52,10 @@ h1 {
     max-height: 250px;
 }
 
-.button {
-    padding: 10px 20px;
-    background-color: var(--light-green);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
-}
-
 .button.excluir {
     background-color: var(--salmon);
     color: white;
+    width: 80px;
 }
 
 .button.excluir:hover {
@@ -82,7 +73,9 @@ h1 {
 
 .button.editar, .button.horario-admin {
     background-color: var(--light-green);
+    padding: 10px;
     color: white;
+    width: 80px;
 }
 
 .button.editar:hover, .button.horario-admin:hover {
@@ -106,8 +99,11 @@ h1 {
 
 .popup {
     width: 300px;
-    height: fit-content;
+    height: 125px;
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -115,17 +111,6 @@ h1 {
     padding: 20px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.popup button {
-    border: none;
-    width: 60px;
-    background-color: transparent;
-    cursor: pointer;
-}
-
-.popup img {
-    width: 60px;
 }
 
 .popup-open {

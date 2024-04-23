@@ -47,13 +47,9 @@
             </div>
             <div class="content"></div>
             <div class="botao-container">
-                <button class="cancelar" type="button" onclick="cancelarCardapio()">
-                    <img src="../assets/cancelar-100px.png" alt="Cancelar">
-                </button>
+                <button class="cancelar" type="button" onclick="cancelarCardapio()"></button>
 
-                <button class="validar" type="submit">
-                    <img src="../assets/validar-100px.png" alt="Alterar">
-                </button>
+                <button class="validar" type="submit"></button>
             </div>
         </form>
     </div>

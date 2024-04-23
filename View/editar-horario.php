@@ -14,21 +14,17 @@
     <div class="container">
         <h1>EDITAR HORÁRIO</h1>
 
-        <form action="processar_horario.php" method="POST">
+        <form action="process/process-horario.php" method="POST">
             <label for="data">Data:</label>
-            <input type="date" id="data" name="data">
+            <input type="date" id="data" name="data" required>
             <br>
             <label for="hora">Hora:</label>
-            <input type="time" id="hora" name="hora">
+            <input type="time" id="hora" name="hora" required>
             <br>
             <div class="botao-container">
-                <a href='painel-administrador.php'><button class="cancelar" type="button">
-                    <img src="../assets/cancelar-100px.png" alt="Cancelar">
-                </button></a>
+                <a href='painel-administrador.php'><button class="cancelar" type="button"></button></a>
 
-                <button class="validar" type="submit">
-                    <img src="../assets/validar-100px.png" alt="Alterar">
-                </button>
+                <button class="validar" type="submit"></button>
             </div>
         </form>
     </div>

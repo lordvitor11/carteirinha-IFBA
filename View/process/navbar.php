@@ -19,11 +19,12 @@
         $logout = "$rootUrl/View/process/logout.php";
         $login = "$rootUrl/View/login.php";
         $sobre = "$rootUrl/View/sobre.php";
+        $admin = "$rootUrl/View/painel-administrador.php";
 
         if (isset($_SESSION['logged_in'])) {
             if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
                 $nome = $_SESSION['user'];
-                $text = "<div class='right'><a class='button-admin' href='painel-administrador.php'>Administrador(a)</a><a href='{$logout}'>Logado como <strong>{$nome}!</strong></a></div>";
+                $text = "<div class='right'><a class='button-admin' href='{$admin}'>Administrador(a)</a><a href='{$logout}'>Logado como <strong>{$nome}!</strong></a></div>";
             } else if ($_SESSION['logged_in']) {
                 $nome = $_SESSION['user'];
                 $text = "<div class='right'><a title='Clique para sair' href='{$logout}'>Logado como <strong>{$nome}!</strong></a></div>";

@@ -53,7 +53,7 @@ function enviarFormulario() {
     let formData = new FormData(formElement);
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "process/processLogin.php", true);
+    xhr.open("POST", "process/process-login.php", true);
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -198,17 +198,19 @@ function addFields() {
 }
 
 function cardapio_popup() {
+    let deleteButton = document.querySelector('.excluir');
+    let editButton = document.querySelector('.editar');
     let container = document.querySelector('.container');
     let div = document.createElement('div');
-    let label = document.createElement('span');
+    let label = document.createElement('div');
     let confirmBtn = document.createElement('button');
     let cancelBtn = document.createElement('button');
     let divBtns = document.createElement('div');
-    let imgValidar = document.createElement('img');
-    let imgCancelar = document.createElement('img');
 
-    imgValidar.setAttribute('src', '../assets/validar-100px.png');
-    imgCancelar.setAttribute('src', '../assets/cancelar-100px.png');
+    confirmBtn.classList.add('validar');
+    cancelBtn.classList.add('cancelar');
+    deleteButton.disabled = true;
+    editButton.disabled = true;
 
     label.textContent = 'Excluir Cardápio?';
 
@@ -231,14 +233,14 @@ function cardapio_popup() {
     cancelBtn.addEventListener('click', () => {
         document.body.classList.remove('popup-open');
         container.removeChild(div);
+        deleteButton.disabled = false;
+        editButton.disabled = false;
     });
 
     div.classList.add('popup');
-    divBtns.classList.add('div-btns');
+    divBtns.classList.add('botao-container');
 
     div.appendChild(label);
-    confirmBtn.appendChild(imgValidar);
-    cancelBtn.appendChild(imgCancelar);
     divBtns.appendChild(cancelBtn);
     divBtns.appendChild(confirmBtn);
     div.appendChild(divBtns);
@@ -246,4 +248,18 @@ function cardapio_popup() {
     container.appendChild(div);
 
     document.body.classList.add('popup-open');
+}
+
+function showIndexPopup() {
+    let div = document.querySelector('.popup-index');
+
+    div.style.display = "flex";
+
+    setTimeout(() => {
+        div.classList.add('hide-popup-index');
+
+        setTimeout(() => {
+            div.style.display = "none";
+        }, 500);
+    }, 3500);   
 }
