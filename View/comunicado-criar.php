@@ -27,9 +27,9 @@
             <input type="file" id="imagem" name="imagem" accept="image/*" required>
 
             <div class="botao-container">
-                <button class="cancelar" type="button">Cancelar Comunicado</button>
-                <input type="submit" value="Validar Comunicado">
-            </div>
+            <a href='comunicados-admin.php'><button class="cancelar" type="button" onclick="cancelarCardapio()"></button></a>
+            <button class="validar" type="button" onclick="alterarCardapio()"></button>
+        </div>
         </form>
     </div>
 

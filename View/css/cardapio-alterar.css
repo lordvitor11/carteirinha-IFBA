@@ -50,7 +50,8 @@ input {
     justify-content: space-between;
     margin-top: 15px;
 }
-.cancelar, .alterar {
+
+.validar, .cancelar {
     padding: 10px 20px; /* Reduz o preenchimento interno do botão */
     width: 60px; /* Define a largura do botão */
     height: 60px; /* Define a altura do botão */
@@ -64,12 +65,7 @@ input {
     color: #fff;
 }
 
-.alterar {
+.validar {
     background-color: #388E3C;
     color: #fff;
 }
-.botao-container img {
-    width: 100%; /* Ajusta a largura da imagem para preencher o botão */
-    height: auto; /* Mantém a proporção da imagem */
-}
-

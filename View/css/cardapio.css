@@ -12,6 +12,7 @@
     align-items: center;
     min-height: 100vh;
     margin: 20px;
+    position: relative; /* Add this line */
 }
 
 table {
@@ -115,4 +116,20 @@ h1 {
 
 .popup-open {
     overflow: hidden;
+}
+
+.button-agendados {
+    position: absolute; /* Add this line */
+    top: 20px; /* Adjust this value to maintain the same height as the other elements */
+    right: 20px; /* Adjust this value to maintain the same margin as the other elements */
+    background-color: #2196F3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-agendados:hover {
+    background-color: #1e87da;
 }

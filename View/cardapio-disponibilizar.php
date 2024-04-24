@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cardapio-justificativa.css">
+    <link rel="stylesheet" href="css/cardapio-cancelar.css">
     <title>Disponibilizar Almoço</title>
 </head>
 <body>
@@ -23,13 +23,8 @@
             <input type="text" id="outro" name="outro" placeholder="Matrícula de quem irá receber.">
             <br>
             <div class="botao-container">
-                <button class="cancelar" type="button" onclick="cancelarCardapio()">
-                    <img src="../assets/cancelar-100px.png" alt="Cancelar">
-                </button>
-
-                <button class="validar" type="submit">
-                    <img src="../assets/validar-100px.png" alt="Alterar">
-                </button>
+            <a href="agendados.php"><button class="cancelar" type="button" onclick="cancelarCardapio()"></button></a>
+                <button class="validar" type="submit"></button>
             </div>
         </form>
     </div>

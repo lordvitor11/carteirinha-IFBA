@@ -1,115 +1,64 @@
-<?php
-    require("../Controller/controller.php");
-    $controller = new LoginController();
-
-    if (isset($_POST['sinal'])) {
-        $sinal = $_POST['sinal'];
-        $cardapio = $controller->deleteCardapio();             
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/cardapio-reserva.css">
-    <title>Reservar Almoço</title>
+    <title>Justificar Almoço</title>
 </head>
 <body>
-<header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img class="img-logo" src='../assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
+<header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img src='../assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
 
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
-        <h1>CARDÁPIO SEMANAL</h1>
-        <img src="../assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
-        <table>
-            
-            <?php 
+    <h1>RESERVAR ALMOÇO</h1>
 
-                error_reporting(E_ALL);
+    <p class="paragrafo">Dia da semana: <strong>Segunda-feira</strong></p>
 
-                ini_set('display_errors', 1);
+    <form action="processar_justificativa.php" method="POST">
 
-                $cardapio = $controller->getCardapio();             
+        <p><strong>Proteína:</strong> </p><br>
+        <p><strong>Acompanhamento:</strong> </p><br>
+        <p><strong>Sobremesa:</strong> </p><br>
+        
+        <label for="justificativa">Justificativa:</label>
+        <select id="justificativa" name="justificativa" onchange="toggleOutroMotivo()">
+            <option value="" selected disabled hidden>Selecione uma opção...</option>
+            <option value="opcao1">Aula no Contra Turno</option>
+            <option value="opcao2">Transporte</option>
+            <option value="opcao3">Projeto, TCC</option>
+            <option value="outro">Outro</option>
+        </select>
+        <br>
+        <label for="outro">Outro Motivo:</label>
+        <input type="text" id="outro" name="outro" placeholder="Digite outro motivo..." disabled>
+        <br>
+        <div class="botao-container">
+            <button class="cancelar" type="button" onclick="cancelarCardapio()"></button>
+            <button class="validar" type="submit"></button>
+        </div>
+    </form>
+</div>
 
-                if ($cardapio[0] != null) {
-                    echo "
-                        <thead>
-                            <tr>
-                                <th>Dia</th>
-                                <th>Proteína</th>
-                                <th>Acompanhamento</th>
-                                <th>Sobremesa</th>
-                                <th></th> <!-- Coluna extra para os botões -->
-                            </tr>
-                        </thead>
-                        <tbody>";
-
-                    foreach ($cardapio as $dia) {
-                        if ($dia['principal'] != 'Sem refeição') {
-                            $data = date("d/m", strtotime($dia['data'])); 
-                            $newDia = ucfirst($dia['dia']) . "-feira";
-                            echo "<tr>";
-                            echo "<td>{$newDia} ({$data})</td>";
-                            echo "<td>{$dia['principal']}</td>";
-                            echo "<td>{$dia['acompanhamento']}</td>";
-                            echo "<td>{$dia['sobremesa']}</td>";
-                            echo "<td>";
-                            echo "<a href='cardapio-justificativa.php'>";
-                            echo "<button class='verde'><img src='../assets/reserva.png'></button>";
-                            echo "</a>";
-                            echo "<a href='cardapio-cancelar.php'>";
-                            echo "<button class='vermelho'><img src='../assets/cancelar.png'></button>";
-                            echo "</a>";
-                            echo "<a href='cardapio-disponibilizar.php'>";
-                            echo "<button class='amarelo'><img src='../assets/transferir.png'></button>";
-                            echo "</a>";
-                            echo "</td>";
-                            echo "</tr>";
-                        } else {
-                            echo "<tr>";
-                            echo "<td>{$dia['dia']}</td>";
-                            echo "<td>{$dia['principal']}</td>";
-                            echo "<td>{$dia['acompanhamento']}</td>";
-                            echo "<td>{$dia['sobremesa']}</td>";
-                            echo "<td>";
-                            echo "<a href='cardapio-justificativa.php'>";
-                            echo "<button class='verde'><img src='../assets/reserva.png'></button>";
-                            echo "</a>";
-                            echo "<a href='cardapio-cancelar.php'>";
-                            echo "<button class='vermelho'><img src='../assets/cancelar.png'></button>";
-                            echo "</a>";
-                            echo "<a href='cardapio-disponibilizar.php'>";
-                            echo "<button class='amarelo'><img src='../assets/transferir.png'></button>";
-                            echo "</a>";
-                            echo "</td>";
-                            echo "</tr>";
-                        }
-                    }
-
-                    echo "</tbody>";
-                    echo "</table>";
-                }
-            ?>
-            </tbody> 
-        </table>
-
-        <a href='cardapio.php'><button class='editar'>Voltar</button></a>
-
-    </div>
 
     <footer class="rodape">
         <div>
-            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
+            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo" draggable="false">
         </div>
         <div class="copyright">
-          <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
+          <p>&copy; 2023 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
             Campus Seabra</p>
         </div>
     </footer>
     <script src="script.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function toggleOutroMotivo() {
+            var select = document.getElementById("justificativa");
+            var outroMotivo = document.getElementById("outro");
+
+            outroMotivo.disabled = select.value !== "outro";
+        }
+    </script>
 </body>
 </html>
