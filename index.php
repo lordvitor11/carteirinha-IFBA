@@ -7,23 +7,18 @@
     <title>Início</title>
 </head>
 <body>
-    
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="view/script.js"></script>
     <?php
         if (isset($_GET['id'])) {
-
-
             $id = $_GET['id'];
             
             echo "<div class='popup-index'>";
             echo "<script>showIndexPopup();</script>";
             
             if ($id == 0) {
-                // echo "Horário limite alterado!";
                 echo "<h2 class='popup-index-title'>Horário limite alterado!</h2>";
             } else {
-                // echo "Erro ao alterar horário!";
                 echo "<h2 class='popup-index-title'>Erro ao alterar horário!</h2>";
             }
 

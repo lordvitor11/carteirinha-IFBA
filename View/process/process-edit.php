@@ -31,6 +31,8 @@
   }
 
   if ($error == "Sem erros") {
-    header("Location: ../cardapio.php");
+    header("Location: ../cardapio.php?id=0");
+  } else {
+    header("Location: ../cardapio.php?id=1");
   }
 ?>
