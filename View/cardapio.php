@@ -22,16 +22,17 @@
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
-        <a href="agendados.php"><button class="button-agendados">AGENDADOS</button></a>
+        <?php
+            if ($_SESSION['category'] != 'adm') {
+                echo "<a href='agendados.php'><button class='button-agendados'>Minhas Reservas</button></a>";
+            }
+        ?>
         
         <h1>CARDÁPIO SEMANAL</h1>
         <img src="../assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
         <table>
-            
             <?php 
-
                 error_reporting(E_ALL);
-
                 ini_set('display_errors', 1);
 
                 $cardapio = $controller->getCardapio();             
