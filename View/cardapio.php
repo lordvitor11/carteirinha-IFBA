@@ -4,7 +4,7 @@
 
     if (isset($_POST['sinal'])) {
         $sinal = $_POST['sinal'];
-        $cardapio = $controller->deleteCardapio();             
+        $controller->deleteCardapio();             
     }
 ?>
 

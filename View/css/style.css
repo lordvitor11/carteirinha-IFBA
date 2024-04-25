@@ -442,6 +442,10 @@ a {
   margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
 }
 
+.button:hover {
+  background-color: var(--dark-green);
+}
+
 .botao-container {
   width: 100%;
   display: flex;
@@ -485,6 +489,7 @@ a {
 }
 
 
+/* ANIMAÇÕES */
 @keyframes showPopup {
   0% {
     opacity: 0;

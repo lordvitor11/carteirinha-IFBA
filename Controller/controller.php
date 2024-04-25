@@ -28,8 +28,8 @@
             return $this->model->getCardapio();
         }
 
-        public function deleteCardapio() : string {
-            return $this->model->deleteCardapio();
+        public function deleteCardapio($func = 0) : string {
+            return $this->model->deleteCardapio($func);
         }
 
         public function setCardapio($array) : string {
@@ -42,6 +42,18 @@
 
         public function setDefaultTime($data, $horario) : string {
             return $this->model->setDefaultTime($data, $horario);
+        }
+
+        public function getHistorico($id = "") : array {
+            return $this->model->getHistorico($id);
+        }
+        
+        public function getCount() : int {
+            return $this->model->getCount();
+        }
+
+        public function getRegistry($ids) : array {
+            return $this->model->getRegistry($ids);
         }
     }
 ?>

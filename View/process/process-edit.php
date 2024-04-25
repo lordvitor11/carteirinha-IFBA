@@ -24,7 +24,7 @@
 
   print_r($cardapio);
 
-  $controller->deleteCardapio();
+  $controller->deleteCardapio(1);
 
   for ($c = 0; $c < count($cardapio); $c++) {
     $error = $controller->setCardapio($cardapio[$c]);

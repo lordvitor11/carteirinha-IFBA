@@ -1,6 +1,15 @@
 @import url(style.css);
 @import url(mq/cardapio.mq.css);
   
+.center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .right {
     margin-left: auto;
 }
@@ -20,6 +29,7 @@
     align-items: center;
     min-height: 100vh;
     margin: 20px;
+    width: 70%;
 }
 
 .input-container {
@@ -76,25 +86,6 @@ h1 {
     color: #388E3C;
 }
 
-.button {
-    padding: 10px 20px;
-    background-color: var(--light-green);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
-}
-
-.button {
-    background-color: var(--light-green);
-    color: white;
-}
-
-.button:hover {
-    background-color: var(--dark-green);
-}
-
 .button-voltar {
     padding: 10px 20px;
     background-color: var(--salmon);
@@ -119,3 +110,86 @@ h1 {
     justify-content: center; /* Centraliza os itens horizontalmente */
     width: 100%; /* Definindo largura total */
 }
+
+.button.historico {
+    border-radius: 5px;
+}
+
+.popup-historico {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* width: 300px; */
+    max-width: 90%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    text-align: center;
+    border-radius: 5px;
+    opacity: 0; /* Opacidade inicial */
+    transition: opacity 0.3s ease; /* Transição de opacidade */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.popup-content table {
+    width: 100%;
+}
+
+.btn-close {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    background-color: #d32f2f;
+}
+
+.popup-historico.show {
+    display: flex;
+    opacity: 1;
+    animation: popupShow 0.35s backwards;
+    transform: translate(-50%, -50%) scale(1); /* Escala final para a segunda animação */
+    overflow: hidden;
+}
+
+.popup-historico.hide {
+    animation: popupHide 0.35s backwards;
+}
+
+
+/* ANIMAÇÕES */
+@keyframes popupShow {
+    from {  
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+@keyframes popupHide {
+    from {  
+        opacity: 1;
+    } to {
+        opacity: 0;
+    }
+}
+

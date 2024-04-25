@@ -263,3 +263,87 @@ function showIndexPopup() {
         }, 500);
     }, 3500);   
 }
+
+function showHistPopup() {
+    const div = document.querySelector('.popup-historico');
+    div.style.opacity = "1";
+    div.classList.add('show');
+}
+
+function getData(dataUser) {
+    let data = `${dataUser[8]}${dataUser[9]}/${dataUser[5]}${dataUser[6]}`; 
+    return data;
+}
+
+function showInfo(btn) {
+    showHistPopup();
+
+    const popup = document.querySelector('.popup-content .semana');
+    let h2Data = document.querySelector('#data');
+    let idsRaw = btn.classList[2];
+    let ids;
+
+    if (idsRaw.length == 5) {
+        ids = idsRaw.split('').map(numero => parseInt(numero, 10));
+    } else if (idsRaw.length == 6) {
+        let temp = idsRaw.split('');
+        temp[0] = `${temp[0]}${temp[1]}`;
+        temp = temp.map(numero => parseInt(numero, 10));
+        temp.splice(1, 1);
+        ids = temp;
+    } else {
+        let temp = [];
+        for (let i = 0; i < btn.classList[2].length; i += 2) {
+            let parDeNumeros = btn.classList[2].substring(i, i + 2);
+            temp.push(parseInt(parDeNumeros));
+        }
+
+        ids = temp;
+    }
+
+    $.ajax({
+        url: "historico.php",
+        type: "POST",
+        data: { sinal: JSON.stringify(ids) },
+        success: function(response) {
+            let responseJson = JSON.parse(response);
+            popup.innerHTML = "";
+
+            h2Data.textContent = `CARDÁPIO (${getData(responseJson[0].data_refeicao)} - ${getData(responseJson[4].data_refeicao)})`;
+
+            for (c = 0; c < responseJson.length; c++) {
+                let tr = document.createElement('tr');
+                let td1 = document.createElement('td');
+                let td2 = document.createElement('td');
+                let td3 = document.createElement('td');
+                let td4 = document.createElement('td');
+                let data = getData(responseJson[c].data_refeicao);
+
+                td1.textContent = responseJson[c].dia.charAt(0).toUpperCase() + responseJson[c].dia.slice(1).toLowerCase() + `-feira (${data})`;
+                td2.textContent = responseJson[c].principal;
+                td3.textContent = responseJson[c].acompanhamento;
+                td4.textContent = responseJson[c].sobremesa;
+
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+
+                popup.appendChild(tr);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Erro ao enviar sinal: " + error);
+        }
+    });
+}
+
+function addListener() {
+    const buttons = document.querySelectorAll('button.historico');
+
+    for (c = 0; c < buttons.length; c++) {
+        buttons[c].addEventListener('click', function() {
+            showInfo(this);
+        });
+    }
+}

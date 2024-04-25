@@ -121,8 +121,13 @@
             }
         }
 
-        public function deleteCardapio() : string {
-            $sql = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";
+        public function deleteCardapio($func = 0) : string {
+            $sql = "";
+            if ($func == 0) {
+                $sql = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";
+            } else {
+                $sql = "DELETE FROM cardapio ORDER BY id DESC LIMIT 5";
+            }
 
             if ($this->conn->query($sql) === TRUE) {
                 return "Sem erros";
@@ -179,6 +184,55 @@
             $stmt->close();
 
             return "Sem erros";
+        }
+
+        public function getHistorico($id = "", $sql = "") : array {
+            if ($id === "") {
+                $sql = "SELECT id, data_refeicao FROM cardapio ORDER BY id DESC LIMIT 5";
+            } else {
+                $sql = "SELECT id, data_refeicao FROM cardapio WHERE id <= {$id} ORDER BY id DESC LIMIT 5";
+            }
+
+            $resultados = $this->conn->query($sql);
+            $valores = array(
+                'ids' => array(),
+                'datas' => array()
+            );
+
+            // Adiciona os valores da consulta à array
+            while ($row = mysqli_fetch_assoc($resultados)) {
+                array_push($valores['ids'], intval($row['id']));
+                $valores['datas'][] = $row['data_refeicao'];
+            }
+
+            for ($c = 1; $c <= count($valores['datas']); $c++) {
+                unset($valores['datas'][$c]);
+            }
+
+            $valores['menorId'] = min($valores['ids']);
+            return $valores;
+        }
+
+        public function getCount() : int {
+            $sql = "SELECT COUNT(*) FROM cardapio";
+            $resultado = $this->conn->query($sql);
+            $num = $resultado->fetch_assoc();
+
+            $num = $num["COUNT(*)"];
+            return intval($num);
+        }
+
+        public function getRegistry($ids) : array {
+            $sql = "SELECT * FROM cardapio WHERE id >= {$ids[count($ids) - 1]} AND id <= {$ids[0]}";
+
+            $resultados = $this->conn->query($sql);
+            $valores = array();
+
+            while ($row = mysqli_fetch_assoc($resultados)) {
+                $valores[] = $row;
+            }
+
+            return $valores;
         }
     }
 ?>
