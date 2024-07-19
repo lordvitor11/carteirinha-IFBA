@@ -7,19 +7,6 @@ h1 {
     color: #388E3C;
 }
 
-form {
-    max-width: 400px;
-    margin: 40px auto;
-    padding: 50px;
-    border: 1px solid #b4b4b4;
-    border-radius: 8px;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
-}
-
 label {
     margin-bottom: 8px;
 }
@@ -37,20 +24,6 @@ select {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.cancelar,
-.validar {
-    padding: 5px 5px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
 }
 
 .cancelar {
@@ -73,5 +46,24 @@ select {
 }
 
 .paragrafo {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
     text-align: center;
 }

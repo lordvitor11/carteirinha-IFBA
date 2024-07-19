@@ -7,8 +7,8 @@
     <title>Início</title>
 </head>
 <body>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="view/script.js"></script>
+    <script src='https://code.jquery.com/jquery-3.6.4.min.js'></script>
+    <script src="View/script.js"></script>
     <?php
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
@@ -16,9 +16,7 @@
             echo "<div class='popup-index'>";
             echo "<script>showIndexPopup();</script>";
             
-            if ($id == 0) {
-                echo "<h2 class='popup-index-title'>Horário limite alterado!</h2>";
-            } else {
+            if ($id == 0) echo "<h2 class='popup-index-title'>Horário limite alterado!</h2>"; else {
                 echo "<h2 class='popup-index-title'>Erro ao alterar horário!</h2>";
             }
 
@@ -57,13 +55,13 @@
                 <a href="https://www.instagram.com/ifba_seabra" target="_blank">
                     <div class="userDetails">
                         <div class="profile_img">
-                            <img src="assets/profile_instagram.png" class="cover">
+                            <img src="assets/profile_instagram.png" class="cover" alt="none">
                         </div>
                         <h3>IFBA Seabra<br><span>Seabra, Bahia</span></h3>
                     </div>
                 </a>
                 <div>
-                    <img src="assets/dot.png" class="dot">
+                    <img src="assets/dot.png" class="dot" alt="none">
                 </div>
             </div>
             <div class="imgBx">
@@ -85,7 +83,7 @@
                                 
                                 for ($c = 1; $c < ($numArquivos + 1); $c++) {
                                     $img = $listaArquivos_[$c - 1];
-                                    $carouselImages[] = ["View/process/images/{$img}" => $arrayDados["img{$c}"]['link']];
+                                    $carouselImages[] = ["View/process/images/$img" => $arrayDados["img$c"]['link']];
                                 }
                 
                                 foreach ($carouselImages as $item){
@@ -104,14 +102,14 @@
             <div class="actionBtns">
                 <a href="https://www.instagram.com/ifba_seabra" target="_blank">
                     <div class="left">
-                        <img src="assets/heart.png" class="heart">
-                        <img src="assets/comment.png">
-                        <img src="assets/share.png">
+                        <img src="assets/heart.png" class="heart" alt="none">
+                        <img src="assets/comment.png" alt="none">
+                        <img src="assets/share.png" alt="none">
                     </div>
                 </a>
                 <a href="https://www.instagram.com/ifba_seabra" target="_blank">
                     <div class="right">
-                        <img src="assets/bookmark.png">
+                        <img src="assets/bookmark.png" alt="none">
                     </div>
                 </a>
             </div>
@@ -133,14 +131,14 @@
         <div class="menu-section">
             <div class="menu-title">CARDÁPIO?</div>
 
-            <div class="separator"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div>
+            <div class="separator"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false" alt="none"> </div>
             
             <div class="menu-items">
                 <div class="menu-item">
                 <img src="assets/6da0cc15731a428a9e2cf1767f46190f.png" alt="Imagem do Almoço" class="menu-image" draggable="false">
                 <div>
                     <div class="menu-name">Almoço</div>
-                    <div class="separator"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div><br>
+                    <div class="separator"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false" alt="none"> </div><br>
                     <div class="menu-info">
                     <p>Todo dia diversas opções diferentes.</p>
                     </div>
@@ -151,7 +149,7 @@
                 <img src="assets/7732604ec55c471e850c0151ec6b1697.png" alt="Imagem do Complemento" class="menu-image" draggable="false">
                 <div>
                     <div class="menu-name">Complemento</div>
-                    <div class="separator"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div><br>
+                    <div class="separator"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false" alt="none"> </div><br>
                     <div class="menu-info">
                     <p>Diversas opções, como saladas e entre outros.</p>
                     </div>
@@ -162,7 +160,7 @@
                 <img src="assets/d362a44164f44a24bbb327a5d7208dd6.png" alt="Imagem da Sobremesa" class="menu-image" draggable="false">
                 <div>
                     <div class="menu-name">Sobremesa</div>
-                    <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false"> </div><br>
+                    <div class="separator2"> <img src="assets/23fcc2516acc4eacad3a22096338e5a2.png" draggable="false" alt="none"> </div><br>
                     <div class="menu-info">
                     <p>Ótimos acompanhamentos para a sua refeição.</p>
                   </div>
@@ -173,7 +171,7 @@
 
     <footer class="rodape">
         <div>
-            <img class="img-logo" src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo" draggable="false">
+            <img class="img-logo" src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" draggable="false">
         </div>
         <div class="copyright">
             <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia Campus Seabra</p>

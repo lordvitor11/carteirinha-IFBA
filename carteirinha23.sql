@@ -1,362 +1,162 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Tempo de geração: 24/12/2023 às 07:06
--- Versão do servidor: 10.4.32-MariaDB
--- Versão do PHP: 8.0.30
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- --------------------------------------------------------
+-- Servidor:                     127.0.0.1
+-- Versão do servidor:           8.0.30 - MySQL Community Server - GPL
+-- OS do Servidor:               Win64
+-- HeidiSQL Versão:              12.1.0.6537
+-- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---
--- Banco de dados: `carteirinha23`
---
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `cardapio`
---
-
-CREATE TABLE `cardapio` (
-  `id` int(11) NOT NULL,
+-- Copiando estrutura para tabela carteirinha23.cardapio
+CREATE TABLE IF NOT EXISTS `cardapio` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `data_refeicao` date NOT NULL,
-  `dia` varchar(255) NOT NULL,
-  `principal` varchar(255) NOT NULL,
-  `acompanhamento` varchar(255) NOT NULL,
-  `sobremesa` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+  `dia` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `principal` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `acompanhamento` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `sobremesa` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `ind_excluido` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
---
--- Acionadores `cardapio`
---
-DELIMITER $$
-CREATE TRIGGER `copiar_historico_cardapio` BEFORE DELETE ON `cardapio` FOR EACH ROW BEGIN
-    -- Copia os dados específicos da linha excluída para a tabela de histórico
-    INSERT INTO historico_cardapio (id, data_refeicao, dia, principal, acompanhamento, sobremesa)
-    VALUES (OLD.id, OLD.data_refeicao, OLD.dia, OLD.principal, OLD.acompanhamento, OLD.sobremesa);
-END
-$$
-DELIMITER ;
+-- Copiando dados para a tabela carteirinha23.cardapio: ~12 rows (aproximadamente)
+INSERT INTO `cardapio` (`id`, `data_refeicao`, `dia`, `principal`, `acompanhamento`, `sobremesa`, `ind_excluido`) VALUES
+	(20, '2024-04-11', 'quarta', 'teste', 'Sem acompanhamento', 'Sem sobremesa', 1),
+	(21, '2024-04-12', 'quinta', 'teste', 'Sem acompanhamento', 'Sem sobremesa', 1),
+	(22, '2024-04-10', 'quarta', 'teste', 'Sem acompanhamento', 'Sem sobremesa', 1),
+	(23, '2024-04-11', 'quinta', 'teste', 'Sem acompanhamento', 'Sem sobremesa', 1),
+	(24, '2024-04-08', 'segunda', 'peito de frango', 'batata', 'Sem sobremesa', 1),
+	(25, '2024-04-10', 'quarta', 'fÃ­gado', 'feijÃ£o', 'Sem sobremesa', 1),
+	(26, '2024-04-11', 'quinta', 'lazanha', 'purÃª', 'Sem sobremesa', 1),
+	(27, '2024-04-12', 'sexta', 'peixe', 'farofa', 'Sem sobremesa', 1),
+	(28, '2024-04-15', 'segunda', 'peito de frango', 'batata', 'Sem sobremesa', 1),
+	(29, '2024-04-17', 'quarta', 'calabresa', 'macarrÃ£o', 'Sem sobremesa', 1),
+	(30, '2024-04-18', 'quinta', 'lazanha', 'purÃª', 'Sem sobremesa', 1),
+	(31, '2024-04-19', 'sexta', 'lasanha', 'farofa', 'Sem sobremesa', 1),
+	(32, '2024-07-15', 'segunda', 'Carne cozida', '-', 'Maçã', 0),
+	(33, '2024-07-16', 'terca', 'Calabresa assada', 'Alface', '-', 0),
+	(34, '2024-07-17', 'quarta', 'Farofa de ovo', 'Salada', 'Banana', 0),
+	(35, '2024-07-18', 'quinta', 'Feijoada', 'Farofa', '-', 0),
+	(36, '2024-07-19', 'sexta', 'Macarrão', 'Batata palha', 'Abacaxi', 0);
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `historico_cardapio`
---
-
-CREATE TABLE `historico_cardapio` (
-  `id` int(11) NOT NULL,
-  `data_refeicao` varchar(255) NOT NULL,
-  `dia` varchar(255) NOT NULL,
-  `principal` varchar(255) NOT NULL,
-  `acompanhamento` varchar(255) NOT NULL,
-  `sobremesa` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `horario_padrão`
---
-
-CREATE TABLE `horario_padrão` (
-  `id` int(11) NOT NULL,
-  `inicio_vig` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+-- Copiando estrutura para tabela carteirinha23.horario_padrao
+CREATE TABLE IF NOT EXISTS `horario_padrao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `inicio_vig` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `fim_vig` timestamp NULL DEFAULT NULL,
-  `horario` time NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+  `horario` time NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
---
--- Despejando dados para a tabela `horario_padrão`
---
+-- Copiando dados para a tabela carteirinha23.horario_padrao: ~5 rows (aproximadamente)
+INSERT INTO `horario_padrao` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
+	(1, '2024-07-17 04:10:38', '2024-07-18 04:11:14', '16:10:00'),
+	(2, '2024-07-18 04:11:14', '2024-07-19 04:14:12', '22:11:00'),
+	(3, '2024-07-19 04:14:12', '2024-07-19 04:14:33', '04:14:00'),
+	(4, '2024-07-19 04:14:33', NULL, '09:00:00');
 
-INSERT INTO `horario_padrão` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
-(38, '2023-11-12 03:00:00', '2023-11-14 03:00:00', '00:00:00'),
-(39, '2023-11-14 03:00:00', '2023-11-30 03:00:00', '00:00:00'),
-(40, '2023-11-30 03:00:00', '2023-11-20 03:00:00', '00:00:00'),
-(41, '2023-11-20 03:00:00', '2023-11-22 03:00:00', '00:00:00'),
-(42, '2023-11-22 03:00:00', NULL, '00:00:00');
+-- Copiando estrutura para tabela carteirinha23.justificativa
+CREATE TABLE IF NOT EXISTS `justificativa` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `justificativa`
---
-
-CREATE TABLE `justificativa` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Despejando dados para a tabela `justificativa`
---
-
+-- Copiando dados para a tabela carteirinha23.justificativa: ~3 rows (aproximadamente)
 INSERT INTO `justificativa` (`id`, `descricao`) VALUES
-(1, 'Aula no contra turno'),
-(2, 'Transporte'),
-(3, 'Projeto/TCC/Estágio');
+	(1, 'Aula no contra turno'),
+	(2, 'Transporte'),
+	(3, 'Projeto/TCC/Estágio'),
+	(4, 'Outro');
 
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `refeicao`
---
-
-CREATE TABLE `refeicao` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_cardapio` int(11) NOT NULL,
-  `id_status_ref` int(11) NOT NULL,
-  `id_justificativa` int(11) DEFAULT NULL,
+-- Copiando estrutura para tabela carteirinha23.refeicao
+CREATE TABLE IF NOT EXISTS `refeicao` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `id_cardapio` int NOT NULL,
+  `id_status_ref` int NOT NULL,
+  `id_justificativa` int DEFAULT NULL,
   `data_solicitacao` datetime NOT NULL,
-  `outra_justificativa` varchar(100) DEFAULT NULL,
-  `motivo_cancelamento` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+  `outra_justificativa` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `motivo_cancelamento` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_cardapio` (`id_cardapio`),
+  KEY `id_status` (`id_status_ref`),
+  KEY `id_justificativa` (`id_justificativa`),
+  CONSTRAINT `refeicao_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `refeicao_ibfk_2` FOREIGN KEY (`id_cardapio`) REFERENCES `cardapio` (`id`),
+  CONSTRAINT `refeicao_ibfk_3` FOREIGN KEY (`id_status_ref`) REFERENCES `status_ref` (`id`),
+  CONSTRAINT `refeicao_ibfk_4` FOREIGN KEY (`id_justificativa`) REFERENCES `justificativa` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
---
--- Acionadores `refeicao`
---
-DELIMITER $$
-CREATE TRIGGER `trg01_refeicao` BEFORE INSERT ON `refeicao` FOR EACH ROW SET NEW.id_status_ref = 1
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `trg02_refeicao` BEFORE INSERT ON `refeicao` FOR EACH ROW SET NEW.data_solicitacao = CONVERT_TZ(NOW(),'+00:00', '+00:00')
-$$
-DELIMITER ;
+-- Copiando dados para a tabela carteirinha23.refeicao: ~10 rows (aproximadamente)
+INSERT INTO `refeicao` (`id`, `id_usuario`, `id_cardapio`, `id_status_ref`, `id_justificativa`, `data_solicitacao`, `outra_justificativa`, `motivo_cancelamento`) VALUES
+	(1, 2, 27, 1, 4, '2024-07-19 02:46:04', NULL, NULL),
+	(2, 2, 27, 1, 4, '2024-07-19 02:46:33', 'Atestado', NULL),
+	(3, 2, 27, 1, 4, '2024-07-19 02:48:31', NULL, NULL),
+	(4, 2, 27, 1, 4, '2024-07-19 02:50:23', NULL, NULL),
+	(5, 2, 27, 1, 1, '2024-07-19 02:57:00', 'contra-turno', NULL),
+	(6, 2, 27, 1, 4, '2024-07-19 02:57:13', 'Atestado', NULL),
+	(7, 2, 27, 1, 1, '2024-07-19 02:57:32', 'contra-turno', NULL),
+	(8, 2, 27, 1, 3, '2024-07-19 02:58:37', NULL, NULL),
+	(9, 2, 27, 1, 3, '2024-07-19 02:58:48', NULL, NULL),
+	(10, 2, 27, 1, 1, '2024-07-19 02:58:57', NULL, NULL);
 
--- --------------------------------------------------------
+-- Copiando estrutura para tabela carteirinha23.status_ref
+CREATE TABLE IF NOT EXISTS `status_ref` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
---
--- Estrutura para tabela `status_ref`
---
-
-CREATE TABLE `status_ref` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Despejando dados para a tabela `status_ref`
---
-
+-- Copiando dados para a tabela carteirinha23.status_ref: ~4 rows (aproximadamente)
 INSERT INTO `status_ref` (`id`, `descricao`) VALUES
-(1, 'Agendada'),
-(2, 'Cancelada'),
-(3, 'Confirmada'),
-(4, 'Não compareceu');
+	(1, 'Agendada'),
+	(2, 'Cancelada'),
+	(3, 'Confirmada'),
+	(4, 'Não compareceu');
 
--- --------------------------------------------------------
+-- Copiando estrutura para tabela carteirinha23.usuario
+CREATE TABLE IF NOT EXISTS `usuario` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `senha` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `categoria` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `telefone` varchar(11) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
---
--- Estrutura para tabela `tabela_temporaria`
---
-
-CREATE TABLE `tabela_temporaria` (
-  `id` int(11) NOT NULL,
-  `inicio_vig` datetime DEFAULT NULL,
-  `fim_vig` datetime DEFAULT NULL,
-  `horario` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Despejando dados para a tabela `tabela_temporaria`
---
-
-INSERT INTO `tabela_temporaria` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
-(49, '2023-11-14 00:00:00', NULL, '00:00:00'),
-(50, '2023-11-30 00:00:00', NULL, '00:00:00'),
-(51, '2023-11-20 00:00:00', NULL, '00:00:00'),
-(52, '2023-11-22 00:00:00', NULL, '00:00:00');
-
---
--- Acionadores `tabela_temporaria`
---
-DELIMITER $$
-CREATE TRIGGER `trg_atualiza_vigencia` AFTER INSERT ON `tabela_temporaria` FOR EACH ROW BEGIN
-    DECLARE id_anterior_temp INT;
-    DECLARE fim_vig_anterior_temp DATETIME;
-
-    -- Encontrar o ID do registro anterior na tabela_temporaria_intermediaria
-    SET id_anterior_temp := (
-        SELECT MAX(id)
-        FROM horario_padrão
-        WHERE id < NEW.id
-    );
-
-    -- Verificar se existe um registro anterior
-    IF id_anterior_temp IS NOT NULL THEN
-        -- Obter o fim_vig do registro anterior na tabela_temporaria_intermediaria
-        SET fim_vig_anterior_temp := (
-            SELECT inicio_vig
-            FROM horario_padrão
-            WHERE id = id_anterior_temp
-        );
-
-        -- Atualizar o campo 'fim_vig' do registro anterior na tabela horario_padrão
-        UPDATE horario_padrão
-        SET fim_vig = NEW.inicio_vig
-        WHERE id = id_anterior_temp;
-        
-        INSERT INTO horario_padrão (inicio_vig, fim_vig, horario)
-        VALUES (NEW.inicio_vig, NULL, NEW.horario);
-        
-        -- INSERT INTO horario_padrão (id, inicio_vig, fim_vig, horario)
-        -- VALUES (NEW.id, NEW.inicio_vig, fim_vig_anterior_temp, horario)
-        -- ON duplicate key update fim_vig = NEW
-        
-        -- Inserir os dados manipulados na tabela horario_padrão
-        -- INSERT INTO horario_padrão (id, inicio_vig, fim_vig, horario)
-        -- VALUES (NEW.id, NEW.inicio_vig, fim_vig_anterior_temp, NEW.horario);
-    END IF;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `usuario`
---
-
-CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `senha` varchar(60) NOT NULL,
-  `categoria` varchar(255) NOT NULL,
-  `telefone` varchar(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
---
--- Despejando dados para a tabela `usuario`
---
-
+-- Copiando dados para a tabela carteirinha23.usuario: ~0 rows (aproximadamente)
 INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `categoria`, `telefone`) VALUES
-(1, 'root', 'root@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00');
+	(1, 'root', 'root@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00'),
+	(2, 'vitor', 'vitor@gmail.com', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00');
 
---
--- Índices para tabelas despejadas
---
+-- Copiando estrutura para trigger carteirinha23.trg01_refeicao
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
+DELIMITER //
+CREATE TRIGGER `trg01_refeicao` BEFORE INSERT ON `refeicao` FOR EACH ROW SET NEW.id_status_ref = 1//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
 
---
--- Índices de tabela `cardapio`
---
-ALTER TABLE `cardapio`
-  ADD PRIMARY KEY (`id`);
+-- Copiando estrutura para trigger carteirinha23.trg02_refeicao
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';
+DELIMITER //
+CREATE TRIGGER `trg02_refeicao` BEFORE INSERT ON `refeicao` FOR EACH ROW SET NEW.data_solicitacao = CONVERT_TZ(NOW(),'+00:00', '+00:00')//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
 
---
--- Índices de tabela `horario_padrão`
---
-ALTER TABLE `horario_padrão`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `justificativa`
---
-ALTER TABLE `justificativa`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `refeicao`
---
-ALTER TABLE `refeicao`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_cardapio` (`id_cardapio`),
-  ADD KEY `id_status` (`id_status_ref`),
-  ADD KEY `id_justificativa` (`id_justificativa`);
-
---
--- Índices de tabela `status_ref`
---
-ALTER TABLE `status_ref`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `tabela_temporaria`
---
-ALTER TABLE `tabela_temporaria`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `usuario`
---
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT para tabelas despejadas
---
-
---
--- AUTO_INCREMENT de tabela `cardapio`
---
-ALTER TABLE `cardapio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de tabela `horario_padrão`
---
-ALTER TABLE `horario_padrão`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
-
---
--- AUTO_INCREMENT de tabela `justificativa`
---
-ALTER TABLE `justificativa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `refeicao`
---
-ALTER TABLE `refeicao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT de tabela `status_ref`
---
-ALTER TABLE `status_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `tabela_temporaria`
---
-ALTER TABLE `tabela_temporaria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT de tabela `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `refeicao`
---
-ALTER TABLE `refeicao`
-  ADD CONSTRAINT `refeicao_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
-  ADD CONSTRAINT `refeicao_ibfk_2` FOREIGN KEY (`id_cardapio`) REFERENCES `cardapio` (`id`),
-  ADD CONSTRAINT `refeicao_ibfk_3` FOREIGN KEY (`id_status_ref`) REFERENCES `status_ref` (`id`),
-  ADD CONSTRAINT `refeicao_ibfk_4` FOREIGN KEY (`id_justificativa`) REFERENCES `justificativa` (`id`);
-COMMIT;
-
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

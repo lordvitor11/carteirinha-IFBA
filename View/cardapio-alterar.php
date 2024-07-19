@@ -54,7 +54,7 @@
     function showFields(cardapio) {
         const component = document.querySelector('.content');
 
-        for (c = 0; c < cardapio.length; c++) {
+        for (let c = 0; c < cardapio.length; c++) {
             let divItem = document.createElement('div');
             let divPrincipal = document.createElement('div');
             let divAcompanhamento = document.createElement('div');

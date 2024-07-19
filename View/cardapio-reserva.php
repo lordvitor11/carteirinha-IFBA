@@ -1,3 +1,27 @@
+<?php
+    require("../Controller/controller.php");
+    $controller = new LoginController();
+
+    $cardapio = $controller->getCardapio();
+
+    $dataAtual = date('Y-m-d'); // Pode ser qualquer data no formato Y-M-D (por exemplo, '2021-12-08')
+    $diaDaSemana = date('l', strtotime($dataAtual));
+    $diaNumero = 0;
+
+    switch ($diaDaSemana) {
+        case "Monday": $diaDaSemana = "segunda"; break;
+        case "Tuesday": $diaDaSemana = "terca"; $diaNumero = 1; break;
+        case "Wednesday": $diaDaSemana = "quarta"; $diaNumero = 2; break;
+        case "Thursday": $diaDaSemana = "quinta"; $diaNumero = 3; break;
+        case "Friday": $diaDaSemana = "sexta"; $diaNumero = 4; break;
+        default: break;
+    }
+
+    $cardapio = $cardapio[$diaNumero];
+
+    $_SESSION['diaSemana'] = $diaDaSemana;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,25 +38,25 @@
     <div class="container">
     <h1>RESERVAR ALMOÇO</h1>
 
-    <p class="paragrafo">Dia da semana: <strong>Segunda-feira</strong></p>
+    <form action="process/process-justificativa.php" method="POST">
+        <table>
+            <tr><th colspan="2"><?php echo ucfirst($diaDaSemana) . '-feira' ?></th></tr>
+            <tr><td>Proteina</td><td><?php echo $cardapio['principal']; ?></td></tr>
+            <tr><td>Acompanhamento</td><td><?php echo $cardapio['acompanhamento']; ?></td></tr>
+            <tr><td>Sobremesa</td><td><?php echo $cardapio['sobremesa']; ?></td></tr>
+        </table>
 
-    <form action="processar_justificativa.php" method="POST">
-
-        <p><strong>Proteína:</strong> </p><br>
-        <p><strong>Acompanhamento:</strong> </p><br>
-        <p><strong>Sobremesa:</strong> </p><br>
-        
         <label for="justificativa">Justificativa:</label>
-        <select id="justificativa" name="justificativa" onchange="toggleOutroMotivo()">
+        <select id="justificativa" name="justificativa" onchange="toggleOutroMotivo()" required>
             <option value="" selected disabled hidden>Selecione uma opção...</option>
-            <option value="opcao1">Aula no Contra Turno</option>
-            <option value="opcao2">Transporte</option>
-            <option value="opcao3">Projeto, TCC</option>
+            <option value="contra-turno">Aula no Contra Turno</option>
+            <option value="transporte">Transporte</option>
+            <option value="projeto">Projeto, TCC</option>
             <option value="outro">Outro</option>
         </select>
         <br>
         <label for="outro">Outro Motivo:</label>
-        <input type="text" id="outro" name="outro" placeholder="Digite outro motivo..." disabled>
+        <input type="text" id="outro" name="outro" placeholder="Digite outro motivo..." disabled required>
         <br>
         <div class="botao-container">
             <button class="cancelar" type="button" onclick="cancelarCardapio()"></button>
@@ -54,8 +78,8 @@
     <script src="script.js"></script>
     <script>
         function toggleOutroMotivo() {
-            var select = document.getElementById("justificativa");
-            var outroMotivo = document.getElementById("outro");
+            let select = document.getElementById("justificativa");
+            let outroMotivo = document.getElementById("outro");
 
             outroMotivo.disabled = select.value !== "outro";
         }

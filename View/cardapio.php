@@ -40,7 +40,7 @@
 
     <div class="container">
         <?php
-            if ($_SESSION['category'] != 'adm') {
+            if ($_SESSION['logged_in'] && $_SESSION['category'] != 'adm') {
                 echo "<a href='agendados.php'><button class='button-agendados'>Minhas Reservas</button></a>";
             }
         ?>
@@ -71,26 +71,21 @@
                             $data = date("d/m", strtotime($dia['data'])); 
                             $newDia = ucfirst($dia['dia']) . "-feira";
                             echo "<tr>";
-                            echo "<td>{$newDia} ({$data})</td>";
-                            echo "<td>{$dia['principal']}</td>";
-                            echo "<td>{$dia['acompanhamento']}</td>";
-                            echo "<td>{$dia['sobremesa']}</td>";
-                            echo "</tr>";
+                            echo "<td>$newDia ($data)</td>";
                         } else {
                             echo "<tr>";
                             echo "<td>{$dia['dia']}</td>";
-                            echo "<td>{$dia['principal']}</td>";
-                            echo "<td>{$dia['acompanhamento']}</td>";
-                            echo "<td>{$dia['sobremesa']}</td>";
-                            echo "</tr>";
                         }
+                        echo "<td>{$dia['principal']}</td>";
+                        echo "<td>{$dia['acompanhamento']}</td>";
+                        echo "<td>{$dia['sobremesa']}</td>";
+                        echo "</tr>";
                     }
 
                     echo "</tbody>";
                     echo "</table>";
                 }
             ?>
-            </tbody> 
         </table>
 
         <?php 

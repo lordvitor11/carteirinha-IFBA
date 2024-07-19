@@ -14,13 +14,13 @@
     <h1 class="title-login">FAÇA LOGIN</h1><br>
 
     <main class="main-login">
-    <img class="img-login" src="../assets/if.png" alt="Logo IFBA">
+    <img class="img-login" src="../assets/IF.png" alt="Logo IFBA">
       <div id="notification" class="notification"></div>
         <form id="form">
-            <label for="usuario">Nome de Usuário:</label>
+            <label for="username">Nome de Usuário:</label>
             <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required autocomplete="off"><br><br>
 
-            <label for="senha">Senha:</label>
+            <label for="password">Senha:</label>
             <input type="password" oninput="check()" name="password" id="password" placeholder="Senha" required autocomplete="off"><br><br>
 
             <div class="result">

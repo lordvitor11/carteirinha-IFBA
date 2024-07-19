@@ -1,23 +1,26 @@
 <?php
     if (isset($_GET['data'])) {
         $data_usuario = $_GET['data'];
-        $data = new DateTime($data_usuario);
-        $primeiro_dia_semana = 0;
-        $ultimo_dia_semana = 6;
-        $dia_semana = $data->format("w");
-        $primeiro_dia_timestamp = strtotime("-" . ($dia_semana - $primeiro_dia_semana) . " days", $data->getTimestamp());
-        $ultimo_dia_timestamp = strtotime("+" . ($ultimo_dia_semana - $dia_semana) . " days", $data->getTimestamp());
-        $dias_semana = array();
-        
-        for ($i = $primeiro_dia_timestamp; $i <= $ultimo_dia_timestamp; $i = strtotime('+1 day', $i)) {
-            $dias_semana[] = date("Y-m-d", $i);
+        try {
+            $data = new DateTime($data_usuario);
+            $primeiro_dia_semana = 0;
+            $ultimo_dia_semana = 6;
+            $dia_semana = $data->format("w");
+            $primeiro_dia_timestamp = strtotime("-" . ($dia_semana - $primeiro_dia_semana) . " days", $data->getTimestamp());
+            $ultimo_dia_timestamp = strtotime("+" . ($ultimo_dia_semana - $dia_semana) . " days", $data->getTimestamp());
+            $dias_semana = array();
+
+            for ($i = $primeiro_dia_timestamp; $i <= $ultimo_dia_timestamp; $i = strtotime('+1 day', $i)) {
+                $dias_semana[] = date("Y-m-d", $i);
+            }
+
+            array_shift($dias_semana);
+            array_pop($dias_semana);
+
+            echo json_encode($dias_semana);
+            exit;
+        } catch (Exception $e) {
         }
-
-        array_shift($dias_semana);
-        array_pop($dias_semana);
-
-        echo json_encode($dias_semana);
-        exit;
     }
 ?>
 
@@ -74,7 +77,7 @@
             let ultimo_dia_timestamp;
             let inputDate = document.querySelector('#data-fim');
 
-            if (dia_semana == 6) {
+            if (dia_semana === 6) {
                 dia_semana = 0;
                 primeiro_dia_timestamp = new Date(data.getTime() - (dia_semana - primeiro_dia_semana) * 24 * 60 * 60 * 1000);
                 ultimo_dia_timestamp = new Date(data.getTime() + (ultimo_dia_semana - dia_semana) * 24 * 60 * 60 * 1000);

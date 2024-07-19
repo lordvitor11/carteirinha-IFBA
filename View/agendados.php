@@ -52,42 +52,29 @@
                             $data = date("d/m", strtotime($dia['data'])); 
                             $newDia = ucfirst($dia['dia']) . "-feira";
                             echo "<tr>";
-                            echo "<td>{$newDia} ({$data})</td>";
-                            echo "<td>{$dia['principal']}</td>";
-                            echo "<td>{$dia['acompanhamento']}</td>";
-                            echo "<td>{$dia['sobremesa']}</td>";
-                            echo "<td>";
-                            echo "<a href='cardapio-cancelar.php'>";
-                            echo "<button class='vermelho'><img src='../assets/cancelar.png'></button>";
-                            echo "</a>";
-                            echo "<a href='cardapio-disponibilizar.php'>";
-                            echo "<button class='amarelo'><img src='../assets/transferir.png'></button>";
-                            echo "</a>";
-                            echo "</td>";
-                            echo "</tr>";
+                            echo "<td>$newDia ($data)</td>";
                         } else {
                             echo "<tr>";
                             echo "<td>{$dia['dia']}</td>";
-                            echo "<td>{$dia['principal']}</td>";
-                            echo "<td>{$dia['acompanhamento']}</td>";
-                            echo "<td>{$dia['sobremesa']}</td>";
-                            echo "<td>";
-                            echo "<a href='cardapio-cancelar.php'>";
-                            echo "<button class='vermelho'><img src='../assets/cancelar.png'></button>";
-                            echo "</a>";
-                            echo "<a href='cardapio-disponibilizar.php'>";
-                            echo "<button class='amarelo'><img src='../assets/transferir.png'></button>";
-                            echo "</a>";
-                            echo "</td>";
-                            echo "</tr>";
                         }
+                        echo "<td>{$dia['principal']}</td>";
+                        echo "<td>{$dia['acompanhamento']}</td>";
+                        echo "<td>{$dia['sobremesa']}</td>";
+                        echo "<td>";
+                        echo "<a href='cardapio-cancelar.php'>";
+                        echo "<button class='vermelho'><img src='../assets/cancelar.png' alt='none'></button>";
+                        echo "</a>";
+                        echo "<a href='cardapio-disponibilizar.php'>";
+                        echo "<button class='amarelo'><img src='../assets/transferir.png' alt='none'></button>";
+                        echo "</a>";
+                        echo "</td>";
+                        echo "</tr>";
                     }
 
                     echo "</tbody>";
                     echo "</table>";
                 }
             ?>
-            </tbody> 
         </table>
 
         <a href='cardapio.php'><button class='editar'>Voltar</button></a>

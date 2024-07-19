@@ -7,8 +7,8 @@
             $this->model = new LoginModel();
         }
 
-        public function processarLogin($usuario, $senha) {
-            if ($this->model->hasRegistry($usuario, $senha)) {
+        public function processarLogin($usuario, $senha) : array {
+            if ($this->model->hasRegistry($usuario)) {
                 $response = $this->model->login($usuario, $senha);
                 if ($response['situacao'] == "aprovado") {
                     return array("situacao" => "aprovado", "id" => $response['id']);
@@ -54,6 +54,10 @@
 
         public function getRegistry($ids) : array {
             return $this->model->getRegistry($ids);
+        }
+
+        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa = ""): string {
+            return $this->model->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa);
         }
     }
 ?>

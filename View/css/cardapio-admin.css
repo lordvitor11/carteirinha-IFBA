@@ -22,23 +22,6 @@ h2 {
     margin-bottom: 10px;
 }
 
-.filtro-container {
-    text-align: left;
-    margin-bottom: 20px;
-    display: flex;
-    gap: 20px;
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    box-shadow: 5px 5px 10px lightblue;
-    background-color: #388E3C;
-    border-radius: 8px;
-    overflow: hidden;
-    padding: 15px;
-    width: 80%;
-    margin-top: 20px;
-}
-
 .filtro-campos {
     display: flex;
     gap: 10px;
@@ -121,7 +104,6 @@ tr:hover {
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     display: flex;
     flex-direction: column;

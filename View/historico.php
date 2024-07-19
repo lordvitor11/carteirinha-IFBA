@@ -30,14 +30,14 @@
         $historico = array();
         $qtdReg = ($controller->getCount() / 5) - 2;
 
-        array_push($historico, $init);
+        $historico[] = $init;
 
         for ($c = 0; $c <= $qtdReg; $c++) {
             $qtd = count($historico) - 1;
             $tempMenorId = ($historico[$qtd]['menorId']) - 1;
             $temp = $controller->getHistorico($tempMenorId);
 
-            array_push($historico, $temp);
+            $historico[] = $temp;
         }
 
 
@@ -79,9 +79,9 @@
 
                         echo "
                             <tr>
-                                <td>{$dataInicio}</td>
-                                <td>{$dataFim}</td>
-                                <td><button class='button historico {$ids[0]}{$ids[1]}{$ids[2]}{$ids[3]}{$ids[4]}'>Exibir detalhes</button></td>
+                                <td>$dataInicio</td>
+                                <td>$dataFim</td>
+                                <td><button class='button historico $ids[0]$ids[1]$ids[2]$ids[3]$ids[4]'>Exibir detalhes</button></td>
                             </tr>
                         ";
                     }
@@ -89,7 +89,6 @@
                     echo "</tbody>";
                     echo "</table>";
                 ?>
-                </tbody> 
             </table>
             <div class="separador">
                 <a href="painel-administrador.php"><button class='button-voltar'>Voltar</button></a>

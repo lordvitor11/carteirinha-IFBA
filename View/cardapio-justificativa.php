@@ -47,8 +47,8 @@
     <script src="script.js"></script>
     <script>
         function toggleOutroMotivo() {
-            var select = document.getElementById("justificativa");
-            var outroMotivo = document.getElementById("outro");
+            let select = document.getElementById("justificativa");
+            let outroMotivo = document.getElementById("outro");
 
             outroMotivo.disabled = select.value !== "outro";
         }

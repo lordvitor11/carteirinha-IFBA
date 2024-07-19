@@ -2,11 +2,12 @@
     class LoginModel {
         public $conn;
         public function __construct() {
+            global $conn;
             require("connect.php");
             $this->conn = $conn;
         }
 
-        public function hasRegistry($usuario, $senha): bool {
+        public function hasRegistry($usuario): bool {
             $sql = "SELECT nome, senha FROM usuario WHERE nome = '$usuario'";
 
             $result = $this->conn->query($sql);
@@ -18,16 +19,16 @@
 
                 $result = $this->conn->query($sql);
 
-                return $result->num_rows > 0 ? true : false;
+                return $result->num_rows > 0;
             }
         }
 
         public function login($usuario, $senha) : array {
-            $sql = "SELECT id, nome, senha, email FROM usuario WHERE nome = '$usuario'";
+            $sql = "SELECT * FROM usuario WHERE nome = '$usuario'";
             $result = $this->conn->query($sql);
 
             if ($result->num_rows <= 0) {
-                $sql = "SELECT id, nome, senha, email FROM usuario WHERE email = '$usuario'";
+                $sql = "SELECT * FROM usuario WHERE email = '$usuario'";
                 $result = $this->conn->query($sql);
             }
             
@@ -65,7 +66,7 @@
             if ($result->num_rows > 0) {
                 $cardapio = array_fill(0, 5, null);
                 while ($row = $result->fetch_assoc()) {
-                    $dia;
+                    $dia = "";
 
                     switch ($row['dia']) {
                         case "segunda":
@@ -91,7 +92,7 @@
 
                 for ($c = 0; $c < count($cardapio); $c++) {
                     if ($cardapio[$c] == null) {
-                        $diaTemp;
+                        $diaTemp = "";
                         switch (array_search($cardapio[$c], $cardapio)) {
                             case 0: 
                                 $diaTemp = 'Segunda'; break;
@@ -122,7 +123,6 @@
         }
 
         public function deleteCardapio($func = 0) : string {
-            $sql = "";
             if ($func == 0) {
                 $sql = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";
             } else {
@@ -137,11 +137,6 @@
         }
 
         public function setCardapio($array) : string {
-            foreach ($array as $dia) {
-                print_r($dia);
-                echo "<br>";
-            }
-            print_r($array);
             $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
 
             if (!$stmt) {
@@ -169,29 +164,44 @@
         }
 
         public function setDefaultTime($data, $horario) : string {
-            $stmt = $this->conn->prepare("INSERT INTO tabela_temporaria (inicio_vig, horario) VALUES (?, ?)");
+            $sql = "SELECT count(*) FROM horario_padrao";
+            $result = $this->conn->query($sql);
 
-            if (!$stmt) {
-                return "Erro na preparação da consulta: " . $this->conn->error;
+            $row = mysqli_fetch_array($result);
+            $totalRegistros = $row[0];
+
+
+            if ($totalRegistros > 0) {
+                $sql = "SELECT * FROM horario_padrao WHERE id = '$totalRegistros'";
+                $result = $this->conn->query($sql);
+                $valores = array();
+
+                if ($result->num_rows > 0) {
+                    $registro = $result->fetch_assoc();
+                    array_push($valores, $registro['id'], $registro['inicio_vig'], $registro['fim_vig'], $registro['horario']);
+                } else {
+                    return "Nenhum registro encontrado.";
+                }
+
+                $sql = "UPDATE horario_padrao SET fim_vig = '$data', inicio_vig = '$valores[1]' WHERE id = '$totalRegistros'";
+                if ($this->conn->query($sql) !== TRUE) {
+                    return "Erro ao excluir dados do cardápio: " . $this->conn->error;
+                }
             }
 
-            $stmt->bind_param("ss", $data, $horario);
+            $sql = "INSERT INTO horario_padrao (inicio_vig, horario) VALUES ('$data', '$horario')";
 
-            if (!$stmt->execute()) {
-                return "Erro na execução da consulta: " . $stmt->error;
+            if ($this->conn->query($sql) === TRUE) {
+                return "Sem erros";
+            } else {
+                return "Erro ao excluir dados do cardápio: " . $this->conn->error;
             }
-
-            $stmt->close();
-
-            return "Sem erros";
         }
 
         public function getHistorico($id = "", $sql = "") : array {
             if ($id === "") {
                 $sql = "SELECT id, data_refeicao FROM cardapio ORDER BY id DESC LIMIT 5";
-            } else {
-                $sql = "SELECT id, data_refeicao FROM cardapio WHERE id <= {$id} ORDER BY id DESC LIMIT 5";
-            }
+            } else $sql = "SELECT id, data_refeicao FROM cardapio WHERE id <= $id ORDER BY id DESC LIMIT 5";
 
             $resultados = $this->conn->query($sql);
             $valores = array(
@@ -201,7 +211,7 @@
 
             // Adiciona os valores da consulta à array
             while ($row = mysqli_fetch_assoc($resultados)) {
-                array_push($valores['ids'], intval($row['id']));
+                $valores['ids'][] = intval($row['id']);
                 $valores['datas'][] = $row['data_refeicao'];
             }
 
@@ -223,7 +233,7 @@
         }
 
         public function getRegistry($ids) : array {
-            $sql = "SELECT * FROM cardapio WHERE id >= {$ids[count($ids) - 1]} AND id <= {$ids[0]}";
+            $sql = "SELECT * FROM cardapio WHERE id >= {$ids[count($ids) - 1]} AND id <= $ids[0]";
 
             $resultados = $this->conn->query($sql);
             $valores = array();
@@ -233,6 +243,24 @@
             }
 
             return $valores;
+        }
+
+        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa): string {
+            if ($justificativa === "") {
+                $justificativa = null;
+            }
+
+            $sql = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, outra_justificativa)
+        VALUES (?, ?, ?, ?, ?, ?)";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("iiisss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa);
+
+            if ($stmt->execute()) {
+                return "Sem erros";
+            } else {
+                return "Erro ao inserir dados: " . $stmt->error;
+            }
         }
     }
 ?>

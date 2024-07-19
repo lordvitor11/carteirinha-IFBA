@@ -17,7 +17,6 @@ main {
     flex: 1;
     max-width: 400px;
     width: 100%;
-    margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
 }
@@ -74,7 +73,6 @@ label {
 }
 
 .title-login {
-    margin-top: 0;
     color: #5ab15e;
     text-align: center;
     margin-top: 30px;

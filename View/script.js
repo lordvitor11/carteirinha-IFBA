@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var carousel = document.querySelector(".carousel");
-    var currentIndex = 0;
-    var items = carousel.querySelectorAll("a").length;
+    const carousel = document.querySelector(".carousel");
+    let currentIndex = 0;
+    const items = carousel.querySelectorAll("a").length;
 
     function nextSlide() {
         currentIndex = (currentIndex + 1) % items;
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function updateCarousel() {
-        var translateValue = -320 * currentIndex + "px";
+        const translateValue = -320 * currentIndex + "px";
         carousel.style.transform = "translateX(" + translateValue + ")";
     }
 
@@ -85,20 +85,6 @@ document.querySelector("#form").addEventListener("submit", function(event) {
     enviarFormulario();
 });
 
-function excluirCardapio() {
-    let xhr = new XMLHttpRequest();
-
-    xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) {
-            document.getElementById("resultado").innerHTML = xhr.responseText;
-        } else {
-            console.error("Erro na requisição AJAX:", xhr.statusText);
-        }
-    };
-
-    xhr.send();
-}
-
 function adicionarCardapio() {
     window.location.href = "cardapio-criar.php";
 }
@@ -111,7 +97,7 @@ function addFields() {
     const data_inicio = document.querySelector('#data-inicio').value;
     const data_fim = document.querySelector('#data-fim').value;
 
-    if (data_inicio != "" || data_fim != "") {
+    if (data_inicio !== "" || data_fim !== "") {
         const inicio = new Date(data_inicio);
         const fim = new Date(data_fim);
         const component = document.querySelector('.content');
@@ -219,7 +205,7 @@ function cardapio_popup() {
             url: "cardapio.php",
             type: "POST",
             data: { sinal: "Sinal enviado!" },
-            success: function(response) {
+            success: function() {
                 document.body.classList.remove('popup-open');
                 container.removeChild(div);
                 location.reload();
@@ -271,8 +257,7 @@ function showHistPopup() {
 }
 
 function getData(dataUser) {
-    let data = `${dataUser[8]}${dataUser[9]}/${dataUser[5]}${dataUser[6]}`; 
-    return data;
+    return `${dataUser[8]}${dataUser[9]}/${dataUser[5]}${dataUser[6]}`;
 }
 
 function showInfo(btn) {
@@ -283,9 +268,9 @@ function showInfo(btn) {
     let idsRaw = btn.classList[2];
     let ids;
 
-    if (idsRaw.length == 5) {
+    if (idsRaw.length === 5) {
         ids = idsRaw.split('').map(numero => parseInt(numero, 10));
-    } else if (idsRaw.length == 6) {
+    } else if (idsRaw.length === 6) {
         let temp = idsRaw.split('');
         temp[0] = `${temp[0]}${temp[1]}`;
         temp = temp.map(numero => parseInt(numero, 10));
@@ -311,7 +296,7 @@ function showInfo(btn) {
 
             h2Data.textContent = `CARDÁPIO (${getData(responseJson[0].data_refeicao)} - ${getData(responseJson[4].data_refeicao)})`;
 
-            for (c = 0; c < responseJson.length; c++) {
+            for (let c = 0; c < responseJson.length; c++) {
                 let tr = document.createElement('tr');
                 let td1 = document.createElement('td');
                 let td2 = document.createElement('td');
@@ -341,7 +326,7 @@ function showInfo(btn) {
 function addListener() {
     const buttons = document.querySelectorAll('button.historico');
 
-    for (c = 0; c < buttons.length; c++) {
+    for (let c = 0; c < buttons.length; c++) {
         buttons[c].addEventListener('click', function() {
             showInfo(this);
         });

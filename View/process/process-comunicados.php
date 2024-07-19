@@ -10,15 +10,15 @@
 
         for ($c = 1; $c < 5; $c++) {
             $new = $c + 1;
-            $arrayDados["img{$c}"] = $arrayDados["img{$new}"];
-            unset($arrayDados["img{$new}"]);
+            $arrayDados["img$c"] = $arrayDados["img$new"];
+            unset($arrayDados["img$new"]);
         }
 
         $jsonStringAtualizado = json_encode($arrayDados);
         file_put_contents($caminhoArquivo, $jsonStringAtualizado);
     }
 
-    function createJson($indice, $caminho) {
+    function createJson($indice) {
         // DADOS DO JSON
         $data = $_POST['data-publicacao'];
         $titulo = $_POST['titulo'];
@@ -28,7 +28,7 @@
         $caminhoArquivo = './dados.json';
 
         $array = array(
-            "img{$indice}" => array(
+            "img$indice" => array(
                 'titulo' => $titulo,
                 'link' => $link,
                 'data_publicacao' => $data,
@@ -51,20 +51,18 @@
 
     }
 
-    function getNum() {
+    function getNum() : int {
         $caminhoPasta = './images';
         $listaArquivos = scandir($caminhoPasta);
         $listaArquivos = array_diff($listaArquivos, array('.', '..'));
-        $numArquivos = count($listaArquivos);
-        return $numArquivos;
+        return count($listaArquivos);
     }
 
     function renameAll() {
-        $diretorio = "./images";
 
         for ($c = 2; $c < 6; $c++) {
             $diretorio = "./images/";
-            $padraoNome = "img{$c}.*";
+            $padraoNome = "img$c.*";
 
             $listaArquivos = glob($diretorio . $padraoNome);
             if (!empty($listaArquivos)) {
@@ -75,7 +73,7 @@
                     $extensao = $infoArquivo['extension'];
                     $caminhoAtual = $diretorio . $nomeCompleto;
                     $indice = $c - 1;
-                    $novoCaminho = "{$diretorio}img{$indice}.{$extensao}";
+                    $novoCaminho = "{$diretorio}img$indice.$extensao";
 
                     rename($caminhoAtual, $novoCaminho);
                 }
@@ -86,13 +84,13 @@
     function saveImg() {
         $diretorioDestino = "images/";
         $numArquivos = getNum() + 1;
-        $nomeArquivo = "img{$numArquivos}" . "." . pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
+        $nomeArquivo = "img$numArquivos" . "." . pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
         $caminhoCompleto = $diretorioDestino . $nomeArquivo;
 
         if (getNum() != 5) {
             if (move_uploaded_file($_FILES['imagem']["tmp_name"], $caminhoCompleto)) {
                 echo "Upload realizado com sucesso. O arquivo foi salvo em: " . $caminhoCompleto;
-                createJson(getNum(), $caminhoCompleto);
+                createJson(getNum());
 
             } else {
                 echo "Erro ao salvar o arquivo.";
