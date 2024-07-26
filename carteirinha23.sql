@@ -137,9 +137,9 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 -- Copiando dados para a tabela carteirinha23.usuario: ~0 rows (aproximadamente)
-INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `categoria`, `telefone`) VALUES
-	(1, 'root', 'root@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00'),
-	(2, 'vitor', 'vitor@gmail.com', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00');
+  INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `categoria`, `telefone`) VALUES
+    (1, 'root', 'root@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00'),
+    (2, 'vitor', 'vitor@gmail.com', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00');
 
 -- Copiando estrutura para trigger carteirinha23.trg01_refeicao
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO';

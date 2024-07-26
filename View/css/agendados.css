@@ -161,3 +161,8 @@ button.editar:hover { background-color: var(--dark-green); }
     width: 100%; /* Ajusta a largura da imagem para preencher o botão */
     height: auto; /* Mantém a proporção da imagem */
 }
+
+h1.texto {
+    margin: 0;
+    margin-top: 50px;
+}

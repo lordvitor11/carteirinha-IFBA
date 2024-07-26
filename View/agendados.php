@@ -81,7 +81,7 @@
                     echo "</tbody>";
                     echo "</table>";
                 } else {
-                    echo "<h1>Sem refeição registrada</h1>";
+                    echo "<h1 class='texto'>Sem refeição registrada</h1>";
                 }
             ?>
         </table>

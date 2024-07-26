@@ -19,7 +19,6 @@
             if ($id == 0) echo "<h2 class='popup-index-title'>Horário limite alterado!</h2>"; else {
                 echo "<h2 class='popup-index-title'>Erro ao alterar horário!</h2>";
             }
-
             echo "</div>";
         }
     ?>

@@ -1,28 +1,13 @@
 @import url(style.css);
 @import url(mq/login.mq.css);
 
-body {
-    background-color: #f4f4f4;  
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 400px);
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.3);
-    flex: 1;
-    max-width: 400px;
+div.center {
     width: 100%;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    height: fit-content;
 }
 
 .main-login {
-    width: 85%;
+    width: 100%;
 }
 
 form {

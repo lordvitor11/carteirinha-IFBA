@@ -11,26 +11,27 @@
 
     <?php include_once("process/navbar.php"); showNav("login"); ?>
 
-    <h1 class="title-login">FAÇA LOGIN</h1><br>
+    <div class="center">
+        <h1 class="title-login">FAÇA LOGIN</h1>
+        <div class="main-login">
+            <form id="form">
+                <div class="notification" id="notification"></div>
+                <img src="../assets/IF.png" alt="Logo IFBA" class="img-login">
+                <label for="username">Nome de Usuário:</label>
+                <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required autocomplete="off"><br><br>
 
-    <main class="main-login">
-    <img class="img-login" src="../assets/IF.png" alt="Logo IFBA">
-      <div id="notification" class="notification"></div>
-        <form id="form">
-            <label for="username">Nome de Usuário:</label>
-            <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required autocomplete="off"><br><br>
+                <label for="password">Senha:</label>
+                <input type="password" oninput="check()" name="password" id="password" placeholder="Senha" required autocomplete="off"><br><br>
 
-            <label for="password">Senha:</label>
-            <input type="password" oninput="check()" name="password" id="password" placeholder="Senha" required autocomplete="off"><br><br>
+                <div class="result">
+                    <div class="loading-spinner"></div>
+                    <div class="content">Logado</div>
+                </div>
 
-            <div class="result">
-                <div class="loading-spinner"></div>
-                <div class="content">Logado</div>
-            </div>
-
-            <input type="submit" value="ENTRAR" name="submit" id="submit" disabled>
-        </form>
-    </main>
+                <input type="submit" value="ENTRAR" name="submit" id="submit" disabled>
+            </form>
+        </div>
+    </div>
 
     <footer class="rodape">
         <div>
