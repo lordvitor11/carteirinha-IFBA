@@ -1,11 +1,6 @@
 <?php
     require("../Controller/controller.php");
     $controller = new LoginController();
-
-    if (isset($_POST['sinal'])) {
-        $sinal = $_POST['sinal'];
-        $cardapio = $controller->deleteCardapio();             
-    }
 ?>
 
 <!DOCTYPE html>
@@ -27,14 +22,36 @@
         <table>
             
             <?php 
+                $idUser = $_SESSION['user'];
+                $sql = "SELECT id FROM usuario WHERE nome = '$idUser'";
+                $result = $conn->query($sql);
+                $row = mysqli_fetch_array($result);
+                $idUser = $row[0];
+                
+                $sql = "SELECT * FROM refeicao WHERE id_usuario = '$idUser'";
+                $result = $conn->query($sql);
 
-                error_reporting(E_ALL);
+                $refeicaoData = [];
 
-                ini_set('display_errors', 1);
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $refeicaoData = $row;
+                }
 
-                $cardapio = $controller->getCardapio();             
+                if (count($refeicaoData) > 0) {
 
-                if ($cardapio[0] != null) {
+                    $cardapioId = $refeicaoData['id_cardapio'];
+
+                    $sql = "SELECT data_refeicao, dia, principal, acompanhamento, sobremesa FROM cardapio WHERE id = $cardapioId";
+                    $result = $conn->query($sql);
+
+                    $cardapioData = [];
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $cardapioData = $row;
+                    }
+
+                    $dia = ucfirst($cardapioData['dia']) . "-feira";
+
                     echo "
                         <thead>
                             <tr>
@@ -46,33 +63,25 @@
                             </tr>
                         </thead>
                         <tbody>";
-
-                    foreach ($cardapio as $dia) {
-                        if ($dia['principal'] != 'Sem refeição') {
-                            $data = date("d/m", strtotime($dia['data'])); 
-                            $newDia = ucfirst($dia['dia']) . "-feira";
-                            echo "<tr>";
-                            echo "<td>$newDia ($data)</td>";
-                        } else {
-                            echo "<tr>";
-                            echo "<td>{$dia['dia']}</td>";
-                        }
-                        echo "<td>{$dia['principal']}</td>";
-                        echo "<td>{$dia['acompanhamento']}</td>";
-                        echo "<td>{$dia['sobremesa']}</td>";
-                        echo "<td>";
-                        echo "<a href='cardapio-cancelar.php'>";
-                        echo "<button class='vermelho'><img src='../assets/cancelar.png' alt='none'></button>";
-                        echo "</a>";
-                        echo "<a href='cardapio-disponibilizar.php'>";
-                        echo "<button class='amarelo'><img src='../assets/transferir.png' alt='none'></button>";
-                        echo "</a>";
-                        echo "</td>";
-                        echo "</tr>";
-                    }
-
+                    
+                    echo "<tr>";
+                    echo "<td>{$dia}({$cardapioData['data_refeicao']})</td>";
+                    echo "<td>{$cardapioData['principal']}</td>";
+                    echo "<td>{$cardapioData['acompanhamento']}</td>";
+                    echo "<td>{$cardapioData['sobremesa']}</td>";
+                    echo "<td>";
+                    echo "<a href='cardapio-cancelar.php'>";
+                    echo "<button class='vermelho'><img src='../assets/cancelar.png' alt='none'></button>";
+                    echo "</a>";
+                    echo "<a href='cardapio-disponibilizar.php'>";
+                    echo "<button class='amarelo'><img src='../assets/transferir.png' alt='none'></button>";
+                    echo "</a>";
+                    echo "</td>";
+                    echo "</tr>";
                     echo "</tbody>";
                     echo "</table>";
+                } else {
+                    echo "<h1>Sem refeição registrada</h1>";
                 }
             ?>
         </table>

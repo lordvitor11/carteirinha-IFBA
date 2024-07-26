@@ -41,7 +41,7 @@
     <div class="container">
         <?php
             if ($_SESSION['logged_in'] && $_SESSION['category'] != 'adm') {
-                echo "<a href='agendados.php'><button class='button-agendados'>Minhas Reservas</button></a>";
+                echo "<a href='agendados.php'><button class='button-agendados'>Minha Reserva</button></a>";
             }
         ?>
         

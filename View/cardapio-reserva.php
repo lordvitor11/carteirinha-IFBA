@@ -1,12 +1,16 @@
-<?php
+<?php session_start();
+    error_reporting(E_ERROR | E_PARSE);
+
     require("../Controller/controller.php");
     $controller = new LoginController();
 
     $cardapio = $controller->getCardapio();
 
+    date_default_timezone_set('America/Sao_Paulo');
     $dataAtual = date('Y-m-d'); // Pode ser qualquer data no formato Y-M-D (por exemplo, '2021-12-08')
     $diaDaSemana = date('l', strtotime($dataAtual));
     $diaNumero = 0;
+
 
     switch ($diaDaSemana) {
         case "Monday": $diaDaSemana = "segunda"; break;
