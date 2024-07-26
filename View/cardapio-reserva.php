@@ -45,7 +45,7 @@
     <form action="process/process-justificativa.php" method="POST">
         <table>
             <tr><th colspan="2"><?php echo ucfirst($diaDaSemana) . '-feira' ?></th></tr>
-            <tr><td>Proteina</td><td><?php echo $cardapio['principal']; ?></td></tr>
+            <tr><td>Proteína</td><td><?php echo $cardapio['principal']; ?></td></tr>
             <tr><td>Acompanhamento</td><td><?php echo $cardapio['acompanhamento']; ?></td></tr>
             <tr><td>Sobremesa</td><td><?php echo $cardapio['sobremesa']; ?></td></tr>
         </table>
