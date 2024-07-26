@@ -332,3 +332,62 @@ function addListener() {
         });
     }
 }
+
+function agendadosPopup(type) {
+    const popup = document.querySelector("#popup");
+    const h2 = document.createElement("h2"); 
+    const inputMotivo = document.createElement("input");
+    const divButtons = document.createElement("div");
+    const btnConfirm = document.createElement("button");
+    const btnCancel = document.createElement("button");
+    const p = document.createElement("label");
+
+    popup.innerHTML = "";
+
+    inputMotivo.setAttribute("id", "outro");
+    inputMotivo.setAttribute("name", "outro");
+    inputMotivo.setAttribute("placeholder", "Digite o motivo...");
+
+    divButtons.classList.add("botao-container");
+    btnConfirm.setAttribute("type", "submit");
+    btnConfirm.classList.add("validar");
+    btnCancel.classList.add("cancelar");
+
+    divButtons.appendChild(btnCancel);
+    divButtons.appendChild(btnConfirm);
+
+    btnCancel.addEventListener("click", closeAgendadosPopup);
+
+    p.textContent = "MOTIVO:";
+    h2.textContent = "CANCELAR RESERVA";
+
+    popup.appendChild(h2);
+    popup.appendChild(p);
+    popup.appendChild(inputMotivo);
+
+    if (type != 1) {
+        const optP = document.createElement("label");
+        const inputMatricula = document.createElement("input");
+
+        inputMatricula.setAttribute("id", "outro");
+        inputMatricula.setAttribute("name", "outro");
+        inputMatricula.setAttribute("placeholder", "Matrícula alvo");
+
+        optP.textContent = "MATRÍCULA";
+        h2.textContent = "DISPONIBILIZAR RESERVA";
+
+        popup.appendChild(optP);
+        popup.appendChild(inputMatricula);
+    }
+
+    popup.appendChild(divButtons);    
+    popup.style.opacity = 1;
+
+    document.querySelector('.container').classList.add("blur");
+}
+
+function closeAgendadosPopup() {
+    const popup = document.querySelector("#popup");
+    popup.style.opacity = 0;
+    document.querySelector('.container').classList.remove("blur");
+}

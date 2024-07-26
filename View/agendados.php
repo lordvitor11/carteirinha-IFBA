@@ -16,6 +16,10 @@
 
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
+    <div class="popup" id="popup"></div>
+
+    </div>
+
     <div class="container">
         <h1>AGENDADOS</h1>
         <img src="../assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
@@ -70,11 +74,11 @@
                     echo "<td>{$cardapioData['acompanhamento']}</td>";
                     echo "<td>{$cardapioData['sobremesa']}</td>";
                     echo "<td>";
-                    echo "<a href='cardapio-cancelar.php'>";
-                    echo "<button class='vermelho'><img src='../assets/cancelar.png' alt='none'></button>";
+                    // echo "<a href='cardapio-cancelar.php'>";
+                    echo "<button class='vermelho' onclick='agendadosPopup(1);'><img src='../assets/cancelar.png' alt='none'></button>";
                     echo "</a>";
-                    echo "<a href='cardapio-disponibilizar.php'>";
-                    echo "<button class='amarelo'><img src='../assets/transferir.png' alt='none'></button>";
+                    // echo "<a href='cardapio-disponibilizar.php'>";
+                    echo "<button class='amarelo' onclick='agendadosPopup(2);'><img src='../assets/transferir.png' alt='none'></button>";
                     echo "</a>";
                     echo "</td>";
                     echo "</tr>";

@@ -61,7 +61,6 @@ input[type='submit'] {
 }
 
 .botao-container {
-    display: none;
     justify-content: space-between;
     margin-top: 15px;
 }
@@ -75,7 +74,7 @@ input[type='submit'] {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     margin: 20px;
 }
 
@@ -98,10 +97,6 @@ th, td {
 th {
     background-color: #388E3C;
     color: #fff;
-}
-
-tr:hover {
-    background-color: #f5f5f5;
 }
 
 h1 {
@@ -130,9 +125,9 @@ button.editar:hover { background-color: var(--dark-green); }
 
 
 .vermelho, .amarelo {
-    padding: 10px 20px; /* Reduz o preenchimento interno do botão */
-    width: 25px; /* Define a largura do botão */
-    height: 25px; /* Define a altura do botão */
+    padding: 10px 20px;
+    width: 25px;
+    height: 25px; 
     margin-right: 10px;
     margin-bottom: 10px;
     border: none;
@@ -158,11 +153,48 @@ button.editar:hover { background-color: var(--dark-green); }
 }
 
 .botao-container img {
-    width: 100%; /* Ajusta a largura da imagem para preencher o botão */
-    height: auto; /* Mantém a proporção da imagem */
+    width: 100%;
+    height: auto;
 }
 
 h1.texto {
     margin: 0;
     margin-top: 50px;
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    width: 300px;
+    height: fit-content;
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.popup h2 {
+    color: var(--light-green);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.popup label {
+    text-align: center;
+}
+
+.popup input {
+    width: 80%;
+}
+
+.blur {
+    filter: blur(5px);
 }
