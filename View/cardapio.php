@@ -17,6 +17,62 @@
     <title>Cardápio Semanal</title>
 </head>
 <body>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>Reserva Confirmada!</h2>
+        <p>Sua reserva foi confirmada com sucesso.</p>
+        <!-- Campo de Feedback -->
+        <div class="feedback-container">
+            <h3>Deixe seu feedback:</h3>
+            <textarea id="feedback" name="feedback" rows="4" placeholder="Digite seu feedback aqui..."></textarea>
+            <button id="btn-submit-feedback">Enviar Feedback</button>
+        </div>
+        <button class="close" onclick="closePopup()">Fechar</button>
+    </div>
+
+    <script>
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function showPopup() {
+            const reserva = getParameterByName('reserva');
+            if (reserva === 'confirmada') {
+                document.getElementById('popup').style.display = 'block';
+                document.getElementById('overlay').style.display = 'block';
+            }
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        document.getElementById('btn-submit-feedback').addEventListener('click', function() {
+            const feedback = document.getElementById('feedback').value.trim();
+            
+            if (feedback === '') {
+                alert('Por favor, digite seu feedback.');
+                return;
+            }
+            
+            console.log('Feedback enviado:', feedback);
+
+            // Aqui você pode adicionar código para enviar o feedback para o servidor
+
+            // Fechar o pop-up após o envio
+            closePopup();
+
+            // Limpar o campo de feedback após o envio
+            document.getElementById('feedback').value = '';
+        });
+
+        // Exibe o pop-up se o parâmetro estiver presente
+        showPopup();
+    </script>
+    </script>
     <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <?php

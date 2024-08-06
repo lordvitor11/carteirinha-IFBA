@@ -17,6 +17,9 @@
         <form method="POST">
             <a href='editar-horario.php'><button class="button" type="button">EDITAR HORÁRIO</button></a>
             <a href='historico.php'><button class="button blue" type="button">HISTÓRICO DE CARDÁPIOS</button></a>
+            <a href='relatorio-diario.php'><button class="button blue" type="button">RELATÓRIO DIÁRIO</button></a>
+            <a href='notificacoes.php'><button class="button blue" type="button">NOTIFICAÇÕES</button></a>
+            <a href='cardapio.php'><button class="button" type="button">CARDAPIO</button></a>
         </form>
     </div>
 

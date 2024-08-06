@@ -16,7 +16,7 @@
             <div class="semi-sphere">
                 <h2>Victor Hugo de Souza Santiago</h2><br>
                 <p>Discente do IFBA Campus Seabra ingressado no ano de 2020.</p><br>
-                <a href="https://www.github.com/nxrding-dev" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/victor.jpg" alt="Foto da Pessoa 1" class="img-sobre" onerror="this.src='../assets/person.png'" draggable="false"></a>
+                <a href="https://www.github.com/nxrding-dev" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/Victor Hugo.jpeg" alt="Foto da Pessoa 1" class="img-sobre" onerror="this.src='../assets/person.png'" draggable="false"></a>
             </div>
         </div>
 

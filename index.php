@@ -48,7 +48,7 @@
     </main>
 
     <div class="session-4">
-        <h4 class="comunicados">COMUNICADOS</h4>
+        <!--<h4 class="comunicados">COMUNICADOS</h4>
         <div class="card">
             <div class="top">
                 <a href="https://www.instagram.com/ifba_seabra" target="_blank">
@@ -112,7 +112,7 @@
                     </div>
                 </a>
             </div>
-        </div>
+        </div>-->
     </div>
 
     <div class="session-4-1">

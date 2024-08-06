@@ -37,6 +37,16 @@ nav {
   align-items: center;
 }
 
+nav .left {
+  display: flex;
+}
+
+nav .right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
 nav a {
   text-decoration: none;
   color: #fff;
@@ -51,6 +61,21 @@ nav a {
 }
 
 nav a:hover { color: rgb(192, 192, 192); }
+
+.button-admin a:hover { background-color: var(--medium-salmon); }
+
+.notification-icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.notification-icon img {
+  width: 100%;
+  height: auto;
+}
 
 .button-admin  a:hover { background-color: var(--medium-salmon);}
 
