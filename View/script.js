@@ -65,7 +65,7 @@ function enviarFormulario() {
                     resultDiv.style.opacity = "1";
 
                     setTimeout(() => {
-                        window.location.href = "../View/painel-administrador.php";
+                        window.location.href = "../index.php";
                     }, 2000);
                 } else {
                     console.log(xhr.responseText);

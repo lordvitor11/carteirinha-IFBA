@@ -23,15 +23,7 @@
     ?>
 
 
-    <footer class="rodape">
-        <div>
-            <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
-        </div>
-        <div class="copyright">
-          <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
-            Campus Seabra</p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
     <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>

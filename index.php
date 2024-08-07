@@ -112,7 +112,7 @@
                     </div>
                 </a>
             </div>
-        </div>-->
+        </div>
     </div>
 
     <div class="session-4-1">
@@ -123,7 +123,7 @@
                 <button class='custom-button-2'>GERENCIAR</button>
                 </a>";
             }
-        ?>
+        ?>-->
     </div>
 
     <main class="session-5">
@@ -168,14 +168,6 @@
         </div>
     </main>
 
-    <footer class="rodape">
-        <div>
-            <img class="img-logo" src="assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" draggable="false">
-        </div>
-        <div class="copyright">
-            <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia Campus Seabra</p>
-        </div>
-    </footer>
-
+    <?php include 'View/footer-index.php'; ?>
 </body>
 </html>

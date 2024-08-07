@@ -66,8 +66,8 @@ nav a:hover { color: rgb(192, 192, 192); }
 
 .notification-icon {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 60px;
+  height: 40px;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
@@ -462,7 +462,7 @@ a {
   border: none;
   cursor: pointer;
   transition: all 0.4s ease;
-  margin: 0 5px; /* Ajuste a margem entre os botões conforme necessário */
+  margin: 0 5px;
 }
 
 .button:hover {
@@ -539,7 +539,106 @@ form {
   margin-top: 20px;
 }
 
+/* Estilo para o pop-up de notificações */
+.popup p {
+  text-align: center;
+  margin-bottom: 15px;
+}
 
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  max-width: 500px;
+  width: 90%;
+}
+
+.popup h2 {
+  color: #388E3C;
+  text-align: center;
+}
+
+.popup #notificationList {
+  margin-bottom: 20px;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.popup textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.popup input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.popup button {
+  display: block;
+  margin: 10px auto 0;
+  background-color: #388E3C;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #274E13;
+}
+
+.popup button.close {
+  background-color: #ff6f61;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.popup button.close:hover {
+  background-color: #e65c5c;
+}
+
+/* Fundo escurecido */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
 
 /* ANIMAÇÕES */
 @keyframes showPopup {

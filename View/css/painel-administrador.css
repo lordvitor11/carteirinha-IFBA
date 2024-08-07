@@ -20,7 +20,7 @@ label {
     margin-bottom: 8px;
 }
 
-.button {
+.button-adm{
     padding: 10px 20px;
     width: 250px; /* Largura fixa para os botões */
     background-color: #4CAF50; /* Verde */
@@ -39,6 +39,15 @@ label {
 
 .button.blue {
     background-color: #2196F3; /* Azul */
+    padding: 10px 20px;
+    width: 250px; /* Largura fixa para os botões */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 .button.blue:hover {

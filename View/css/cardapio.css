@@ -118,31 +118,6 @@ h1 {
     overflow: hidden;
 }*/
 
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    max-width: 500px;
-    width: 90%;
-}
-
-.popup h2 {
-    color: #388E3C;
-    text-align: center;
-}
-
-.popup p {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
 .feedback-container {
     margin: 15px 0;
 }
@@ -179,6 +154,65 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Estilo para o pop-up de notificações */
+.popup p {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    max-width: 500px;
+    width: 90%;
+}
+
+.popup h2 {
+    color: #388E3C;
+    text-align: center;
+}
+
+.popup #notificationList {
+    margin-bottom: 20px;
+}
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.notification-item:last-child {
+    border-bottom: none;
+}
+
+.popup textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.popup input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
 .popup button {
     display: block;
     margin: 10px auto 0;
@@ -194,6 +228,22 @@ h1 {
     background-color: #274E13;
 }
 
+.popup button.close {
+    background-color: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.popup button.close:hover {
+    background-color: #e65c5c;
+}
+
+/* Fundo escurecido */
 .overlay {
     display: none;
     position: fixed;
@@ -203,24 +253,6 @@ h1 {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
-}
-
-.popup button.close {
-    background-color: #ff6f61; /* Cor Salmon para o botão de fechar */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px; /* Espaço acima do botão */
-}
-
-.popup button.close:hover {
-    background-color: #e65c5c; /* Cor Salmon mais escura ao passar o mouse */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .button-agendados {
