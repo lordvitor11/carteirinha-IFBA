@@ -251,7 +251,7 @@
             }
 
             $sql = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, outra_justificativa)
-        VALUES (?, ?, ?, ?, ?, ?)";
+            VALUES (?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("iiisss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa);
@@ -261,6 +261,12 @@
             } else {
                 return "Erro ao inserir dados: " . $stmt->error;
             }
+        }
+
+        public function getRefeicoes($idUser, $diaAtual) : int {
+            $sql = "SELECT count(*) FROM refeicao WHERE id_usuario = $idUser AND data_solicitacao = $diaAtual";
+
+            
         }
     }
 ?>
