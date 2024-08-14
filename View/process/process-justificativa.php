@@ -32,8 +32,11 @@ if (isset($_SESSION['diaSemana'])) {
     $row = $result->fetch_assoc();
     $idCardapio = $row['id'];
     $statusRef = 1;
-    $dataSolicitacao = date("Y-m-d H:i:s");
-    $result = $controller->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa);
+    $dataSolicitacao = date("Y-m-d");
+    $horaSolicitacao = date("H:i:s");
+    // echo $dataSolicitacao;
+
+    $result = $controller->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
 
     if ($result == "Sem erros") {
         header("Location: ../cardapio.php?reserva=confirmada");

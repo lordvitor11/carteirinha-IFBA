@@ -245,16 +245,16 @@
             return $valores;
         }
 
-        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa): string {
+        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa): string {
             if ($justificativa === "") {
                 $justificativa = null;
             }
 
-            $sql = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, outra_justificativa)
-            VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, hora_solicitacao, outra_justificativa)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
 
             $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("iiisss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa);
+            $stmt->bind_param("iiissss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
 
             if ($stmt->execute()) {
                 return "Sem erros";
@@ -263,10 +263,14 @@
             }
         }
 
-        public function getRefeicoes($idUser, $diaAtual) : int {
-            $sql = "SELECT count(*) FROM refeicao WHERE id_usuario = $idUser AND data_solicitacao = $diaAtual";
-
+        public function hasRefeicao($idUser, $diaAtual) : bool {
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = '$idUser' AND data_solicitacao = '$diaAtual'";
             
+            $resultado = $this->conn->query($sql);
+            $num = $resultado->fetch_assoc();
+            $num = $num["COUNT(*)"];
+
+            return $num > 0;
         }
     }
 ?>

@@ -56,8 +56,12 @@
             return $this->model->getRegistry($ids);
         }
 
-        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa = ""): string {
-            return $this->model->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $justificativa);
+        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa = ""): string {
+            return $this->model->setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
+        }
+
+        public function hasRefeicao($idUser, $diaAtual) : bool {
+            return $this->model->hasRefeicao($idUser, $diaAtual);
         }
     }
 ?>

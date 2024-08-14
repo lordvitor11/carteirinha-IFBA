@@ -256,9 +256,9 @@ h1 {
 }
 
 .button-agendados {
-    position: absolute; /* Add this line */
-    top: 20px; /* Adjust this value to maintain the same height as the other elements */
-    right: 20px; /* Adjust this value to maintain the same margin as the other elements */
+    /* position: absolute; Add this line */
+    /* top: 20px; Adjust this value to maintain the same height as the other elements */
+    /* right: 20px; Adjust this value to maintain the same margin as the other elements */
     background-color: #2196F3;
     color: white;
     padding: 10px 20px;
