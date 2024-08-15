@@ -155,7 +155,7 @@
             } else if ($_SESSION['category'] == "adm" && $cardapio[0] == null) {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
                 echo "<a href='cardapio-criar.php'><button class='button'>Adicionar cardápio</button></a>"; 
-            } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null) {
+            } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null && $_SESSION['logged_in']) {
                 date_default_timezone_set('America/Sao_Paulo');
                 $current_time = date("H:m:s");
                 $current_day = date("Y-m-d");
@@ -166,9 +166,12 @@
                 $result = $conn->query($sql);
                 $row = mysqli_fetch_array($result);
                 $idUser = $row[0];
+                $result = $controller->hasRefeicao($idUser, $current_day);
 
-                if ($controller->hasRefeicao($idUser, $current_day)) {
-                    echo "<a href='agendados.php'><button class='button-agendados'>Minha Reserva</button></a>";
+                if ($result != null) {
+                    if ($result) {
+                        echo "<a href='agendados.php'><button class='button-agendados'>Minha Reserva</button></a>";
+                    }
                 } else if ($current_time >= $horario_padrao) {
                     echo "<span class='horario-limite'>Horário limite atingido!</span>";
                 } else if ($current_time < $horario_padrao) {
