@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 26-Jul-2024 às 15:03
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Host: localhost:3306
+-- Generation Time: Aug 16, 2024 at 11:00 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,27 +18,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `carteirinha23`
+-- Database: `carteirinha23`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cardapio`
+-- Table structure for table `cardapio`
 --
 
 CREATE TABLE `cardapio` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `data_refeicao` date NOT NULL,
-  `dia` varchar(255) NOT NULL,
-  `principal` varchar(255) NOT NULL,
-  `acompanhamento` varchar(255) NOT NULL,
-  `sobremesa` varchar(255) NOT NULL,
-  `ind_excluido` tinyint(1) NOT NULL DEFAULT 0
+  `dia` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `principal` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `acompanhamento` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `sobremesa` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `ind_excluido` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Extraindo dados da tabela `cardapio`
+-- Dumping data for table `cardapio`
 --
 
 INSERT INTO `cardapio` (`id`, `data_refeicao`, `dia`, `principal`, `acompanhamento`, `sobremesa`, `ind_excluido`) VALUES
@@ -51,18 +51,18 @@ INSERT INTO `cardapio` (`id`, `data_refeicao`, `dia`, `principal`, `acompanhamen
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `horario_padrao`
+-- Table structure for table `horario_padrao`
 --
 
 CREATE TABLE `horario_padrao` (
-  `id` int(11) NOT NULL,
-  `inicio_vig` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int NOT NULL,
+  `inicio_vig` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `fim_vig` timestamp NULL DEFAULT NULL,
   `horario` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Extraindo dados da tabela `horario_padrao`
+-- Dumping data for table `horario_padrao`
 --
 
 INSERT INTO `horario_padrao` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
@@ -75,16 +75,16 @@ INSERT INTO `horario_padrao` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `justificativa`
+-- Table structure for table `justificativa`
 --
 
 CREATE TABLE `justificativa` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(45) NOT NULL
+  `id` int NOT NULL,
+  `descricao` varchar(45) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Extraindo dados da tabela `justificativa`
+-- Dumping data for table `justificativa`
 --
 
 INSERT INTO `justificativa` (`id`, `descricao`) VALUES
@@ -96,22 +96,31 @@ INSERT INTO `justificativa` (`id`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `refeicao`
+-- Table structure for table `refeicao`
 --
 
 CREATE TABLE `refeicao` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_cardapio` int(11) NOT NULL,
-  `id_status_ref` int(11) NOT NULL,
-  `id_justificativa` int(11) DEFAULT NULL,
-  `data_solicitacao` datetime NOT NULL,
-  `outra_justificativa` varchar(100) DEFAULT NULL,
-  `motivo_cancelamento` varchar(100) DEFAULT NULL
+  `id` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `id_cardapio` int NOT NULL,
+  `id_status_ref` int NOT NULL,
+  `id_justificativa` int DEFAULT NULL,
+  `data_solicitacao` date NOT NULL,
+  `hora_solicitacao` time NOT NULL,
+  `outra_justificativa` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
+  `motivo_cancelamento` varchar(100) COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Acionadores `refeicao`
+-- Dumping data for table `refeicao`
+--
+
+INSERT INTO `refeicao` (`id`, `id_usuario`, `id_cardapio`, `id_status_ref`, `id_justificativa`, `data_solicitacao`, `hora_solicitacao`, `outra_justificativa`, `motivo_cancelamento`) VALUES
+(14, 2, 44, 1, 1, '2024-08-14', '12:18:29', NULL, NULL),
+(15, 2, 45, 1, 3, '2024-08-15', '10:21:48', NULL, NULL);
+
+--
+-- Triggers `refeicao`
 --
 DELIMITER $$
 CREATE TRIGGER `trg01_refeicao` BEFORE INSERT ON `refeicao` FOR EACH ROW SET NEW.id_status_ref = 1
@@ -125,16 +134,16 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `status_ref`
+-- Table structure for table `status_ref`
 --
 
 CREATE TABLE `status_ref` (
-  `id` int(11) NOT NULL,
-  `descricao` varchar(45) NOT NULL
+  `id` int NOT NULL,
+  `descricao` varchar(45) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Extraindo dados da tabela `status_ref`
+-- Dumping data for table `status_ref`
 --
 
 INSERT INTO `status_ref` (`id`, `descricao`) VALUES
@@ -146,20 +155,20 @@ INSERT INTO `status_ref` (`id`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `senha` varchar(60) NOT NULL,
-  `categoria` varchar(255) NOT NULL,
-  `telefone` varchar(11) NOT NULL
+  `id` int NOT NULL,
+  `nome` varchar(100) COLLATE latin1_general_ci NOT NULL,
+  `email` varchar(100) COLLATE latin1_general_ci NOT NULL,
+  `senha` varchar(60) COLLATE latin1_general_ci NOT NULL,
+  `categoria` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `telefone` varchar(11) COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Extraindo dados da tabela `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `categoria`, `telefone`) VALUES
@@ -167,29 +176,29 @@ INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `categoria`, `telefone`) 
 (2, 'vitor', 'vitor@gmail.com', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00');
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `cardapio`
+-- Indexes for table `cardapio`
 --
 ALTER TABLE `cardapio`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `horario_padrao`
+-- Indexes for table `horario_padrao`
 --
 ALTER TABLE `horario_padrao`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `justificativa`
+-- Indexes for table `justificativa`
 --
 ALTER TABLE `justificativa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `refeicao`
+-- Indexes for table `refeicao`
 --
 ALTER TABLE `refeicao`
   ADD PRIMARY KEY (`id`),
@@ -199,64 +208,64 @@ ALTER TABLE `refeicao`
   ADD KEY `id_justificativa` (`id_justificativa`);
 
 --
--- Índices para tabela `status_ref`
+-- Indexes for table `status_ref`
 --
 ALTER TABLE `status_ref`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `cardapio`
+-- AUTO_INCREMENT for table `cardapio`
 --
 ALTER TABLE `cardapio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT de tabela `horario_padrao`
+-- AUTO_INCREMENT for table `horario_padrao`
 --
 ALTER TABLE `horario_padrao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de tabela `justificativa`
+-- AUTO_INCREMENT for table `justificativa`
 --
 ALTER TABLE `justificativa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `refeicao`
+-- AUTO_INCREMENT for table `refeicao`
 --
 ALTER TABLE `refeicao`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT de tabela `status_ref`
+-- AUTO_INCREMENT for table `status_ref`
 --
 ALTER TABLE `status_ref`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Restrições para despejos de tabelas
+-- Constraints for dumped tables
 --
 
 --
--- Limitadores para a tabela `refeicao`
+-- Constraints for table `refeicao`
 --
 ALTER TABLE `refeicao`
   ADD CONSTRAINT `refeicao_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id`),
