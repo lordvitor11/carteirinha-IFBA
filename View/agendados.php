@@ -17,14 +17,16 @@
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="popup" id="popup"></div>
+    <div class="overlay" id="overlay"></div>
 
     </div>
 
     <div class="container">
         <h1>AGENDADOS</h1>
         <img src="../assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
+
         <table>
-            
+
             <?php 
                 $idUser = $_SESSION['user'];
                 $sql = "SELECT id FROM usuario WHERE nome = '$idUser'";
@@ -97,5 +99,71 @@
     <?php include 'footer.php'; ?>
     <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        // Função para abrir o pop-up
+        function agendadosPopup(type) {
+            const popup = document.querySelector("#popup");
+            const overlay = document.querySelector("#overlay");
+            popup.innerHTML = ""; // Limpa o conteúdo anterior
+
+            const h2 = document.createElement("h2");
+            const inputMotivo = document.createElement("input");
+            const divButtons = document.createElement("div");
+            const btnConfirm = document.createElement("button");
+            const btnCancel = document.createElement("button");
+            const labelMotivo = document.createElement("label");
+
+            inputMotivo.setAttribute("id", "outro");
+            inputMotivo.setAttribute("name", "outro");
+            inputMotivo.setAttribute("placeholder", "Digite o motivo...");
+
+            divButtons.classList.add("botao-container");
+            btnConfirm.setAttribute("type", "submit");
+            btnConfirm.classList.add("validar");
+            btnCancel.classList.add("cancelar");
+
+            divButtons.appendChild(btnCancel);
+            divButtons.appendChild(btnConfirm);
+
+            btnCancel.addEventListener("click", closeAgendadosPopup);
+
+            labelMotivo.textContent = "MOTIVO:";
+            h2.textContent = type === 1 ? "CANCELAR RESERVA" : "DISPONIBILIZAR RESERVA";
+
+            popup.appendChild(h2);
+            popup.appendChild(labelMotivo);
+            popup.appendChild(inputMotivo);
+
+            if (type !== 1) {
+                const labelMatricula = document.createElement("label");
+                const inputMatricula = document.createElement("input");
+
+                inputMatricula.setAttribute("id", "matricula");
+                inputMatricula.setAttribute("name", "matricula");
+                inputMatricula.setAttribute("placeholder", "Matrícula alvo");
+
+                labelMatricula.textContent = "MATRÍCULA";
+
+                popup.appendChild(labelMatricula);
+                popup.appendChild(inputMatricula);
+            }
+
+            popup.appendChild(divButtons);
+            popup.style.display = "block";
+            overlay.style.display = "block";
+
+            document.querySelector('.container').classList.add("blur");
+        }
+
+        // Função para fechar o pop-up
+        function closeAgendadosPopup() {
+            const popup = document.querySelector("#popup");
+            const overlay = document.querySelector("#overlay");
+            popup.style.display = "none";
+            overlay.style.display = "none";
+            document.querySelector('.container').classList.remove("blur");
+        }
+    </script>
 </body>
 </html>

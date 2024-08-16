@@ -240,6 +240,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+h3{
+  color: #337A30;
+}
+
 .session-3 {
   width: 100%;
   background-color: white;
