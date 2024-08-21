@@ -63,5 +63,9 @@
         public function hasRefeicao($idUser, $diaAtual) : bool {
             return $this->model->hasRefeicao($idUser, $diaAtual);
         }
+
+        public function cancelarRefeicao($idUser, $diaAtual, $motivo) : string {
+            return $this->model->cancelarRefeicao($idUser, $diaAtual, $motivo);
+        }
     }
 ?>

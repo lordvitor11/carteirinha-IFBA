@@ -264,13 +264,25 @@
         }
 
         public function hasRefeicao($idUser, $diaAtual) : bool {
-            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = '$idUser' AND data_solicitacao = '$diaAtual'";
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = '$idUser' AND data_solicitacao = '$diaAtual' AND motivo_cancelamento != NULL";
             
             $resultado = $this->conn->query($sql);
             $num = $resultado->fetch_assoc();
             $num = $num["COUNT(*)"];
 
             return $num > 0;
+        }
+
+        public function cancelarRefeicao($idUser, $diaAtual, $motivo) : string {
+            if (hasRefeicao($idUser, $diaAtual)) {
+                $sql = "UPDATE refeicao SET motivo_cancelamento = '$motivo' WHERE id_usuario = '$id_user' AND data_solicitacao = '$diaAtual";
+
+                if ($this->conn->query($sql)) {
+                    return "sucesso";
+                } else {
+                    return "Erro ao executar a declaração: " . $stmt->error;
+                }
+            }
         }
     }
 ?>

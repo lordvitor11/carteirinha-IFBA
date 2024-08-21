@@ -1,6 +1,26 @@
 <?php
     require("../Controller/controller.php");
     $controller = new LoginController();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $motivo = $_POST['motivo'];
+        $idUser = $_SESSION['user'];
+        $sql = "SELECT id FROM usuario WHERE nome = '$idUser'";
+        $result = $conn->query($sql);
+        $row = mysqli_fetch_array($result);
+        $idUser = $row[0];
+
+        $current_day = date("Y-m-d");
+
+        $result = $controller->cancelarReserva($idUser, $current_day, $motivo);
+        if ($result === "sucesso") {
+            echo "sucesso";
+        } else {
+            echo "erro";
+        }
+    } else {
+        echo "Método de requisição inválido.";
+    }
 ?>
 
 <!DOCTYPE html>

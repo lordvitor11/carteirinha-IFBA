@@ -333,6 +333,20 @@ function addListener() {
     }
 }
 
+function reservaCancelada(popup) {
+    popup.innerHTML = "";
+
+    const h2 = document.createElement("h2"); 
+    const btnConfirm = document.createElement("button");
+
+    btnConfirm.setAttribute("type", "button");
+    h2.textContent = "Reserva Cancelada!";
+    btnConfirm.textContent = "Fechar";
+
+    btnConfirm.addEventListener("click", closeAgendadosPopup());
+
+}
+
 function agendadosPopup(type) {
     const popup = document.querySelector("#popup");
     const h2 = document.createElement("h2"); 
@@ -357,6 +371,31 @@ function agendadosPopup(type) {
     divButtons.appendChild(btnConfirm);
 
     btnCancel.addEventListener("click", closeAgendadosPopup);
+    btnConfirm.addEventListener("click", function() {
+        console.log("entrou");
+        const value = inputMotivo.textContent;
+
+        fetch('processa.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({
+                'motivo': value
+            })
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data === "sucesso") {
+                reservaCancelada(popup);
+            } else {
+
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+    });
 
     p.textContent = "MOTIVO:";
     h2.textContent = "CANCELAR RESERVA";
