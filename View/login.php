@@ -16,7 +16,6 @@
         <div class="main-login">
             <form id="form">
                 <div class="notification" id="notification"></div>
-                <img src="../assets/IF.png" alt="Logo IFBA" class="img-login">
                 <label for="username">Nome de Usuário:</label>
                 <input type="text" oninput="check()" name="username" id="username" placeholder="Usuário" required autocomplete="off"><br><br>
 

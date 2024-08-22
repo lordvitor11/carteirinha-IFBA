@@ -1,10 +1,13 @@
-<?php session_start();
-    if (!isset($_SESSION['logged_in'])) {
-        $_SESSION['user'] = "";
-        $_SESSION['id_user'] = "";
-        $_SESSION['logged_in'] = false;
-        $_SESSION['category'] = "";
-    }
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['logged_in'])) {
+    $_SESSION['user'] = "";
+    $_SESSION['id_user'] = "";
+    $_SESSION['logged_in'] = false;
+    $_SESSION['category'] = "";
+}
 ?>
 
 <?php
@@ -19,6 +22,7 @@ function showNav($call) {
     $login = "$rootUrl/View/login.php";
     $sobre = "$rootUrl/View/sobre.php";
     $admin = "$rootUrl/View/painel-administrador.php";
+    $perfil = "$rootUrl/View/perfil.php";
     $notification_icon_path = "$rootUrl/assets/notification.png"; // Caminho atualizado para o ícone
 
     $notification_icon = "<a href='#' class='notification-icon' title='Notificações'><img src='$notification_icon_path' alt='Notificações'></a>";
@@ -26,10 +30,10 @@ function showNav($call) {
     if (isset($_SESSION['logged_in'])) {
         if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
             $nome = $_SESSION['user'];
-            $text = "<div class='right'>$notification_icon<a class='button-admin' href='$admin'>Administrador(a)</a><a href='$logout'>Logado como <strong>$nome!</strong></a></div>";
+            $text = "<div class='right'>$notification_icon<a class='button-admin' href='$admin'>Administrador(a)</a><a href='$perfil'>Logado como <strong>$nome!</strong></a></div>";
         } else if ($_SESSION['logged_in']) {
             $nome = $_SESSION['user'];
-            $text = "<div class='right'>$notification_icon<a title='Clique para sair' href='$logout'>Logado como <strong>$nome!</strong></a></div>";
+            $text = "<div class='right'>$notification_icon<a href='$perfil'>Logado como <strong>$nome!</strong></a></div>";
         } else {
             $text = "<div class='right'><a href='$login'>LOGIN</a></div>";
         }
