@@ -1,12 +1,9 @@
-@import url(style.css);
-@import url(mq/sobre.mq.css);
-
 .container-sphere {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-top: 50px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 .person {
@@ -30,8 +27,8 @@
 }
 
 .img-sobre {
-    width: 150px; 
-    height: 150px; 
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     object-fit: cover;
     margin-top: 10px;
@@ -44,4 +41,50 @@
 
 .person h2{
     color: #388E3C;
+}
+
+hr {
+    border: 0;
+    height: 5px;
+    background-color: #388E3C;
+    margin: 50px 0;
+}
+
+.contact-form {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.contact-title {
+    font-size: 24px;
+    color: #388E3C;
+    margin-bottom: 20px;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #388E3C;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #2E7D32;
 }

@@ -36,13 +36,30 @@ $foto_perfil = '../assets/Victor Hugo.jpeg'; // Atualize este caminho conforme n
             <img src="<?php echo $foto_perfil; ?>" alt="Foto de Perfil" class="foto-perfil">
             <h2><?php echo htmlspecialchars($usuario); ?></h2>
             <p><strong>Matrícula:</strong> <?php echo htmlspecialchars($matricula); ?></p>
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p><br>
-            <button id="alterar-senha">Alterar Senha</button>
-            <a href="process/logout.php" class="btn-logout">Sair</a><br>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+            <button class="alterar-senha-2">Alterar Senha</button>
+            <a href="process/logout.php" class="btn-logout">Sair</a>
+        </div>
+    </div>
+
+    <!-- Popup de Alterar Senha -->
+    <div id="alterar-senha-popup-2" class="popup-2">
+        <div class="popup-content-2">
+            <span class="close-btn-2" id="close-popup-2">&times;</span>
+            <h3>Alterar Senha</h3>
+            <form id="alterar-senha-form-2">
+                <label for="new-password-2">Nova Senha:</label><br>
+                <input type="password" id="new-password-2" name="new-password" required><br><br>
+
+                <label for="confirm-password-2">Confirmar Senha:</label><br>
+                <input type="password" id="confirm-password-2" name="confirm-password" required><br><br>
+
+                <button type="submit">Salvar</button>
+            </form>
         </div>
     </div>
 
     <?php include 'footer.php'; ?>
-    <script src="script.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>

@@ -1,19 +1,43 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const carousel = document.querySelector(".carousel");
-    let currentIndex = 0;
-    const items = carousel.querySelectorAll("a").length;
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % items;
-        updateCarousel();
+    // Obtém referências aos elementos do DOM
+    const changePasswordButton = document.querySelector('.alterar-senha-2');
+    const popup = document.querySelector('#alterar-senha-popup-2');
+    const closePopupButton = document.querySelector('#close-popup-2');
+    const passwordForm = document.querySelector('#alterar-senha-form-2');
+    
+    // Mostra o popup de alteração de senha
+    if (changePasswordButton && popup) {
+        changePasswordButton.addEventListener('click', () => {
+            popup.style.display = 'flex'; // Exibe o popup centralizado
+        });
     }
 
-    function updateCarousel() {
-        const translateValue = -320 * currentIndex + "px";
-        carousel.style.transform = "translateX(" + translateValue + ")";
+    // Fecha o popup quando o botão de fechar é clicado
+    if (closePopupButton) {
+        closePopupButton.addEventListener('click', () => {
+            popup.style.display = 'none'; // Oculta o popup
+        });
     }
 
-    setInterval(nextSlide, 3000);
+    // Submete o formulário de alteração de senha
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Obtém os valores dos campos de senha
+            const newPassword = document.querySelector('#new-password-2').value;
+            const confirmPassword = document.querySelector('#confirm-password-2').value;
+
+            // Valida se as senhas são iguais e não estão vazias
+            if (newPassword.length > 0 && newPassword === confirmPassword) {
+                alert('Senha alterada com sucesso!');
+                popup.style.display = 'none'; // Oculta o popup após a alteração
+                passwordForm.reset(); // Limpa os campos do formulário
+            } else {
+                alert('As senhas não coincidem ou estão vazias.');
+            }
+        });
+    }
 });
 
 function check() {
@@ -47,7 +71,7 @@ function showNotification(message, type) {
         notification.innerHTML = "";
     }, 3000);
 }
-  
+
 function enviarFormulario() {
     let formElement = document.querySelector("#form");
     let formData = new FormData(formElement);
@@ -109,18 +133,15 @@ function addFields() {
         for (let data = inicio; data < fim; data.setDate(data.getDate() + 1)) {
             const dia_da_semana_numero = data.getDay();
 
-            // Armazena o dia da semana e a data correspondente no objeto
             dias_da_semana_entre_datas[data.toISOString().slice(0, 10)] = diaSemanaNomes[dia_da_semana_numero];
         }
 
         for (const [data, dia_da_semana] of Object.entries(dias_da_semana_entre_datas)) {
-            // Divs
             let divItem = document.createElement('div');
             let divPrincipal = document.createElement('div');
             let divAcompanhamento = document.createElement('div');
             let divSobremesa = document.createElement('div');
 
-            // Content
             let labelPrincipal = document.createElement('label');
             let inputPrincipal = document.createElement('input');
 
@@ -130,10 +151,8 @@ function addFields() {
             let labelSobremesa = document.createElement('label');
             let inputSobremesa = document.createElement('input');
 
-            // Configuração dos componentes
             divItem.classList.add('dia-semana');
 
-            // Proteína
             labelPrincipal.setAttribute('id', dia_da_semana);
             labelPrincipal.setAttribute('name', dia_da_semana);
             labelPrincipal.textContent = dia_da_semana.charAt(0).toUpperCase() + dia_da_semana.slice(1).toLowerCase() + '-feira';
@@ -143,7 +162,6 @@ function addFields() {
             inputPrincipal.setAttribute('placeholder', 'Proteína');
             inputPrincipal.required = true;
 
-            // Acompanhamento
             labelAcompanhamento.setAttribute('id', 'acompanhamento-' + dia_da_semana);
             labelAcompanhamento.setAttribute('name', 'acompanhamento-' + dia_da_semana);
             labelAcompanhamento.textContent = "‎ ";
@@ -152,7 +170,6 @@ function addFields() {
             inputAcompanhamento.setAttribute('name', 'acompanhamento-' + dia_da_semana);
             inputAcompanhamento.setAttribute('placeholder', 'Acompanhamento');
 
-            // Sobremesa
             labelSobremesa.setAttribute('id', 'sobremesa-' + dia_da_semana);
             labelSobremesa.setAttribute('name', 'sobremesa-' + dia_da_semana);
             labelSobremesa.textContent = "‎ ";
@@ -161,7 +178,6 @@ function addFields() {
             inputSobremesa.setAttribute('name', 'sobremesa-' + dia_da_semana);
             inputSobremesa.setAttribute('placeholder', 'Sobremesa');
 
-            // Adição dos componentes aos componetes pais
             divPrincipal.appendChild(labelPrincipal);
             divPrincipal.appendChild(inputPrincipal);
 
@@ -236,197 +252,49 @@ function cardapio_popup() {
     document.body.classList.add('popup-open');
 }
 
-function showIndexPopup() {
-    let div = document.querySelector('.popup-index');
+function agendar_popup() {
+    let popupContainer = document.querySelector('.container');
+    let div = document.createElement('div');
+    let label = document.createElement('div');
+    let confirmBtn = document.createElement('button');
+    let cancelBtn = document.createElement('button');
+    let divBtns = document.createElement('div');
 
-    div.style.display = "flex";
+    confirmBtn.classList.add('validar');
+    cancelBtn.classList.add('cancelar');
 
-    setTimeout(() => {
-        div.classList.add('hide-popup-index');
+    label.textContent = 'Deseja salvar as alterações?';
 
-        setTimeout(() => {
-            div.style.display = "none";
-        }, 500);
-    }, 3500);   
-}
-
-function showHistPopup() {
-    const div = document.querySelector('.popup-historico');
-    div.style.opacity = "1";
-    div.classList.add('show');
-}
-
-function getData(dataUser) {
-    return `${dataUser[8]}${dataUser[9]}/${dataUser[5]}${dataUser[6]}`;
-}
-
-function showInfo(btn) {
-    showHistPopup();
-
-    const popup = document.querySelector('.popup-content .semana');
-    let h2Data = document.querySelector('#data');
-    let idsRaw = btn.classList[2];
-    let ids;
-
-    if (idsRaw.length === 5) {
-        ids = idsRaw.split('').map(numero => parseInt(numero, 10));
-    } else if (idsRaw.length === 6) {
-        let temp = idsRaw.split('');
-        temp[0] = `${temp[0]}${temp[1]}`;
-        temp = temp.map(numero => parseInt(numero, 10));
-        temp.splice(1, 1);
-        ids = temp;
-    } else {
-        let temp = [];
-        for (let i = 0; i < btn.classList[2].length; i += 2) {
-            let parDeNumeros = btn.classList[2].substring(i, i + 2);
-            temp.push(parseInt(parDeNumeros));
-        }
-
-        ids = temp;
-    }
-
-    $.ajax({
-        url: "historico.php",
-        type: "POST",
-        data: { sinal: JSON.stringify(ids) },
-        success: function(response) {
-            let responseJson = JSON.parse(response);
-            popup.innerHTML = "";
-
-            h2Data.textContent = `CARDÁPIO (${getData(responseJson[0].data_refeicao)} - ${getData(responseJson[4].data_refeicao)})`;
-
-            for (let c = 0; c < responseJson.length; c++) {
-                let tr = document.createElement('tr');
-                let td1 = document.createElement('td');
-                let td2 = document.createElement('td');
-                let td3 = document.createElement('td');
-                let td4 = document.createElement('td');
-                let data = getData(responseJson[c].data_refeicao);
-
-                td1.textContent = responseJson[c].dia.charAt(0).toUpperCase() + responseJson[c].dia.slice(1).toLowerCase() + `-feira (${data})`;
-                td2.textContent = responseJson[c].principal;
-                td3.textContent = responseJson[c].acompanhamento;
-                td4.textContent = responseJson[c].sobremesa;
-
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td3);
-                tr.appendChild(td4);
-
-                popup.appendChild(tr);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error("Erro ao enviar sinal: " + error);
-        }
-    });
-}
-
-function addListener() {
-    const buttons = document.querySelectorAll('button.historico');
-
-    for (let c = 0; c < buttons.length; c++) {
-        buttons[c].addEventListener('click', function() {
-            showInfo(this);
-        });
-    }
-}
-
-function reservaCancelada(popup) {
-    popup.innerHTML = "";
-
-    const h2 = document.createElement("h2"); 
-    const btnConfirm = document.createElement("button");
-
-    btnConfirm.setAttribute("type", "button");
-    h2.textContent = "Reserva Cancelada!";
-    btnConfirm.textContent = "Fechar";
-
-    btnConfirm.addEventListener("click", closeAgendadosPopup());
-
-}
-
-function agendadosPopup(type) {
-    const popup = document.querySelector("#popup");
-    const h2 = document.createElement("h2"); 
-    const inputMotivo = document.createElement("input");
-    const divButtons = document.createElement("div");
-    const btnConfirm = document.createElement("button");
-    const btnCancel = document.createElement("button");
-    const p = document.createElement("label");
-
-    popup.innerHTML = "";
-
-    inputMotivo.setAttribute("id", "outro");
-    inputMotivo.setAttribute("name", "outro");
-    inputMotivo.setAttribute("placeholder", "Digite o motivo...");
-
-    divButtons.classList.add("botao-container");
-    btnConfirm.setAttribute("type", "submit");
-    btnConfirm.classList.add("validar");
-    btnCancel.classList.add("cancelar");
-
-    divButtons.appendChild(btnCancel);
-    divButtons.appendChild(btnConfirm);
-
-    btnCancel.addEventListener("click", closeAgendadosPopup);
-    btnConfirm.addEventListener("click", function() {
-        console.log("entrou");
-        const value = inputMotivo.textContent;
-
-        fetch('processa.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+    confirmBtn.addEventListener('click', () => {
+        $.ajax({
+            url: "agendados.php",
+            type: "POST",
+            data: { sinal: "Sinal enviado!" },
+            success: function() {
+                document.body.classList.remove('popup-open');
+                popupContainer.removeChild(div);
+                location.reload();
             },
-            body: new URLSearchParams({
-                'motivo': value
-            })
-        })
-        .then(response => response.text())
-        .then(data => {
-            if (data === "sucesso") {
-                reservaCancelada(popup);
-            } else {
-
+            error: function(xhr, status, error) {
+                console.error("Erro ao enviar sinal: " + error);
             }
-        })
-        .catch(error => {
-            console.error('Erro:', error);
         });
     });
 
-    p.textContent = "MOTIVO:";
-    h2.textContent = "CANCELAR RESERVA";
+    cancelBtn.addEventListener('click', () => {
+        document.body.classList.remove('popup-open');
+        popupContainer.removeChild(div);
+    });
 
-    popup.appendChild(h2);
-    popup.appendChild(p);
-    popup.appendChild(inputMotivo);
+    div.classList.add('popup');
+    divBtns.classList.add('botao-container');
 
-    if (type != 1) {
-        const optP = document.createElement("label");
-        const inputMatricula = document.createElement("input");
+    div.appendChild(label);
+    divBtns.appendChild(cancelBtn);
+    divBtns.appendChild(confirmBtn);
+    div.appendChild(divBtns);
 
-        inputMatricula.setAttribute("id", "outro");
-        inputMatricula.setAttribute("name", "outro");
-        inputMatricula.setAttribute("placeholder", "Matrícula alvo");
+    popupContainer.appendChild(div);
 
-        optP.textContent = "MATRÍCULA";
-        h2.textContent = "DISPONIBILIZAR RESERVA";
-
-        popup.appendChild(optP);
-        popup.appendChild(inputMatricula);
-    }
-
-    popup.appendChild(divButtons);    
-    popup.style.opacity = 1;
-
-    document.querySelector('.container').classList.add("blur");
-}
-
-function closeAgendadosPopup() {
-    const popup = document.querySelector("#popup");
-    popup.style.opacity = 0;
-    document.querySelector('.container').classList.remove("blur");
+    document.body.classList.add('popup-open');
 }

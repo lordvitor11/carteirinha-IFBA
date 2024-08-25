@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="css/sobre.css">
 </head>
 <body>
-    <header class="session-1"> <a href='https://portal.ifba.edu.br/seabra' target='_blank'> <img class="img-logo" src='../assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'> </a> </header>
+    <header class="session-1">
+        <a href='https://portal.ifba.edu.br/seabra' target='_blank'>
+            <img class="img-logo" src='../assets/1b1210fdf4454600bea220983da0cc63.png' alt='logo-ifba-seabra' draggable='false'>
+        </a>
+    </header>
 
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
@@ -35,6 +39,24 @@
                 <a href="https://www.github.com/lordvitor11" target="_blank"><img title="Clique para acessar o GitHub" src="../assets/vitor.jpg" alt="Foto da Pessoa 3" class="img-sobre" onerror="this.src='../assets/person.png'" draggable="false"></a>
             </div>
         </div>
+    </div>
+
+    <hr> <!-- Linha de separação -->
+
+    <div class="contact-form">
+        <h1 class="contact-title">Entre em Contato</h1>
+        <form action="process/contact_form.php" method="post">
+            <label for="name">Nome:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="message">Mensagem:</label><br>
+            <textarea id="message" name="message" required></textarea><br><br>
+
+            <button type="submit">Enviar</button>
+        </form>
     </div>
 
     <?php include 'footer.php'; ?>

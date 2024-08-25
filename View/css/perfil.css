@@ -1,6 +1,69 @@
 @import url(style.css);
 @import url(mq/cardapio.mq.css);
 
+/* Estilos para o popup de alterar senha */
+.popup-2 {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    z-index: 999; /* Aparece acima de todos os elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Corrigido para ocupar a largura total */
+    height: 100%; /* Corrigido para ocupar a altura total */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content-2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative; /* Para posicionar o botão de fechar corretamente */
+}
+
+.close-btn-2 {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn-2:hover {
+    color: red;
+}
+
+.popup-2 h3 {
+    color: #388E3C;
+    margin-bottom: 20px;
+}
+
+.popup-2 form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.popup-2 form button {
+    padding: 10px 20px;
+    background-color: #388E3C;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup-2 form button:hover {
+    background-color: #2E7D32;
+}
+
 /* Estilo para a página de perfil */
 .perfil-container {
     max-width: 600px;
@@ -33,7 +96,7 @@
     margin-bottom: 10px;
 }
 
-#alterar-senha {
+.alterar-senha-2 {
     background-color: var(--light-green);
     color: #fff;
     border: none;
@@ -46,7 +109,7 @@
     width: 100%; /* Faz com que o botão ocupe a largura total do contêiner */
 }
 
-#alterar-senha:hover {
+.alterar-senha-2:hover {
     background-color: var(--dark-green);
 }
 
@@ -65,4 +128,38 @@
 
 .btn-logout:hover {
     background-color: darkred; /* Cor de fundo vermelha escura no hover */
+}
+
+/* Estilos para notificações */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f8d7da; /* Cor de fundo padrão para erros */
+    color: #721c24; /* Cor do texto padrão para erros */
+    padding: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1000; /* Garante que as notificações apareçam acima de outros elementos */
+    width: 300px; /* Largura fixa para melhor visibilidade */
+    font-size: 16px; /* Tamanho da fonte ajustado para melhor legibilidade */
+}
+
+.notification.success {
+    background-color: #d4edda; /* Cor de fundo para sucesso */
+    color: #155724; /* Cor do texto para sucesso */
+    border-color: #c3e6cb; /* Cor da borda para sucesso */
+}
+
+.notification.error {
+    background-color: #f8d7da; /* Cor de fundo para erro */
+    color: #721c24; /* Cor do texto para erro */
+    border-color: #f5c6cb; /* Cor da borda para erro */
+}
+
+.notification.show {
+    opacity: 1;
 }
