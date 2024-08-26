@@ -298,3 +298,17 @@ function agendar_popup() {
 
     document.body.classList.add('popup-open');
 }
+
+function showIndexPopup() {
+    let div = document.querySelector('.popup-index');
+
+    div.style.display = "flex";
+
+    setTimeout(() => {
+        div.classList.add('hide-popup-index');
+
+        setTimeout(() => {
+            div.style.display = "none";
+        }, 500);
+    }, 3500);   
+}

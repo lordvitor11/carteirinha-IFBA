@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require("../Controller/controller.php");
     $controller = new LoginController();
 
@@ -12,14 +13,14 @@
 
         $current_day = date("Y-m-d");
 
-        $result = $controller->cancelarReserva($idUser, $current_day, $motivo);
+        $result = $controller->cancelarRefeicao($idUser, $current_day, $motivo);
+        echo $result;
+        exit;
         if ($result === "sucesso") {
             echo "sucesso";
         } else {
             echo "erro";
         }
-    } else {
-        echo "Método de requisição inválido.";
     }
 ?>
 
@@ -140,6 +141,7 @@
 
             divButtons.classList.add("botao-container");
             btnConfirm.setAttribute("type", "submit");
+            btnConfirm.setAttribute("id", "confirmar");
             btnConfirm.classList.add("validar");
             btnCancel.classList.add("cancelar");
 
@@ -147,6 +149,7 @@
             divButtons.appendChild(btnConfirm);
 
             btnCancel.addEventListener("click", closeAgendadosPopup);
+            if (type === 1) { btnConfirm.addEventListener("click", funcaoReserva); }
 
             labelMotivo.textContent = "MOTIVO:";
             h2.textContent = type === 1 ? "CANCELAR RESERVA" : "DISPONIBILIZAR RESERVA";
@@ -176,13 +179,34 @@
             document.querySelector('.container').classList.add("blur");
         }
 
-        // Função para fechar o pop-up
         function closeAgendadosPopup() {
             const popup = document.querySelector("#popup");
             const overlay = document.querySelector("#overlay");
             popup.style.display = "none";
             overlay.style.display = "none";
             document.querySelector('.container').classList.remove("blur");
+        }
+
+        function funcaoReserva(type, motivo) {
+            const data = {
+                motivo: document.querySelector("#outro").value
+            };
+
+            fetch('agendados.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded' 
+                },
+                body: new URLSearchParams(data).toString() 
+            })
+            .then(response => response.text())
+            .then(result => {
+                window.location.href = 'cardapio.php?id=0';
+                console.log('Resposta do servidor:', result);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
         }
     </script>
 </body>

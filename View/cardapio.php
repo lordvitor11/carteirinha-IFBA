@@ -17,7 +17,18 @@
     <title>Cardápio Semanal</title>
 </head>
 <body>
-
+    <script src='https://code.jquery.com/jquery-3.6.4.min.js'></script>
+    <script src="./script.js"></script>
+    <?php
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            
+            echo "<div class='popup-index'>";
+            echo "<script>showIndexPopup();</script>";
+            echo "<h2 class='popup-index-title'>Reserva Cancelada!</h2>";
+            echo "</div>";
+        }
+    ?>
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <h2>Reserva Confirmada!</h2>
@@ -59,13 +70,7 @@
             }
             
             console.log('Feedback enviado:', feedback);
-
-            // Aqui você pode adicionar código para enviar o feedback para o servidor
-
-            // Fechar o pop-up após o envio
             closePopup();
-
-            // Limpar o campo de feedback após o envio
             document.getElementById('feedback').value = '';
         });
 
@@ -95,12 +100,6 @@
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
-        <?php
-            if ($_SESSION['logged_in'] && $_SESSION['category'] != 'adm') {
-                // echo "<a href='agendados.php'><button class='button-agendados'>Minha Reserva</button></a>";
-            }
-        ?>
-        
         <h1>CARDÁPIO SEMANAL</h1>
         <img src="../assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
         <table>
@@ -167,9 +166,6 @@
                 $row = mysqli_fetch_array($result);
                 $idUser = $row[0];
                 $result = $controller->hasRefeicao($idUser, $current_day);
-
-                // echo $result;
-                // exit;
 
                 if ($result != null) {
                     if ($result) {
