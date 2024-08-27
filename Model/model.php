@@ -275,12 +275,12 @@
 
         public function cancelarRefeicao($idUser, $diaAtual, $motivo) : string {
             if (hasRefeicao($idUser, $diaAtual)) {
-                $sql = "UPDATE refeicao SET motivo_cancelamento = '$motivo' WHERE id_usuario = '$id_user' AND data_solicitacao = '$diaAtual";
+                $sql = "UPDATE refeicao SET motivo_cancelamento = '$motivo' WHERE id_usuario = '$idUser' AND data_solicitacao = '$diaAtual";
 
                 if ($this->conn->query($sql)) {
                     return "sucesso";
                 } else {
-                    return "Erro ao executar a declaração: " . $stmt->error;
+                    return "Erro ao executar a declaração: " . $sql->error;
                 }
             }
         }

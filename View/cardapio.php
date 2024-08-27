@@ -168,6 +168,9 @@
                 $idUser = $row[0];
                 $result = $controller->hasRefeicao($idUser, $current_day);
 
+                // echo $result;
+                // exit;
+
                 if ($result != null) {
                     if ($result) {
                         echo "<a href='agendados.php'><button class='button-agendados'>Minha Reserva</button></a>";
