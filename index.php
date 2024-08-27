@@ -1,3 +1,12 @@
+<?php session_start();
+    if (isset($_SESSION['category'])) {
+        if ($_SESSION['category'] == "adm") {
+            header("Location: View/painel-administrador.php");
+            
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
