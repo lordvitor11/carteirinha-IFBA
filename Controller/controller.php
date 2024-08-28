@@ -67,5 +67,17 @@
         public function cancelarRefeicao($idUser, $diaAtual, $motivo) : string {
             return $this->model->cancelarRefeicao($idUser, $diaAtual, $motivo);
         }
+
+        public function hasNotification($idUser) : bool {
+            return $this->model->hasNotification($idUser);
+        }
+
+        public function getIdByName($name) : int {
+            return $this->model->getIdByName($name);
+        }
+
+        public function getAssunto($userId) : array {
+            return $this->model->getAssunto($userId);
+        }
     }
 ?>

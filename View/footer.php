@@ -14,10 +14,20 @@
         <div class="popup" id="notificationPopup">
             <h2>Notificações</h2>
             <div id="notificationList">
-                <!-- Exemplos de Notificações -->
-                <div class="notification-item">Seu horário de aula foi alterado.</div>
-                <div class="notification-item">O cardápio de hoje está disponível.</div>
-                <div class="notification-item">Atenção: Inscrição para o evento se encerra amanhã.</div>
+                <?php
+                    if (isset($_SESSION['logged_in'])) {
+                        require("../Controller/controller.php");
+                        $controller = new LoginController();
+                        $userId = $_SESSION['id_user'];
+
+                        $result = $controller->hasNotification($userId);
+                        if ($result) {
+                            echo "<div class='notification-item'>Fazendo a leitura.</div>";
+                        } else {
+                            echo "<div class='notification-item'>Sem notificações.</div>";
+                        }
+                    }
+                ?>
             </div>
             <?php if ($_SESSION['category'] == 'adm'): ?>
                 <h3>Enviar Notificação</h3>
@@ -35,12 +45,13 @@
                 <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
             </div>
             <div class="copyright">
-            <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
+                <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
                 Campus Seabra</p>
             </div>
         </footer>
+    <!-- </div> -->
 
-        <script>
+    <script>
         // Função para abrir o pop-up de notificações
         function openNotificationPopup() {
             document.getElementById('notificationPopup').style.display = 'block';

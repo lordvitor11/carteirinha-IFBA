@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 16, 2024 at 11:00 AM
+-- Generation Time: Aug 28, 2024 at 11:04 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `cardapio` (
   `id` int NOT NULL,
   `data_refeicao` date NOT NULL,
-  `dia` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `principal` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `acompanhamento` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `sobremesa` varchar(255) COLLATE latin1_general_ci NOT NULL,
+  `dia` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `principal` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `acompanhamento` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `sobremesa` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `ind_excluido` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
@@ -80,7 +80,7 @@ INSERT INTO `horario_padrao` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
 
 CREATE TABLE `justificativa` (
   `id` int NOT NULL,
-  `descricao` varchar(45) COLLATE latin1_general_ci NOT NULL
+  `descricao` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -96,6 +96,20 @@ INSERT INTO `justificativa` (`id`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notificacao`
+--
+
+CREATE TABLE `notificacao` (
+  `id` int NOT NULL,
+  `id_remetente` int NOT NULL,
+  `id_destinatario` int NOT NULL,
+  `assunto` text NOT NULL,
+  `mensagem` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `refeicao`
 --
 
@@ -107,8 +121,8 @@ CREATE TABLE `refeicao` (
   `id_justificativa` int DEFAULT NULL,
   `data_solicitacao` date NOT NULL,
   `hora_solicitacao` time NOT NULL,
-  `outra_justificativa` varchar(100) COLLATE latin1_general_ci DEFAULT NULL,
-  `motivo_cancelamento` varchar(100) COLLATE latin1_general_ci DEFAULT NULL
+  `outra_justificativa` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `motivo_cancelamento` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -139,7 +153,7 @@ DELIMITER ;
 
 CREATE TABLE `status_ref` (
   `id` int NOT NULL,
-  `descricao` varchar(45) COLLATE latin1_general_ci NOT NULL
+  `descricao` varchar(45) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -160,11 +174,11 @@ INSERT INTO `status_ref` (`id`, `descricao`) VALUES
 
 CREATE TABLE `usuario` (
   `id` int NOT NULL,
-  `nome` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `email` varchar(100) COLLATE latin1_general_ci NOT NULL,
-  `senha` varchar(60) COLLATE latin1_general_ci NOT NULL,
-  `categoria` varchar(255) COLLATE latin1_general_ci NOT NULL,
-  `telefone` varchar(11) COLLATE latin1_general_ci NOT NULL
+  `nome` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `senha` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `categoria` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `telefone` varchar(11) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
@@ -196,6 +210,14 @@ ALTER TABLE `horario_padrao`
 --
 ALTER TABLE `justificativa`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notificacao`
+--
+ALTER TABLE `notificacao`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_remetente` (`id_remetente`),
+  ADD KEY `fk_destinatario` (`id_destinatario`);
 
 --
 -- Indexes for table `refeicao`
@@ -243,6 +265,12 @@ ALTER TABLE `justificativa`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `notificacao`
+--
+ALTER TABLE `notificacao`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `refeicao`
 --
 ALTER TABLE `refeicao`
@@ -263,6 +291,13 @@ ALTER TABLE `usuario`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `notificacao`
+--
+ALTER TABLE `notificacao`
+  ADD CONSTRAINT `fk_destinatario` FOREIGN KEY (`id_destinatario`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_remetente` FOREIGN KEY (`id_remetente`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `refeicao`

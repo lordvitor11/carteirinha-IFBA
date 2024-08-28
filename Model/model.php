@@ -287,5 +287,57 @@
             
             return "Nenhuma refeição encontrada para cancelar.";
         }
+
+        public function hasNotification($userId) : bool {
+            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = '$userId'";
+            $resultado = $this->conn->query($sql);
+            $num = $resultado->fetch_assoc();
+            $num = $num["COUNT(*)"];
+
+            return $num > 0;
+        }
+
+        public function getIdByName($name) : int {
+            $sql = "SELECT id FROM usuario WHERE nome = ?";
+            $stmt = $this->conn->prepare($sql);
+            
+            if ($stmt === false) {
+                throw new Exception('Erro ao preparar a consulta: ' . $this->conn->error);
+            }
+            
+            $stmt->bind_param('s', $name);
+            $stmt->execute();
+            $stmt->bind_result($id);
+            $id = null;
+            
+            if ($stmt->fetch()) {
+                $stmt->close();
+                return $id;
+            } else {
+                $stmt->close();
+                return null;
+            }
+        }
+        
+        public function getAssunto($userId) : array {
+            $sql = "SELECT assunto FROM notificacao WHERE id_destinatario = ?";
+            $stmt = $this->conn->prepare($sql);
+            
+            if ($stmt === false) {
+                throw new Exception('Erro ao preparar a consulta: ' . $this->conn->error);
+            }
+            
+            $stmt->bind_param('i', $userId);
+            $stmt->execute();
+            $stmt->bind_result($assunto);
+            $assuntos = [];
+            
+            while ($stmt->fetch()) {
+                $assuntos[] = $assunto;
+            }
+            
+            $stmt->close();
+            return $assuntos;
+        }
     }
 ?>

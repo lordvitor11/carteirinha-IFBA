@@ -1,3 +1,8 @@
+<?php
+    require("Controller/controller.php");
+    $controller = new LoginController();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,10 +19,23 @@
         <div class="popup" id="notificationPopup">
             <h2>Notificações</h2>
             <div id="notificationList">
-                <!-- Exemplos de Notificações -->
-                <div class="notification-item">Seu horário de aula foi alterado.</div>
-                <div class="notification-item">O cardápio de hoje está disponível.</div>
-                <div class="notification-item">Atenção: Inscrição para o evento se encerra amanhã.</div>
+                <?php
+                    if (isset($_SESSION['logged_in'])) {
+                        $userId = $controller->getIdByName($_SESSION['user']);
+
+                        $result = $controller->hasNotification($userId);
+                        if ($result) {
+                            $assuntos = $controller->getAssunto($userId);
+
+                            foreach ($assuntos as $assunto) {
+                                echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . "</div>";
+                            }
+                            // echo "<div class='notification-item'>Fazendo a leitura.</div>";
+                        } else {
+                            echo "<div class='notification-item'>Sem notificações.</div>";
+                        }
+                    }
+                ?>
             </div>
             <?php if ($_SESSION['category'] == 'adm'): ?>
                 <h3>Enviar Notificação</h3>
@@ -40,21 +58,21 @@
             </div>
         </footer>
 
-        <script>
+    <script>
         // Função para abrir o pop-up de notificações
-        function openNotificationPopup() {
-            document.getElementById('notificationPopup').style.display = 'block';
-            document.getElementById('notificationOverlay').style.display = 'block';
-        }
+            function openNotificationPopup() {
+                document.getElementById('notificationPopup').style.display = 'block';
+                document.getElementById('notificationOverlay').style.display = 'block';
+            }
 
-        // Função para fechar o pop-up de notificações
-        function closeNotificationPopup() {
-            document.getElementById('notificationPopup').style.display = 'none';
-            document.getElementById('notificationOverlay').style.display = 'none';
-        }
+            // Função para fechar o pop-up de notificações
+            function closeNotificationPopup() {
+                document.getElementById('notificationPopup').style.display = 'none';
+                document.getElementById('notificationOverlay').style.display = 'none';
+            }
 
-        // Adiciona o evento de clique no ícone de notificações
-        document.querySelector('.notification-icon').addEventListener('click', openNotificationPopup);
+            // Adiciona o evento de clique no ícone de notificações
+            document.querySelector('.notification-icon').addEventListener('click', openNotificationPopup);
     </script>
 </body>
 </html>
