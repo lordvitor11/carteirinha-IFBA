@@ -312,3 +312,50 @@ function showIndexPopup() {
         }, 500);
     }, 3500);   
 }
+
+function sendNotification() {
+    const popup = document.querySelector('#notificationPopup');
+    const popupList = document.querySelector('#notificationvList');
+    const popupButtons = document.querySelector('.buttons');
+    popupButtons.parentNode.removeChild(popupButtons);
+
+    popup.classList.add("transformPopup");
+    popupList.innerHTML = '';
+
+    const h3 = document.createElement('h3');
+    const labelMsg = document.createElement('label');
+    const textarea = document.createElement('textarea');
+    const labelMatricula = document.createElement('label');
+    const input = document.createElement('input');
+    const buttonConfirm = document.createElement('button');
+    const buttonCancel = document.createElement('button');
+    const divButtons = document.createElement('div');
+
+    buttonCancel.textContent = 'Fechar';
+    buttonConfirm.textContent = 'Enviar';
+    buttonConfirm.classList.add('send');
+    buttonCancel.classList.add('close');
+    divButtons.classList.add('buttons');
+    h3.textContent = "Enviar Notificação";
+    labelMsg.textContent = 'Mensagem:'
+    labelMsg.setAttribute('for', 'notificationMessage');
+    textarea.setAttribute('id', 'notificationMessage');
+    textarea.setAttribute('name', 'notificationMessage');
+    textarea.setAttribute('rows', '4');
+    textarea.setAttribute('placeholder', 'Digite a mensagem...');
+    labelMatricula.setAttribute('for', 'notificationRecipient');
+    labelMatricula.textarea = 'Matrícula (deixe em branco para enviar a todos):';
+    input.setAttribute('id', 'notificationRecipient');
+    input.setAttribute('name', 'notificationRecipient');
+    input.setAttribute('placeholder', 'Digite a matrícula...');
+
+    popup.appendChild(h3);
+    popup.appendChild(labelMsg);
+    popup.appendChild(textarea);
+    popup.appendChild(labelMatricula);
+    popup.appendChild(input);
+    divButtons.appendChild(buttonConfirm);
+    divButtons.appendChild(buttonCancel);
+    popup.appendChild(divButtons);
+
+}

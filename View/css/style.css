@@ -548,7 +548,7 @@ form {
   margin-bottom: 15px;
 }
 
-.popup {
+.popup, .transformPopup {
   display: none;
   position: fixed;
   top: 50%;
@@ -563,7 +563,7 @@ form {
   width: 90%;
 }
 
-.popup h2 {
+.popup h2, .transformPopup h2 {
   color: #388E3C;
   text-align: center;
 }
@@ -581,7 +581,7 @@ form {
   border-bottom: none;
 }
 
-.popup textarea {
+.popup textarea, .transformPopup textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -591,7 +591,7 @@ form {
   margin-bottom: 10px;
 }
 
-.popup input {
+.popup input, .transformPopup input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -601,7 +601,7 @@ form {
   margin-bottom: 10px;
 }
 
-.popup button {
+.popup button, .transformPopup button {
   display: block;
   margin: 10px auto 0;
   background-color: #388E3C;
@@ -612,11 +612,15 @@ form {
   cursor: pointer;
 }
 
-.popup button:hover {
+.popup button:hover, .transformPopup button:hover {
   background-color: #274E13;
 }
 
-.popup button.close {
+.popup .buttons, .transformPopup .buttons {
+  display: flex;
+}
+
+.popup button.close, .popup button.send, .transformPopup button.close, .transformPopup button.send {
   background-color: #ff6f61;
   color: white;
   padding: 10px 20px;
@@ -627,8 +631,16 @@ form {
   margin-top: 20px;
 }
 
-.popup button.close:hover {
+.popup button.close:hover, .transformPopup button.close:hover {
   background-color: #e65c5c;
+}
+
+.popup button.send, .transformPopup button.send {
+  background-color: #337A30;
+}
+
+.notification-item.null {
+  text-align: center;
 }
 
 /* Fundo escurecido */
@@ -642,6 +654,41 @@ form {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
+
+#notificationvList {
+  width: 100%; 
+  max-height: 300px;
+  overflow-y: auto; 
+}
+
+#notificationvList::-webkit-scrollbar {
+  width: 12px;
+}
+
+#notificationvList::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+#notificationvList::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 50%;
+}
+
+#notificationvList::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+#notificationvList {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f0f0f0;
+}
+
+.transformPopup {
+  width: 500px;
+  height: 360px;
+  animation: extendPopup 1s backwards;
+}
+
 
 /* ANIMAÇÕES */
 @keyframes showPopup {
@@ -661,5 +708,13 @@ form {
   } 100% {
     opacity: 0;
     transform: translateY(-100%);
+  }
+}
+
+@keyframes extendPopup {
+  0% {
+    height: 300px;
+  } 100% {
+    height: 360px;
   }
 }

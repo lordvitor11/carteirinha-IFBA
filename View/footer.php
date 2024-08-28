@@ -10,6 +10,9 @@
         $script = 'View/script.js';
         require("Controller/controller.php");
         $controller = new LoginController();
+    } else if ($relativePath == "/painel-administrador.php") {
+        require("../Controller/controller.php");
+        $controller = new LoginController();
     }
 ?>
 
@@ -28,34 +31,35 @@
     <div class="overlay" id="notificationOverlay"></div>
         <div class="popup" id="notificationPopup">
             <h2>Notificações</h2>
-            <div id="notificationList">
+            <div id="notificationvList">
                 <?php
-                    // if (isset($_SESSION['logged_in'])) {
-                    //     $userId = $controller->getIdByName($_SESSION['user']);
+                    if (isset($_SESSION['logged_in'])) {
+                        $userId = $controller->getIdByName($_SESSION['user']);
+                        $result = $controller->hasNotification($userId);
 
-                    //     $result = $controller->hasNotification($userId);
-                    //     if ($result) {
-                    //         $assuntos = $controller->getAssunto($userId);
+                        if ($result) {
+                            $assuntos = $controller->getAssunto($userId);
 
-                    //         foreach ($assuntos as $assunto) {
-                    //             echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . "</div>";
-                    //         }
-                    //         // echo "<div class='notification-item'>Fazendo a leitura.</div>";
-                    //     } else {
-                    //         echo "<div class='notification-item'>Sem notificações.</div>";
-                    //     }
-                    // }
+                            foreach ($assuntos as $assunto) {
+                                echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . "</div>";
+                            }
+                        } else {
+                            echo "<h3 class='notification-item null'>Sem notificações.</h3>";
+                        }
+                    }
                 ?>
             </div>
             <?php if ($_SESSION['category'] == 'adm'): ?>
-                <h3>Enviar Notificação</h3>
+                <!-- <h3>Enviar Notificação</h3>
                 <label for="notificationMessage">Mensagem:</label>
                 <textarea id="notificationMessage" name="notificationMessage" rows="4" placeholder="Digite a mensagem..."></textarea>
                 <label for="notificationRecipient">Matrícula (deixe em branco para enviar a todos):</label>
-                <input type="text" id="notificationRecipient" name="notificationRecipient" placeholder="Digite a matrícula...">
-                <button id="btn-send-notification" onclick="sendNotification()">Enviar Notificação</button>
+                <input type="text" id="notificationRecipient" name="notificationRecipient" placeholder="Digite a matrícula..."> -->
             <?php endif; ?>
-            <button class="close" onclick="closeNotificationPopup()">Fechar</button>
+            <div class="buttons">
+                <?php if ($_SESSION['category'] == "adm") { echo "<button class='send' onclick='sendNotification()'>Enviar notificação</button>"; } ?>
+                <button class="close" onclick="closeNotificationPopup()">Fechar</button>
+            </div>
         </div>
 
         <footer class="rodape">
