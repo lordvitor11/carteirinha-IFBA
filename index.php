@@ -176,6 +176,6 @@
         </div>
     </main>
 
-    <?php include 'View/footer-index.php'; ?>
+    <?php include 'View/footer.php'; ?>
 </body>
 </html>

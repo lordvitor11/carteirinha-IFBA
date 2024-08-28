@@ -1,11 +1,26 @@
+<?php 
+    $css = 'css/style.css';
+    $img = '../assets/1b1210fdf4454600bea220983da0cc63.png';
+    $script = 'script.js';
+    $relativePath = '/' . basename($_SERVER['SCRIPT_FILENAME']); 
+    
+    if ($relativePath == "/index.php") {
+        $css = 'View/css/style.css';
+        $img = 'assets/1b1210fdf4454600bea220983da0cc63.png';
+        $script = 'View/script.js';
+        require("Controller/controller.php");
+        $controller = new LoginController();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="<?php echo $css; ?>">
     <title>RELATÓRIO DE RESERVAS DIÁRIO</title>
-    <script src="script.js"></script>
+    <script src="<?php echo $script; ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -15,18 +30,21 @@
             <h2>Notificações</h2>
             <div id="notificationList">
                 <?php
-                    if (isset($_SESSION['logged_in'])) {
-                        require("../Controller/controller.php");
-                        $controller = new LoginController();
-                        $userId = $_SESSION['id_user'];
+                    // if (isset($_SESSION['logged_in'])) {
+                    //     $userId = $controller->getIdByName($_SESSION['user']);
 
-                        $result = $controller->hasNotification($userId);
-                        if ($result) {
-                            echo "<div class='notification-item'>Fazendo a leitura.</div>";
-                        } else {
-                            echo "<div class='notification-item'>Sem notificações.</div>";
-                        }
-                    }
+                    //     $result = $controller->hasNotification($userId);
+                    //     if ($result) {
+                    //         $assuntos = $controller->getAssunto($userId);
+
+                    //         foreach ($assuntos as $assunto) {
+                    //             echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . "</div>";
+                    //         }
+                    //         // echo "<div class='notification-item'>Fazendo a leitura.</div>";
+                    //     } else {
+                    //         echo "<div class='notification-item'>Sem notificações.</div>";
+                    //     }
+                    // }
                 ?>
             </div>
             <?php if ($_SESSION['category'] == 'adm'): ?>
@@ -42,7 +60,7 @@
 
         <footer class="rodape">
             <div>
-                <img src="../assets/1b1210fdf4454600bea220983da0cc63.png" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
+                <img src="<?php echo $img; ?>" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
             </div>
             <div class="copyright">
                 <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
@@ -67,5 +85,6 @@
         // Adiciona o evento de clique no ícone de notificações
         document.querySelector('.notification-icon').addEventListener('click', openNotificationPopup);
     </script>
+
 </body>
 </html>
