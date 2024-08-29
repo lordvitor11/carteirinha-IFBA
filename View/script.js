@@ -313,15 +313,37 @@ function showIndexPopup() {
     }, 3500);   
 }
 
-function sendNotification() {
+function sendNotification(type) {
     const popup = document.querySelector('#notificationPopup');
     const popupList = document.querySelector('#notificationvList');
     const popupButtons = document.querySelector('.buttons');
-    popupButtons.parentNode.removeChild(popupButtons);
 
-    popup.classList.add("transformPopup");
-    popupList.innerHTML = '';
+    if (type == 1) {
+        popupButtons.parentNode.removeChild(popupButtons);
+        popup.classList.add("transformPopup");
+        popupList.innerHTML = '';
 
+        const array = createSend();
+
+        console.log(array[7])
+
+        array.forEach(element => {
+            popup.appendChild(element);
+        });
+    }
+
+    // popup.appendChild(h3);
+    // popup.appendChild(labelMsg);
+    // popup.appendChild(textarea);
+    // popup.appendChild(labelMatricula);
+    // popup.appendChild(input);
+    // divButtons.appendChild(buttonConfirm);
+    // divButtons.appendChild(buttonCancel);
+    // popup.appendChild(divButtons);
+
+}
+
+function createSend() {
     const h3 = document.createElement('h3');
     const labelMsg = document.createElement('label');
     const textarea = document.createElement('textarea');
@@ -343,19 +365,79 @@ function sendNotification() {
     textarea.setAttribute('name', 'notificationMessage');
     textarea.setAttribute('rows', '4');
     textarea.setAttribute('placeholder', 'Digite a mensagem...');
+    textarea.required = true;
     labelMatricula.setAttribute('for', 'notificationRecipient');
     labelMatricula.textarea = 'Matrícula (deixe em branco para enviar a todos):';
     input.setAttribute('id', 'notificationRecipient');
     input.setAttribute('name', 'notificationRecipient');
     input.setAttribute('placeholder', 'Digite a matrícula...');
+    buttonConfirm.setAttribute('type', 'submit');
 
-    popup.appendChild(h3);
-    popup.appendChild(labelMsg);
-    popup.appendChild(textarea);
-    popup.appendChild(labelMatricula);
-    popup.appendChild(input);
+    buttonConfirm.addEventListener('click', function () {
+        const input = document.querySelector('#notificationRecipient');
+        const msg = document.querySelector('#notificationMessage');
+        const popup = document.querySelector('#notificationPopup');
+        const h2 = document.createElement('h2');
+        const button = document.createElement('button');
+        const value = input.value;
+        const message = msg.value;
+
+        // popupButtons.parentNode.removeChild(popupButtons);
+
+        if (message != "") {
+            if (value == "") {
+                h2.textContent = 'Notificação enviada a todos!';
+            } else {
+                h2.textContent = 'Notificação Enviada!';
+            }
+
+            popup.innerHTML = '';
+            popup.classList.add('enviado');
+            button.classList.add('close');
+            button.textContent = 'Fechar';
+            button.addEventListener('click', function() {
+                closeNotificationPopup();
+                location.reload();
+            });
+            
+            popup.appendChild(h2);
+            popup.appendChild(button);
+        }
+
+    });
+
+    buttonCancel.addEventListener('click', closeNotificationPopup);
+
     divButtons.appendChild(buttonConfirm);
     divButtons.appendChild(buttonCancel);
-    popup.appendChild(divButtons);
 
+    const array = [h3, labelMsg, textarea, labelMatricula,
+                   input, divButtons
+    ];
+
+    return array;
 }
+
+const data = {
+    tipo: 'especifico',
+    mensagem: 'john.doe@example.com',
+    destino: ''
+};
+
+// // Envio dos dados usando fetch
+// fetch('process.php', {
+//     method: 'POST',
+//     headers: {
+//         'Content-Type': 'application/json'
+//     },
+//     body: JSON.stringify(data)
+// })
+// .then(response => response.json())
+// .then(result => {
+//     console.log('Success:', result);
+//     alert('Dados enviados com sucesso!');
+// })
+// .catch(error => {
+//     console.error('Error:', error);
+//     alert('Ocorreu um erro ao enviar os dados.');
+// });

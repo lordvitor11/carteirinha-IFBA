@@ -10,7 +10,7 @@
         $script = 'View/script.js';
         require("Controller/controller.php");
         $controller = new LoginController();
-    } else if ($relativePath == "/painel-administrador.php") {
+    } else if ($relativePath == "/painel-administrador.php" || $relativePath == "/sobre.php") {
         require("../Controller/controller.php");
         $controller = new LoginController();
     }
@@ -57,7 +57,7 @@
                 <input type="text" id="notificationRecipient" name="notificationRecipient" placeholder="Digite a matrícula..."> -->
             <?php endif; ?>
             <div class="buttons">
-                <?php if ($_SESSION['category'] == "adm") { echo "<button class='send' onclick='sendNotification()'>Enviar notificação</button>"; } ?>
+                <?php if ($_SESSION['category'] == "adm") { echo "<button class='send' onclick='sendNotification(1)'>Enviar notificação</button>"; } ?>
                 <button class="close" onclick="closeNotificationPopup()">Fechar</button>
             </div>
         </div>

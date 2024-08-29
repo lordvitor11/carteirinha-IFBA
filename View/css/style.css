@@ -689,6 +689,16 @@ form {
   animation: extendPopup 1s backwards;
 }
 
+.enviado {
+  width: 350px;
+  height: 150px;
+  animation: sendMsg 0.5s backwards;
+}
+
+.popup h2 {
+  text-align: center;
+}
+
 
 /* ANIMAÇÕES */
 @keyframes showPopup {
@@ -716,5 +726,15 @@ form {
     height: 300px;
   } 100% {
     height: 360px;
+  }
+}
+
+@keyframes sendMsg {
+  0% {
+    height: 360px;
+    width: 500px;
+  } 100% {
+    height: 150px;
+    width: 350px;
   }
 }
