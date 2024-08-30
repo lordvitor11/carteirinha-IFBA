@@ -18,6 +18,7 @@
             <a href='editar-horario.php'><button class="button-adm" type="button">EDITAR HORÁRIO</button></a>
             <a href='historico.php'><button class="button blue" type="button">HISTÓRICO DE CARDÁPIOS</button></a>
             <a href='relatorio-diario.php'><button class="button blue" type="button">RELATÓRIO DIÁRIO</button></a>
+            <a href='relatorio-feedbacks.php'><button class="button blue" type="button">RELATÓRIO FEEDBACKS</button></a>
             <a href='cardapio.php'><button class="button-adm" type="button">CARDAPIO</button></a>
         </form>
     </div>

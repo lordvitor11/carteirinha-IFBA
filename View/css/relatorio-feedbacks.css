@@ -1,0 +1,128 @@
+@import url(style.css);
+@import url(mq/cardapio.mq.css);
+
+.center {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    font-weight: bolder;
+    color: var(--light-green);
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+    width: 70%;
+}
+
+/* Estilo para o container do buscador */
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    width: 100%;
+    margin: 20px 0; /* Ajuste as margens conforme necessário */
+}
+
+/* Estilo para o textbox */
+.input-container input[type="text"] {
+    width: 100%;
+    max-width: 300px; /* Largura máxima do textbox */
+    padding: 12px 15px; /* Maior padding para um visual mais agradável */
+    border: 1px solid #ccc;
+    border-radius: 25px; /* Bordas arredondadas para um visual moderno */
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao textbox */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+}
+
+.input-container input[type="text"]:focus {
+    border-color: #388E3C; /* Cor da borda ao focar */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao focar */
+    outline: none; /* Remove a borda padrão ao focar */
+}
+
+/* Estilo para o botão de busca */
+.input-container button {
+    padding: 12px 20px; /* Padding maior para um botão mais chamativo */
+    background-color: #388E3C; /* Cor de fundo do botão */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Bordas arredondadas */
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 10px; /* Espaço entre o textbox e o botão */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao botão */
+}
+
+.input-container button:hover {
+    background-color: #274E13; /* Cor de fundo ao passar o mouse */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+}
+
+.input-container button:active {
+    background-color: #1b3b0e; /* Cor de fundo ao clicar */
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px;
+    box-shadow: 5px 5px 10px lightblue;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #388E3C;
+    color: #fff;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.separador {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.button-voltar {
+    padding: 10px 20px;
+    background-color: var(--salmon);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    margin: 0 5px;
+}
+
+.button-voltar:hover {
+    background-color: var(--medium-salmon);
+    color: white;
+}
+
+.checkbox {
+    margin-right: 10px;
+}

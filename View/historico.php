@@ -3,7 +3,6 @@
         require("../Controller/controller.php");
         $controller = new LoginController(); 
         $ids = json_decode($_POST['sinal']);
-        // echo json_encode($ids);
         $response = $controller->getRegistry($ids);
 
         echo json_encode($response);
@@ -39,12 +38,6 @@
 
             $historico[] = $temp;
         }
-
-
-        // foreach ($historico as $item) {
-        //     print_r($item);
-        //     echo "<br><br>";
-        // }
     ?>
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
@@ -57,44 +50,46 @@
                 <input type="date" id="data-inicio" name="data-inicio" required>
 
                 <label for="data-fim">Data Fim:</label>
-                <input type="date" id="data-fim" name="data-fim" required>
+                <input type="date" id="data-fim" name="data-fim" required><br>
+
+                <button id="buscar" class="button">Buscar</button>
             </div>
+
+            <div class="input-container">
+                <label for="filtro-busca">Filtro de Busca:</label>
+                <input type="text" id="filtro-busca" placeholder="Digite uma palavra-chave...">
+            </div>
+
             <table>
-                <?php 
-                    echo "
-                        <thead>
-                            <tr>
-                                <th>Data Inicio</th>
-                                <th>Data Fim</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    ";
+                <thead>
+                    <tr>
+                        <th>Data Início</th>
+                        <th>Data Fim</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                        for ($c = 0; $c < count($historico); $c++) {
+                            $dataInicio = date("d/m/Y", strtotime($historico[$c]['datas'][4]));
+                            $dataFim = date("d/m/Y", strtotime($historico[$c]['datas'][0]));
+                            $ids = $historico[$c]['ids'];
 
-                    for ($c = 0; $c < count($historico); $c++) {
-                        $dataInicio = date("d/m/Y", strtotime($historico[$c]['datas'][4]));
-                        $dataFim = date("d/m/Y", strtotime($historico[$c]['datas'][0]));
-                        $ids = $historico[$c]['ids'];
-
-                        echo "
-                            <tr>
-                                <td>$dataInicio</td>
-                                <td>$dataFim</td>
-                                <td><button class='button historico $ids[0]$ids[1]$ids[2]$ids[3]$ids[4]'>Exibir detalhes</button></td>
-                            </tr>
-                        ";
-                    }
-
-                    echo "</tbody>";
-                    echo "</table>";
-                ?>
+                            echo "
+                                <tr>
+                                    <td>$dataInicio</td>
+                                    <td>$dataFim</td>
+                                    <td><button class='button historico $ids[0]$ids[1]$ids[2]$ids[3]$ids[4]'>Exibir detalhes</button></td>
+                                </tr>
+                            ";
+                        }
+                    ?>
+                </tbody>
             </table>
+
             <div class="separador">
                 <a href="painel-administrador.php"><button class='button-voltar'>Voltar</button></a>
-                <button class='button'>Buscar</button>
             </div>
-            
         </div>
     </div>
 
@@ -118,6 +113,55 @@
         </div>
     </div>
     <script>
+        document.getElementById('buscar').addEventListener('click', function() {
+            const dataInicio = document.getElementById('data-inicio').value;
+            const dataFim = document.getElementById('data-fim').value;
+
+            if (dataInicio && dataFim) {
+                $.ajax({
+                    url: window.location.href,
+                    type: "POST",
+                    data: {
+                        sinal: JSON.stringify({ dataInicio: dataInicio, dataFim: dataFim })
+                    },
+                    success: function(response) {
+                        const historicoFiltrado = JSON.parse(response);
+                        const tbody = document.querySelector('tbody');
+                        tbody.innerHTML = '';  // Limpar a tabela existente
+
+                        historicoFiltrado.forEach(item => {
+                            let dataInicio = new Date(item.datas[4]).toLocaleDateString('pt-BR');
+                            let dataFim = new Date(item.datas[0]).toLocaleDateString('pt-BR');
+                            let ids = item.ids.join('');
+
+                            tbody.innerHTML += `
+                                <tr>
+                                    <td>${dataInicio}</td>
+                                    <td>${dataFim}</td>
+                                    <td><button class='button historico ${ids}'>Exibir detalhes</button></td>
+                                </tr>
+                            `;
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erro ao buscar dados: " + error);
+                    }
+                });
+            } else {
+                alert("Por favor, selecione as datas de início e fim.");
+            }
+        });
+
+        document.getElementById('filtro-busca').addEventListener('input', function() {
+            const filtro = this.value.toLowerCase();
+            const linhas = document.querySelectorAll('tbody tr');
+
+            linhas.forEach(linha => {
+                const textoLinha = linha.textContent.toLowerCase();
+                linha.style.display = textoLinha.includes(filtro) ? '' : 'none';
+            });
+        });
+
         document.getElementsByClassName('btn-close')[0].addEventListener('click', function() {
             const div = document.querySelector('.popup-historico');
             div.classList.remove('show');
