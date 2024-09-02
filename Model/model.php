@@ -7,6 +7,20 @@
             $this->conn = $conn;
         }
 
+        private function doQuery($array, $sql, $bind) {
+            foreach (array_keys($array) as $key) { $destinationArray[] = $key; }
+
+            $stmt = $this->conn->prepare($sql);
+
+            $stmt->bind_param($bind, array_map(fn($key) => $array[$key], $destinationArray));
+
+            if ($stmt->execute()) {
+                return "Sem erros";
+            } else {
+                return "Erro ao inserir dados: " . $stmt->error;
+            }
+        }
+
         public function hasRegistry($usuario): bool {
             $sql = "SELECT nome, senha FROM usuario WHERE nome = '$usuario'";
 
