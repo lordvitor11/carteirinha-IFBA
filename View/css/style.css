@@ -18,6 +18,10 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body{
+  background-color: #f0f4f7;
+}
+
 .session-1 {
   display: flex;
   flex-direction: column;

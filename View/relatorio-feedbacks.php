@@ -21,21 +21,21 @@
     <div class="container">
         <h1 class="titulo">RELATÓRIO DE FEEDBACKS</h1>
 
-        <div class="center">
-            <div class="input-container">
-                <input type="text" id="buscador" placeholder="Digite sua busca...">
-                <button onclick="search()">Buscar</button>
-            </div>
+        <div class="input-container">
+            <label for="data-inicio">Data Início:</label>
+            <input type="date" id="data-inicio" name="data-inicio" required>
+
+            <label for="data-fim">Data Fim:</label>
+            <input type="date" id="data-fim" name="data-fim" required><br>
+
+            <button id="buscar" class="button">Buscar</button>
         </div>
 
         <table id="resultado">
             <thead>
                 <tr>
-                    <th><input type="checkbox" id="select-all"> Selecionar Todos</th>
                     <th>Nome</th>
-                    <th>Matrícula</th>
-                    <th>Data</th>
-                    <th>Hora</th>
+                    <th>Mensagem</th>
                 </tr>
             </thead>
             <tbody>

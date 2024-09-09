@@ -85,6 +85,15 @@ button.amarelo:hover {
     background-color: #f39c12;
 }
 
+button.azul {
+    background-color: #0f71f1;
+    color: #fff;
+}
+
+button.azul:hover {
+    background-color: #123bf3;
+}
+
 /* Estilo do popup */
 .popup {
     display: none;
@@ -304,7 +313,7 @@ button.editar:hover {
     background-color: var(--dark-green); 
 }
 
-.vermelho, .amarelo {
+.vermelho, .amarelo, .azul {
     padding: 10px 20px;
     width: 25px;
     height: 25px; 
@@ -326,6 +335,14 @@ button.editar:hover {
 
 .vermelho {
     background-color: #f75252;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.azul {
+    background-color: #0f71f1;
     color: #fff;
     display: flex;
     justify-content: center;
