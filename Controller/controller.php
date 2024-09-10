@@ -79,5 +79,9 @@
         public function getAssunto($userId) : array {
             return $this->model->getAssunto($userId);
         }
+        
+        public function findName($type, $string) : string { 
+            return $this->model->findName($type, $string);
+        }
     }
 ?>

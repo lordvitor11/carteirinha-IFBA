@@ -424,6 +424,37 @@ const data = {
     destino: ''
 };
 
+function search() {
+    const string = document.querySelector('#buscador').value;
+    let identfier = '';
+
+    if (/^\d+$/.test(string)) {
+        identfier = 'matricula';
+    } else {
+        identfier = 'nome';
+    }
+
+    const data = {
+        tipo: identfier,
+        value: string
+    };
+
+    fetch('relatorio-diario.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log('Success:', result);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 // // Envio dos dados usando fetch
 // fetch('process.php', {
 //     method: 'POST',

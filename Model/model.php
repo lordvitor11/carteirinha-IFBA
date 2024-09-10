@@ -353,5 +353,27 @@
             $stmt->close();
             return $assuntos;
         }
+
+        public function findName($type, $string) : string {
+            $sql;
+
+            if ($tipo == "matricula") {
+                $stmt = $mysqli->prepare("SELECT nome FROM usuario WHERE matricula = '$string'");
+            } else {
+                $stmt = $mysqli->prepare("SELECT nome FROM usuario WHERE nome = '$string'");
+            }
+    
+            $stmt->bind_param("s", $string);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $nome;
+    
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $nome = $row['nome'];
+            }
+
+            return $nome;
+        }
     }
 ?>

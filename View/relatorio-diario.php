@@ -1,3 +1,23 @@
+<?php 
+    require("../Controller/controller.php");
+    $controller = new LoginController();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $rawData = file_get_contents('php://input');
+        $data = json_decode($rawData, true);
+
+        $tipo = isset($data['tipo']) ? $data['tipo'] : '';
+        $string = isset($data['string']) ? $data['string'] : '';
+        // echo json_encode(['tipo' => $tipo]);
+        // $nome = $controller->findName($tipo, $string);
+        echo json_encode($nome);
+        exit;
+
+        // echo json_encode(['status' => 'success', 'nome' => $nome]);
+    }
+            
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,7 +43,7 @@
 
         <div class="center">
             <div class="input-container">
-                <input type="text" id="buscador" placeholder="Digite sua busca...">
+                <input type="text" id="buscador" placeholder="Digite nome ou matrícula…">
                 <button onclick="search()">Buscar</button>
             </div>
         </div>
