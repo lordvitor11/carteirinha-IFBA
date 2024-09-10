@@ -55,11 +55,6 @@
                 <button id="buscar" class="button">Buscar</button>
             </div>
 
-            <div class="input-container">
-                <label for="filtro-busca">Filtro de Busca:</label>
-                <input type="text" id="filtro-busca" placeholder="Digite uma palavra-chave...">
-            </div>
-
             <table>
                 <thead>
                     <tr>

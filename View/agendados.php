@@ -103,6 +103,8 @@
                     // echo "<a href='cardapio-disponibilizar.php'>";
                     echo "<button class='amarelo' onclick='agendadosPopup(2);'><img src='../assets/transferir.png' alt='none'></button>";
                     echo "</a>";
+                    echo "<button class='azul' onclick='window.location.href=\"qr-code.php\";'><img src='../assets/qrcode.png' alt='none'></button>";
+                    echo "</a>";
                     echo "</td>";
                     echo "</tr>";
                     echo "</tbody>";

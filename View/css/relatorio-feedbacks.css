@@ -27,31 +27,28 @@
     width: 70%;
 }
 
-/* Estilo para o container do buscador */
 .input-container {
     display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza horizontalmente */
-    width: 100%;
-    margin: 20px 0; /* Ajuste as margens conforme necessário */
+    justify-content: center; /* Alinhamento centralizado */
+    width: 80%;
+    margin-bottom: 15px;
 }
 
-/* Estilo para o textbox */
-.input-container input[type="text"] {
-    width: 100%;
-    max-width: 300px; /* Largura máxima do textbox */
-    padding: 12px 15px; /* Maior padding para um visual mais agradável */
+.input-container label {
+    font-size: 18px;
+    color: #388E3C;
+    margin-right: 10px;
+}
+
+input[type="date"], input[type="text"] {
+    width: 40%;
+    padding: 10px;
+    box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 25px; /* Bordas arredondadas para um visual moderno */
+    border-radius: 4px;
     font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra ao textbox */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
-}
-
-.input-container input[type="text"]:focus {
-    border-color: #388E3C; /* Cor da borda ao focar */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao focar */
-    outline: none; /* Remove a borda padrão ao focar */
+    margin-right: 5%;
+    text-align: center; /* Centraliza o texto dentro do campo */
 }
 
 /* Estilo para o botão de busca */

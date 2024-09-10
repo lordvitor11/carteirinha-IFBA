@@ -43,7 +43,7 @@
 
         <div class="center">
             <div class="input-container">
-                <input type="text" id="buscador" placeholder="Digite nome ou matrícula…">
+                <input type="text" id="buscador" placeholder="Digite o nome ou matrícula...">
                 <button onclick="search()">Buscar</button>
             </div>
         </div>
