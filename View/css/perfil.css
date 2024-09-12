@@ -3,14 +3,14 @@
 
 /* Estilos para o popup de alterar senha */
 .popup-2 {
-    display: none; /* Oculto por padrão */
+    display: none; 
     position: fixed;
-    z-index: 999; /* Aparece acima de todos os elementos */
+    z-index: 999; 
     left: 0;
     top: 0;
-    width: 100%; /* Corrigido para ocupar a largura total */
-    height: 100%; /* Corrigido para ocupar a altura total */
-    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    width: 100%;
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
 }
@@ -23,7 +23,7 @@
     max-width: 400px;
     width: 100%;
     text-align: center;
-    position: relative; /* Para posicionar o botão de fechar corretamente */
+    position: relative; 
 }
 
 .close-btn-2 {
@@ -104,9 +104,9 @@
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 10px; /* Espaço abaixo do botão */
-    display: block; /* Garante que o botão ocupe toda a largura disponível */
-    width: 100%; /* Faz com que o botão ocupe a largura total do contêiner */
+    margin-bottom: 10px; 
+    display: block; 
+    width: 100%;
 }
 
 .alterar-senha-2:hover {
@@ -114,7 +114,7 @@
 }
 
 .btn-logout {
-    background-color: red; /* Cor de fundo vermelha */
+    background-color: red; 
     color: #fff;
     border: none;
     padding: 12px 20px;
@@ -122,12 +122,12 @@
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease;
-    display: block; /* Garante que o botão ocupe toda a largura disponível */
-    width: 100%; /* Faz com que o botão ocupe a largura total do contêiner */
+    display: block; 
+    width: 100%; 
 }
 
 .btn-logout:hover {
-    background-color: darkred; /* Cor de fundo vermelha escura no hover */
+    background-color: darkred; 
 }
 
 /* Estilos para notificações */
@@ -135,31 +135,37 @@
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #f8d7da; /* Cor de fundo padrão para erros */
-    color: #721c24; /* Cor do texto padrão para erros */
+    background-color: #f8d7da; 
+    color: #721c24; 
     padding: 15px;
     border: 1px solid #f5c6cb;
     border-radius: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    z-index: 1000; /* Garante que as notificações apareçam acima de outros elementos */
-    width: 300px; /* Largura fixa para melhor visibilidade */
-    font-size: 16px; /* Tamanho da fonte ajustado para melhor legibilidade */
+    z-index: 1000; 
+    width: 300px; 
+    font-size: 16px;
 }
 
 .notification.success {
-    background-color: #d4edda; /* Cor de fundo para sucesso */
-    color: #155724; /* Cor do texto para sucesso */
-    border-color: #c3e6cb; /* Cor da borda para sucesso */
+    background-color: #d4edda; 
+    color: #155724; 
+    border-color: #c3e6cb;
 }
 
 .notification.error {
-    background-color: #f8d7da; /* Cor de fundo para erro */
-    color: #721c24; /* Cor do texto para erro */
-    border-color: #f5c6cb; /* Cor da borda para erro */
+    background-color: #f8d7da; 
+    color: #721c24;
+    border-color: #f5c6cb; 
 }
 
 .notification.show {
     opacity: 1;
+}
+
+#error, #error-2 {
+    margin-bottom: 15px;
+    color: var(--salmon);
+    font-weight: bold;
 }

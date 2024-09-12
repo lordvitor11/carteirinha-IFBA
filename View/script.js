@@ -18,26 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
             popup.style.display = 'none'; // Oculta o popup
         });
     }
-
-    // Submete o formulário de alteração de senha
-    if (passwordForm) {
-        passwordForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
-
-            // Obtém os valores dos campos de senha
-            const newPassword = document.querySelector('#new-password-2').value;
-            const confirmPassword = document.querySelector('#confirm-password-2').value;
-
-            // Valida se as senhas são iguais e não estão vazias
-            if (newPassword.length > 0 && newPassword === confirmPassword) {
-                alert('Senha alterada com sucesso!');
-                popup.style.display = 'none'; // Oculta o popup após a alteração
-                passwordForm.reset(); // Limpa os campos do formulário
-            } else {
-                alert('As senhas não coincidem ou estão vazias.');
-            }
-        });
-    }
 });
 
 function check() {
@@ -331,47 +311,57 @@ function sendNotification(type) {
             popup.appendChild(element);
         });
     }
-
-    // popup.appendChild(h3);
-    // popup.appendChild(labelMsg);
-    // popup.appendChild(textarea);
-    // popup.appendChild(labelMatricula);
-    // popup.appendChild(input);
-    // divButtons.appendChild(buttonConfirm);
-    // divButtons.appendChild(buttonCancel);
-    // popup.appendChild(divButtons);
-
 }
 
 function createSend() {
-    const h3 = document.createElement('h3');
-    const labelMsg = document.createElement('label');
-    const textarea = document.createElement('textarea');
-    const labelMatricula = document.createElement('label');
-    const input = document.createElement('input');
-    const buttonConfirm = document.createElement('button');
-    const buttonCancel = document.createElement('button');
-    const divButtons = document.createElement('div');
+    const items = {
+        h3: document.createElement('h3'),
+        labelMsg: document.createElement('label'),
+        textarea: document.createElement('textarea'),
+        labelMatricula: document.createElement('label'),
+        input: document.createElement('input'),
+        buttonConfirm: document.createElement('button'),
+        buttonCancel: document.createElement('button'),
+        divButtons: document.createElement('div')
+    }
 
-    buttonCancel.textContent = 'Fechar';
-    buttonConfirm.textContent = 'Enviar';
-    buttonConfirm.classList.add('send');
-    buttonCancel.classList.add('close');
+    Object.assign(items.buttonCancel, {
+        textContent: 'Fechar',
+        for: 'new-password-2',
+        textContent: 'Nova Senha:',
+        classList: 'close'
+    });
+    // buttonCancel.classList.add('close');
+    buttonCancel.addEventListener('click', closeNotificationPopup);
+
+    Object.assign(items.buttonConfirm, {
+        textContent: 'Enviar',
+        classList: 'send',
+        type: 'submit'
+    });
+
     divButtons.classList.add('buttons');
     h3.textContent = "Enviar Notificação";
-    labelMsg.textContent = 'Mensagem:'
-    labelMsg.setAttribute('for', 'notificationMessage');
-    textarea.setAttribute('id', 'notificationMessage');
-    textarea.setAttribute('name', 'notificationMessage');
-    textarea.setAttribute('rows', '4');
-    textarea.setAttribute('placeholder', 'Digite a mensagem...');
-    textarea.required = true;
+
+    Object.assign(items.labelMsg, {
+        textContent: 'Mensagem:',
+        for: 'notificationMessage'
+    });
+
+    Object.assign(items.textarea, {
+        id: 'notificationMessage',
+        name: 'notificationMessage',
+        rows: '4',
+        placeholder: 'Digite a mensagem...',
+        required: true
+    });
+
     labelMatricula.setAttribute('for', 'notificationRecipient');
     labelMatricula.textarea = 'Matrícula (deixe em branco para enviar a todos):';
     input.setAttribute('id', 'notificationRecipient');
     input.setAttribute('name', 'notificationRecipient');
     input.setAttribute('placeholder', 'Digite a matrícula...');
-    buttonConfirm.setAttribute('type', 'submit');
+    // buttonConfirm.setAttribute('type', 'submit');
 
     buttonConfirm.addEventListener('click', function () {
         const input = document.querySelector('#notificationRecipient');
@@ -381,8 +371,6 @@ function createSend() {
         const button = document.createElement('button');
         const value = input.value;
         const message = msg.value;
-
-        // popupButtons.parentNode.removeChild(popupButtons);
 
         if (message != "") {
             if (value == "") {
@@ -406,13 +394,12 @@ function createSend() {
 
     });
 
-    buttonCancel.addEventListener('click', closeNotificationPopup);
 
     divButtons.appendChild(buttonConfirm);
     divButtons.appendChild(buttonCancel);
 
-    const array = [h3, labelMsg, textarea, labelMatricula,
-                   input, divButtons
+    const array = [items.h3, items.labelMsg, items.textarea, items.labelMatricula,
+        items.input, items.divButtons
     ];
 
     return array;
@@ -455,20 +442,141 @@ function search() {
     });
 }
 
-// // Envio dos dados usando fetch
-// fetch('process.php', {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify(data)
-// })
-// .then(response => response.json())
-// .then(result => {
-//     console.log('Success:', result);
-//     alert('Dados enviados com sucesso!');
-// })
-// .catch(error => {
-//     console.error('Error:', error);
-//     alert('Ocorreu um erro ao enviar os dados.');
-// });
+function checkPass() {
+    const input = document.querySelector("#current-password").value;
+    const data = {
+        sinal: "checkPass",
+        pass: input
+    }
+    event.preventDefault();
+    fetch('perfil.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(text => Promise.reject(`Network response was not ok: ${text}`));
+        }
+        return response.text();
+    })
+    .then(text => {
+        try {
+            document.querySelector("#current-password").value = "";
+            const labelErro = document.querySelector('#error');
+            const resultado = JSON.parse(text);
+            if (resultado.status == "sucesso") {
+                labelErro.textContent = "";
+                passSection();
+            } else {
+                if (resultado.mensagem == "Senha incorreta") {
+                    labelErro.textContent = resultado.mensagem;
+                } else {
+                    console.log(resultado.mensagem);
+                    labelErro.textContent = "";
+                }
+            }
+
+
+        } catch (e) {
+            console.error('Erro ao analisar JSON:', e);
+            console.log('Resposta recebida:', text);
+        }
+    })
+    .catch(error => {
+        console.log('Houve um problema com a requisição:', error);
+    });
+}
+
+function passSection() {
+    const form = document.querySelector("#alterar-senha-form-2");
+    form.innerHTML = "";
+
+    const items = {
+        label1: document.createElement('label'),
+        input1: document.createElement('input'),
+        label2: document.createElement('label'),
+        input2: document.createElement('input'),
+        label3: document.createElement('label'),
+        submit: document.createElement('button')
+    }
+
+    Object.assign(items.label1, {
+        for: 'new-password-2',
+        textContent: 'Nova Senha:'
+    });
+
+    Object.assign(items.label2, {
+        for: 'confirm-password-2',
+        textContent: 'Confirmar Senha:'
+    });
+
+    Object.assign(items.input1, {
+        type: 'password',
+        id: 'new-password-2',
+        name: 'new-password',
+        required: true
+    });
+
+    Object.assign(items.input2, {
+        type: 'password',
+        id: 'confirm-password-2',
+        name: 'confirm-password',
+        required: true
+    });
+
+    items.label3.setAttribute('id', 'error-2');
+
+    items.submit.textContent = 'Confirmar';
+
+    items.submit.addEventListener('click', function () {
+        event.preventDefault();
+        const input1 = document.querySelector('#new-password-2');
+        const input2 = document.querySelector('#confirm-password-2');
+        const labelError = document.querySelector('#error-2');
+
+        if (input1.value != '' && input2.value != '') {
+            if (input1.value == input2.value) {
+                fetch('perfil.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ sinal: 'changePass-confirm', dado: input2.value })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text().then(text => Promise.reject(`Network response was not ok: ${text}`));
+                    }
+                    // Analisa a resposta JSON
+                    return response.json();
+                })
+                .then(data => {
+                    // Verifica o valor do campo `status` na resposta JSON
+                    if (data.status === 'sucesso') {
+                        // Redireciona para a URL desejada
+                        window.location.href = 'perfil.php?id=1';
+                    } else {
+                        // Lida com casos onde o status não é 'sucesso'
+                        console.log('Resposta inesperada:', data);
+                    }
+                })
+                .catch(error => {
+                    // Captura e exibe qualquer erro que tenha ocorrido
+                    console.error('Houve um problema com a requisição:', error);
+                });
+            } else {
+                labelError.textContent = 'Senhas não coincidem';
+            }
+        } else {
+            labelError.textContent = 'Os campos não podem estar vazios';
+        }
+    });
+
+    for (let key in items) {
+        form.appendChild(items[key]);
+    }
+}
+

@@ -61,16 +61,17 @@
                 <button class="close" onclick="closeNotificationPopup()">Fechar</button>
             </div>
         </div>
+    </div>
 
-        <footer class="rodape">
-            <div>
-                <img src="<?php echo $img; ?>" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
-            </div>
-            <div class="copyright">
-                <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
-                Campus Seabra</p>
-            </div>
-        </footer>
+    <footer class="rodape">
+        <div>
+            <img src="<?php echo $img; ?>" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 | IFBA - Instituto Federal de Educação, Ciência e Tecnologia da Bahia
+            Campus Seabra</p>
+        </div>
+    </footer>
     <!-- </div> -->
 
     <script>

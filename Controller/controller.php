@@ -83,5 +83,13 @@
         public function findName($type, $string) : string { 
             return $this->model->findName($type, $string);
         }
+
+        public function checkPass($tempPass, $user) : string {
+            return $this->model->checkPass($tempPass, $user);
+        }
+
+        public function changePassword($user, $pass) : string {
+            return $this->model->changePassword($user, $pass);
+        }
     }
 ?>

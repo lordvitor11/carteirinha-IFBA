@@ -375,5 +375,31 @@
 
             return $nome;
         }
+
+        public function checkPass($tempPass, $user) : string {
+            $sql = "SELECT COUNT(*) as count FROM usuario WHERE id = '$user' AND senha = MD5('$tempPass')";
+
+            $result = $this->conn->query($sql);
+
+            if ($result) {
+                $row = $result->fetch_assoc();
+                $count = $row['count'];
+
+                if ($count > 0) { return "sucess"; } 
+                else { return "error"; }
+            } else {
+                return "Erro na consulta: " . $conn->error;
+            }  
+        }
+
+        public function changePassword($user, $pass) : string {
+            $sql = "UPDATE usuario SET senha = MD5('$pass') WHERE id = '$user'";
+
+            if ($this->conn->query($sql) === TRUE) {
+                return "sucesso";
+            } else {
+                return "Erro ao atualizar a senha: " . $conn->error;
+            }
+        }
     }
 ?>
