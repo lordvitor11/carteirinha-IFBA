@@ -59,17 +59,19 @@
         }
 
         public function getUserData($id) : array {
-            $sql = "SELECT nome, categoria FROM usuario WHERE id = '$id'";
+            $sql = "SELECT nome, email, matricula, categoria FROM usuario WHERE id = '$id'";
             $result = $this->conn->query($sql);
 
-            $nome = ""; $categoria = "";
+            // $nome = ""; $categoria = "";
 
             while ($row = $result->fetch_assoc()) {
                 $nome = $row['nome'];
+                $email = $row['email'];
+                $matricula = $row['matricula'];
                 $categoria = $row['categoria'];
             }
 
-            return array("nome" => $nome, "categoria" => $categoria);
+            return array("nome" => $nome, "email" => $email, "matricula" => $matricula, "categoria" => $categoria);
         }
 
         public function getCardapio() : array {
