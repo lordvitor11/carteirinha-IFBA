@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($dados['sinal'])) {
         if ($dados['sinal'] == 'changePass-confirm') {
-            $resposta = $controller->changePassword($controller->getIdByName($_SESSION['user']), $dados['dado']);
+            $resposta = $controller->changePassword($_SESSION['id'], $dados['dado']);
 
             if ($resposta == 'sucesso') {
                 $resultado = ['status' => 'sucesso'];
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $resultado = ['status' => 'erro', 'mensagem' => $resposta];
             }
         } else {
-            $resposta = $controller->checkPass($dados['pass'], $controller->getIdByName($_SESSION['user']));
+            $resposta = $controller->checkPass($dados['pass'], $_SESSION['id']);
             if ($resposta == "sucess") {
                 $resultado = ['status' => 'sucesso'];
             } else if ($resposta == "error") {
@@ -39,8 +39,8 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
 }
 
 // Verifica se as variáveis de sessão necessárias estão definidas
-$usuario = isset($_SESSION['nome']) ? $_SESSION['nome'] : 'Usuário não definido';
-$matricula = isset($_SESSION['matricula']) ? $_SESSION['matricula'] : 'Não disponível';
+$usuario = isset($_SESSION['name']) ? ucfirst($_SESSION['name']) : 'Usuário não definido';
+$matricula = isset($_SESSION['enrollment']) ? $_SESSION['enrollment'] : 'Não disponível';
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : 'Não disponível';
 $foto_perfil = '../assets/Victor Hugo.jpeg'; // Atualize este caminho conforme necessário
 ?>
