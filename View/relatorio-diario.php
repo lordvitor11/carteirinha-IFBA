@@ -54,18 +54,22 @@
         <table id="resultado">
             <thead>
                 <tr>
-                    <!-- <th><input type="checkbox" id="select-all"> Selecionar Todos</th> -->
                     <th>Nome</th>
                     <th>Matrícula</th>
-                    <!-- <th>Data</th> -->
                     <th>Hora</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Vitin</td>
-                    <td>20201180046</td>
-                </tr>
+                <?php
+                    $refeicoes = $controller->getRefeicoes();
+                    foreach ($refeicoes as $refeicao) {
+                        echo "<tr>";
+                        echo "<td>{$refeicao['nome']}</td>";
+                        echo "<td>{$refeicao['matricula']}</td>";
+                        echo "<td>{$refeicao['hora_solicitacao']}</td>";
+                        echo "</td>";
+                    }
+                ?>
             </tbody>
         </table>
 

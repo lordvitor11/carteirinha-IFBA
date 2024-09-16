@@ -406,5 +406,21 @@
                 return "Erro ao atualizar a senha: " . $conn->error;
             }
         }
+
+        public function getRefeicoes() : array {
+            date_default_timezone_set('America/Sao_Paulo');
+            $hoje = date('Y-m-d');
+            $sql = "SELECT u.nome, u.matricula, r.hora_solicitacao FROM refeicao r JOIN usuario u ON r.id_usuario = u.id WHERE r.data_solicitacao = '$hoje'";
+        
+
+            $resultados = $this->conn->query($sql);
+            $valores = array();
+
+            while ($row = mysqli_fetch_assoc($resultados)) {
+                $valores[] = $row;
+            }
+
+            return $valores;
+        }
     }
 ?>

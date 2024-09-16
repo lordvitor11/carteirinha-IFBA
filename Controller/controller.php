@@ -91,5 +91,9 @@
         public function changePassword($user, $pass) : string {
             return $this->model->changePassword($user, $pass);
         }
+
+        public function getRefeicoes() : array {
+            return $this->model->getRefeicoes();
+        }
     }
 ?>

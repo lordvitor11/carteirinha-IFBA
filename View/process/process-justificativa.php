@@ -7,11 +7,7 @@ if (isset($_SESSION['diaSemana'])) {
     global $conn;
 
     $justificativa = $_POST['justificativa'];
-    $idUser = $_SESSION['user'];
-    $sql = "SELECT id FROM usuario WHERE nome = '$idUser'";
-    $result = $conn->query($sql);
-    $row = mysqli_fetch_array($result);
-    $idUser = $row[0];
+    $idUser = $_SESSION['id'];
     $idJustificativa = 0;
 
     if ($_POST["justificativa"] == "outro") {

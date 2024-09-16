@@ -160,11 +160,7 @@
                 $current_day = date("Y-m-d");
 
                 $horario_padrao = $controller->getTime();
-                $idUser = $_SESSION['user'];
-                $sql = "SELECT id FROM usuario WHERE nome = '$idUser'";
-                $result = $conn->query($sql);
-                $row = mysqli_fetch_array($result);
-                $idUser = $row[0];
+                $idUser = $_SESSION['id'];
                 $result = $controller->hasRefeicao($idUser, $current_day);
 
                 if ($result != null) {
