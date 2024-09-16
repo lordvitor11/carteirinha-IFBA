@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 28, 2024 at 11:04 AM
+-- Generation Time: Sep 16, 2024 at 07:31 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -70,7 +70,8 @@ INSERT INTO `horario_padrao` (`id`, `inicio_vig`, `fim_vig`, `horario`) VALUES
 (2, '2024-07-18 07:11:14', '2024-07-19 07:14:12', '22:11:00'),
 (3, '2024-07-19 07:14:12', '2024-07-19 07:14:33', '04:14:00'),
 (4, '2024-07-19 07:14:33', '2024-07-26 12:19:36', '09:00:00'),
-(5, '2024-07-26 12:19:36', NULL, '10:19:00');
+(5, '2024-07-26 12:19:36', '2024-09-16 19:26:52', '10:19:00'),
+(6, '2024-09-16 19:26:52', NULL, '21:26:00');
 
 -- --------------------------------------------------------
 
@@ -131,7 +132,8 @@ CREATE TABLE `refeicao` (
 
 INSERT INTO `refeicao` (`id`, `id_usuario`, `id_cardapio`, `id_status_ref`, `id_justificativa`, `data_solicitacao`, `hora_solicitacao`, `outra_justificativa`, `motivo_cancelamento`) VALUES
 (14, 2, 44, 1, 1, '2024-08-14', '12:18:29', NULL, NULL),
-(15, 2, 45, 1, 3, '2024-08-15', '10:21:48', NULL, NULL);
+(15, 2, 45, 1, 3, '2024-08-15', '10:21:48', NULL, NULL),
+(16, 2, 42, 1, 2, '2024-09-16', '19:27:30', NULL, NULL);
 
 --
 -- Triggers `refeicao`
@@ -176,6 +178,7 @@ CREATE TABLE `usuario` (
   `id` int NOT NULL,
   `nome` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `email` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `matricula` varchar(255) COLLATE latin1_general_ci NOT NULL,
   `senha` varchar(60) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `categoria` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `telefone` varchar(11) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL
@@ -185,9 +188,9 @@ CREATE TABLE `usuario` (
 -- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `nome`, `email`, `senha`, `categoria`, `telefone`) VALUES
-(1, 'root', 'root@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00'),
-(2, 'vitor', 'vitor@gmail.com', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00');
+INSERT INTO `usuario` (`id`, `nome`, `email`, `matricula`, `senha`, `categoria`, `telefone`) VALUES
+(1, 'root', 'root@gmail.com', '20201180041', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00'),
+(2, 'vitor', 'vitor@gmail.com', '20201180046', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00');
 
 --
 -- Indexes for dumped tables
@@ -256,7 +259,7 @@ ALTER TABLE `cardapio`
 -- AUTO_INCREMENT for table `horario_padrao`
 --
 ALTER TABLE `horario_padrao`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `justificativa`
@@ -274,7 +277,7 @@ ALTER TABLE `notificacao`
 -- AUTO_INCREMENT for table `refeicao`
 --
 ALTER TABLE `refeicao`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `status_ref`
