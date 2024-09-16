@@ -72,9 +72,9 @@
             return $this->model->hasNotification($idUser);
         }
 
-        public function getIdByName($name) : int {
-            return $this->model->getIdByName($name);
-        }
+        // public function getIdByName($name) : int {
+        //     return $this->model->getIdByName($name);
+        // }
 
         public function getAssunto($userId) : array {
             return $this->model->getAssunto($userId);

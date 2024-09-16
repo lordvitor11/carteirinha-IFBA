@@ -3,19 +3,22 @@
     $controller = new LoginController();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $rawData = file_get_contents('php://input');
-        $data = json_decode($rawData, true);
-
-        $tipo = isset($data['tipo']) ? $data['tipo'] : '';
-        $string = isset($data['string']) ? $data['string'] : '';
-        // echo json_encode(['tipo' => $tipo]);
-        // $nome = $controller->findName($tipo, $string);
-        echo json_encode($nome);
-        exit;
-
-        // echo json_encode(['status' => 'success', 'nome' => $nome]);
-    }
+        if ($dados['type'] == 'all') {
             
+        } else {
+            $dadosRecebidos = file_get_contents('php://input');
+            $dados = json_decode($dadosRecebidos, true);
+
+            $nome = $controller->findName($dados['type'], $dados['value']);
+            $response = [
+                'status' => 'success',
+                'nome' => $nome,
+            ];
+
+            echo json_encode($response);
+            exit;
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -43,23 +46,26 @@
 
         <div class="center">
             <div class="input-container">
-                <input type="text" id="buscador" placeholder="Digite o nome ou matrícula...">
-                <button onclick="search()">Buscar</button>
+                <input type="text" id="buscador" placeholder="Digite o nome ou matrícula..." oninput='search()'>
+                <!-- <button onclick="search()">Buscar</button> -->
             </div>
         </div>
 
         <table id="resultado">
             <thead>
                 <tr>
-                    <th><input type="checkbox" id="select-all"> Selecionar Todos</th>
+                    <!-- <th><input type="checkbox" id="select-all"> Selecionar Todos</th> -->
                     <th>Nome</th>
                     <th>Matrícula</th>
-                    <th>Data</th>
+                    <!-- <th>Data</th> -->
                     <th>Hora</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Resultados serão inseridos aqui -->
+                <tr>
+                    <td>Vitin</td>
+                    <td>20201180046</td>
+                </tr>
             </tbody>
         </table>
 

@@ -413,33 +413,57 @@ const data = {
 
 function search() {
     const string = document.querySelector('#buscador').value;
-    let identfier = '';
+    let identifier = '';
 
     if (/^\d+$/.test(string)) {
-        identfier = 'matricula';
+        identifier = 'matricula';
     } else {
-        identfier = 'nome';
+        identifier = 'nome';
     }
 
-    const data = {
-        tipo: identfier,
-        value: string
-    };
+    if (string.value == "") {
+        fetch('relatorio-diario.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ type: 'all' })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => Promise.reject(`Network response was not ok: ${text}`));
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Houve um problema com a requisição:', error);
+        });
+    } else {
+        fetch('relatorio-diario.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ type: identifier, value: string })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.text().then(text => Promise.reject(`Network response was not ok: ${text}`));
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Houve um problema com a requisição:', error);
+        });
+    }
 
-    fetch('relatorio-diario.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log('Success:', result);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    
 }
 
 function checkPass() {

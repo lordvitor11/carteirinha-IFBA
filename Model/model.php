@@ -356,26 +356,29 @@
             return $assuntos;
         }
 
-        public function findName($type, $string) : string {
-            $sql;
-
-            if ($tipo == "matricula") {
-                $stmt = $mysqli->prepare("SELECT nome FROM usuario WHERE matricula = '$string'");
+        public function findName($type, $string) : array {
+            $nome = 'vazio';
+        
+            if ($type == "matricula") {
+                $stmt = $this->conn->prepare("SELECT nome, matricula FROM usuario WHERE matricula LIKE ?");
+                $stmt->bind_param("s", $string);
             } else {
-                $stmt = $mysqli->prepare("SELECT nome FROM usuario WHERE nome = '$string'");
+                $string = "%{$string}%";
+                $stmt = $this->conn->prepare("SELECT nome, matricula FROM usuario WHERE nome LIKE ?");
+                $stmt->bind_param("s", $string);
             }
-    
-            $stmt->bind_param("s", $string);
+        
             $stmt->execute();
             $result = $stmt->get_result();
-            $nome;
-    
+        
             if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $nome = $row['nome'];
             }
-
-            return $nome;
+        
+            $stmt->close();
+        
+            return [''];
         }
 
         public function checkPass($tempPass, $user) : string {
