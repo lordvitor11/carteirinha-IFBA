@@ -56,24 +56,6 @@
     </main>
 
     <div class="session-4">
-        <!--<h4 class="comunicados">COMUNICADOS</h4>
-        <div class="card">
-            <div class="top">
-                <a href="https://www.instagram.com/ifba_seabra" target="_blank">
-                    <div class="userDetails">
-                        <div class="profile_img">
-                            <img src="assets/profile_instagram.png" class="cover" alt="none">
-                        </div>
-                        <h3>IFBA Seabra<br><span>Seabra, Bahia</span></h3>
-                    </div>
-                </a>
-                <div>
-                    <img src="assets/dot.png" class="dot" alt="none">
-                </div>
-            </div>
-            <div class="imgBx">
-                <div class="carousel-container">
-                    <div class="carousel">
                         <?php
                             $caminhoPasta = 'View/process/images';
                             $listaArquivos = scandir($caminhoPasta);
@@ -102,28 +84,6 @@
                                 echo "<img src='View/process/sem-comunicados.jpeg' alt='Sem comunicados'>";
                             }
                         ?>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="actionBtns">
-                <a href="https://www.instagram.com/ifba_seabra" target="_blank">
-                    <div class="left">
-                        <img src="assets/heart.png" class="heart" alt="none">
-                        <img src="assets/comment.png" alt="none">
-                        <img src="assets/share.png" alt="none">
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/ifba_seabra" target="_blank">
-                    <div class="right">
-                        <img src="assets/bookmark.png" alt="none">
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div class="session-4-1">
         <?php
             if (isset($_SESSION['category']) && $_SESSION['category'] == "adm") {
                 echo "
@@ -131,7 +91,7 @@
                 <button class='custom-button-2'>GERENCIAR</button>
                 </a>";
             }
-        ?>-->
+        ?>
     </div>
 
     <main class="session-5">

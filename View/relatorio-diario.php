@@ -2,12 +2,17 @@
     require("../Controller/controller.php");
     $controller = new LoginController();
 
+    $dadosRecebidos = file_get_contents('php://input');
+    $dados = json_decode($dadosRecebidos, true);
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($dados['type'] == 'all') {
-            
+            $response = [
+                'status' => 'sucess' 
+            ];
+            echo json_encode($response);
         } else {
-            $dadosRecebidos = file_get_contents('php://input');
-            $dados = json_decode($dadosRecebidos, true);
+            
 
             $nome = $controller->findName($dados['type'], $dados['value']);
             $response = [

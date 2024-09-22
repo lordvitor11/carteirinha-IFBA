@@ -328,11 +328,11 @@ function createSend() {
     Object.assign(items.buttonCancel, {
         textContent: 'Fechar',
         for: 'new-password-2',
-        textContent: 'Nova Senha:',
+        textContent: 'Cancelar',
         classList: 'close'
     });
     // buttonCancel.classList.add('close');
-    buttonCancel.addEventListener('click', closeNotificationPopup);
+    items.buttonCancel.addEventListener('click', closeNotificationPopup);
 
     Object.assign(items.buttonConfirm, {
         textContent: 'Enviar',
@@ -340,8 +340,8 @@ function createSend() {
         type: 'submit'
     });
 
-    divButtons.classList.add('buttons');
-    h3.textContent = "Enviar Notificação";
+    items.divButtons.classList.add('buttons');
+    items.h3.textContent = "Enviar Notificação";
 
     Object.assign(items.labelMsg, {
         textContent: 'Mensagem:',
@@ -356,14 +356,14 @@ function createSend() {
         required: true
     });
 
-    labelMatricula.setAttribute('for', 'notificationRecipient');
-    labelMatricula.textarea = 'Matrícula (deixe em branco para enviar a todos):';
-    input.setAttribute('id', 'notificationRecipient');
-    input.setAttribute('name', 'notificationRecipient');
-    input.setAttribute('placeholder', 'Digite a matrícula...');
+    items.labelMatricula.setAttribute('for', 'notificationRecipient');
+    items.labelMatricula.textarea = 'Matrícula (deixe em branco para enviar a todos):';
+    items.input.setAttribute('id', 'notificationRecipient');
+    items.input.setAttribute('name', 'notificationRecipient');
+    items.input.setAttribute('placeholder', 'Digite a matrícula...');
     // buttonConfirm.setAttribute('type', 'submit');
 
-    buttonConfirm.addEventListener('click', function () {
+    items.buttonConfirm.addEventListener('click', function () {
         const input = document.querySelector('#notificationRecipient');
         const msg = document.querySelector('#notificationMessage');
         const popup = document.querySelector('#notificationPopup');
@@ -395,8 +395,8 @@ function createSend() {
     });
 
 
-    divButtons.appendChild(buttonConfirm);
-    divButtons.appendChild(buttonCancel);
+    items.divButtons.appendChild(items.buttonConfirm);
+    items.divButtons.appendChild(items.buttonCancel);
 
     const array = [items.h3, items.labelMsg, items.textarea, items.labelMatricula,
         items.input, items.divButtons
@@ -462,8 +462,6 @@ function search() {
             console.error('Houve um problema com a requisição:', error);
         });
     }
-
-    
 }
 
 function checkPass() {
@@ -574,21 +572,16 @@ function passSection() {
                     if (!response.ok) {
                         return response.text().then(text => Promise.reject(`Network response was not ok: ${text}`));
                     }
-                    // Analisa a resposta JSON
                     return response.json();
                 })
                 .then(data => {
-                    // Verifica o valor do campo `status` na resposta JSON
                     if (data.status === 'sucesso') {
-                        // Redireciona para a URL desejada
                         window.location.href = 'perfil.php?id=1';
                     } else {
-                        // Lida com casos onde o status não é 'sucesso'
                         console.log('Resposta inesperada:', data);
                     }
                 })
                 .catch(error => {
-                    // Captura e exibe qualquer erro que tenha ocorrido
                     console.error('Houve um problema com a requisição:', error);
                 });
             } else {

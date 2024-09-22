@@ -1,7 +1,7 @@
 <?php
     $host = 'localhost';
     $user = 'root';
-    $password = '';
+    $password = 'plan_laravel';
     $database = 'carteirinha23';
 
     $conn = new mysqli($host, $user, $password, $database);
