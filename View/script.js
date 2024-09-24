@@ -304,18 +304,18 @@ function sendNotification(type) {
         popupList.innerHTML = '';
 
         const array = createSend();
-
-        console.log(array[7])
-
-        array.forEach(element => {
-            popup.appendChild(element);
-        });
+        setTimeout(() => {
+            array.forEach(element => {
+                popup.appendChild(element);
+            });
+        }, 500);
     }
 }
 
 function createSend() {
     const items = {
         h3: document.createElement('h3'),
+        inputAssunto: document.createElement('input'),
         labelMsg: document.createElement('label'),
         textarea: document.createElement('textarea'),
         labelMatricula: document.createElement('label'),
@@ -332,7 +332,10 @@ function createSend() {
         classList: 'close'
     });
     // buttonCancel.classList.add('close');
-    items.buttonCancel.addEventListener('click', closeNotificationPopup);
+    items.buttonCancel.addEventListener('click', () => {
+        closeNotificationPopup();
+        location.reload();
+    });
 
     Object.assign(items.buttonConfirm, {
         textContent: 'Enviar',
@@ -356,6 +359,13 @@ function createSend() {
         required: true
     });
 
+    Object.assign(items.inputAssunto, {
+        id: 'assunto',
+        name: 'assunto',
+        placeholder: 'Assunto',
+        required: true
+    });
+
     items.labelMatricula.setAttribute('for', 'notificationRecipient');
     items.labelMatricula.textarea = 'Matrícula (deixe em branco para enviar a todos):';
     items.input.setAttribute('id', 'notificationRecipient');
@@ -364,6 +374,7 @@ function createSend() {
     // buttonConfirm.setAttribute('type', 'submit');
 
     items.buttonConfirm.addEventListener('click', function () {
+        const inputAssunto = document.querySelector('#assunto');
         const input = document.querySelector('#notificationRecipient');
         const msg = document.querySelector('#notificationMessage');
         const popup = document.querySelector('#notificationPopup');
@@ -373,32 +384,48 @@ function createSend() {
         const message = msg.value;
 
         if (message != "") {
-            if (value == "") {
-                h2.textContent = 'Notificação enviada a todos!';
-            } else {
-                h2.textContent = 'Notificação Enviada!';
-            }
+            const dados = {
+                matricula: input.value,
+                assunto: inputAssunto.value,
+                mensagem: message
+            };
 
-            popup.innerHTML = '';
-            popup.classList.add('enviado');
-            button.classList.add('close');
-            button.textContent = 'Fechar';
-            button.addEventListener('click', function() {
-                closeNotificationPopup();
-                location.reload();
-            });
-            
-            popup.appendChild(h2);
-            popup.appendChild(button);
+            fetch('process/process-notification.php', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dados)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status == "success") {
+                    h2.textContent = 'Notificação Enviada!';
+                } else {
+                    h2.textContent = 'Notificação enviada a todos!';
+                }
+    
+                popup.innerHTML = '';
+                popup.classList.add('enviado');
+                button.classList.add('close');
+                button.textContent = 'Fechar';
+                button.addEventListener('click', function() {
+                    closeNotificationPopup();
+                    location.reload();
+                });
+                
+                popup.appendChild(h2);
+                popup.appendChild(button);
+            })
+            .catch(error => console.error('Erro:', error));            
         }
-
     });
 
 
     items.divButtons.appendChild(items.buttonConfirm);
     items.divButtons.appendChild(items.buttonCancel);
 
-    const array = [items.h3, items.labelMsg, items.textarea, items.labelMatricula,
+    const array = [items.h3, items.inputAssunto, items.labelMsg, items.textarea, items.labelMatricula,
         items.input, items.divButtons
     ];
 

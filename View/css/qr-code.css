@@ -1,2 +1,21 @@
 @import url(style.css);
 @import url(mq/cardapio.mq.css);
+
+.center {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.center h1 {
+    color: green;
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    padding: 10px;
+}

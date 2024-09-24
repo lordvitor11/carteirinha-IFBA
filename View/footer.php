@@ -34,7 +34,7 @@
             <div id="notificationvList">
                 <?php
                     if (isset($_SESSION['logged_in'])) {
-                        $userId = $controller->$_SESSION['id'];
+                        $userId = $_SESSION['id'];
                         $result = $controller->hasNotification($userId);
 
                         if ($result) {

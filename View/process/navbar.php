@@ -19,6 +19,8 @@ function showNav($call) {
     $admin = "$rootUrl/View/painel-administrador.php";
     $perfil = "$rootUrl/View/perfil.php";
     $notification_icon_path = "$rootUrl/assets/notification.png"; // Caminho atualizado para o ícone
+    $qrcode = "$rootUrl/assets/qr-code.png";
+    $qrcodeLink = "$rootUrl/View/qr-code.php"; 
 
     $notification_icon = "<a href='#' class='notification-icon' title='Notificações'><img src='$notification_icon_path' alt='Notificações'></a>";
 
@@ -37,7 +39,20 @@ function showNav($call) {
     if ($call == "login") {
         echo "<nav><div><a href='$index'>Início</a><a href='$cardapio'>Cardápio</a><a href='$sobre'>Sobre</a></div></nav>";
     } else {
-        echo "<nav><div><a href='$index'>Início</a><a href='$cardapio'>Cardápio</a><a href='$sobre'>Sobre</a></div>$text</nav>";
+        if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
+            echo "<nav>
+                    <div>
+                      <a href='$index'>Início</a>
+                      <a href='$cardapio'>Cardápio</a>
+                      <a href='$sobre'>Sobre</a>
+                      <a href='$qrcodeLink'><img src='$qrcode' alt='qr-code-alomoço'></a>
+                    </div>
+                    $text
+                  </nav>
+            ";
+        } else {
+            echo "<nav><div><a href='$index'>Início</a><a href='$cardapio'>Cardápio</a><a href='$sobre'>Sobre</a></div>$text</nav>";
+        }
     }
 }
 ?>

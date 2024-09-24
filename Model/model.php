@@ -422,5 +422,46 @@
 
             return $valores;
         }
+
+        public function sendNotification($matricula, $remetente, $assunto, $mensagem) : string {
+            if ($matricula === "") {
+                $sql = "INSERT INTO notificacao (id_destinatario, id_remetente, assunto, mensagem)
+                        SELECT id, ?, ?, ?
+                        FROM usuario
+                        WHERE categoria <> 'adm'";
+                
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("sss", $remetente, $assunto, $mensagem);
+                if ($stmt->execute()) {
+                    $stmt->close();
+                    return "success";
+                } else {
+                    return "error";
+                }
+            } else {
+                $sql = "SELECT id FROM usuario WHERE matricula = ?";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("s", $matricula);
+                $stmt->execute();
+        
+                $result = $stmt->get_result();
+                if ($row = $result->fetch_assoc()) {
+                    $destinatario = $row['id'];
+        
+                    $sql = "INSERT INTO notificacao (id_remetente, id_destinatario, assunto, mensagem)
+                            VALUES (?, ?, ?, ?)";
+                    $stmt = $this->conn->prepare($sql);
+                    $stmt->bind_param("ssss", $remetente, $destinatario, $assunto, $mensagem);
+                    if ($stmt->execute()) {
+                        $stmt->close();
+                        return "success";
+                    } else {
+                        return "error";
+                    }
+                } else {
+                    return "error";
+                }
+            }
+        }        
     }
 ?>

@@ -95,5 +95,9 @@
         public function getRefeicoes() : array {
             return $this->model->getRefeicoes();
         }
+
+        public function sendNotification($matricula, $remetente, $assunto, $mensagem) : string {
+            return $this->model->sendNotification($matricula, $remetente, $assunto, $mensagem);
+        }
     }
 ?>
