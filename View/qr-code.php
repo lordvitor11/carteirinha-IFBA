@@ -17,8 +17,8 @@
         <h1>QR Code do Almoço</h1>
         <img src="../assets/qrcode-frame.png" alt="qr-code-almoço"> <br>
         <div class="buttons">
-            <button>Imprimir</button>
-            <button>Voltar</button>
+            <a href="#"><input class="button" type="button" value="Imprimir"></a>
+            <a href="../index.php"><input class="button voltar" type="button" value="Voltar"></a>
         </div>
     </div>
 

@@ -19,3 +19,7 @@
 .buttons button {
     padding: 10px;
 }
+
+.voltar {
+    background-color: var(--salmon) !important;
+}

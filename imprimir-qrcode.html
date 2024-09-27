@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprimir PDF</title>
+</head>
+<body>
+
+    <h1>PDF para Imprimir</h1>
+    <a href="assets/qrcode-frame.pdf" target="_blank" id="linkPdf">Abrir PDF</a>
+    <button onclick="imprimirPdf()">Imprimir PDF</button>
+
+    <script>
+        function imprimirPdf() {
+            const pdfUrl = document.getElementById('linkPdf').href;
+            const janelaImpressao = window.open(pdfUrl);
+
+            janelaImpressao.onload = function() {
+                janelaImpressao.print();
+            };
+        }
+    </script>
+
+</body>
+</html>
