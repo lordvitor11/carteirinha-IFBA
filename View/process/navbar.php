@@ -1,8 +1,8 @@
 <?php
-    if (session_status() === PHP_SESSION_NONE) { session_start(); }
-    if (!isset($_SESSION['logged_in']) && basename($_SERVER['PHP_SELF']) != 'login.php') {
-        header('Location: /carteirinha-IFBA/View/login.php');
-    }
+if (session_status() === PHP_SESSION_NONE) { session_start(); }
+if (!isset($_SESSION['logged_in']) && basename($_SERVER['PHP_SELF']) != 'login.php') {
+    header('Location: /carteirinha-IFBA/View/login.php');
+}
 ?>
 
 <?php
@@ -21,6 +21,7 @@ function showNav($call) {
     $notification_icon_path = "$rootUrl/assets/notification.png"; // Caminho atualizado para o ícone
     $qrcode = "$rootUrl/assets/qr-code.png";
     $qrcodeLink = "$rootUrl/View/qr-code.php"; 
+    $qrcodeEstudanteLink = "$rootUrl/View/qr-code-estudante.php"; // Novo link para QR Code do estudante
 
     $notification_icon = "<a href='#' class='notification-icon' title='Notificações'><img src='$notification_icon_path' alt='Notificações'></a>";
 
@@ -51,7 +52,15 @@ function showNav($call) {
                   </nav>
             ";
         } else {
-            echo "<nav><div><a href='$index'>Início</a><a href='$cardapio'>Cardápio</a><a href='$sobre'>Sobre</a></div>$text</nav>";
+            echo "<nav>
+                    <div>
+                      <a href='$index'>Início</a>
+                      <a href='$cardapio'>Cardápio</a>
+                      <a href='$sobre'>Sobre</a>
+                      <a href='$qrcodeEstudanteLink'><img src='$qrcode' alt='qr-code-estudante'></a> <!-- Botão QR Code para estudante -->
+                    </div>
+                    $text
+                  </nav>";
         }
     }
 }

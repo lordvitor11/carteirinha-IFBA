@@ -275,7 +275,7 @@ h3{
   padding-inline: var(--container-padding-horizontal);
   display: grid;
   place-items: center;
-  height: 5px;
+  height: 300px;
 }
 
 .session-4-1{

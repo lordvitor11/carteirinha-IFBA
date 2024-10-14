@@ -56,42 +56,7 @@
     </main>
 
     <div class="session-4">
-                        <?php
-                            $caminhoPasta = 'View/process/images';
-                            $listaArquivos = scandir($caminhoPasta);
-                            if (count($listaArquivos) > 2) {
-                                $listaArquivos = array_diff($listaArquivos, array('.', '..'));
-                                $numArquivos = count($listaArquivos);
 
-                                $listaArquivos_ = array_values($listaArquivos);
-
-                                $carouselImages = [];
-
-                                $jsonStringOrigem = file_get_contents('View/process/dados.json');
-                                $arrayDados = json_decode($jsonStringOrigem, true);
-                                
-                                for ($c = 1; $c < ($numArquivos + 1); $c++) {
-                                    $img = $listaArquivos_[$c - 1];
-                                    $carouselImages[] = ["View/process/images/$img" => $arrayDados["img$c"]['link']];
-                                }
-                
-                                foreach ($carouselImages as $item){
-                                    foreach ($item as $image => $link) {
-                                        echo "<a href='$link' target='_blank'><img src='$image' alt='Carousel Image'></a>";
-                                    }
-                                }
-                            } else {
-                                echo "<img src='View/process/sem-comunicados.jpeg' alt='Sem comunicados'>";
-                            }
-                        ?>
-        <?php
-            if (isset($_SESSION['category']) && $_SESSION['category'] == "adm") {
-                echo "
-                <a href='View/comunicados-admin.php'>
-                <button class='custom-button-2'>GERENCIAR</button>
-                </a>";
-            }
-        ?>
     </div>
 
     <main class="session-5">
