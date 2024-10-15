@@ -1,0 +1,41 @@
+@import url(main.mq.css);
+
+/* Estilos responsivos para telas menores */
+@media only screen and (max-width: 430px) {
+    .img-logo {
+        width: 100%; /* Logo ocupando 100% da largura */
+    }
+
+    .center {
+        padding: 10px; /* Reduzindo o padding */
+    }
+
+    .camera-container {
+        margin-bottom: 10px; /* Reduzindo o espaçamento entre a câmera e os botões */
+    }
+
+    .frame {
+        width: 80%; /* Moldura ocupando 80% da largura */
+        height: auto; /* Altura automática para manter a proporção */
+    }
+
+    .subtitle {
+        font-size: 18px; /* Diminuindo o tamanho da fonte */
+        width: 90%; /* Ajustando a largura do subtítulo */
+    }
+
+    .description {
+        font-size: 12px; /* Diminuindo o tamanho da fonte da descrição */
+    }
+
+    .buttons {
+        flex-direction: column; /* Mudando a direção dos botões para coluna */
+        width: 100%; /* Botões ocupando toda a largura */
+        align-items: center; /* Centralizando os botões */
+    }
+
+    .buttons .button {
+        width: 90%; /* Botões ocupando 90% da largura */
+        margin-bottom: 10px; /* Espaçamento entre os botões */
+    }
+}

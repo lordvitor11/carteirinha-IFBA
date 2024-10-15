@@ -1,0 +1,39 @@
+/* Media query para dispositivos com largura máxima de 768px */
+@media (max-width: 768px) {
+    .container form {
+        padding: 15px; /* Reduz o padding */
+    }
+
+    h1 {
+        font-size: 36px; /* Tamanho do título reduzido */
+    }
+
+    input {
+        padding: 8px; /* Reduz o padding do input */
+    }
+
+    .botao-container {
+        flex-direction: column; /* Botões empilhados */
+        gap: 10px; /* Espaço entre os botões */
+    }
+
+    .cancelar,
+    .validar {
+        width: 100%; /* Botões em largura total */
+    }
+}
+
+/* Media query para dispositivos com largura máxima de 430px */
+@media (max-width: 430px) {
+    h1 {
+        font-size: 28px; /* Tamanho do título ainda menor */
+    }
+
+    input {
+        font-size: 14px; /* Fonte menor */
+    }
+
+    .container {
+        margin: 10px; /* Margem reduzida na container */
+    }
+}

@@ -1,0 +1,44 @@
+@import url(../css/historico.css);
+
+@media (max-width: 430px) {
+    .titulo {
+        font-size: 30px; /* Diminuir o tamanho do título */
+    }
+
+    .container {
+        width: 90%; /* Ajustar a largura da container */
+    }
+
+    .input-container {
+        flex-direction: column; /* Mudar a direção para coluna */
+        align-items: flex-start; /* Alinhar à esquerda */
+        width: 100%; /* Ocupa toda a largura */
+    }
+
+    .input-container label {
+        margin-bottom: 5px; /* Espaçamento abaixo do label */
+    }
+
+    input[type="date"], input[type="text"] {
+        width: 100%; /* Largura total para campos de entrada */
+        margin-right: 0; /* Remover margens direita */
+    }
+
+    table {
+        width: 100%; /* Ajustar a largura da tabela */
+    }
+
+    th, td {
+        padding: 10px; /* Diminuir o padding das células */
+        font-size: 14px; /* Ajustar tamanho da fonte */
+    }
+
+    .button-voltar, .button {
+        width: 100%; /* Largura total para botões */
+        margin-top: 10px; /* Espaçamento acima do botão */
+    }
+
+    .popup-content {
+        width: 90%; /* Ajustar largura do popup */
+    }
+}

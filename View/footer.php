@@ -11,7 +11,7 @@ if ($relativePath == "/index.php") {
     $script = 'View/script.js';
     require("Controller/controller.php");
     $controller = new LoginController();
-} else if ($relativePath == "/painel-administrador.php" || $relativePath == "/sobre.php" || $relativePath == "/qr-code-estudante.php" || $relativePath == "/qr-code.php" || $relativePath == "/perfil.php.php") {
+} else if ($relativePath == "/painel-administrador.php" || $relativePath == "/sobre.php" || $relativePath == "/qr-code-estudante.php" || $relativePath == "/qr-code.php" || $relativePath == "/perfil.php" || $relativePath == "/aprovado.php" || $relativePath == "/negado.php" || $relativePath == "/relatorio-feedbacks.php" || $relativePath == "/editar-horario.php" || $relativePath == "/cardapio-criar.php" || $relativePath == "/cardapio-cancelar.php" || $relativePath == "/cardapio-alterar.php") {
     require("../Controller/controller.php"); // Ajuste aqui
     $controller = new LoginController();
 }
@@ -49,12 +49,12 @@ if ($relativePath == "/index.php") {
             }
             ?>
         </div>
-        <?php if ($_SESSION['category'] == 'adm'): ?>
-            <div class="buttons">
+        <div class="buttons">
+            <?php if ($_SESSION['category'] == 'adm'): ?>
                 <button class='send' onclick='sendNotification(1)'>Enviar notificação</button>
-                <button class="close" onclick="closeNotificationPopup()">Fechar</button>
-            </div>
-        <?php endif; ?>
+            <?php endif; ?>
+            <button class="close" onclick="closeNotificationPopup()">Fechar</button> <!-- Botão de fechar para todos -->
+        </div>
     </div>
     
     <footer class="rodape">

@@ -1,5 +1,5 @@
 @import url(style.css);
-@import url(mq/cardapio.mq.css);
+@import url(mq/qr-code-estudante.mq.css);
 
 * {
     box-sizing: border-box;
@@ -77,7 +77,7 @@ body, html {
 }
 
 .subtitle {
-    background-color: rgba(220, 220, 220, 0.8); /* Cor cinza mais clara */
+    background-color: rgba(170, 170, 170, 0.8); /* Cor cinza clara com pouca opacidade */
     padding: 20px;
     width: 320px;
     text-align: center;
@@ -86,7 +86,6 @@ body, html {
     font-weight: bold;
     border-radius: 10px;
     margin-bottom: 20px; /* Espaçamento entre o retângulo e a moldura */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 .description {

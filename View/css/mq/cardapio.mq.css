@@ -1,7 +1,64 @@
 @import url(main.mq.css);
 
-@media only screen and (max-width: 430px) {
-  .img-logo {
-    width: 100%;
+@media screen and (max-width: 768px) {
+  /* Ajustes para telas menores que 768px */
+  .container {
+      margin: 10px;
+      padding: 10px;
+  }
+
+  h1 {
+      font-size: 32px;
+  }
+
+  table {
+      width: 100%;
+  }
+
+  th, td {
+      padding: 10px;
+      font-size: 14px;
+  }
+
+  .button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+  }
+
+  .feedback-container {
+      margin: 10px 0;
+  }
+
+  #feedback {
+      font-size: 14px;
+  }
+
+  #btn-submit-feedback {
+      width: 100%;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  /* Ajustes para telas menores que 430px */
+  h1 {
+      font-size: 28px;
+  }
+
+  .image2 {
+      max-height: 150px;
+  }
+
+  .popup {
+      width: 90%;
+      padding: 15px;
+  }
+
+  #feedback {
+      font-size: 12px;
+  }
+
+  #btn-submit-feedback {
+      padding: 8px;
   }
 }

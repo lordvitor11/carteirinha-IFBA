@@ -1,4 +1,5 @@
 @import url(style.css);
+@import url(mq/cardapio-alterar.mq.css);
 
  body {
     font-family: Arial, sans-serif;

@@ -1,11 +1,36 @@
 @import url(main.mq.css);
 
 @media only screen and (max-width: 430px) {
-  .img-logo {
-    width: 100%;
-  }
+    .img-logo {
+        width: 100%;
+    }
 
-  .container-sphere {
-    flex-direction: column;
-  }
+    .container-sphere {
+        flex-direction: column; /* Mudando a direção para coluna */
+        align-items: center; /* Centralizando os itens */
+    }
+
+    .semi-sphere {
+        width: 90%; /* Largura reduzida para dispositivos menores */
+        height: auto; /* Ajuste automático da altura */
+        margin: 10px 0; /* Margem reduzida */
+    }
+
+    .img-sobre {
+        width: 100px; /* Largura reduzida da imagem */
+        height: 100px; /* Altura reduzida da imagem */
+    }
+
+    .contact-title {
+        font-size: 20px; /* Tamanho da fonte reduzido */
+    }
+
+    form input,
+    form textarea {
+        padding: 8px; /* Padding reduzido para campos de entrada */
+    }
+
+    form button {
+        width: 100%; /* Botão ocupando a largura total */
+    }
 }
