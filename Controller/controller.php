@@ -99,5 +99,9 @@
         public function sendNotification($matricula, $remetente, $assunto, $mensagem) : string {
             return $this->model->sendNotification($matricula, $remetente, $assunto, $mensagem);
         }
+
+        public function retirarAlmoco($idUser) : string {
+            return $this->model->retirarAlmoco($idUser);
+        }
     }
 ?>

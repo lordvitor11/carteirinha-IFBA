@@ -462,6 +462,16 @@
                     return "error";
                 }
             }
-        }        
+        }     
+        
+        public function retirarAlmoco($idUser) : string {
+            $stmt = $this->conn->prepare("SELECT * FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) { return "confirmar"; } 
+            else { return "recusar"; }
+        }
     }
 ?>
