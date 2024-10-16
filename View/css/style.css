@@ -19,10 +19,10 @@
 }
 
 body{
-  background-color: #f0f4f7;
+  background-color: white;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Adicione essa linha */
   justify-content: space-between;
   min-height: 100vh; /* Garantir que a altura mínima seja 100% da viewport */
 }
@@ -34,6 +34,7 @@ body{
   align-items: center;
   background-color: #388E3C;
   color: white;
+  flex-grow: 1; /* Adicione essa linha */
 }
 
 nav {
@@ -98,6 +99,7 @@ nav a:hover { color: rgb(192, 192, 192); }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-grow: 1; /* Adicione essa linha */
 }
 
 .session-2 div {
@@ -163,6 +165,7 @@ nav a:hover { color: rgb(192, 192, 192); }
 
 .image {
   width: 100%; 
+  background-color: white;
   margin-top: 10px;
   margin-bottom: -2px;
 }
@@ -195,10 +198,17 @@ nav a:hover { color: rgb(192, 192, 192); }
   margin: 20px;
 }
 
-.menu-image {
-  width: 70px; 
-  height: auto;
-  margin-bottom: 10px;
+.image {
+  background-color: #fdfdfd;
+  display: flex; /* Para centralizar a imagem */
+  justify-content: center; /* Centraliza a imagem horizontalmente */
+  margin-bottom: -20px; /* Ajuste a margem inferior se necessário */
+}
+
+.image img {
+  width: 100%; /* Use 100% para ocupar a largura do contêiner */
+  max-width: 300px; /* Defina um tamanho máximo para a imagem */
+  height: auto; /* Mantém a proporção da imagem */
 }
 
 .menu-name {
@@ -259,6 +269,7 @@ h3{
   display: flex;
   justify-content: center; /* Centraliza o conteúdo horizontalmente */
   flex-direction: column; /* Alinha itens verticalmente */
+  flex-grow: 1; /* Adicione essa linha */
 }
 
 .session-3 .content {
@@ -284,9 +295,12 @@ h3{
   --container-padding-horizontal: 32px;
   position: relative;
   padding-inline: var(--container-padding-horizontal);
-  display: grid;
-  place-items: center;
-  height: 300px;
+  display: flex; /* Use flexbox para alinhar os itens */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  height: 300px; /* Altura da seção */
+  flex-grow: 1;
+  margin-top: -20px; /* Ajuste a margem superior para conectar à imagem */
 }
 
 .session-4-1{
@@ -298,6 +312,15 @@ h3{
   padding-inline: var(--container-padding-horizontal);
   place-items: center;
   height: 100px;
+}
+
+.session-5 {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  flex-direction: column; /* Alinha itens verticalmente */
+  flex-grow: 1; /* Adicione essa linha */
 }
 
 .custom-button-2 {

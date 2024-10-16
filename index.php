@@ -50,14 +50,13 @@
             <h1 class="title">COMO SURGIU?</h1>
             <p class="text">O projeto da carteirinha digital iniciou-se em 2023 com o intuito de simplificar o processo de almoço na escola, proporcionando praticidade e controle aos alunos. Além disso, oferece segurança e eficiência para a instituição de ensino, tornando a experiência das refeições na escola muito mais conveniente e agradável.</p>
         </div>
-        <div class="image">
-            <img src="assets/cozinheira.png" alt="Imagem do Boneco" class="image" draggable="false">
-        </div>
     </main>
 
-    <div class="session-4">
-
+    <div class="image">
+        <img src="assets/cozinheira.png" alt="Imagem do Boneco" class="image" draggable="false">
     </div>
+
+    <div class="session-4"></div>
 
     <main class="session-5">
         <div class="menu-section">
