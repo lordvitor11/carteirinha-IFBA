@@ -1,11 +1,19 @@
 @import url(mq/main.mq.css);
 
-.container-sphere {
+body, html {
+    height: 100%;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh; /* Garantir que a altura mínima seja 100% da viewport */
+}
+
+.container-sphere {
+    flex-grow: 1; /* Permite que a área de conteúdo central cresça */
+    display: flex; /* Adicionado para usar flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    flex-direction: column; /* Mantém as semi-esferas na vertical */
 }
 
 .person {
@@ -23,7 +31,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin: 10px 0; /* Adicione margens verticais para espaçamento */
     border: 2px solid #388E3C;
     box-shadow: 10px 10px 5px lightblue;
 }
@@ -41,7 +49,7 @@
     margin: 5px 0;
 }
 
-.person h2{
+.person h2 {
     color: #388E3C;
 }
 
@@ -55,6 +63,7 @@ hr {
 .contact-form {
     text-align: center;
     margin: 20px 0;
+    flex-grow: 1; /* Adicione isso */
 }
 
 .contact-title {

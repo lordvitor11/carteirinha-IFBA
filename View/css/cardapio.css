@@ -12,11 +12,13 @@
     align-items: center;
     min-height: 100vh;
     margin: 20px;
-    position: relative; /* Add this line */
+    position: relative;
+    overflow-x: auto; /* Adiciona rolagem horizontal, se necessário */
 }
 
 table {
-    width: 80%;
+    width: 100%; /* Altera para 100% para se ajustar à largura do contêiner */
+    max-width: 100%; /* Garante que a tabela não ultrapasse a largura do contêiner */
     border-collapse: collapse;
     margin: 20px;
     box-shadow: 5px 5px 10px lightblue;

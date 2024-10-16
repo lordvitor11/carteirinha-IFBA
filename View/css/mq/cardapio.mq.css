@@ -13,6 +13,7 @@
 
   table {
       width: 100%;
+      font-size: 14px; /* Ajusta o tamanho da fonte para telas menores */
   }
 
   th, td {
@@ -44,6 +45,11 @@
   h1 {
       font-size: 28px;
   }
+
+  table {
+    font-size: 14px; /* Ajusta o tamanho da fonte para telas menores */
+  }
+
 
   .image2 {
       max-height: 150px;

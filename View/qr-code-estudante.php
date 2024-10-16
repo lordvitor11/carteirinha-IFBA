@@ -32,19 +32,21 @@
 
     <script>
         function requestCameraPermission() {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
                 navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function(stream) {
                     console.log("Permissão de câmera concedida");
+                    // Adicione aqui o código para usar a câmera, como mostrar a transmissão ao vivo.
                 })
                 .catch(function(error) {
-                    console.error("Permissão de câmera negada", error);
-                    alert("Permissão de câmera negada.");
+                    console.error("Erro ao tentar acessar a câmera:", error);
+                    alert("Erro ao tentar acessar a câmera: " + error.message);
                 });
             } else {
-                alert("Navegador não suporta acesso à câmera.");
+                alert("Navegador não suporta o acesso à câmera.");
             }
         }
+
         window.onload = requestCameraPermission;
     </script>
 

@@ -20,6 +20,11 @@
 
 body{
   background-color: #f0f4f7;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh; /* Garantir que a altura mínima seja 100% da viewport */
 }
 
 .session-1 {
@@ -252,21 +257,27 @@ h3{
   width: 100%;
   background-color: white;
   display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  flex-direction: column; /* Alinha itens verticalmente */
 }
 
 .session-3 .content {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .session-3 .image {
-  width: 100%;
-  height: 100%;
+  display: flex; /* Para centralizar a imagem */
+  justify-content: center; /* Centraliza a imagem horizontalmente */
 }
+
+.session-3 .image img {
+  width: 300px; /* Largura fixa */
+  height: auto; /* Mantém a proporção */
+  max-width: 100%; /* Adapta ao contêiner, mas não o ultrapassa */
+}
+
 
 .session-4 {
   background-color: #388E3C;
