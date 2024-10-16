@@ -75,8 +75,13 @@ if ($relativePath == "/index.php") {
         <h1>ALLCONFIRM</h1>
     </template>
     <template id="oneconfirm">
-        
-        <h1>ONECONFIRM</h1>
+        <h1>Essa é a pessoa que deve receber?</h1>
+
+        <h2>Nome: <span class="nome"></span></h2>
+        <h2>E-mail: <span class="email"></span></h2>
+        <h2>Matricula: <span class="matricula"></span></h2>
+        <h2>Telefone: <span class="telefone"></span></h2>
+
     </template>
     <!-- <template id="screen1">
     </template>
@@ -117,11 +122,41 @@ if ($relativePath == "/index.php") {
             document.querySelector('#notificationPopup').innerHTML = document.querySelector('#send').innerHTML;
             
             document.querySelector('.confirm').addEventListener('click', () => {
-            if (document.querySelector('#notificationRecipient').value != '') {
-                document.querySelector('#notificationPopup').innerHTML = document.querySelector('#oneconfirm').innerHTML;
-            } else {
-                document.querySelector('#notificationPopup').innerHTML = document.querySelector('#allconfirm').innerHTML;
-            }
+                if (document.querySelector('#notificationRecipient').value != '') {
+                    const matricula = document.querySelector('#notificationRecipient').value;
+                    document.querySelector('#notificationPopup').innerHTML = document.querySelector('#oneconfirm').innerHTML;
+                    
+
+                    fetch('process/process-oneconfirm.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: new URLSearchParams({
+                            'matricula': matricula
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Exibe os dados do usuário
+                            // alert('Nome: ' + data.data.nome + '\nEmail: ' + data.data.email + '\nTelefone: ' + data.data.telefone);
+                            document.querySelector('.nome').innerText = data.data.nome;
+                            document.querySelector('.email').innerText = data.data.email;
+                            document.querySelector('.matricula').innerText = data.data.matricula;
+                            document.querySelector('.telefone').innerText = data.data.telefone;
+
+                        } else {
+                            // Exibe a mensagem de erro
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao enviar o sinal:', error);
+                    });
+                } else {
+                    document.querySelector('#notificationPopup').innerHTML = document.querySelector('#allconfirm').innerHTML;
+                }
             });
         }); 
 

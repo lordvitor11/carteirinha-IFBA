@@ -474,5 +474,23 @@
             if ($result->num_rows > 0) { return "confirmar"; } 
             else { return "recusar"; }
         }
+
+        public function getDataByMatricula($matricula) : array {
+            $stmt = $this->conn->prepare("SELECT nome, email, matricula, telefone FROM usuario WHERE matricula = ?");
+            $stmt->bind_param("s", $matricula);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+    
+            $userData = [];
+            if ($result->num_rows > 0) {
+                $userData = $result->fetch_assoc(); 
+                $stmt->close();
+                return $userData;
+            } else {
+                return ["erro"];
+            }
+
+        }
     }
 ?>

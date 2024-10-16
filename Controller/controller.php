@@ -103,5 +103,9 @@
         public function retirarAlmoco($idUser) : string {
             return $this->model->retirarAlmoco($idUser);
         }
+
+        public function getDataByMatricula($matricula) : array {
+            return $this->model->getDataByMatricula($matricula);
+        }
     }
 ?>
