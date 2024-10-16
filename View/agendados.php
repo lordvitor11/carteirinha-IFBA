@@ -5,12 +5,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $motivo = $_POST['motivo'];
-        $idUser = $_SESSION['user'];
-        $sql = "SELECT id FROM usuario WHERE nome = '$idUser'";
-        $result = $conn->query($sql);
-        $row = mysqli_fetch_array($result);
-        $idUser = $row[0];
-
+        $idUser = $_SESSION['id'];
         $current_day = date("Y-m-d");
 
         $result = $controller->cancelarRefeicao($idUser, $current_day, $motivo);
@@ -49,11 +44,7 @@
         <table>
 
             <?php 
-                $idUser = $_SESSION['user'];
-                $sql = "SELECT id FROM usuario WHERE nome = '$idUser'";
-                $result = $conn->query($sql);
-                $row = mysqli_fetch_array($result);
-                $idUser = $row[0];
+                $idUser = $_SESSION['id'];
                 
                 $sql = "SELECT * FROM refeicao WHERE id_usuario = '$idUser'";
                 $result = $conn->query($sql);

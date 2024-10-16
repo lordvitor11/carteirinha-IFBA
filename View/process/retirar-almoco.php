@@ -4,9 +4,11 @@
     require("../../Controller/controller.php");
     $controller = new LoginController();
 
-    $controller->retirarAlmoco($_SESSION['id']);
+    $result = $controller->retirarAlmoco($_SESSION['id']);
 
-    if ($controller == "confirmar") {
+    echo $result;
+
+    if ($result === "confirmar") {
         echo "<h1>RECEBIMENTO CONFIRMADO</h1>";
     } else {
         echo "<h1>RECEBIMENTO CANCELADO</h1>";
