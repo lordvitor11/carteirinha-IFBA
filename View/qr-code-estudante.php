@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QR Code</title>
     <link rel="stylesheet" href="css/qr-code-estudante.css">
+    <script src="https://cdn.jsdelivr.net/npm/zxing@0.18.1/dist/zxing.min.js"></script>
 </head>
 <body>
     <header class="session-1">
@@ -21,7 +22,10 @@
                 Escanear QR CODE
                 <p class="description">Aproxime o QR Code da câmera para escanear automaticamente.</p>
             </div>
-            <div class="frame"></div>
+            <div class="frame">
+                <video id="video" width="100%" height="100%" style="border-radius: 10px;"></video>
+            </div>
+            <p id="result"></p>
         </div>
         
         <div class="buttons">
@@ -31,27 +35,36 @@
     </div>
 
     <script>
-        function requestCameraPermission() {
-            if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    console.log("Permissão de câmera concedida");
-                    // Adicione aqui o código para usar a câmera, como mostrar a transmissão ao vivo.
-                })
-                .catch(function(error) {
-                    console.error("Erro ao tentar acessar a câmera:", error);
-                    alert("Erro ao tentar acessar a câmera: " + error.message);
-                });
-            } else {
-                alert("Navegador não suporta o acesso à câmera.");
-            }
-        }
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                document.getElementById('video').srcObject = stream;
+                document.getElementById('video').play();
+            })
+            .catch(error => {
+                console.error('Erro ao solicitar acesso à câmera:', error);
+            });
 
-        window.onload = requestCameraPermission;
+        const video = document.getElementById('video');
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        video.addEventListener('play', () => {
+            setInterval(() => {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const codeReader = new ZXing.BrowserMultiFormatReader();
+                codeReader.decodeFromImage(imageData)
+                    .then(result => {
+                        document.getElementById('result').innerText = 'QR-code lido: ' + result.text;
+                    })
+                    .catch(error => {
+                        console.error('Erro ao ler QR-code:', error);
+                    });
+            }, 100);
+        });
     </script>
 
     <?php include 'footer.php'; ?>
-
     <script src="script.js"></script>
 </body>
 </html>
