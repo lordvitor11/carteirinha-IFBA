@@ -31,31 +31,59 @@ if ($relativePath == "/index.php") {
 
     <div class="overlay" id="notificationOverlay"></div>
     <div class="popup" id="notificationPopup">
-        <h2>Notificações</h2>
-        <div id="notificationList">
-            <?php
-            if (isset($_SESSION['logged_in'])) {
-                $userId = $_SESSION['id'];
-                $result = $controller->hasNotification($userId);
+    </div>
 
-                if ($result) {
-                    $assuntos = $controller->getAssunto($userId);
-                    foreach ($assuntos as $assunto) {
-                        echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . "</div>";
+    <template id="show">
+        <h2>Notificações</h2>
+            <div id="notificationList">
+                <?php
+                if (isset($_SESSION['logged_in'])) {
+                    $userId = $_SESSION['id'];
+                    $result = $controller->hasNotification($userId);
+
+                    if ($result) {
+                        $assuntos = $controller->getAssunto($userId);
+                        foreach ($assuntos as $assunto) {
+                            echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . "</div>";
+                        }
+                    } else {
+                        echo "<h3 class='notification-item null'>Sem notificações.</h3>";
                     }
-                } else {
-                    echo "<h3 class='notification-item null'>Sem notificações.</h3>";
                 }
-            }
-            ?>
-        </div>
+                ?>
+            </div>
         <div class="buttons">
             <?php if ($_SESSION['category'] == 'adm'): ?>
-                <button class='send' onclick='sendNotification(1)'>Enviar notificação</button>
+                <button class='send'>Enviar notificação</button>
+                <!-- <button class='send' onclick='sendNotification(1)'>Enviar notificação</button> -->
             <?php endif; ?>
             <button class="close" onclick="closeNotificationPopup()">Fechar</button> <!-- Botão de fechar para todos -->
         </div>
-    </div>
+    </template>
+
+    <template id="send">
+        <h3>Enviar Notificação</h3>
+        <input type="text" id="assunto" name="assunto" placeholder="Assunto" required>
+        <textarea name="notificationMessage" id="notificationMessage" placeholder="Digite a mensagem..." rows="4" required></textarea>
+        <input type="text" id="notificationRecipient" name="notificationRecipient" placeholder="Digite a matrícula...">
+        <div class="buttons">
+            <button class="confirm">Enviar</button>
+            <button class="close" onclick="closeNotificationPopup(); location.reload();">Fechar</button>
+        </div>
+    </template>
+    <template id="allconfirm">
+        <h1>ALLCONFIRM</h1>
+    </template>
+    <template id="oneconfirm">
+        
+        <h1>ONECONFIRM</h1>
+    </template>
+    <!-- <template id="screen1">
+    </template>
+    <template id="screen1">
+    </template> -->
+
+    
     
     <footer class="rodape">
         <div>
@@ -81,6 +109,81 @@ if ($relativePath == "/index.php") {
 
         // Adiciona o evento de clique no ícone de notificações
         document.querySelector('.notification-icon').addEventListener('click', openNotificationPopup);
+
+        // Mudando de Telas na Área de Notificação
+        document.querySelector('#notificationPopup').innerHTML = document.querySelector('#show').innerHTML;
+
+        document.querySelector('.send').addEventListener('click', () => {
+            document.querySelector('#notificationPopup').innerHTML = document.querySelector('#send').innerHTML;
+            
+            document.querySelector('.confirm').addEventListener('click', () => {
+            if (document.querySelector('#notificationRecipient').value != '') {
+                document.querySelector('#notificationPopup').innerHTML = document.querySelector('#oneconfirm').innerHTML;
+            } else {
+                document.querySelector('#notificationPopup').innerHTML = document.querySelector('#allconfirm').innerHTML;
+            }
+            });
+        }); 
+
+
+        
+    // items.buttonConfirm.addEventListener('click', function () {
+    //     const inputAssunto = document.querySelector('#assunto');
+    //     const input = document.querySelector('#notificationRecipient');
+    //     const msg = document.querySelector('#notificationMessage');
+    //     const popup = document.querySelector('#notificationPopup');
+    //     const h2 = document.createElement('h2');
+    //     const button = document.createElement('button');
+    //     const value = input.value;
+    //     const message = msg.value;
+
+    //     if (message != "") {
+    //         const dados = {
+    //             matricula: input.value,
+    //             assunto: inputAssunto.value,
+    //             mensagem: message
+    //         };
+
+    //         fetch('process/process-notification.php', {
+    //             method: 'POST',
+    //             headers: {
+    //               'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(dados)
+    //         })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             if (data.status == "success") {
+    //                 h2.textContent = 'Notificação Enviada!';
+    //             } else {
+    //                 h2.textContent = 'Notificação enviada a todos!';
+    //             }
+    
+    //             popup.innerHTML = '';
+    //             popup.classList.add('enviado');
+    //             button.classList.add('close');
+    //             button.textContent = 'Fechar';
+    //             button.addEventListener('click', function() {
+    //                 closeNotificationPopup();
+    //                 location.reload();
+    //             });
+                
+    //             popup.appendChild(h2);
+    //             popup.appendChild(button);
+    //         })
+    //         .catch(error => console.error('Erro:', error));            
+    //     }
+    // });
+
+
+    // items.divButtons.appendChild(items.buttonConfirm);
+    // items.divButtons.appendChild(items.buttonCancel);
+
+    // const array = [items.h3, items.inputAssunto, items.labelMsg, items.textarea, items.labelMatricula,
+    //     items.input, items.divButtons
+    // ];
+
+    // return array;
     </script>
 
 </body>

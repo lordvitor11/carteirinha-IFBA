@@ -465,8 +465,9 @@
         }     
         
         public function retirarAlmoco($idUser) : string {
-            $stmt = $this->conn->prepare("SELECT * FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL");
-            $stmt->bind_param("i", $id);
+            $dataAtual = date("Y-m-d");
+            $stmt = $this->conn->prepare("SELECT id FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL AND data_solicitacao = ?");
+            $stmt->bind_param("is", $idUser, $dataAtual);
             $stmt->execute();
             $result = $stmt->get_result();
 
