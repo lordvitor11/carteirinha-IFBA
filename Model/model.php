@@ -7,277 +7,241 @@
             $this->conn = $conn;
         }
 
-        private function doQuery($array, $sql, $bind) {
-            foreach (array_keys($array) as $key) { $destinationArray[] = $key; }
-
+        private function doQuery(array $params, string $sql, string $bind): string {
             $stmt = $this->conn->prepare($sql);
-
-            $stmt->bind_param($bind, array_map(fn($key) => $array[$key], $destinationArray));
-
-            if ($stmt->execute()) {
-                return "Sem erros";
-            } else {
-                return "Erro ao inserir dados: " . $stmt->error;
-            }
-        }
-
-        public function hasRegistry($usuario): bool {
-            $sql = "SELECT nome, senha FROM usuario WHERE nome = '$usuario'";
-
-            $result = $this->conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                return true;
-            } else {
-                $sql = "SELECT nome, senha FROM usuario WHERE email = '$usuario'";
-
-                $result = $this->conn->query($sql);
-
-                return $result->num_rows > 0;
-            }
-        }
-
-        public function login($usuario, $senha) : array {
-            $sql = "SELECT * FROM usuario WHERE nome = '$usuario'";
-            $result = $this->conn->query($sql);
-
-            if ($result->num_rows <= 0) {
-                $sql = "SELECT * FROM usuario WHERE email = '$usuario'";
-                $result = $this->conn->query($sql);
-            }
-            
-            $tempUser = ""; $tempPass = ""; $tempEmail = ""; $tempId = "";
-            while ($row = $result->fetch_assoc()) {
-                $tempUser = $row['nome']; $tempPass = $row['senha']; $tempEmail = $row['email']; $tempId = $row['id'];
-            }
-
-            if (($usuario === $tempUser || $usuario === $tempEmail) && MD5($senha) === $tempPass) {
-                return array('situacao' => 'aprovado', 'id' => $tempId);
-            } else {
-                return array('situacao' => 'desaprovado', 'id' => null);
-            }
-        }
-
-        public function getUserData($id) : array {
-            $sql = "SELECT nome, email, matricula, categoria FROM usuario WHERE id = '$id'";
-            $result = $this->conn->query($sql);
-
-            // $nome = ""; $categoria = "";
-
-            while ($row = $result->fetch_assoc()) {
-                $nome = $row['nome'];
-                $email = $row['email'];
-                $matricula = $row['matricula'];
-                $categoria = $row['categoria'];
-            }
-
-            return array("nome" => $nome, "email" => $email, "matricula" => $matricula, "categoria" => $categoria);
-        }
-
-        public function getCardapio() : array {
-            $sql = "SELECT * FROM cardapio WHERE ind_excluido = 0 ORDER BY data_refeicao";
-
-            $result = $this->conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                $cardapio = array_fill(0, 5, null);
-                while ($row = $result->fetch_assoc()) {
-                    $dia = "";
-
-                    switch ($row['dia']) {
-                        case "segunda":
-                            $dia = 0; break;
-                        case "terca":
-                            $dia = 1; break;
-                        case "quarta": 
-                            $dia = 2; break;
-                        case "quinta":
-                            $dia = 3; break;
-                        case "sexta":
-                            $dia = 4; break;
-                    }
-
-                    $cardapio[$dia] = array(
-                        "dia" => $row['dia'],
-                        "data" => $row['data_refeicao'],
-                        "principal" => $row['principal'], 
-                        "acompanhamento" => $row['acompanhamento'], 
-                        "sobremesa" => $row['sobremesa']
-                    );
-                }
-
-                for ($c = 0; $c < count($cardapio); $c++) {
-                    if ($cardapio[$c] == null) {
-                        $diaTemp = "";
-                        switch (array_search($cardapio[$c], $cardapio)) {
-                            case 0: 
-                                $diaTemp = 'Segunda'; break;
-                            case 1:
-                                $diaTemp = 'Terça'; break;
-                            case 2: 
-                                $diaTemp = 'Quarta'; break;
-                            case 3:
-                                $diaTemp = 'Quinta'; break;
-                            case 4:
-                                $diaTemp = 'Sexta'; break;
-                        }
-
-                        $cardapio[$c] = array(
-                            "dia" => $diaTemp,
-                            "data" => '',
-                            "principal" => '-', 
-                            "acompanhamento" => '-', 
-                            "sobremesa" => '-'
-                        );
-                    }
-                }
-
-                return $cardapio;
-            } else {
-                return array(null);
-            }
-        }
-
-        public function deleteCardapio($func = 0) : string {
-            if ($func == 0) {
-                $sql = "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0";
-            } else {
-                $sql = "DELETE FROM cardapio ORDER BY id DESC LIMIT 5";
-            }
-
-            if ($this->conn->query($sql) === TRUE) {
-                return "Sem erros";
-            } else {
-                return "Erro ao excluir dados do cardápio: " . $this->conn->error;
-            }
-        }
-
-        public function setCardapio($array) : string {
-            $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
-
+        
             if (!$stmt) {
                 return "Erro na preparação da consulta: " . $this->conn->error;
             }
-
-            $stmt->bind_param("sssss", $array['data'], $array['dia'], $array['principal'], $array['acompanhamento'], $array['sobremesa']);
-
-            if (!$stmt->execute()) {
-                return "Erro na execução da consulta: " . $stmt->error;
-            }
-
-            $stmt->close();
-
-            return "Sem erros";
-        }
-
-        public function getTime() : string {
-            $sql = "SELECT * FROM horario_padrao WHERE fim_vig IS NULL";
-            $result = $this->conn->query($sql);
-            $response = ""; 
-
-            while ($row = $result->fetch_assoc()) { $response = $row['horario']; }
-            return $response;
-        }
-
-        public function setDefaultTime($data, $horario) : string {
-            $sql = "SELECT count(*) FROM horario_padrao";
-            $result = $this->conn->query($sql);
-
-            $row = mysqli_fetch_array($result);
-            $totalRegistros = $row[0];
-
-
-            if ($totalRegistros > 0) {
-                $sql = "SELECT * FROM horario_padrao WHERE id = '$totalRegistros'";
-                $result = $this->conn->query($sql);
-                $valores = array();
-
-                if ($result->num_rows > 0) {
-                    $registro = $result->fetch_assoc();
-                    array_push($valores, $registro['id'], $registro['inicio_vig'], $registro['fim_vig'], $registro['horario']);
-                } else {
-                    return "Nenhum registro encontrado.";
-                }
-
-                $sql = "UPDATE horario_padrao SET fim_vig = '$data', inicio_vig = '$valores[1]' WHERE id = '$totalRegistros'";
-                if ($this->conn->query($sql) !== TRUE) {
-                    return "Erro ao excluir dados do cardápio: " . $this->conn->error;
-                }
-            }
-
-            $sql = "INSERT INTO horario_padrao (inicio_vig, horario) VALUES ('$data', '$horario')";
-
-            if ($this->conn->query($sql) === TRUE) {
-                return "Sem erros";
-            } else {
-                return "Erro ao excluir dados do cardápio: " . $this->conn->error;
-            }
-        }
-
-        public function getHistorico($id = "", $sql = "") : array {
-            if ($id === "") {
-                $sql = "SELECT id, data_refeicao FROM cardapio ORDER BY id DESC LIMIT 5";
-            } else $sql = "SELECT id, data_refeicao FROM cardapio WHERE id <= $id ORDER BY id DESC LIMIT 5";
-
-            $resultados = $this->conn->query($sql);
-            $valores = array(
-                'ids' => array(),
-                'datas' => array()
-            );
-
-            // Adiciona os valores da consulta à array
-            while ($row = mysqli_fetch_assoc($resultados)) {
-                $valores['ids'][] = intval($row['id']);
-                $valores['datas'][] = $row['data_refeicao'];
-            }
-
-            for ($c = 1; $c <= count($valores['datas']); $c++) {
-                unset($valores['datas'][$c]);
-            }
-
-            $valores['menorId'] = min($valores['ids']);
-            return $valores;
-        }
-
-        public function getCount() : int {
-            $sql = "SELECT COUNT(*) FROM cardapio";
-            $resultado = $this->conn->query($sql);
-            $num = $resultado->fetch_assoc();
-
-            $num = $num["COUNT(*)"];
-            return intval($num);
-        }
-
-        public function getRegistry($ids) : array {
-            $sql = "SELECT * FROM cardapio WHERE id >= {$ids[count($ids) - 1]} AND id <= $ids[0]";
-
-            $resultados = $this->conn->query($sql);
-            $valores = array();
-
-            while ($row = mysqli_fetch_assoc($resultados)) {
-                $valores[] = $row;
-            }
-
-            return $valores;
-        }
-
-        public function setMeal($idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa): string {
-            if ($justificativa === "") {
-                $justificativa = null;
-            }
-
-            $sql = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, hora_solicitacao, outra_justificativa)
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
-
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bind_param("iiissss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
-
+        
+            $stmt->bind_param($bind, ...array_values($params));
+        
             if ($stmt->execute()) {
                 return "Sem erros";
             } else {
-                return "Erro ao inserir dados: " . $stmt->error;
+                return "Erro ao executar a consulta: " . $stmt->error;
             }
         }
+        
+
+        public function hasRegistry($usuario): bool {
+            $sql = "SELECT COUNT(*) as count FROM usuario WHERE nome = ? OR email = ?";
+            $stmt = $this->conn->prepare($sql);
+        
+            if (!$stmt) {
+                throw new Exception("Erro na preparação da consulta: " . $this->conn->error);
+            }
+        
+            $stmt->bind_param("ss", $usuario, $usuario);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+        
+            return $count > 0;
+        }
+        
+
+        public function login($usuario, $senha): array {
+            $sql = "SELECT id, nome, senha, email FROM usuario WHERE nome = ? OR email = ?";
+            $stmt = $this->conn->prepare($sql);
+        
+            if (!$stmt) {
+                throw new Exception("Erro na preparação da consulta: " . $this->conn->error);
+            }
+        
+            $stmt->bind_param("ss", $usuario, $usuario);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $tempPass = $row['senha'];
+        
+                if (md5($senha) === $tempPass) {
+                    $stmt->close();
+                    return ['situacao' => 'aprovado', 'id' => $row['id']];
+                }
+            }
+        
+            $stmt->close();
+            return ['situacao' => 'desaprovado', 'id' => null];
+        }
+        
+
+        public function getUserData($id): array {
+            $sql = "SELECT nome, email, matricula, categoria FROM usuario WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+        
+            if (!$stmt) {
+                throw new Exception("Erro na preparação da consulta: " . $this->conn->error);
+            }
+        
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if ($row = $result->fetch_assoc()) {
+                $stmt->close();
+                return [
+                    "nome" => $row['nome'],
+                    "email" => $row['email'],
+                    "matricula" => $row['matricula'],
+                    "categoria" => $row['categoria']
+                ];
+            }
+        
+            $stmt->close();
+            return [];
+        }
+        
+
+        public function getCardapio(): array {
+            $sql = "SELECT dia, data_refeicao, principal, acompanhamento, sobremesa FROM cardapio WHERE ind_excluido = 0 ORDER BY data_refeicao";
+            $result = $this->conn->query($sql);
+            
+            $cardapio = array_fill(0, 5, [
+                "dia" => '',
+                "data" => '',
+                "principal" => '-',
+                "acompanhamento" => '-',
+                "sobremesa" => '-'
+            ]);
+        
+            if ($result && $result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $diaIndex = match ($row['dia']) {
+                        "segunda" => 0,
+                        "terca" => 1,
+                        "quarta" => 2,
+                        "quinta" => 3,
+                        "sexta" => 4,
+                        default => null,
+                    };
+                    if ($diaIndex !== null) {
+                        $cardapio[$diaIndex] = [
+                            "dia" => ucfirst($row['dia']),
+                            "data" => $row['data_refeicao'],
+                            "principal" => $row['principal'],
+                            "acompanhamento" => $row['acompanhamento'],
+                            "sobremesa" => $row['sobremesa']
+                        ];
+                    }
+                }
+            }
+        
+            return $cardapio;
+        }
+        
+
+        public function deleteCardapio(int $func = 0): string {
+            $sql = $func === 0 
+                ? "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0" 
+                : "DELETE FROM cardapio ORDER BY id DESC LIMIT 5";
+        
+            return $this->executeQuery($sql, "Erro ao excluir dados do cardápio");
+        }
+        
+        private function executeQuery(string $sql, string $errorMessage): string {
+            if ($this->conn->query($sql) === TRUE) {
+                return "Sem erros";
+            } else {
+                return $errorMessage . ": " . $this->conn->error;
+            }
+        }
+        
+
+        public function setCardapio(array $data): string {
+            $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
+            
+            if (!$stmt) {
+                return "Erro na preparação da consulta: " . $this->conn->error;
+            }
+        
+            $stmt->bind_param("sssss", $data['data'], $data['dia'], $data['principal'], $data['acompanhamento'], $data['sobremesa']);
+            
+            return $stmt->execute() ? "Sem erros" : "Erro na execução da consulta: " . $stmt->error;
+        }
+
+        public function getTime(): string {
+            $sql = "SELECT horario FROM horario_padrao WHERE fim_vig IS NULL";
+            $result = $this->conn->query($sql);
+            
+            return $result->num_rows > 0 ? $result->fetch_assoc()['horario'] : '';
+        }
+        
+
+        public function setDefaultTime(string $data, string $horario): string {
+            $totalRegistros = $this->conn->query("SELECT COUNT(*) FROM horario_padrao")->fetch_row()[0];
+        
+            if ($totalRegistros > 0) {
+                $registro = $this->conn->query("SELECT * FROM horario_padrao WHERE id = '$totalRegistros'")->fetch_assoc();
+                
+                if (!$registro) {
+                    return "Nenhum registro encontrado.";
+                }
+        
+                $sql = "UPDATE horario_padrao SET fim_vig = '$data', inicio_vig = '{$registro['inicio_vig']}' WHERE id = '$totalRegistros'";
+                if (!$this->conn->query($sql)) {
+                    return "Erro ao atualizar dados: " . $this->conn->error;
+                }
+            }
+        
+            $sql = "INSERT INTO horario_padrao (inicio_vig, horario) VALUES ('$data', '$horario')";
+            
+            return $this->conn->query($sql) ? "Sem erros" : "Erro ao inserir dados: " . $this->conn->error;
+        }
+        
+        public function getHistorico(string $id = ""): array {
+            $sql = $id === "" 
+                ? "SELECT id, data_refeicao FROM cardapio ORDER BY id DESC LIMIT 5" 
+                : "SELECT id, data_refeicao FROM cardapio WHERE id <= $id ORDER BY id DESC LIMIT 5";
+        
+            $resultados = $this->conn->query($sql);
+            $valores = ['ids' => [], 'datas' => []];
+        
+            while ($row = $resultados->fetch_assoc()) {
+                $valores['ids'][] = (int) $row['id'];
+                $valores['datas'][] = $row['data_refeicao'];
+            }
+        
+            // Remove itens a partir do segundo
+            array_splice($valores['datas'], 1);
+        
+            $valores['menorId'] = !empty($valores['ids']) ? min($valores['ids']) : null;
+            return $valores;
+        }
+        
+
+        public function getCount(): int {
+            $sql = "SELECT COUNT(*) as total FROM cardapio";
+            $resultado = $this->conn->query($sql);
+            return (int) $resultado->fetch_assoc()['total'];
+        }
+        
+
+        public function getRegistry(array $ids): array {
+            $minId = min($ids);
+            $maxId = max($ids);
+            $sql = "SELECT * FROM cardapio WHERE id BETWEEN $minId AND $maxId";
+        
+            $resultados = $this->conn->query($sql);
+            return $resultados->fetch_all(MYSQLI_ASSOC);
+        }
+        
+
+        public function setMeal(int $idUser, int $idCardapio, int $statusRef, ?int $idJustificativa, string $dataSolicitacao, string $horaSolicitacao, ?string $justificativa): string {
+            $justificativa = $justificativa ?: null; // Define como null se estiver vazia
+        
+            $sql = "INSERT INTO refeicao (id_usuario, id_cardapio, id_status_ref, id_justificativa, data_solicitacao, hora_solicitacao, outra_justificativa)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+        
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("iiissss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
+        
+            return $stmt->execute() ? "Sem erros" : "Erro ao inserir dados: " . $stmt->error;
+        }
+        
 
         public function hasRefeicao($idUser, $diaAtual) : bool {
             $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = '$idUser' AND data_solicitacao = '$diaAtual' AND motivo_cancelamento IS null";
@@ -289,53 +253,34 @@
             return $num > 0;
         }
 
-        public function cancelarRefeicao($idUser, $diaAtual, $motivo) : string {
-            if ($this->hasRefeicao($idUser, $diaAtual)) {
-                $stmt = $this->conn->prepare("UPDATE refeicao SET motivo_cancelamento = ? WHERE id_usuario = ? AND data_solicitacao = ?");
-                $stmt->bind_param("sis", $motivo, $idUser, $diaAtual);
-        
-                if ($stmt->execute()) {
-                    return "sucesso";
-                } else {
-                    return "Erro ao executar a declaração: " . $stmt->error;
-                }
-            }
+        public function hasRefeicao(int $idUser, string $diaAtual): bool {
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND data_solicitacao = ? AND motivo_cancelamento IS NULL";
             
-            return "Nenhuma refeição encontrada para cancelar.";
-        }
-
-        public function hasNotification($userId) : bool {
-            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = '$userId'";
-            $resultado = $this->conn->query($sql);
-            $num = $resultado->fetch_assoc();
-            $num = $num["COUNT(*)"];
-
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("is", $idUser, $diaAtual);
+            $stmt->execute();
+            
+            $resultado = $stmt->get_result();
+            $num = $resultado->fetch_row()[0];
+        
             return $num > 0;
         }
-
-        // public function getIdByEnrollment($name) : int {
-        //     $sql = "SELECT id FROM usuario WHERE nome = ?";
-        //     $stmt = $this->conn->prepare($sql);
-            
-        //     if ($stmt === false) {
-        //         throw new Exception('Erro ao preparar a consulta: ' . $this->conn->error);
-        //     }
-            
-        //     $stmt->bind_param('s', $name);
-        //     $stmt->execute();
-        //     $stmt->bind_result($id);
-        //     $id = null;
-            
-        //     if ($stmt->fetch()) {
-        //         $stmt->close();
-        //         return $id;
-        //     } else {
-        //         $stmt->close();
-        //         return null;
-        //     }
-        // }
         
-        public function getAssunto($userId) : array {
+
+        public function hasNotification(int $userId): bool {
+            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = ?";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+            
+            $resultado = $stmt->get_result();
+            $num = $resultado->fetch_row()[0];
+        
+            return $num > 0;
+        }
+              
+        public function getAssunto(int $userId): array {
             $sql = "SELECT assunto FROM notificacao WHERE id_destinatario = ?";
             $stmt = $this->conn->prepare($sql);
             
@@ -346,8 +291,8 @@
             $stmt->bind_param('i', $userId);
             $stmt->execute();
             $stmt->bind_result($assunto);
-            $assuntos = [];
             
+            $assuntos = [];
             while ($stmt->fetch()) {
                 $assuntos[] = $assunto;
             }
@@ -355,75 +300,85 @@
             $stmt->close();
             return $assuntos;
         }
+        
 
-        public function findName($type, $string) : array {
-            $nome = 'vazio';
-        
-            if ($type == "matricula") {
-                $stmt = $this->conn->prepare("SELECT nome, matricula FROM usuario WHERE matricula LIKE ?");
-                $stmt->bind_param("s", $string);
-            } else {
-                $string = "%{$string}%";
-                $stmt = $this->conn->prepare("SELECT nome, matricula FROM usuario WHERE nome LIKE ?");
-                $stmt->bind_param("s", $string);
-            }
-        
+        public function findName(string $type, string $string): array {
+            $query = $type === "matricula" 
+                ? "SELECT nome, matricula FROM usuario WHERE matricula LIKE ?"
+                : "SELECT nome, matricula FROM usuario WHERE nome LIKE ?";
+            
+            $string = $type === "matricula" ? $string : "%{$string}%";
+            
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("s", $string);
             $stmt->execute();
+            
             $result = $stmt->get_result();
-        
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $nome = $row['nome'];
+            $nomes = [];
+            
+            while ($row = $result->fetch_assoc()) {
+                $nomes[] = $row['nome'];
             }
         
             $stmt->close();
+            return $nomes;
+        }
         
-            return [''];
+        public function checkPass(string $tempPass, int $user): string {
+            $sql = "SELECT COUNT(*) as count FROM usuario WHERE id = ? AND senha = MD5(?)";
+            $stmt = $this->conn->prepare($sql);
+        
+            if (!$stmt) {
+                return "Erro na preparação da consulta: " . $this->conn->error;
+            }
+        
+            $stmt->bind_param("is", $user, $tempPass);
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+        
+            return $count > 0 ? "success" : "error";
         }
-
-        public function checkPass($tempPass, $user) : string {
-            $sql = "SELECT COUNT(*) as count FROM usuario WHERE id = '$user' AND senha = MD5('$tempPass')";
-
-            $result = $this->conn->query($sql);
-
-            if ($result) {
-                $row = $result->fetch_assoc();
-                $count = $row['count'];
-
-                if ($count > 0) { return "sucess"; } 
-                else { return "error"; }
-            } else {
-                return "Erro na consulta: " . $conn->error;
-            }  
-        }
-
-        public function changePassword($user, $pass) : string {
-            $sql = "UPDATE usuario SET senha = MD5('$pass') WHERE id = '$user'";
-
-            if ($this->conn->query($sql) === TRUE) {
+        
+        public function changePassword(int $user, string $pass): string {
+            $sql = "UPDATE usuario SET senha = MD5(?) WHERE id = ?";
+            $stmt = $this->conn->prepare($sql);
+        
+            if (!$stmt) {
+                return "Erro na preparação da consulta: " . $this->conn->error;
+            }
+        
+            $stmt->bind_param("si", $pass, $user);
+            
+            if ($stmt->execute()) {
                 return "sucesso";
             } else {
-                return "Erro ao atualizar a senha: " . $conn->error;
+                return "Erro ao atualizar a senha: " . $stmt->error;
             }
-        }
+        }        
 
-        public function getRefeicoes() : array {
+        public function getRefeicoes(): array {
             date_default_timezone_set('America/Sao_Paulo');
             $hoje = date('Y-m-d');
-            $sql = "SELECT u.nome, u.matricula, r.hora_solicitacao FROM refeicao r JOIN usuario u ON r.id_usuario = u.id WHERE r.data_solicitacao = '$hoje'";
-        
-
-            $resultados = $this->conn->query($sql);
-            $valores = array();
-
-            while ($row = mysqli_fetch_assoc($resultados)) {
-                $valores[] = $row;
-            }
-
+            
+            $sql = "SELECT u.nome, u.matricula, r.hora_solicitacao 
+                    FROM refeicao r 
+                    JOIN usuario u ON r.id_usuario = u.id 
+                    WHERE r.data_solicitacao = ?";
+            
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $hoje);
+            $stmt->execute();
+            
+            $result = $stmt->get_result();
+            $valores = $result->fetch_all(MYSQLI_ASSOC);
+            
+            $stmt->close();
             return $valores;
         }
-
-        public function sendNotification($matricula, $remetente, $assunto, $mensagem) : string {
+        
+        public function sendNotification($matricula, $remetente, $assunto, $mensagem): string {
             if ($matricula === "") {
                 $sql = "INSERT INTO notificacao (id_destinatario, id_remetente, assunto, mensagem)
                         SELECT id, ?, ?, ?
@@ -432,65 +387,53 @@
                 
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("sss", $remetente, $assunto, $mensagem);
-                if ($stmt->execute()) {
-                    $stmt->close();
-                    return "success";
-                } else {
-                    return "error";
-                }
             } else {
                 $sql = "SELECT id FROM usuario WHERE matricula = ?";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("s", $matricula);
                 $stmt->execute();
-        
+                
                 $result = $stmt->get_result();
                 if ($row = $result->fetch_assoc()) {
                     $destinatario = $row['id'];
+                    $stmt->close();
         
                     $sql = "INSERT INTO notificacao (id_remetente, id_destinatario, assunto, mensagem)
                             VALUES (?, ?, ?, ?)";
                     $stmt = $this->conn->prepare($sql);
                     $stmt->bind_param("ssss", $remetente, $destinatario, $assunto, $mensagem);
-                    if ($stmt->execute()) {
-                        $stmt->close();
-                        return "success";
-                    } else {
-                        return "error";
-                    }
                 } else {
                     return "error";
                 }
             }
-        }     
         
-        public function retirarAlmoco($idUser) : string {
+            if ($stmt->execute()) {
+                $stmt->close();
+                return "success";
+            } else {
+                return "error";
+            }
+        }        
+        
+        public function retirarAlmoco($idUser): string {
             $dataAtual = date("Y-m-d");
             $stmt = $this->conn->prepare("SELECT id FROM refeicao WHERE id_usuario = ? AND motivo_cancelamento IS NULL AND data_solicitacao = ?");
             $stmt->bind_param("is", $idUser, $dataAtual);
             $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) { return "confirmar"; } 
-            else { return "recusar"; }
+            
+            return $stmt->get_result()->num_rows > 0 ? "confirmar" : "recusar";
         }
 
-        public function getDataByMatricula($matricula) : array {
+        public function getDataByMatricula($matricula): array {
             $stmt = $this->conn->prepare("SELECT nome, email, matricula, telefone FROM usuario WHERE matricula = ?");
             $stmt->bind_param("s", $matricula);
             $stmt->execute();
-
+            
             $result = $stmt->get_result();
-    
-            $userData = [];
-            if ($result->num_rows > 0) {
-                $userData = $result->fetch_assoc(); 
-                $stmt->close();
-                return $userData;
-            } else {
-                return ["erro"];
-            }
-
-        }
+            $userData = $result->fetch_assoc() ?: ["erro"];
+            $stmt->close();
+            
+            return $userData;
+        }        
     }
 ?>
