@@ -22,7 +22,6 @@
                 return "Erro ao executar a consulta: " . $stmt->error;
             }
         }
-        
 
         public function hasRegistry($usuario): bool {
             $sql = "SELECT COUNT(*) as count FROM usuario WHERE nome = ? OR email = ?";
@@ -41,7 +40,6 @@
             return $count > 0;
         }
         
-
         public function login($usuario, $senha): array {
             $sql = "SELECT id, nome, senha, email FROM usuario WHERE nome = ? OR email = ?";
             $stmt = $this->conn->prepare($sql);
@@ -68,7 +66,6 @@
             return ['situacao' => 'desaprovado', 'id' => null];
         }
         
-
         public function getUserData($id): array {
             $sql = "SELECT nome, email, matricula, categoria FROM usuario WHERE id = ?";
             $stmt = $this->conn->prepare($sql);
@@ -95,7 +92,6 @@
             return [];
         }
         
-
         public function getCardapio(): array {
             $sql = "SELECT dia, data_refeicao, principal, acompanhamento, sobremesa FROM cardapio WHERE ind_excluido = 0 ORDER BY data_refeicao";
             $result = $this->conn->query($sql);
@@ -130,10 +126,10 @@
                 }
             }
         
+            // print_r($cardapio); exit;
             return $cardapio;
         }
         
-
         public function deleteCardapio(int $func = 0): string {
             $sql = $func === 0 
                 ? "UPDATE cardapio SET ind_excluido = 1 WHERE ind_excluido = 0" 
@@ -148,8 +144,7 @@
             } else {
                 return $errorMessage . ": " . $this->conn->error;
             }
-        }
-        
+        } 
 
         public function setCardapio(array $data): string {
             $stmt = $this->conn->prepare("INSERT INTO cardapio (data_refeicao, dia, principal, acompanhamento, sobremesa) VALUES (?, ?, ?, ?, ?)");
@@ -205,21 +200,18 @@
                 $valores['datas'][] = $row['data_refeicao'];
             }
         
-            // Remove itens a partir do segundo
             array_splice($valores['datas'], 1);
         
             $valores['menorId'] = !empty($valores['ids']) ? min($valores['ids']) : null;
             return $valores;
         }
         
-
         public function getCount(): int {
             $sql = "SELECT COUNT(*) as total FROM cardapio";
             $resultado = $this->conn->query($sql);
             return (int) $resultado->fetch_assoc()['total'];
         }
         
-
         public function getRegistry(array $ids): array {
             $minId = min($ids);
             $maxId = max($ids);
@@ -229,7 +221,6 @@
             return $resultados->fetch_all(MYSQLI_ASSOC);
         }
         
-
         public function setMeal(int $idUser, int $idCardapio, int $statusRef, ?int $idJustificativa, string $dataSolicitacao, string $horaSolicitacao, ?string $justificativa): string {
             $justificativa = $justificativa ?: null; // Define como null se estiver vazia
         
@@ -240,17 +231,6 @@
             $stmt->bind_param("iiissss", $idUser, $idCardapio, $statusRef, $idJustificativa, $dataSolicitacao, $horaSolicitacao, $justificativa);
         
             return $stmt->execute() ? "Sem erros" : "Erro ao inserir dados: " . $stmt->error;
-        }
-        
-
-        public function hasRefeicao($idUser, $diaAtual) : bool {
-            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = '$idUser' AND data_solicitacao = '$diaAtual' AND motivo_cancelamento IS null";
-            
-            $resultado = $this->conn->query($sql);
-            $num = $resultado->fetch_assoc();
-            $num = $num["COUNT(*)"];
-
-            return $num > 0;
         }
 
         public function hasRefeicao(int $idUser, string $diaAtual): bool {
@@ -266,7 +246,6 @@
             return $num > 0;
         }
         
-
         public function hasNotification(int $userId): bool {
             $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = ?";
             
@@ -301,7 +280,6 @@
             return $assuntos;
         }
         
-
         public function findName(string $type, string $string): array {
             $query = $type === "matricula" 
                 ? "SELECT nome, matricula FROM usuario WHERE matricula LIKE ?"

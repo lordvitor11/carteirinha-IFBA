@@ -298,7 +298,7 @@ h3{
   display: flex; /* Use flexbox para alinhar os itens */
   justify-content: center; /* Centraliza o conteúdo horizontalmente */
   align-items: center; /* Centraliza o conteúdo verticalmente */
-  height: 300px; /* Altura da seção */
+  height: 10px; /* Altura da seção */
   flex-grow: 1;
   margin-top: -20px; /* Ajuste a margem superior para conectar à imagem */
 }

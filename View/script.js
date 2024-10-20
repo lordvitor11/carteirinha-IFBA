@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-
 function check() {
     const submit = document.querySelector("#submit");
     const user = document.querySelector("#username");

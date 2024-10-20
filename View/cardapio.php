@@ -109,7 +109,7 @@
 
                 $cardapio = $controller->getCardapio();             
 
-                if ($cardapio[0] != null) {
+                if ($cardapio[0]['dia'] != '') {
                     echo "
                         <thead>
                             <tr>
@@ -144,17 +144,17 @@
         </table>
 
         <?php 
-            if ($_SESSION['category'] == "adm" && $cardapio[0] != null) {
+            if ($_SESSION['category'] === "adm" && $cardapio[0]['dia'] !== '') {
                 echo "<div class='separador'>";
                 echo "<div class='button-group'>";
                 echo "<button class='button excluir' onclick='cardapio_popup()'>Excluir</button>";
                 echo "<a href='cardapio-alterar.php'><button class='button editar'>Editar</button></a>";
                 echo "</div>";
                 echo "</div>";
-            } else if ($_SESSION['category'] == "adm" && $cardapio[0] == null) {
+            } else if ($_SESSION['category'] === "adm" && $cardapio[0]['dia'] === '') {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Adicione um agora</h3>";
                 echo "<a href='cardapio-criar.php'><button class='button'>Adicionar cardápio</button></a>"; 
-            } else if ($_SESSION['category'] != "adm" && $cardapio[0] != null && $_SESSION['logged_in']) {
+            } else if ($_SESSION['category'] !== "adm" && $cardapio[0]['dia'] !== '' && $_SESSION['logged_in']) {
                 date_default_timezone_set('America/Sao_Paulo');
                 $current_time = date("H:m:s");
                 $current_day = date("Y-m-d");
@@ -172,7 +172,7 @@
                 } else if ($current_time < $horario_padrao) {
                     echo "<a href='cardapio-reserva.php'><button class='button'>Quero almoçar!</button></a>";
                 } 
-            } else if ($_SESSION['category'] != "adm" && $cardapio[0] == null) {
+            } else if ($_SESSION['category'] !== "adm" && $cardapio[0]['dia'] === '') {
                 echo "<h3 class='null'>O cardápio ainda está vazio. Aguarde por atualizações.</h3>";
             }
         ?>

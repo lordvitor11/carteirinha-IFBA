@@ -17,8 +17,8 @@
 }
 
 table {
-    width: 100%; /* Altera para 100% para se ajustar à largura do contêiner */
-    max-width: 100%; /* Garante que a tabela não ultrapasse a largura do contêiner */
+    width: 75%; /* Altera para 100% para se ajustar à largura do contêiner */
+    max-width: 80%; /* Garante que a tabela não ultrapasse a largura do contêiner */
     border-collapse: collapse;
     margin: 20px;
     box-shadow: 5px 5px 10px lightblue;

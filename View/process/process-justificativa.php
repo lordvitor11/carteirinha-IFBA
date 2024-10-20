@@ -24,6 +24,7 @@ if (isset($_SESSION['diaSemana'])) {
 
     $diaDaSemana = $_SESSION['diaSemana'];
     $sql = "SELECT id FROM cardapio WHERE dia = '$diaDaSemana' AND ind_excluido = 0";
+    // echo $diaDaSemana; exit;
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
     $idCardapio = $row['id'];
