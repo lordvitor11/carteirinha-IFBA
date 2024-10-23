@@ -39,7 +39,7 @@
 
     <div class="container">
         <h1>AGENDADOS</h1>
-        <img src="../assets/_a865d40c-77b6-4702-b2aa-50249d59935d-removebg-preview.png" alt="Imagem do Boneco" class="image2" draggable="false">
+        <img src="../assets/cozinheira.png" alt="Imagem do Boneco" class="image2" draggable="false">
 
         <table>
 
