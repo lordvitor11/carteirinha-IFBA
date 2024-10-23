@@ -1,3 +1,18 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-menu');
+    const navList = document.getElementById('nav-list');
+
+    hamburger.addEventListener('click', function() {
+        navList.classList.toggle('show'); // Adiciona ou remove a classe "show"
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!navList.contains(event.target) && !hamburger.contains(event.target)) {
+            navList.classList.remove('show'); // Remove a classe "show" ao clicar fora
+        }
+    });
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     const changePasswordButton = document.querySelector('.alterar-senha-2');
     const popup = document.querySelector('#alterar-senha-popup-2');

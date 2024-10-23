@@ -1,5 +1,9 @@
 /* Media query para dispositivos com largura máxima de 768px */
 @media (max-width: 768px) {
+    .img-logo {
+        width: 100%;
+    }
+
     .container2 {
         margin: 10px; /* Reduz a margem da container */
         padding: 15px; /* Reduz o padding da container */
@@ -35,6 +39,10 @@
 
 /* Media query para dispositivos com largura máxima de 430px */
 @media (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+
     h1 {
         font-size: 28px; /* Tamanho do título ainda menor */
     }

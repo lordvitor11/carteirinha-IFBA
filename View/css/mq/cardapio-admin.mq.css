@@ -1,5 +1,9 @@
 /* Regras para max-width de 768px */
 @media (max-width: 768px) {
+    .img-logo {
+        width: 100%;
+    }
+
     .container {
         margin: 10px;
     }
@@ -29,6 +33,10 @@
 
 /* Regras para max-width de 430px */
 @media (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+
     h1 {
         font-size: 28px;
     }

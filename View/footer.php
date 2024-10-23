@@ -11,7 +11,7 @@ if ($relativePath == "/index.php") {
     $script = 'View/script.js';
     require("Controller/controller.php");
     $controller = new LoginController();
-} else if ($relativePath == "/painel-administrador.php" || $relativePath == "/sobre.php" || $relativePath == "/qr-code-estudante.php" || $relativePath == "/qr-code.php" || $relativePath == "/perfil.php" || $relativePath == "/aprovado.php" || $relativePath == "/negado.php" || $relativePath == "/relatorio-feedbacks.php" || $relativePath == "/editar-horario.php" || $relativePath == "/cardapio-criar.php" || $relativePath == "/cardapio-cancelar.php" || $relativePath == "/cardapio-alterar.php") {
+} else if ($relativePath == "/painel-administrador.php" || $relativePath == "/sobre.php" || $relativePath == "/qr-code-estudante.php" || $relativePath == "/qr-code.php" || $relativePath == "/perfil.php" || $relativePath == "/aprovado.php" || $relativePath == "/negado.php" || $relativePath == "/relatorio-feedbacks.php" || $relativePath == "/editar-horario.php" || $relativePath == "/cardapio-criar.php" || $relativePath == "/cardapio-cancelar.php" || $relativePath == "/cardapio-alterar.php" || $relativePath == "/cardapio-disponibilizar.php") {
     require("../Controller/controller.php"); // Ajuste aqui
     $controller = new LoginController();
 }

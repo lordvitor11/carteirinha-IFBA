@@ -1,0 +1,83 @@
+/* Estilos da navbar */
+.nav-container {
+  background-color: #388E3C; /* Fundo verde */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  position: relative; /* Para que o dropdown se posicione relativo a este contêiner */
+}
+
+/* Estilos do ícone de hambúrguer */
+.hamburger {
+  display: none; /* Ocultar por padrão */
+  flex-direction: column; /* Exibir os spans em coluna */
+  cursor: pointer; /* Mão ao passar o mouse */
+}
+
+.hamburger span {
+  background-color: white; /* Ícone de hambúrguer branco */
+  height: 3px;
+  width: 25px;
+  margin: 3px 0;
+  transition: all 0.3s ease;
+}
+
+/* Lista de navegação */
+.nav-list {
+  display: flex; /* Exibir a lista de navegação em todos os dispositivos */
+  flex-direction: row; /* Alterar para linha (horizontal) */
+  position: relative; /* Para que fique no fluxo normal */
+  list-style: none; /* Remove os marcadores padrão da lista */
+  padding: 0; /* Remove o padding padrão */
+  margin: 0; /* Remove a margem padrão */
+}
+
+.nav-list li {
+  position: relative;
+}
+
+.nav-list a {
+  color: white; /* Nomes da navbar em branco */
+  text-decoration: none;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+
+/* Linha abaixo do nome da navbar */
+.nav-list a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background-color: #388E3C; /* Verde escuro */
+  transition: width 0.3s ease;
+  width: 0;
+  margin: auto;
+}
+
+.nav-list a:hover::after {
+  width: 100%; /* A linha se expande ao passar o mouse */
+}
+
+/* Estilo para dispositivos móveis */
+@media (max-width: 768px) {
+  .nav-list {
+    display: none; /* Ocultar a lista por padrão em dispositivos móveis */
+    flex-direction: column; /* Alinha os itens em coluna */
+    width: 100%; /* Largura total */
+    background-color: #388E3C; /* Fundo verde */
+    position: absolute; /* Para sair do fluxo normal */
+    top: 100%; /* Fica logo abaixo da navbar */
+    left: 0; /* Alinha à esquerda */
+    z-index: 1000; /* Garante que a lista fique acima de outros elementos */
+  }
+
+  .nav-list.show {
+    display: flex; /* Mostra a lista quando a classe "show" é adicionada */
+    background-color: #388E3C; /* Ajuste no fundo verde quando a lista está visível */
+  }
+
+  .hamburger {
+    display: flex; /* Exibir o ícone do hamburguer em dispositivos móveis */
+  }
+}

@@ -1,4 +1,5 @@
 @import url(mq/main.mq.css);
+@import url(navbar.css);
 
 :root {
     --light-green: #388E3C;
@@ -736,7 +737,6 @@ form {
 .popup h2 {
   text-align: center;
 }
-
 
 /* ANIMAÇÕES */
 @keyframes showPopup {

@@ -40,28 +40,28 @@ function showNav($call) {
     if ($call == "login") {
         echo "<nav><div><a href='$index'>Início</a><a href='$cardapio'>Cardápio</a><a href='$sobre'>Sobre</a></div></nav>";
     } else {
-        if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
-            echo "<nav>
-                    <div>
-                      <a href='$index'>Início</a>
-                      <a href='$cardapio'>Cardápio</a>
-                      <a href='$sobre'>Sobre</a>
-                      <a href='$qrcodeLink'><img src='$qrcode' alt='qr-code-alomoço'></a>
-                    </div>
-                    $text
-                  </nav>
-            ";
-        } else {
-            echo "<nav>
-                    <div>
-                      <a href='$index'>Início</a>
-                      <a href='$cardapio'>Cardápio</a>
-                      <a href='$sobre'>Sobre</a>
-                      <a href='$qrcodeEstudanteLink'><img src='$qrcode' alt='qr-code-estudante'></a> <!-- Botão QR Code para estudante -->
-                    </div>
-                    $text
-                  </nav>";
-        }
+        // Novo código da estrutura de navegação com o menu hambúrguer
+        echo '
+        <nav>
+            <div class="nav-container">
+                <div class="hamburger" id="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="' . $index . '">Início</a></li>
+                    <li><a href="' . $cardapio . '">Cardápio</a></li>
+                    <li><a href="' . $sobre . '">Sobre</a></li>
+                    <li><a href="' . ($_SESSION['category'] == "adm" ? $qrcodeLink : $qrcodeEstudanteLink) . '">
+                        <img src="' . $qrcode . '" alt="qr-code">
+                    </a></li>
+                </ul>
+                <div class="right">
+                    ' . ($text ?? '') . '
+                </div>
+            </div>
+        </nav>';
     }
 }
 ?>
