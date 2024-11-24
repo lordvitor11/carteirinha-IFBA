@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged_in']) || !$_SESSION['logged_in']) {
 $usuario = isset($_SESSION['name']) ? ucfirst($_SESSION['name']) : 'Usuário não definido';
 $matricula = isset($_SESSION['enrollment']) ? $_SESSION['enrollment'] : 'Não disponível';
 $email = isset($_SESSION['email']) ? $_SESSION['email'] : 'Não disponível';
-$foto_perfil = '../assets/Victor Hugo.jpeg'; // Atualize este caminho conforme necessário
+$foto_perfil = '../assets/Victor Hugo.jpg'; // Atualize este caminho conforme necessário
 ?>
 
 <!DOCTYPE html>

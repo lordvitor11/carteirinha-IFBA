@@ -17,10 +17,10 @@
 }
 
 table {
-    width: 75%; /* Altera para 100% para se ajustar à largura do contêiner */
-    max-width: 80%; /* Garante que a tabela não ultrapasse a largura do contêiner */
+    width: 100%; /* Ajusta a largura para se adaptar ao contêiner */
+    max-width: 100%; /* Evita ultrapassar o limite do contêiner */
     border-collapse: collapse;
-    margin: 20px;
+    margin: 20px 0;
     box-shadow: 5px 5px 10px lightblue;
     background-color: #fff;
     border-radius: 8px;
@@ -39,11 +39,11 @@ th {
 }
 
 tr:hover {
-    background-color: #fff;
+    background-color: #f9f9f9;
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 36px; /* Diminuído para telas menores */
     margin: 20px 0;
     text-align: center;
     color: #388E3C;
@@ -271,4 +271,44 @@ h1 {
 
 .button-agendados:hover {
     background-color: #1e87da;
+}
+
+/* Para dispositivos com largura máxima de 768px */
+@media (max-width: 768px) {
+    .img-logo {
+        width: 100%;
+    }
+    
+    table {
+        font-size: 14px; /* Diminui o tamanho da fonte */
+        width: 95%; /* Garante que a tabela ocupe quase toda a largura da tela */
+    }
+
+    th, td {
+        padding: 10px; /* Reduz o padding */
+    }
+
+    h1 {
+        font-size: 28px; /* Reduz o tamanho do título */
+    }
+}
+
+/* Para dispositivos com largura máxima de 430px */
+@media (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+
+    table {
+        font-size: 12px; /* Reduz ainda mais o tamanho da fonte */
+        width: 100%; /* Preenche a tela */
+    }
+
+    th, td {
+        padding: 8px; /* Reduz o padding para o menor tamanho possível */
+    }
+
+    h1 {
+        font-size: 24px; /* Ajusta o tamanho do título */
+    }
 }

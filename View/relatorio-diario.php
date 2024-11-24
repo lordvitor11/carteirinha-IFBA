@@ -47,7 +47,7 @@
 
 <div class="center">
     <div class="container">
-        <h1 class="titulo">RELATÓRIO DE RESERVAS DIÁRIO</h1>
+        <h1 class="titulo">RELATÓRIO DIÁRIO DE RESERVAS</h1>
 
         <div class="center">
             <div class="input-container">

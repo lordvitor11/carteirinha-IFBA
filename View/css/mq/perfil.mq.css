@@ -1,4 +1,7 @@
 @media (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
     /* Estilos para o popup de alterar senha */
     .popup-2 {
         display: flex; 

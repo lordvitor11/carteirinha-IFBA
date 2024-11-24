@@ -28,7 +28,7 @@ function showNav($call) {
     if (isset($_SESSION['logged_in'])) {
         if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
             $nome = $_SESSION['name'];
-            $text = "<div class='right'>$notification_icon<a class='button-admin' href='$admin'>Administrador(a)</a><a href='$perfil'>Logado como <strong>$nome!</strong></a></div>";
+            $text = "<div class='right'>$notification_icon<a class='button-admin' href='$admin'>ADMIN</a><a href='$perfil'>Logado como <strong>$nome!</strong></a></div>";
         } else if ($_SESSION['logged_in']) {
             $nome = $_SESSION['name'];
             $text = "<div class='right'>$notification_icon<a href='$perfil'>Logado como <strong>$nome!</strong></a></div>";
