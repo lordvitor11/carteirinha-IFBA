@@ -77,8 +77,8 @@ nav a:hover { color: rgb(192, 192, 192); }
 
 .notification-icon {
   display: inline-block;
-  width: 60px;
-  height: 40px;
+  width: 80px;
+  height: 60px;
   cursor: pointer;
   transition: opacity 0.3s ease;
 }

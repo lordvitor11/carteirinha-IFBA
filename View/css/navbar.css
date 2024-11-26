@@ -1,91 +1,152 @@
-/* Estilos da navbar */
-.nav-container {
-  background-color: #388E3C; /* Fundo verde */
+/* Estilo da navbar */
+nav {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 0px;
-  position: relative; /* Para que o dropdown se posicione relativo a este contêiner */
+  align-items: center;
+  background-color: #388E3C; /* Verde */
+  padding: 10px 20px;
+  color: white;
+  position: relative;
+  z-index: 1; /* Garante que a navbar fique acima do menu */
 }
 
-/* Estilos do ícone de hambúrguer */
-.hamburger {
-  display: none; /* Ocultar por padrão */
-  flex-direction: column; /* Exibir os spans em coluna */
-  cursor: pointer; /* Mão ao passar o mouse */
-}
-
-.hamburger span {
-  background-color: white; /* Ícone de hambúrguer branco */
-  height: 3px;
-  width: 25px;
-  margin: 3px 0;
-  transition: all 0.3s ease;
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 /* Lista de navegação */
 .nav-list {
-  display: flex; /* Exibir a lista de navegação em todos os dispositivos */
-  flex-direction: row; /* Alterar para linha (horizontal) */
-  position: relative; /* Para que fique no fluxo normal */
-  list-style: none; /* Remove os marcadores padrão da lista */
-  padding: 0; /* Remove o padding padrão */
-  margin: 0; /* Remove a margem padrão */
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute; /* Alinha o menu abaixo da navbar */
+  top: 100%; /* Menu começa logo abaixo da navbar */
+  left: 0; /* Inicia no lado esquerdo */
+  width: 100%; /* O menu ocupará 100% da largura da tela */
+  background-color: #388E3C; /* Verde */
+  flex-direction: column;
+  transition: max-height 0.3s ease-in-out; /* Animação suave para expandir para baixo */
+  max-height: 0; /* Inicialmente escondido */
+  overflow: hidden; /* Esconde o conteúdo que não cabe */
+  z-index: 2; /* Faz o menu ficar acima da navbar */
 }
 
 .nav-list li {
-  position: relative;
+  margin: 20px 0;
+  text-align: center; /* Centraliza os itens */
 }
 
 .nav-list a {
-  color: white; /* Nomes da navbar em branco */
   text-decoration: none;
-  padding: 10px;
-  transition: color 0.3s ease;
+  color: white;
+  font-size: 16px;
+  transition: color 0.3s;
 }
 
-/* Linha abaixo do nome da navbar */
-.nav-list a::after {
-  content: '';
-  display: block;
-  height: 2px;
-  background-color: #388E3C; /* Verde escuro */
-  transition: width 0.3s ease;
-  width: 0;
-  margin: auto;
+.nav-list a:hover {
+  color: #66ff66; /* Verde claro */
 }
 
-.nav-list a:hover::after {
-  width: 100%; /* A linha se expande ao passar o mouse */
+/* Ícone de notificação e botões à direita */
+.right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-/* Estilo para dispositivos móveis */
-@media (max-width: 768px) {
-  
+.notification-icon img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.button-admin {
+  color: white;
+  padding: 5px 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.button-admin:hover {
+  background-color: #e65c5c; /* Verde mais claro */
+}
+
+.right a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Menu do desktop - Exibido sempre */
+@media (min-width: 769px) {
   .nav-list {
-    display: none; /* Ocultar a lista por padrão em dispositivos móveis */
-    flex-direction: column; /* Alinha os itens em coluna */
-    width: 100%; /* Largura total */
-    background-color: #388E3C; /* Fundo verde */
-    position: absolute; /* Para sair do fluxo normal */
-    top: 100%; /* Fica logo abaixo da navbar */
-    left: 0; /* Alinha à esquerda */
-    z-index: 1000; /* Garante que a lista fique acima de outros elementos */
+    position: static; /* Menu fica visível abaixo da navbar */
+    flex-direction: row; /* Exibe os itens na horizontal */
+    max-height: none; /* Não há necessidade de limitar a altura */
   }
 
-  .nav-list.show {
-    display: flex; /* Mostra a lista quando a classe "show" é adicionada */
-    background-color: #388E3C; /* Ajuste no fundo verde quando a lista está visível */
+  .nav-list li {
+    margin: 0 20px;
+    text-align: left; /* Deixa os itens alinhados à esquerda */
   }
 
   .hamburger {
-    display: flex; /* Exibir o ícone do hamburguer em dispositivos móveis */
+    display: none; /* Esconde o botão hambúrguer no desktop */
+  }
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  .nav-list {
+    max-height: 0; /* Inicialmente escondido */
+    top: 60px; /* Ajuste para que o menu fique abaixo da navbar */
+  }
+
+  .hamburger {
+    display: block; /* Exibe o menu hambúrguer */
+    cursor: pointer;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: all 0.3s;
+  }
+
+  .nav-list.show {
+    max-height: 500px; /* Expande o menu para baixo */
+  }
+
+  .nav-list li {
+    margin: 10px 0;
+    text-align: center; /* Centraliza os itens */
+  }
+
+  .right {
+    justify-content: flex-end; /* Ajusta os itens à direita */
   }
 }
 
 @media (max-width: 430px) {
-  .img-logo {
-    width: 100%;
+  .button-admin {
+    font-size: 12px;
+    padding: 4px 8px;
   }
 
+  .right a {
+    font-size: 12px;
+  }
+
+  .notification-icon img {
+    width: 20px;
+    height: 20px;
+  }
 }

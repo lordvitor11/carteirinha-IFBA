@@ -19,6 +19,7 @@
     color: var(--light-green);
     font-size: 50px;
     margin-bottom: 50px;
+    text-align: center;  /* Adicionado para centralizar o título */
 }
 
 .container {
@@ -55,6 +56,23 @@ input[type="date"], input[type="text"] {
     text-align: center; /* Centraliza o texto dentro do campo */
 }
 
+/* Centralização para os campos de data */
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container input[type="date"] {
+    width: 40%;
+    margin-right: 10px;  /* Adiciona um espaço entre os campos de data */
+}
+
+/* Para garantir que tanto o título quanto os campos de data fiquem centralizados */
+.titulo, .input-container {
+    text-align: center;
+}
+
 table {
     width: 80%;
     border-collapse: collapse;
@@ -81,51 +99,57 @@ tr:hover {
 }
 
 h1 {
-    font-size: 48px;
-    margin: 20px 0;
-    color: #388E3C;
-}
-
-.button-voltar {
-    padding: 10px 20px;
-    background-color: var(--salmon);
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 15px;
-}
-
-.button-voltar:hover {
-    background-color: var(--salmon-hover);
-    font-weight: bolder;
+    font-size: 2.5em;
+    margin-bottom: 20px;
 }
 
 .button {
-    padding: 10px 20px;
-    background-color: var(--light-green);
+    background-color: #388E3C;
     color: white;
     border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
 .button:hover {
-    background-color: var(--dark-green);
-    font-weight: bolder;
+    background-color: #2c6f2d;
+}
+
+.separador {
+    margin-top: 30px;
+}
+
+.button-voltar {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button-voltar:hover {
+    background-color: #e41d26;
 }
 
 .popup-historico {
+    display: none;
     position: fixed;
-    top: 0;
+    z-index: 1000;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
-    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
 }
 
 .popup-historico.show {
@@ -134,42 +158,122 @@ h1 {
 
 .popup-content {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    width: 80%;
-    max-width: 500px;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 80%;
+    overflow-y: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .popup-content table {
     width: 100%;
-    margin: 20px 0;
-    box-shadow: none;
+    margin-top: 20px;
 }
 
-.popup-content th {
-    background-color: var(--light-green);
-}
-
-.popup-content td {
-    border-bottom: none;
+.popup-content td, .popup-content th {
+    text-align: left;
+    padding: 10px;
 }
 
 .btn-close {
-    background-color: #E53935;
+    background-color: #f44336;
     color: white;
     border: none;
     padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
-    transition: all 0.3s;
+    border-radius: 5px;
+    display: block;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .btn-close:hover {
-    background-color: #d32f2f;
-    font-weight: bolder;
+    background-color: #e41d26;
 }
 
-.popup-content h2 {
+h2{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #388E3C; /* cor verde */
     margin-bottom: 20px;
+}
+
+/* Estilos gerais para a tabela */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 10px;  /* Garantindo que a tabela não fique grudada nas bordas da tela */
+    overflow-x: hidden;  /* Previne a rolagem horizontal */
+}
+
+table {
+    width: 100%;  /* Tabela ocupa 100% da largura disponível */
+    max-width: 100%;  /* Limita a largura da tabela a 100% da tela */
+    border-collapse: collapse;
+    margin: 0 auto;
+    table-layout: fixed;  /* Garante que a tabela ocupe a largura de forma eficiente */
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word;  /* Previne que o conteúdo longo ultrapasse as células */
+}
+
+table th {
+    background-color: #388E3C;
+    color: white;
+}
+
+table td {
+    background-color: #f9f9f9;
+}
+
+/* Responsividade para smartphones (telas de até 768px) */
+@media (max-width: 768px) {
+    .img-logo {
+        width: 100%;
+    }
+
+    .table-container {
+        padding: 0 15px;  /* Ajusta o padding para telas menores */
+        overflow-x: auto;  /* Permite rolagem horizontal apenas quando necessário */
+    }
+
+    table {
+        width: 100%;  /* A tabela ocupa 100% da largura disponível */
+        max-width: 100%;  /* Garante que a largura da tabela não ultrapasse a tela */
+    }
+
+    table th, table td {
+        font-size: 14px;  /* Ajusta o tamanho da fonte para dispositivos móveis */
+        padding: 10px;  /* Diminui o padding dentro das células */
+    }
+}
+
+/* Responsividade para smartphones menores (telas de até 430px) */
+@media (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+    
+    .table-container {
+        padding: 0 10px;  /* Reduz o padding para dispositivos muito pequenos */
+        overflow-x: auto;  /* Permite rolagem horizontal somente se necessário */
+    }
+
+    table {
+        width: 100%;  /* A tabela ocupa 100% da largura disponível */
+        max-width: 100%;  /* A tabela ocupa toda a largura disponível sem ultrapassar */
+    }
+
+    table th, table td {
+        font-size: 12px;  /* Ajuste para o tamanho da fonte em dispositivos pequenos */
+        padding: 8px;  /* Ajuste do padding para telas menores */
+    }
 }

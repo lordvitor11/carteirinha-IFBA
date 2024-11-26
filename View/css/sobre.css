@@ -1,26 +1,25 @@
-@import url(mq/main.mq.css);
-
-body, html {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100vh; /* Garantir que a altura mínima seja 100% da viewport */
-}
-
+/* Container para a sessão de pessoas */
 .container-sphere {
-    flex-grow: 1; /* Permite que a área de conteúdo central cresça */
-    display: flex; /* Adicionado para usar flexbox */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    flex-direction: column; /* Mantém as semi-esferas na vertical */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    align-items: center; /* Centraliza os itens verticalmente */
+    flex-direction: column; /* Para dispositivos móveis, manter a coluna */
+    flex-wrap: wrap; /* Permite que os itens se ajustem em várias linhas, se necessário */
+    text-align: center; /* Centraliza o texto dentro de cada "person" */
+    width: 100%; /* Garante que o container ocupe toda a largura */
 }
 
+/* Definindo os itens de pessoa */
 .person {
     text-align: center;
-    margin-bottom: 20px;
+    margin: 20px; /* Espaçamento maior entre as pessoas */
+    display: flex;
+    justify-content: center; /* Garante que os itens dentro de .person fiquem centralizados */
+    align-items: center; /* Alinha os itens no centro vertical */
 }
 
+/* Estilo para a semi-esfera */
 .semi-sphere {
     width: 350px;
     height: 420px;
@@ -31,11 +30,12 @@ body, html {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 10px 0; /* Adicione margens verticais para espaçamento */
+    margin: 10px;
     border: 2px solid #388E3C;
     box-shadow: 10px 10px 5px lightblue;
 }
 
+/* Estilo da imagem */
 .img-sobre {
     width: 150px;
     height: 150px;
@@ -63,7 +63,7 @@ hr {
 .contact-form {
     text-align: center;
     margin: 20px 0;
-    flex-grow: 1; /* Adicione isso */
+    flex-grow: 1;
 }
 
 .contact-title {
@@ -98,4 +98,67 @@ form button {
 
 form button:hover {
     background-color: #2E7D32;
+}
+
+/* Responsividade para dispositivos móveis */
+@media only screen and (max-width: 768px) {
+    .container-sphere {
+        flex-direction: column; /* Coluna para telas pequenas */
+        justify-content: center; /* Centraliza o conteúdo na vertical */
+        align-items: center; /* Centraliza os itens na horizontal */
+    }
+
+    .person {
+        flex: 1 1 100%; /* Ocupa toda a largura da tela */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+/* Para telas maiores, horizontalmente */
+@media only screen and (min-width: 769px) {
+    .container-sphere {
+        flex-direction: row; /* Alinha as pessoas horizontalmente */
+        justify-content: center; /* Centraliza as pessoas na horizontal */
+        align-items: center; /* Garante o alinhamento no centro verticalmente */
+    }
+
+    .person {
+        flex: 1 1 30%; /* As pessoas ocupam 30% da largura, mas você pode ajustar conforme necessário */
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .img-logo {
+        width: 100%;
+    }
+
+    .container-sphere {
+        flex-direction: column; /* Em dispositivos muito pequenos, manter a direção em coluna */
+        align-items: center; /* Centralizando os itens */
+    }
+
+    .semi-sphere {
+        width: 90%; /* Reduzindo a largura para dispositivos pequenos */
+        height: auto; /* Ajuste da altura */
+    }
+
+    .img-sobre {
+        width: 100px; /* Largura reduzida da imagem */
+        height: 100px; /* Altura reduzida da imagem */
+    }
+
+    .contact-title {
+        font-size: 20px;
+    }
+
+    form input,
+    form textarea {
+        padding: 8px;
+    }
+
+    form button {
+        width: 100%;
+    }
 }

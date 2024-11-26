@@ -1,8 +1,21 @@
 @import url(style.css);
-@import url(mq/cardapio.mq.css);
-  
-.right {
-    margin-left: auto;
+@import url(mq/historico.mq.css);
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.titulo {
+    font-weight: bolder;
+    color: #388E3C; /* Cor desejada */
+    font-size: 50px;
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 .container {
@@ -10,17 +23,39 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 20px;
-    position: relative;
-    overflow-x: auto; /* Adiciona rolagem horizontal, se necessário */
+    width: 100%;
+    margin: 0 auto;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+.input-container label {
+    font-size: 18px;
+    color: #388E3C;
+    margin-right: 10px;
+}
+
+input[type="date"], input[type="text"] {
+    width: 40%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-right: 5%;
+    text-align: center;
 }
 
 table {
-    width: 100%; /* Ajusta a largura para se adaptar ao contêiner */
-    max-width: 100%; /* Evita ultrapassar o limite do contêiner */
+    width: 80%;
+    margin: 0 auto;
     border-collapse: collapse;
-    margin: 20px 0;
     box-shadow: 5px 5px 10px lightblue;
     background-color: #fff;
     border-radius: 8px;
@@ -39,276 +74,100 @@ th {
 }
 
 tr:hover {
-    background-color: #f9f9f9;
+    background-color: #f5f5f5;
 }
 
 h1 {
-    font-size: 36px; /* Diminuído para telas menores */
-    margin: 20px 0;
+    font-size: 2.5em;
+    margin-bottom: 20px;
     text-align: center;
-    color: #388E3C;
 }
 
-.image2 {
-    margin-bottom: -20px;
-    max-width: 100%;
-    max-height: 250px;
-}
-
-.button.excluir {
-    background-color: var(--salmon);
+.button {
+    background-color: #388E3C;
     color: white;
-    width: 80px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-.button.excluir:hover {
-    background-color: var(--medium-salmon);
-}
-
-.button.cardapio-historico {
-    background-color: rgb(44, 83, 255);
-    color: white;
-}
-
-.button.cardapio-historico:hover {
-    background-color: rgb(0, 47, 255);
-}
-
-.button.editar, .button.horario-admin {
-    background-color: var(--light-green);
-    padding: 10px;
-    color: white;
-    width: 80px;
-}
-
-.button.editar:hover, .button.horario-admin:hover {
-    background-color: var(--dark-green);
+.button:hover {
+    background-color: #2c6f2d;
 }
 
 .separador {
-    display: flex;
-    justify-content: center; /* Centraliza os itens horizontalmente */
-    width: 100%; /* Definindo largura total */
+    margin-top: 30px;
 }
 
-.horario-limite {
-    text-align: center;
-    font-weight: 600;
-    background-color: rgb(202, 132, 124);
-    width: 50%;
-    padding: 10px;
+.button-voltar {
+    background-color: #f44336;
     color: white;
-}
-
-/*.popup {
-    width: 300px;
-    height: 125px;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}*/
-
-/*.popup-open {
-    overflow: hidden;
-}*/
-
-.feedback-container {
-    margin: 15px 0;
-}
-
-.feedback-container h3 {
-    margin-bottom: 10px;
-    color: #388E3C; /* Cor do título de feedback */
-}
-
-#feedback {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    margin-bottom: 10px; /* Espaçamento abaixo do textarea */
-}
-
-#btn-submit-feedback {
-    background-color: #388E3C; /* Cor do botão de enviar */
-    color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    padding: 10px 20px;
     font-size: 16px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border-radius: 5px;
 }
 
-#btn-submit-feedback:hover {
-    background-color: #274E13; /* Cor do botão ao passar o mouse */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+.button-voltar:hover {
+    background-color: #e41d26;
 }
 
-/* Estilo para o pop-up de notificações */
-.popup p {
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-.popup {
+.popup-historico {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    max-width: 500px;
-    width: 90%;
-}
-
-.popup h2 {
-    color: #388E3C;
-    text-align: center;
-}
-
-.popup #notificationList {
-    margin-bottom: 20px;
-}
-
-.notification-item {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.notification-item:last-child {
-    border-bottom: none;
-}
-
-.popup textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.popup input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.popup button {
-    display: block;
-    margin: 10px auto 0;
-    background-color: #388E3C;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.popup button:hover {
-    background-color: #274E13;
-}
-
-.popup button.close {
-    background-color: #ff6f61;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-}
-
-.popup button.close:hover {
-    background-color: #e65c5c;
-}
-
-/* Fundo escurecido */
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
     left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    justify-content: center;
+    align-items: center;
 }
 
-.button-agendados {
-    /* position: absolute; Add this line */
-    /* top: 20px; Adjust this value to maintain the same height as the other elements */
-    /* right: 20px; Adjust this value to maintain the same margin as the other elements */
-    background-color: #2196F3;
+.popup-historico.show {
+    display: flex;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 80%;
+    overflow-y: auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.popup-content td, .popup-content th {
+    text-align: left;
+    padding: 10px;
+}
+
+.btn-close {
+    background-color: #f44336;
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin-top: 20px;
+    width: 100%;
 }
 
-.button-agendados:hover {
-    background-color: #1e87da;
-}
-
-/* Para dispositivos com largura máxima de 768px */
-@media (max-width: 768px) {
-    .img-logo {
-        width: 100%;
-    }
-    
-    table {
-        font-size: 14px; /* Diminui o tamanho da fonte */
-        width: 95%; /* Garante que a tabela ocupe quase toda a largura da tela */
-    }
-
-    th, td {
-        padding: 10px; /* Reduz o padding */
-    }
-
-    h1 {
-        font-size: 28px; /* Reduz o tamanho do título */
-    }
-}
-
-/* Para dispositivos com largura máxima de 430px */
-@media (max-width: 430px) {
-    .img-logo {
-        width: 100%;
-    }
-
-    table {
-        font-size: 12px; /* Reduz ainda mais o tamanho da fonte */
-        width: 100%; /* Preenche a tela */
-    }
-
-    th, td {
-        padding: 8px; /* Reduz o padding para o menor tamanho possível */
-    }
-
-    h1 {
-        font-size: 24px; /* Ajusta o tamanho do título */
-    }
+.btn-close:hover {
+    background-color: #e41d26;
 }

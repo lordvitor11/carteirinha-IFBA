@@ -74,7 +74,7 @@
                                 <tr>
                                     <td>$dataInicio</td>
                                     <td>$dataFim</td>
-                                    <td><button class='button historico $ids[0]$ids[1]$ids[2]$ids[3]$ids[4]'>Exibir detalhes</button></td>
+                                    <td><button class='button historico' data-ids='" . implode(",", $ids) . "'>Exibir detalhes</button></td>
                                 </tr>
                             ";
                         }
@@ -92,9 +92,9 @@
 
     <div class="popup-historico">
         <div class="popup-content">
+            <h2 id="data">Detalhes do Cardápio</h2>
             <table>
                 <thead>
-                    <h2 id="data">CARDÁPIO (22/04 - 26/04)</h2>
                     <tr>
                         <th>Data</th>
                         <th>Proteína</th>
@@ -127,13 +127,13 @@
                         historicoFiltrado.forEach(item => {
                             let dataInicio = new Date(item.datas[4]).toLocaleDateString('pt-BR');
                             let dataFim = new Date(item.datas[0]).toLocaleDateString('pt-BR');
-                            let ids = item.ids.join('');
+                            let ids = item.ids.join(',');
 
-                            tbody.innerHTML += `
+                            tbody.innerHTML += ` 
                                 <tr>
                                     <td>${dataInicio}</td>
                                     <td>${dataFim}</td>
-                                    <td><button class='button historico ${ids}'>Exibir detalhes</button></td>
+                                    <td><button class='button historico' data-ids='${ids}'>Exibir detalhes</button></td>
                                 </tr>
                             `;
                         });
@@ -147,25 +147,45 @@
             }
         });
 
-        document.getElementById('filtro-busca').addEventListener('input', function() {
-            const filtro = this.value.toLowerCase();
-            const linhas = document.querySelectorAll('tbody tr');
+        // Mostrar detalhes do cardápio quando o botão for clicado
+        document.querySelectorAll('.button.historico').forEach(button => {
+            button.addEventListener('click', function() {
+                const ids = this.getAttribute('data-ids').split(',');
 
-            linhas.forEach(linha => {
-                const textoLinha = linha.textContent.toLowerCase();
-                linha.style.display = textoLinha.includes(filtro) ? '' : 'none';
+                $.ajax({
+                    url: window.location.href,
+                    type: "POST",
+                    data: {
+                        sinal: JSON.stringify(ids)
+                    },
+                    success: function(response) {
+                        const detalhes = JSON.parse(response);
+                        const semanaBody = document.querySelector('.semana');
+                        semanaBody.innerHTML = ''; // Limpa a tabela
+
+                        detalhes.forEach(item => {
+                            semanaBody.innerHTML += `
+                                <tr>
+                                    <td>${item.dia}</td>
+                                    <td>${item.principal}</td>
+                                    <td>${item.acompanhamento}</td>
+                                    <td>${item.sobremesa}</td>
+                                </tr>
+                            `;
+                        });
+
+                        document.querySelector('.popup-historico').classList.add('show');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Erro ao buscar detalhes do cardápio: " + error);
+                    }
+                });
             });
         });
 
-        document.getElementsByClassName('btn-close')[0].addEventListener('click', function() {
-            const div = document.querySelector('.popup-historico');
-            div.classList.remove('show');
-            div.classList.add('hide');
-
-            setTimeout(() => {
-                div.classList.remove('hide');
-                div.style.opacity = "0";
-            }, 350);
+        // Fechar o popup
+        document.querySelector('.btn-close').addEventListener('click', function() {
+            document.querySelector('.popup-historico').classList.remove('show');
         });
     </script>
 </body>

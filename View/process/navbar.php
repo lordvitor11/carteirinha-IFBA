@@ -40,7 +40,6 @@ function showNav($call) {
     if ($call == "login") {
         echo "<nav><div><a href='$index'>Início</a><a href='$cardapio'>Cardápio</a><a href='$sobre'>Sobre</a></div></nav>";
     } else {
-        // Novo código da estrutura de navegação com o menu hambúrguer
         echo '
         <nav>
             <div class="nav-container">
