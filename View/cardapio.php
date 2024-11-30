@@ -149,6 +149,7 @@
                 echo "<div class='button-group'>";
                 echo "<button class='button-excluir' onclick='cardapio_popup()'>Excluir</button>";
                 echo "<a href='cardapio-alterar.php'><button class='button-editar'>Editar</button></a>";
+                echo "<button class='button-imprimir' onclick='window.print()'>Imprimir Cardápio</button>";
                 echo "</div>";
                 echo "</div>";
             } else if ($_SESSION['category'] === "adm" && $cardapio[0]['dia'] === '') {
