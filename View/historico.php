@@ -92,7 +92,7 @@
 
     <div class="popup-historico">
         <div class="popup-content">
-            <h2 id="data">Detalhes do Cardápio</h2>
+            <h1 class="titulo">Detalhes do Cardápio</h1>
             <table>
                 <thead>
                     <tr>

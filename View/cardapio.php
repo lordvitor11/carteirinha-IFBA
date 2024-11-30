@@ -100,7 +100,7 @@
     <?php include_once("process/navbar.php"); showNav("default"); ?>
 
     <div class="container">
-        <h1>CARDÁPIO SEMANAL</h1>
+        <h1 class="titulo">CARDÁPIO SEMANAL</h1>
         <img src="../assets/cozinheira.png" alt="Imagem do Boneco" class="image2" draggable="false">
         <table>
             <?php 
@@ -147,8 +147,8 @@
             if ($_SESSION['category'] === "adm" && $cardapio[0]['dia'] !== '') {
                 echo "<div class='separador'>";
                 echo "<div class='button-group'>";
-                echo "<button class='button excluir' onclick='cardapio_popup()'>Excluir</button>";
-                echo "<a href='cardapio-alterar.php'><button class='button editar'>Editar</button></a>";
+                echo "<button class='button-excluir' onclick='cardapio_popup()'>Excluir</button>";
+                echo "<a href='cardapio-alterar.php'><button class='button-editar'>Editar</button></a>";
                 echo "</div>";
                 echo "</div>";
             } else if ($_SESSION['category'] === "adm" && $cardapio[0]['dia'] === '') {

@@ -85,7 +85,8 @@ function enviarFormulario() {
             resultDiv.style.opacity = "1";
 
             setTimeout(() => {
-                window.location.href = "../index.php";
+                // Redirecionando para a página correta, com o caminho absoluto
+                window.location.href = "../View/cardapio.php";
             }, 2000);
         } else {
             console.log(data);
