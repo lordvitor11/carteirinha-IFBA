@@ -47,7 +47,7 @@ img {
 }
 
 table {
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     border-collapse: collapse;
     box-shadow: 5px 5px 10px lightblue;
@@ -92,9 +92,6 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s;
-    position: absolute; /* Para posicionamento relativo ao contêiner da tabela */
-    top: 400px; /* Ajusta o botão para uma posição mais próxima da tabela */
-    right: 30px; /* Alinha o botão à direita da tabela */
     z-index: 10; /* Garante que o botão fique acima da tabela */
 }
 
@@ -150,7 +147,7 @@ h1 {
 
     table {
         font-size: 14px;
-        width: 100%;
+        width: 0%;
     }
 
     .button {
@@ -168,8 +165,6 @@ h1 {
     .button-imprimir {
         padding: 8px 16px;
         font-size: 14px;
-        top: 250px; /* Ajusta a posição do botão em telas menores */
-        right: 10px; /* Ajuste para garantir que o botão não fique na tabela */
     }
 }
 
@@ -189,7 +184,7 @@ h1 {
 
     table {
         font-size: 12px;
-        width: 100%;
+        width: 80%;
     }
 
     .button {
@@ -207,7 +202,5 @@ h1 {
     .button-imprimir {
         padding: 6px 12px;
         font-size: 12px;
-        top: 250px; /* Ajusta a posição do botão em telas menores */
-        right: 10px; /* Ajuste para garantir que o botão não fique na tabela */
     }
 }
