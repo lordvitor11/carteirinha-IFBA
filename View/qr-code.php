@@ -15,13 +15,30 @@
 
     <div class="center">
         <h1>QR Code do Almoço</h1>
-        <img src="../assets/qrcode-frame.png" alt="qr-code-almoço"> <br>
+        <div class="print-content">
+            <img src="../assets/qrcode-frame.png" alt="qr-code-almoço"> <br>
+        </div>
         <div class="buttons">
-            <a href="#"><input class="button" type="button" value="Imprimir"></a>
+            <a href="#"><input class="button imprimir" type="button" value="Imprimir"></a>
             <a href="../index.php"><input class="button voltar" type="button" value="Voltar"></a>
         </div>
     </div>
 
     <?php include 'footer.php'; ?>
+    <script>
+        document.querySelector('.imprimir').addEventListener('click', () => {
+            const tableHTML = document.querySelector('.print-content').outerHTML;
+
+            const printWindow = window.open(
+                'imprimir-qrcode.php', 
+                'imprimirJanela', 
+                'width=1024,height=768,top=100,left=100,scrollbars=yes,resizable=yes'
+            );
+
+            printWindow.onload = () => {
+                printWindow.postMessage(tableHTML, '*');
+            };
+        });
+    </script>
 </body>
 </html>

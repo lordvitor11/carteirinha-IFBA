@@ -204,3 +204,24 @@ h1 {
         font-size: 12px;
     }
 }
+
+@media print {
+    body * {
+        display: none !important; /* Oculta tudo */
+    }
+
+    .print-only, 
+    .print-only * {
+        display: block !important; /* Exibe a div e todos os seus elementos filhos */
+    }
+
+    .print-only table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .print-only th, .print-only td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+}

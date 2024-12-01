@@ -534,3 +534,14 @@ function createElement(tag, attributes) {
     Object.assign(element, attributes);
     return element;
 }
+
+function printCardapio() {
+    // print-template
+    // const content = document.querySelector('.print-template').innerHTML;
+    // const originalContent = document.body.innerHTML;
+
+    // console.log(content);
+    // document.body.innerHTMl = content;
+    window.print();
+    // document.body.innerHTML = originalContent;
+}

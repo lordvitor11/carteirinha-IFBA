@@ -102,7 +102,7 @@
     <div class="container">
         <h1 class="titulo">CARDÁPIO SEMANAL</h1>
         <img src="../assets/cozinheira.png" alt="Imagem do Boneco" class="image2" draggable="false">
-        <table>
+        <table class='print-content'>
             <?php 
                 error_reporting(E_ALL);
                 ini_set('display_errors', 1);
@@ -149,7 +149,7 @@
                 echo "<div class='button-group'>";
                 echo "<button class='button-excluir' onclick='cardapio_popup()'>Excluir</button>";
                 echo "<a href='cardapio-alterar.php'><button class='button-editar'>Editar</button></a>";
-                echo "<button class='button-imprimir' onclick='window.print()'>Imprimir Cardápio</button>";
+                echo "<button class='button-imprimir' onclick='imprimirCardapio();'>Imprimir Cardápio</button>";
                 echo "</div>";
                 echo "</div>";
             } else if ($_SESSION['category'] === "adm" && $cardapio[0]['dia'] === '') {
@@ -180,5 +180,24 @@
     </div>
 
     <?php include 'footer.php'; ?>
+    <script>
+        function imprimirCardapio() {
+            // Obter o innerHTML da tabela
+            const tableHTML = document.querySelector('.print-content').outerHTML;
+
+            // Abrir uma nova janela para impressão
+            // const printWindow = window.open('imprimir-cardapio.php', '_top');
+            const printWindow = window.open(
+                'imprimir-cardapio.php', 
+                'imprimirJanela', 
+                'width=1024,height=768,top=100,left=100,scrollbars=yes,resizable=yes'
+            );
+
+            // Enviar o conteúdo da tabela para a nova janela
+            printWindow.onload = () => {
+                printWindow.postMessage(tableHTML, '*');
+            };
+        }
+    </script>
 </body>
 </html>
