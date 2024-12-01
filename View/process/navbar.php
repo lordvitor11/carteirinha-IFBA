@@ -28,10 +28,35 @@ function showNav($call) {
     if (isset($_SESSION['logged_in'])) {
         if ($_SESSION['logged_in'] && $_SESSION['category'] == "adm") {
             $nome = $_SESSION['name'];
-            $text = "<div class='right'>$notification_icon<a class='button-admin' href='$admin'>ADMIN</a><a href='$perfil'>Logado como <strong>$nome!</strong></a></div>";
+            $text = "<div class='right'>
+                        $notification_icon
+                        <a class='button-admin' href='$admin'>ADMIN</a>
+                        <div class='profile-dropdown'>
+                            <div class='profile-icon'>
+                                <img src='../assets/Victor Hugo.jpg' alt='Perfil'>
+                                <span class='dropdown-arrow'></span>
+                            </div>
+                            <a href='$perfil'>Logado como <strong>$nome!</strong></a>
+                            <div class='dropdown-menu'>
+                                <a href='$logout'>Sair</a>
+                            </div>
+                        </div>
+                    </div>";
         } else if ($_SESSION['logged_in']) {
             $nome = $_SESSION['name'];
-            $text = "<div class='right'>$notification_icon<a href='$perfil'>Logado como <strong>$nome!</strong></a></div>";
+            $text = "<div class='right'>
+                        $notification_icon
+                        <div class='profile-dropdown'>
+                            <div class='profile-icon'>
+                                <img src='../assets/Victor Hugo.jpg' alt='Perfil'>
+                                <span class='dropdown-arrow'></span>
+                            </div>
+                            <a href='$perfil'>Logado como <strong>$nome!</strong></a>
+                            <div class='dropdown-menu'>
+                                <a href='$logout'>Sair</a>
+                            </div>
+                        </div>
+                    </div>";
         } else {
             $text = "<div class='right'><a href='$login'>LOGIN</a></div>";
         }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressão</title>
+    <link rel="stylesheet" href="css/imprimir-cardapio.css">
     <style>
         table {
             width: 100%;
@@ -20,10 +21,11 @@
     <div id="print-content"></div>
 
     <script>
-        window.addEventListener('message', (event) => {
-            // Receber o conteúdo da tabela (innerHTML)
-            const tableHTML = event.data;
+    window.addEventListener('message', (event) => {
+        // Verifique se o conteúdo recebido é uma string (HTML)
+        const tableHTML = event.data;
 
+        if (typeof tableHTML === 'string') {
             // Inserir o conteúdo no local correto
             document.getElementById('print-content').innerHTML = tableHTML;
 
@@ -32,7 +34,11 @@
                 window.print();
                 window.close();
             }, 500);
-        });
-    </script>
+        } else {
+            console.error('Erro: o conteúdo não é uma string HTML válida.');
+        }
+    });
+</script>
+
 </body>
 </html>

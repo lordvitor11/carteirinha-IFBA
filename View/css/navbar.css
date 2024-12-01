@@ -1,18 +1,19 @@
+/* Estilo geral */
 nav {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Alinha todos os itens verticalmente no centro */
   background-color: #388E3C; /* Verde */
   padding: 10px 20px;
   color: white;
   position: relative;
-  z-index: 1; /* Garante que a navbar fique acima do menu */
+  z-index: 1;
 }
 
 .nav-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Alinha todos os itens verticalmente no centro */
   width: 100%;
 }
 
@@ -28,10 +29,10 @@ nav {
   width: 100%; /* O menu ocupará 100% da largura da tela */
   background-color: #388E3C; /* Verde */
   flex-direction: column;
-  transition: max-height 0.3s ease-in-out; /* Animação suave para expandir para baixo */
-  max-height: 0; /* Inicialmente escondido */
-  overflow: hidden; /* Esconde o conteúdo que não cabe */
-  z-index: 2; /* Faz o menu ficar acima da navbar */
+  transition: max-height 0.3s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+  z-index: 2;
 }
 
 .nav-list li {
@@ -50,11 +51,12 @@ nav {
   color: #66ff66; /* Verde claro */
 }
 
-/* Ícone de notificação e botões à direita */
+/* Ícones e botões à direita */
 .right {
   display: flex;
-  align-items: center;
+  align-items: center; /* Alinha os itens verticalmente no centro */
   gap: 15px;
+  justify-content: flex-end;
 }
 
 .button-admin {
@@ -75,33 +77,80 @@ nav {
   font-size: 14px;
 }
 
-/* Menu do desktop - Exibido sempre */
-@media (min-width: 769px) {
-  .nav-list {
-    position: static; /* Menu fica visível abaixo da navbar */
-    flex-direction: row; /* Exibe os itens na horizontal */
-    max-height: none; /* Não há necessidade de limitar a altura */
-  }
-
-  .nav-list li {
-    margin: 0 20px;
-    text-align: left; /* Deixa os itens alinhados à esquerda */
-  }
-
-  .hamburger {
-    display: none; /* Esconde o botão hambúrguer no desktop */
-  }
+/* Estilo para o ícone de perfil */
+.profile-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-/* Responsividade para dispositivos móveis */
+.profile-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 10px; /* Distância entre o ícone e o texto */
+}
+
+.profile-icon img {
+  width: 30px;  /* Largura fixa */
+  height: 30px; /* Altura fixa */
+  border-radius: 50%;
+  object-fit: cover; /* Impede o achatamento da imagem */
+  transition: width 0.3s, height 0.3s; /* Animações suaves para o tamanho */
+}
+
+.dropdown-arrow {
+  content: '▼';
+  font-size: 12px;
+  color: white;
+  margin-left: 5px;
+}
+
+/* Ajuste do tamanho do texto "Logado como ..." */
+.profile-dropdown a {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+/* Menu de opções */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background-color: #388E3C;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  min-width: 150px;
+  text-align: left;
+  z-index: 1;
+}
+
+.dropdown-menu a {
+  color: white;
+  padding: 8px 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-menu a:hover {
+  background-color: #66ff66;
+}
+
+.profile-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Responsividade - Ajustes para telas pequenas */
 @media (max-width: 768px) {
   .nav-list {
-    max-height: 0; /* Inicialmente escondido */
-    top: 60px; /* Ajuste para que o menu fique abaixo da navbar */
+    max-height: 0;
+    top: 60px;
   }
 
   .hamburger {
-    display: block; /* Exibe o menu hambúrguer */
+    display: block;
     cursor: pointer;
   }
 
@@ -115,20 +164,43 @@ nav {
   }
 
   .nav-list.show {
-    max-height: 500px; /* Expande o menu para baixo */
+    max-height: 500px;
   }
 
   .nav-list li {
     margin: 10px 0;
-    text-align: center; /* Centraliza os itens */
+    text-align: center;
   }
 
   .right {
-    justify-content: flex-end; /* Ajusta os itens à direita */
+    justify-content: flex-end;
+  }
+
+  .profile-icon img {
+    width: 25px;
+    height: 25px;
+  }
+
+  .dropdown-arrow {
+    font-size: 10px;
+  }
+
+  .dropdown-menu {
+    min-width: 120px;
   }
 }
 
+/* Responsividade para telas de 430px */
 @media (max-width: 430px) {
+  .profile-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .dropdown-arrow {
+    font-size: 8px;
+  }
+
   .button-admin {
     font-size: 12px;
     padding: 4px 8px;
@@ -136,5 +208,25 @@ nav {
 
   .right a {
     font-size: 12px;
+  }
+}
+
+/* Para o desktop - Ajustes de exibição */
+@media (min-width: 768px) {
+  .nav-list {
+    position: relative;
+    top: 0;
+    max-height: none;
+    flex-direction: row;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .nav-list li {
+    margin: 0 15px;
   }
 }

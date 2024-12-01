@@ -545,3 +545,21 @@ function printCardapio() {
     window.print();
     // document.body.innerHTML = originalContent;
 }
+
+function imprimirCardapio() {
+    // Obter o innerHTML da tabela
+    const tableHTML = document.querySelector('.print-content').outerHTML;
+
+    // Abrir uma nova janela para impressão
+    const printWindow = window.open(
+        'imprimir-cardapio.php', 
+        'imprimirJanela', 
+        'width=1024,height=768,top=100,left=100,scrollbars=yes,resizable=yes'
+    );
+
+    // Enviar o conteúdo da tabela para a nova janela
+    printWindow.onload = () => {
+        // Certifique-se de enviar apenas o conteúdo HTML da tabela (como string)
+        printWindow.postMessage(tableHTML, '*');
+    };
+}
