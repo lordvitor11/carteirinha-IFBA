@@ -2,8 +2,8 @@
 nav {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Alinha todos os itens verticalmente no centro */
-  background-color: #388E3C; /* Verde */
+  align-items: center;
+  background-color: #388E3C;
   padding: 10px 20px;
   color: white;
   position: relative;
@@ -13,7 +13,7 @@ nav {
 .nav-container {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Alinha todos os itens verticalmente no centro */
+  align-items: center;
   width: 100%;
 }
 
@@ -23,11 +23,11 @@ nav {
   list-style: none;
   margin: 0;
   padding: 0;
-  position: absolute; /* Alinha o menu abaixo da navbar */
-  top: 100%; /* Menu começa logo abaixo da navbar */
-  left: 0; /* Inicia no lado esquerdo */
-  width: 100%; /* O menu ocupará 100% da largura da tela */
-  background-color: #388E3C; /* Verde */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #388E3C;
   flex-direction: column;
   transition: max-height 0.3s ease-in-out;
   max-height: 0;
@@ -37,7 +37,7 @@ nav {
 
 .nav-list li {
   margin: 20px 0;
-  text-align: center; /* Centraliza os itens */
+  text-align: center;
 }
 
 .nav-list a {
@@ -48,13 +48,13 @@ nav {
 }
 
 .nav-list a:hover {
-  color: #66ff66; /* Verde claro */
+  color: #66ff66;
 }
 
 /* Ícones e botões à direita */
 .right {
   display: flex;
-  align-items: center; /* Alinha os itens verticalmente no centro */
+  align-items: center;
   gap: 15px;
   justify-content: flex-end;
 }
@@ -68,7 +68,7 @@ nav {
 }
 
 .button-admin:hover {
-  background-color: #e65c5c; /* Verde mais claro */
+  background-color: #e65c5c;
 }
 
 .right a {
@@ -88,15 +88,15 @@ nav {
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-left: 10px; /* Distância entre o ícone e o texto */
+  margin-left: 10px;
 }
 
 .profile-icon img {
-  width: 30px;  /* Largura fixa */
-  height: 30px; /* Altura fixa */
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  object-fit: cover; /* Impede o achatamento da imagem */
-  transition: width 0.3s, height 0.3s; /* Animações suaves para o tamanho */
+  object-fit: cover;
+  transition: width 0.3s, height 0.3s;
 }
 
 .dropdown-arrow {
@@ -106,7 +106,6 @@ nav {
   margin-left: 5px;
 }
 
-/* Ajuste do tamanho do texto "Logado como ..." */
 .profile-dropdown a {
   font-size: 12px;
   margin-left: 5px;
