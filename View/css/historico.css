@@ -63,7 +63,7 @@ input[type="date"] {
 }
 
 table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     margin: 20px;
     box-shadow: 5px 5px 10px lightblue;
@@ -122,8 +122,9 @@ tr:hover {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 90%;
+    /* max-width: 600px; */
+    /* width: 90%; */
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center; /* Centraliza o conteúdo dentro do popup */
@@ -143,6 +144,10 @@ tr:hover {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.popup-content table {
+    width: 100%;
 }
 
 .btn-close:hover {

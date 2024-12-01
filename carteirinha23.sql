@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 01, 2024 at 02:16 AM
+-- Generation Time: Dec 02, 2024 at 06:35 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -106,8 +106,16 @@ CREATE TABLE `notificacao` (
   `id_destinatario` int NOT NULL,
   `assunto` text NOT NULL,
   `mensagem` text NOT NULL,
-  `status` int NOT NULL
+  `lida` tinyint(1) NOT NULL DEFAULT '0',
+  `transferencia` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `notificacao`
+--
+
+INSERT INTO `notificacao` (`id`, `id_remetente`, `id_destinatario`, `assunto`, `mensagem`, `lida`, `transferencia`) VALUES
+(4, 2, 3, 'Transferencia de Almoço', 'Saudações Botteste, o estudante Vitor fez a você uma solicitação de transferência de almoço!', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -126,6 +134,13 @@ CREATE TABLE `refeicao` (
   `outra_justificativa` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
   `motivo_cancelamento` varchar(100) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+
+--
+-- Dumping data for table `refeicao`
+--
+
+INSERT INTO `refeicao` (`id`, `id_usuario`, `id_cardapio`, `id_status_ref`, `id_justificativa`, `data_solicitacao`, `hora_solicitacao`, `outra_justificativa`, `motivo_cancelamento`) VALUES
+(17, 2, 47, 1, 1, '2024-12-02', '17:20:02', NULL, NULL);
 
 --
 -- Triggers `refeicao`
@@ -201,7 +216,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `nome`, `email`, `matricula`, `senha`, `categoria`, `telefone`) VALUES
 (1, 'root', 'root@gmail.com', '20201180041', '81dc9bdb52d04dc20036dbd8313ed055', 'adm', '00'),
-(2, 'vitor', 'vitor@gmail.com', '20201180046', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00');
+(2, 'vitor', 'vitor@gmail.com', '20201180046', '58573b6d50c9bb551471d1227925c0b6', 'estudante', '00'),
+(3, 'botteste', 'botteste@gmail.com', '20201180011', '202cb962ac59075b964b07152d234b70', 'estudante', '75982777354');
 
 --
 -- Indexes for dumped tables
@@ -288,13 +304,13 @@ ALTER TABLE `justificativa`
 -- AUTO_INCREMENT for table `notificacao`
 --
 ALTER TABLE `notificacao`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `refeicao`
 --
 ALTER TABLE `refeicao`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `status_msg`
@@ -312,7 +328,7 @@ ALTER TABLE `status_ref`
 -- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

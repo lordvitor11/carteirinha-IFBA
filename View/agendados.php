@@ -163,6 +163,33 @@
 
                 popup.appendChild(labelMatricula);
                 popup.appendChild(inputMatricula);
+
+                btnConfirm.addEventListener('click', () => {
+                    const motivo = document.querySelector('#outro').value;
+                    const matricula = document.querySelector('#matricula').value;
+                    
+                    let dados = {
+                        motivo: motivo,
+                        matricula: matricula
+                    };
+
+                    fetch('process/transferir-reserva.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded' 
+                        },
+                        body: new URLSearchParams(dados).toString() 
+                    })
+                    .then(response => response.text())
+                    .then(result => {
+                        // window.location.href = 'cardapio.php?id=0';
+                        console.log('Resposta do servidor:', result);
+                        closeAgendadosPopup();
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                    });
+                });
             }
 
             popup.appendChild(divButtons);

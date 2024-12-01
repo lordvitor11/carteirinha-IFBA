@@ -66,6 +66,7 @@
                 <tbody>
                     <?php 
                         for ($c = 0; $c < count($historico); $c++) {
+                            // print_r($historico[$c]['datas']); exit;
                             $dataInicio = date("d/m/Y", strtotime($historico[$c]['datas'][4]));
                             $dataFim = date("d/m/Y", strtotime($historico[$c]['datas'][0]));
                             $ids = $historico[$c]['ids'];
@@ -164,9 +165,10 @@
                         semanaBody.innerHTML = ''; // Limpa a tabela
 
                         detalhes.forEach(item => {
+                            console.log(item);
                             semanaBody.innerHTML += `
                                 <tr>
-                                    <td>${item.dia}</td>
+                                    <td>${item.dia.charAt(0).toUpperCase() + item.dia.slice(1).toLowerCase()}(${item.data_refeicao})</td>
                                     <td>${item.principal}</td>
                                     <td>${item.acompanhamento}</td>
                                     <td>${item.sobremesa}</td>

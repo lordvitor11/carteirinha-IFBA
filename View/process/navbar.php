@@ -22,7 +22,7 @@ function showNav($call) {
     $qrcode = "$rootUrl/assets/qr-code.png";
     $qrcodeLink = "$rootUrl/View/qr-code.php"; 
     $qrcodeEstudanteLink = "$rootUrl/View/qr-code-estudante.php"; // Novo link para QR Code do estudante
-
+    $profilePic = basename($_SERVER['PHP_SELF']) == "index.php" ? "assets/Victor Hugo.jpg" : "../assets/Victor Hugo.jpg";
     $notification_icon = "<a href='#' class='notification-icon' title='Notificações'><img src='$notification_icon_path' alt='Notificações'></a>";
 
     if (isset($_SESSION['logged_in'])) {
@@ -33,7 +33,7 @@ function showNav($call) {
                         <a class='button-admin' href='$admin'>ADMIN</a>
                         <div class='profile-dropdown'>
                             <div class='profile-icon'>
-                                <img src='../assets/Victor Hugo.jpg' alt='Perfil'>
+                                <img src='$profilePic' alt='Perfil'>
                                 <span class='dropdown-arrow'></span>
                             </div>
                             <a href='$perfil'>Logado como <strong>$nome!</strong></a>
@@ -48,7 +48,7 @@ function showNav($call) {
                         $notification_icon
                         <div class='profile-dropdown'>
                             <div class='profile-icon'>
-                                <img src='../assets/Victor Hugo.jpg' alt='Perfil'>
+                                <img src='$profilePic' alt='Perfil'>
                                 <span class='dropdown-arrow'></span>
                             </div>
                             <a href='$perfil'>Logado como <strong>$nome!</strong></a>

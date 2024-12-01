@@ -194,13 +194,17 @@
         
             $resultados = $this->conn->query($sql);
             $valores = ['ids' => [], 'datas' => []];
+
+            // echo "teste"; exit();
         
             while ($row = $resultados->fetch_assoc()) {
                 $valores['ids'][] = (int) $row['id'];
                 $valores['datas'][] = $row['data_refeicao'];
             }
         
-            array_splice($valores['datas'], 1);
+            // array_splice($valores['datas'], 1);
+
+            // print_r($valores['datas']); exit;
         
             $valores['menorId'] = !empty($valores['ids']) ? min($valores['ids']) : null;
             return $valores;
@@ -412,6 +416,86 @@
             $stmt->close();
             
             return $userData;
+        }        
+
+        private function getUserIdByMatricula($matricula) : int {
+            $stmt = $this->conn->prepare("SELECT id FROM usuario WHERE matricula = ? LIMIT 1");
+            $stmt->bind_param("s", $matricula);
+            $stmt->execute();
+            
+            $result = $stmt->get_result();
+            if ($result->num_rows === 0) {
+                // Nenhuma linha encontrada
+                throw new Exception("Nenhum usuário encontrado com a matrícula fornecida. $matricula");
+            }
+            
+            $row = $result->fetch_assoc();
+            $id = $row['id'] ?? null; // Verifica se a chave 'id' existe
+            
+            $stmt->close();
+        
+            if ($id === null) {
+                throw new Exception("Erro ao obter o ID do usuário.");
+            }
+        
+            return $id;
+        }
+        
+
+        private function getNomeById($id) : string {
+            $sql = "SELECT nome FROM usuario WHERE id = ? LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("s", $id);
+
+            $stmt->execute();
+            $stmt->bind_result($nome);
+            $stmt->fetch();
+            $stmt->close();
+        
+            return $nome;   
+        }
+        
+
+        private function isActiveReserva($idUser) : bool {
+            $sql = "SELECT COUNT(*) FROM refeicao WHERE id_usuario = ? AND id_status_ref = 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $idUser);
+        
+            $stmt->execute();
+            $stmt->bind_result($count);
+            $stmt->fetch();
+            $stmt->close();
+        
+            return $count > 0;
+        }
+
+
+        public function transferirReserva($idUser, $motivo, $matriculaAlvo) : string {
+            if ($this->isActiveReserva($idUser)) {
+                // echo $matriculaAlvo; exit;
+                $idAlvo = $this->getUserIdByMatricula($matriculaAlvo);
+                $nomeRemetente = ucfirst($this->getNomeById($idUser));
+                $nomeDestinatario = ucfirst($this->getNomeById($idAlvo));
+                $assunto = "Transferencia de Almoço";
+                $mensagem = "Saudações $nomeDestinatario, o estudante $nomeRemetente fez a você uma solicitação de transferência de almoço!";
+                $transferencia = true;
+
+                $sql = "INSERT INTO notificacao (id_remetente, id_destinatario, assunto, mensagem, transferencia) 
+                        VALUES (?, ?, ?, ?, ?)";
+            
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("iissi", $idUser, $idAlvo, $assunto, $mensagem, $transferencia);
+                $result = $stmt->execute();
+                $stmt->close();
+            
+                if ($result) { 
+                    return "Notificação enviada"; 
+                } else { 
+                    return "Falha ao enviar notificação. Por favor, tente novamente."; 
+                }
+            } else {    
+                return "reserva inelegivel";
+            }
         }        
     }
 ?>

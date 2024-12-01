@@ -107,5 +107,9 @@
         public function getDataByMatricula($matricula) : array {
             return $this->model->getDataByMatricula($matricula);
         }
+
+        public function transferirReserva($idUser, $motivo, $matriculaAlvo) : string {
+            return $this->model->transferirReserva($idUser, $motivo, $matriculaAlvo);
+        }
     }
 ?>
