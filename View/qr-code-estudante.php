@@ -23,7 +23,7 @@
                 <p class="description">Aproxime o QR Code da câmera para escanear automaticamente.</p>
             </div>
             <div class="frame">
-                <video id="video" width="100%" height="100%" style="border-radius: 10px;"></video>
+                <video id="video" autoplay playsinline></video>
             </div>
             <p id="result"></p>
         </div>
@@ -35,36 +35,42 @@
     </div>
 
     <script>
-        navigator.mediaDevices.getUserMedia({ video: true })
+        // Função para verificar se o dispositivo é móvel
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Configuração de vídeo baseada no tipo de dispositivo
+        const constraints = isMobileDevice()
+            ? { video: { facingMode: "environment" } } // Móveis: câmera traseira
+            : { video: true }; // Computadores: qualquer câmera disponível
+
+        // Solicitação de permissão para usar a câmera
+        navigator.mediaDevices.getUserMedia(constraints)
             .then(stream => {
-                document.getElementById('video').srcObject = stream;
-                document.getElementById('video').play();
+                const videoElement = document.getElementById('video');
+                videoElement.srcObject = stream;
+                videoElement.play();
             })
             .catch(error => {
-                console.error('Erro ao solicitar acesso à câmera:', error);
+                console.error("Erro ao acessar a câmera:", error);
+                alert("Não foi possível acessar a câmera. Verifique as permissões do dispositivo.");
             });
 
+        // Configuração do leitor de QR Code
+        const codeReader = new ZXing.BrowserMultiFormatReader();
         const video = document.getElementById('video');
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
 
-        video.addEventListener('play', () => {
-            setInterval(() => {
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const codeReader = new ZXing.BrowserMultiFormatReader();
-                codeReader.decodeFromImage(imageData)
-                    .then(result => {
-                        document.getElementById('result').innerText = 'QR-code lido: ' + result.text;
-                    })
-                    .catch(error => {
-                        console.error('Erro ao ler QR-code:', error);
-                    });
-            }, 100);
+        codeReader.decodeFromVideoDevice(null, video, (result, err) => {
+            if (result) {
+                document.getElementById('result').innerText = 'QR Code lido: ' + result.text;
+            }
+            if (err && !(err instanceof ZXing.NotFoundException)) {
+                console.error(err);
+            }
         });
     </script>
 
     <?php include 'footer.php'; ?>
-    <script src="script.js"></script>
 </body>
 </html>
