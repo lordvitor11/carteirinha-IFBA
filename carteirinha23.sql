@@ -108,7 +108,7 @@ CREATE TABLE `notificacao` (
   `mensagem` text NOT NULL,
   `lida` tinyint(1) NOT NULL DEFAULT '0',
   `transferencia` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `notificacao`
@@ -163,7 +163,7 @@ DELIMITER ;
 CREATE TABLE `status_msg` (
   `id` int NOT NULL,
   `descricao` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `status_msg`

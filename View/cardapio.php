@@ -1,6 +1,8 @@
 <?php
-    require("../Controller/controller.php");
-    $controller = new LoginController();
+    // if (!class_exists('LoginModel')) {
+    //     require_once("../Controller/controller.php");
+    //     $controller = new LoginController();
+    // }
 
     if (isset($_POST['sinal'])) {
         $sinal = $_POST['sinal'];
@@ -107,7 +109,12 @@
                 error_reporting(E_ALL);
                 ini_set('display_errors', 1);
 
-                $cardapio = $controller->getCardapio();             
+                // if (!class_exists('LoginModel')) {
+                //     require_once("../Controller/controller.php");
+                //     $controller = new LoginController();
+                // }
+
+                $cardapio = $controller->getCardapio();   
 
                 if ($cardapio[0]['dia'] != '') {
                     echo "

@@ -9,11 +9,7 @@ if ($relativePath == "/index.php") {
     $css = 'View/css/style.css';
     $img = 'assets/1b1210fdf4454600bea220983da0cc63.png';
     $script = 'View/script.js';
-    require("Controller/controller.php");
-    $controller = new LoginController();
 } else if ($relativePath == "/painel-administrador.php" || $relativePath == "/sobre.php" || $relativePath == "/qr-code-estudante.php" || $relativePath == "/qr-code.php" || $relativePath == "/perfil.php" || $relativePath == "/aprovado.php" || $relativePath == "/negado.php" || $relativePath == "/relatorio-feedbacks.php" || $relativePath == "/editar-horario.php" || $relativePath == "/cardapio-criar.php" || $relativePath == "/cardapio-cancelar.php" || $relativePath == "/cardapio-alterar.php" || $relativePath == "/cardapio-disponibilizar.php") {
-    require("../Controller/controller.php"); // Ajuste aqui
-    $controller = new LoginController();
 }
 ?>
 
@@ -45,6 +41,7 @@ if ($relativePath == "/index.php") {
         <div id="notificationList">
             <?php
             if (isset($_SESSION['logged_in'])) {
+                global $controller;
                 $userId = $_SESSION['id'];
                 $result = $controller->hasNotification($userId);
 

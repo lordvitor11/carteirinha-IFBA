@@ -1,8 +1,5 @@
-<?php
-    session_start();
-    require("../Controller/controller.php");
-    $controller = new LoginController();
-
+<?php session_start();
+    global $controller;
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $motivo = $_POST['motivo'];
         $idUser = $_SESSION['id'];

@@ -251,7 +251,7 @@
         }
         
         public function hasNotification(int $userId): bool {
-            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = ?";
+            $sql = "SELECT COUNT(*) FROM notificacao WHERE id_destinatario = ? AND lida = 0";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("i", $userId);
@@ -496,6 +496,6 @@
             } else {    
                 return "reserva inelegivel";
             }
-        }        
+        } 
     }
 ?>
