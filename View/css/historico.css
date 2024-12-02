@@ -111,6 +111,8 @@ tr:hover {
     height: 100%;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1999; /* Garante que a overlay fique abaixo do conteúdo do popup */
 }
 
 .popup-historico.show {
@@ -122,12 +124,11 @@ tr:hover {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    /* max-width: 600px; */
-    /* width: 90%; */
     width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center; /* Centraliza o conteúdo dentro do popup */
+    z-index: 2000; /* Popup aparece acima da overlay */
 }
 
 .popup-content .titulo {
@@ -144,17 +145,17 @@ tr:hover {
     font-size: 16px;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.popup-content table {
-    width: 100%;
+    z-index: 2001; /* Botão no topo */
 }
 
 .btn-close:hover {
     background-color: #e53935;
 }
 
-/* Responsividade - Media Queries */
+
+.popup-content table {
+    width: 100%;
+}
 
 /* Para dispositivos com largura até 768px */
 @media (max-width: 768px) {

@@ -114,12 +114,13 @@
     <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- Adições abaixo -->
+
     <script>
-        // Função para abrir o pop-up
         function agendadosPopup(type) {
             const popup = document.querySelector("#popup");
             const overlay = document.querySelector("#overlay");
-            popup.innerHTML = ""; // Limpa o conteúdo anterior
+            popup.innerHTML = ""; 
 
             const h2 = document.createElement("h2");
             const inputMotivo = document.createElement("input");
@@ -167,7 +168,7 @@
                 btnConfirm.addEventListener('click', () => {
                     const motivo = document.querySelector('#outro').value;
                     const matricula = document.querySelector('#matricula').value;
-                    
+
                     let dados = {
                         motivo: motivo,
                         matricula: matricula
@@ -176,20 +177,45 @@
                     fetch('process/transferir-reserva.php', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded' 
+                            'Content-Type': 'application/x-www-form-urlencoded'
                         },
-                        body: new URLSearchParams(dados).toString() 
+                        body: new URLSearchParams(dados).toString()
                     })
-                    .then(response => response.text())
+                    .then(response => response.json())
                     .then(result => {
-                        // window.location.href = 'cardapio.php?id=0';
-                        console.log('Resposta do servidor:', result);
+                        if (result.status === "sucesso") {
+                            showNotification(
+                                `Reserva transferida com sucesso para o usuário de matrícula ${result.matriculaDestino}!`,
+                                "success"
+                            );
+                        } else {
+                            showNotification(
+                                `Erro ao transferir a reserva: ${result.mensagem || "Tente novamente mais tarde."}`,
+                                "error"
+                            );
+                        }
                         closeAgendadosPopup();
                     })
                     .catch(error => {
                         console.error('Erro:', error);
+                        showNotification(
+                            "Ocorreu um erro inesperado ao transferir a reserva. Tente novamente mais tarde.",
+                            "error"
+                        );
                     });
                 });
+
+                function showNotification(message, type) {
+                    const notification = document.createElement("div");
+                    notification.classList.add("notification", type);
+                    notification.innerText = message;
+
+                    document.body.appendChild(notification);
+
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 5000);
+                }
             }
 
             popup.appendChild(divButtons);

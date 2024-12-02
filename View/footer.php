@@ -30,34 +30,43 @@ if ($relativePath == "/index.php") {
 <body>
 
     <div class="overlay" id="notificationOverlay"></div>
-    <div class="popup" id="notificationPopup">
+    <div class="popup" id="notificationPopup"></div>
+
+    <!-- Novo Popup 2 (Este é o que queremos abrir acima) -->
+    <div class="overlay2" id="overlay2"></div>
+    <div class="popup2" id="popup2">
+        <h2>Detalhes da Notificação</h2>
+        <p id="popupContent">Aqui vai o conteúdo do popup.</p>
+        <button class="close-btn-2" onclick="closePopup2()">Fechar</button>
     </div>
 
     <template id="show">
         <h2>Notificações</h2>
-            <div id="notificationList">
-                <?php
-                if (isset($_SESSION['logged_in'])) {
-                    $userId = $_SESSION['id'];
-                    $result = $controller->hasNotification($userId);
+        <div id="notificationList">
+            <?php
+            if (isset($_SESSION['logged_in'])) {
+                $userId = $_SESSION['id'];
+                $result = $controller->hasNotification($userId);
 
-                    if ($result) {
-                        $assuntos = $controller->getAssunto($userId);
-                        foreach ($assuntos as $assunto) {
-                            echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . "</div>";
-                        }
-                    } else {
-                        echo "<h3 class='notification-item null'>Sem notificações.</h3>";
+                if ($result) {
+                    $assuntos = $controller->getAssunto($userId);
+                    foreach ($assuntos as $assunto) {
+                        // Exibe a notificação com o botão de detalhes
+                        echo "<div class='notification-item'>" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . 
+                            " <button class='button' data-assunto='" . htmlspecialchars($assunto, ENT_QUOTES, 'UTF-8') . 
+                            "' onclick='openPopup2()'>Exibir detalhes</button></div>";
                     }
+                } else {
+                    echo "<h3 class='notification-item null'>Sem notificações.</h3>";
                 }
-                ?>
-            </div>
+            }
+            ?>
+        </div>
         <div class="buttons">
             <?php if ($_SESSION['category'] == 'adm'): ?>
                 <button class='send'>Enviar notificação</button>
-                <!-- <button class='send' onclick='sendNotification(1)'>Enviar notificação</button> -->
             <?php endif; ?>
-            <button class="close" onclick="closeNotificationPopup()">Fechar</button> <!-- Botão de fechar para todos -->
+            <button class="close" onclick="closeNotificationPopup()">Fechar</button>
         </div>
     </template>
 
@@ -71,25 +80,19 @@ if ($relativePath == "/index.php") {
             <button class="close" onclick="closeNotificationPopup(); location.reload();">Fechar</button>
         </div>
     </template>
+
     <template id="allconfirm">
         <h1>ALLCONFIRM</h1>
     </template>
+
     <template id="oneconfirm">
         <h1>Essa é a pessoa que deve receber?</h1>
-
         <h2>Nome: <span class="nome"></span></h2>
         <h2>E-mail: <span class="email"></span></h2>
         <h2>Matricula: <span class="matricula"></span></h2>
         <h2>Telefone: <span class="telefone"></span></h2>
-
     </template>
-    <!-- <template id="screen1">
-    </template>
-    <template id="screen1">
-    </template> -->
 
-    
-    
     <footer class="rodape">
         <div>
             <img src="<?php echo $img; ?>" alt="logo-ifba-seabra" class="logo img-logo" draggable="false">
@@ -139,15 +142,12 @@ if ($relativePath == "/index.php") {
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
-                            // Exibe os dados do usuário
-                            // alert('Nome: ' + data.data.nome + '\nEmail: ' + data.data.email + '\nTelefone: ' + data.data.telefone);
                             document.querySelector('.nome').innerText = data.data.nome;
                             document.querySelector('.email').innerText = data.data.email;
                             document.querySelector('.matricula').innerText = data.data.matricula;
                             document.querySelector('.telefone').innerText = data.data.telefone;
 
                         } else {
-                            // Exibe a mensagem de erro
                             alert(data.message);
                         }
                     })
@@ -158,67 +158,19 @@ if ($relativePath == "/index.php") {
                     document.querySelector('#notificationPopup').innerHTML = document.querySelector('#allconfirm').innerHTML;
                 }
             });
-        }); 
+        });
 
+        // Função para abrir o popup 2
+        function openPopup2() {
+            document.getElementById('overlay2').style.display = 'block';
+            document.getElementById('popup2').style.display = 'block';
+        }
 
-        
-    // items.buttonConfirm.addEventListener('click', function () {
-    //     const inputAssunto = document.querySelector('#assunto');
-    //     const input = document.querySelector('#notificationRecipient');
-    //     const msg = document.querySelector('#notificationMessage');
-    //     const popup = document.querySelector('#notificationPopup');
-    //     const h2 = document.createElement('h2');
-    //     const button = document.createElement('button');
-    //     const value = input.value;
-    //     const message = msg.value;
-
-    //     if (message != "") {
-    //         const dados = {
-    //             matricula: input.value,
-    //             assunto: inputAssunto.value,
-    //             mensagem: message
-    //         };
-
-    //         fetch('process/process-notification.php', {
-    //             method: 'POST',
-    //             headers: {
-    //               'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(dados)
-    //         })
-    //         .then(response => response.json())
-    //         .then(data => {
-    //             if (data.status == "success") {
-    //                 h2.textContent = 'Notificação Enviada!';
-    //             } else {
-    //                 h2.textContent = 'Notificação enviada a todos!';
-    //             }
-    
-    //             popup.innerHTML = '';
-    //             popup.classList.add('enviado');
-    //             button.classList.add('close');
-    //             button.textContent = 'Fechar';
-    //             button.addEventListener('click', function() {
-    //                 closeNotificationPopup();
-    //                 location.reload();
-    //             });
-                
-    //             popup.appendChild(h2);
-    //             popup.appendChild(button);
-    //         })
-    //         .catch(error => console.error('Erro:', error));            
-    //     }
-    // });
-
-
-    // items.divButtons.appendChild(items.buttonConfirm);
-    // items.divButtons.appendChild(items.buttonCancel);
-
-    // const array = [items.h3, items.inputAssunto, items.labelMsg, items.textarea, items.labelMatricula,
-    //     items.input, items.divButtons
-    // ];
-
-    // return array;
+        // Função para fechar o popup 2
+        function closePopup2() {
+            document.getElementById('overlay2').style.display = 'none';
+            document.getElementById('popup2').style.display = 'none';
+        }
     </script>
 
 </body>

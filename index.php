@@ -99,6 +99,6 @@
         </div>
     </main>
 
-    <?php include 'View/footer.php'; ?>
+    <?php include 'View/footer2.php'; ?>
 </body>
 </html>

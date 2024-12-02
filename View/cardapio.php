@@ -166,7 +166,7 @@
 
                 if ($result != null) {
                     if ($result) {
-                        echo "<a href='agendados.php'><button class='button-agendados'>Minha Reserva</button></a>";
+                        echo "<a href='agendados.php'><button class='button'>Minha Reserva</button></a>";
                     }
                 } else if ($current_time >= $horario_padrao) {
                     echo "<span class='horario-limite'>Horário limite atingido!</span>";
